@@ -1,5 +1,5 @@
 package lit.dto;
 
-public class EmptyDto {
+public class Member {
 
 }
