@@ -15,6 +15,7 @@ public class EmptyController {
 		System.out.println("케이틀린");
 		
 		System.out.println("럭스");
+		System.out.println("이성훈!!!");
 	}
 
 }
