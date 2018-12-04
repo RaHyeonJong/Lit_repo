@@ -13,6 +13,8 @@ public class EmptyController {
 
 		System.out.println("레오나");
 		System.out.println("케이틀린");
+		
+		System.out.println("럭스");
 	}
 
 }
