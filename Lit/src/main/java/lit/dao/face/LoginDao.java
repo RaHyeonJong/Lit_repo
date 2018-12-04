@@ -1,5 +1,5 @@
 package lit.dao.face;
 
-public interface EmptyDao {
+public interface LoginDao {
 
 }

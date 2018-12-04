@@ -1,5 +1,5 @@
 package lit.service.face;
 
-public interface EmptyService {
+public interface LoginService {
 
 }
