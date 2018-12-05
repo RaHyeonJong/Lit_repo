@@ -18,6 +18,7 @@ import lit.service.face.LodgeService;
 
 @Controller
 @RequestMapping("/lodge")
+
 public class LodgeController {
 
 	@Autowired LodgeService lodgeService;
