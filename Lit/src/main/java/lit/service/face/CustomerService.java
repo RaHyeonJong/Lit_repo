@@ -2,15 +2,15 @@ package lit.service.face;
 
 import java.util.List;
 
-import lit.dto.Client;
-import lit.dto.Inquiry;
+import lit.dto.Board;
+import lit.dto.Member;
 
 public interface CustomerService {
 
-	public void writer(Client client);
+	public void writer(Member member);
 	
-	public List<Inquiry> list();
+	public List<Board> list();
 	
-	public Inquiry view(int boardno);
+	public Board view(int boardno);
 	
 }
