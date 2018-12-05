@@ -9,14 +9,13 @@
 <body>
 
 <!--  Header.jsp 포함 -->
-<!--  <jsp:include page="../layout/header.jsp" /> -->
-
+<%-- <jsp:include page="../layout/header.jsp" /> --%>
 
 <!--  사용자가 문의한 항목들을 리스트로 뿌려줌 -->
-
-
+<h1>문의내용 목록</h1>
+<hr>
 <!--  Footer.jsp 포험 -->
-<!--  <jsp:include page="../layout/footer.jsp" />-->
+<%-- <jsp:include page="../layout/footer.jsp" /> --%>
 
 </body>
 </html>
