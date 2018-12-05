@@ -1,5 +1,5 @@
 package lit.controller;
 
-public class EmptyController {
+public class LodgeController {
 
 }
