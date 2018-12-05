@@ -3,9 +3,9 @@ package lit.dto;
 import java.util.Date;
 
 public class Member {
-	private final String ADMIN = "ADMIN"; 	//mem_case_no = 0
-	private final String USER = "USER"; 		//mem_case_no = 1
-	private final String HOST = "HOST";		//mem_case_no = 2
+	private final String ADMIN = "admin"; 	//회원유형: 관리자 / mem_case_no = 0
+	private final String USER = "user"; 		//회원유형: 일반유저 / mem_case_no = 1
+	private final String HOST = "host";		//회원유형: 호스트 / mem_case_no = 2
 	
 	private int mem_no;
 	private int mem_case_no;		// 0 = ADMIN, 1 = USER, 2 = HOST
