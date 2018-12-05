@@ -2,8 +2,9 @@ package lit.dao.face;
 
 import java.util.List;
 
-import lit.dto.Board;
 import lit.dto.Member;
+
+import lit.dto.Board;
 
 public interface CustomerServiceDao {
 
@@ -19,7 +20,6 @@ public interface CustomerServiceDao {
 
 	public Board view(int boardno);
 
-	
 	
 	
 }
