@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +26,7 @@ public class MainController {
 
 	// 메인 페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public void main() {
+	public void main(Model model) {
 		logger.info("메인 페이지 띄우기");
 
 		// 추천 숙소 리스트
@@ -33,12 +34,22 @@ public class MainController {
 		// 추천 행사 리스트
 		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
 
+		// 테마별 숙소 리스트
+		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
+		// 테마별 행사 리스트
+		List<Lodge> themeFestivalList = mainService.getThemeFestivalList("");
+		
 		// 도시별 추천 숙소, 행사 리스트 추가
+		
+		model.addAttribute("recommendLodgeList", recommendLodgeList);
+		model.addAttribute("recommendFestivalList", recommendFestivalList);
+		model.addAttribute("themeLodgeList", themeLodgeList);
+		model.addAttribute("themeFestivalList", themeFestivalList);
 	}
 
 	// 메인 숙소 페이지
 	@RequestMapping(value = "/lodge", method = RequestMethod.GET)
-	public void mainLodge() {
+	public void mainLodge(Model model) {
 		logger.info("메인 숙소 페이지 띄우기");
 
 		// 최고 평점순 숙소 리스트
@@ -52,11 +63,16 @@ public class MainController {
 		
 		// 제주 숙소 리스트
 		List<Lodge> jejuLodgeList = mainService.getLocalLodgeList("jeju");
+		
+		model.addAttribute("bestLodgeList", bestLodgeList);
+		model.addAttribute("seoulLodgeList", seoulLodgeList);
+		model.addAttribute("busanLodgeList", busanLodgeList);
+		model.addAttribute("jejuLodgeList", jejuLodgeList);
 	}
 
 	// 메인 행사 페이지
 	@RequestMapping(value = "/festival", method = RequestMethod.GET)
-	public void mainFestival() {
+	public void mainFestival(Model model) {
 		logger.info("메인 행사 페이지 띄우기");
 
 		// 최고 평점순 행사 리스트
@@ -70,18 +86,11 @@ public class MainController {
 		
 		// 제주 행사 리스트
 		List<Lodge> jejuFestivalList = mainService.getLocalFestivalList("jeju");
-	}
-
-	// 추천 숙소 페이지
-	@RequestMapping(value = "/recommendLodge", method = RequestMethod.GET)
-	public void recommendLodge() {
-		logger.info("추천 숙소 페이지 띄우기");
-	}
-
-	// 추천 행사 페이지
-	@RequestMapping(value = "/recommendFestival", method = RequestMethod.GET)
-	public void recommendFestival() {
-		logger.info("추천 행사 페이지 띄우기");
+		
+		model.addAttribute("bestFestivalList", bestFestivalList);
+		model.addAttribute("seoulFestivalList", seoulFestivalList);
+		model.addAttribute("busanFestivalList", busanFestivalList);
+		model.addAttribute("jejuFestivalList", jejuFestivalList);
 	}
 
 }

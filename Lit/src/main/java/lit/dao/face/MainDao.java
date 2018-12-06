@@ -19,4 +19,8 @@ public interface MainDao {
 
 	List<Lodge> selectLocalFestival(String location); // 지역명 행사 리스트
 
+	List<Lodge> selectThemeLodge(String theme); // 테마별 숙소 리스트
+
+	List<Lodge> selectThemeFestival(String theme); // 테마별 행사 리스트
+
 }
