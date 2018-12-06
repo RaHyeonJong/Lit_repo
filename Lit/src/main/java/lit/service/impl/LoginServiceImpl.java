@@ -13,12 +13,38 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired LoginDao loginDao;
 
 	@Override
-	public boolean login(Member member) {
+	public boolean checkMembership(Member member) {
+		int cntAccount = loginDao.checkMembership(member);
 		
-		loginDao.login(member);
-		// 로그인 성공 시 1, 실패시 0 반환한다.
+		if(cntAccount == 1) {
+			return true;
+		}
 		
 		return false;
 	}
+
+	@Override
+	public Member getMember(Member member) {	
+		
+		return loginDao.getMember(member);
+	}
+
+	@Override
+	public boolean findId(Member member) {
+		int cntId = loginDao.findId(member);
+		
+		if(cntId == 1) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public Member getId(Member member) {
+
+		return loginDao.getId(member);
+	}
+	
 
 }

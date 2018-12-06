@@ -8,8 +8,6 @@
 </head>
 <body>
 
-
-
 <h1> GIT_자주하는 질문 테스트</h1>
 <hr>
 <!--  Header.jsp 포함 -->

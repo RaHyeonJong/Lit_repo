@@ -6,6 +6,13 @@ import lit.dto.Member;
 
 public interface LoginService {
 
-	boolean login(Member member);
+	public boolean checkMembership(Member member);
+
+	public Member getMember(Member member);
+
+	public boolean findId(Member member);
+
+	public Member getId(Member member);
+
 
 }
