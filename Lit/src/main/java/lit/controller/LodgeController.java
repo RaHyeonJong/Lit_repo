@@ -1,6 +1,5 @@
 package lit.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +34,7 @@ public class LodgeController {
 		//결제한 사람의 정보를 가져온다.
 		//상세 뷰에 숙소에 결제한 사람만 후기 작성 버튼 보이게 한다.
 		// 숙소와 회원 결제를 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
-		
+		logger.info("Lodge View");
 		
 		lodgeService.LodgeView(lodge);
 		
