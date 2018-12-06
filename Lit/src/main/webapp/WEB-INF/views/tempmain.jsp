@@ -16,21 +16,12 @@ a {
 <body>
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
+
 <h1>임시 메인페이지</h1>
-<hr>
 
-<a href="/login">로그인</a><br>
-<button id="login">로그인</button><br>
-<a href="/join">회원가입</a><br>
-<br>
 
-<a href="/logout">로그아웃</a><br>
-<a href="">메시지</a><br>
-<a href="">호스트되기</a><br>
-<a href="">호스트페이지</a><br>
-<a href="/mypage/view_profile">마이페이지</a><br>
-<a href="/cs/cs">고객센터</a><br>
-<br>
+
 
 
 </div></body>

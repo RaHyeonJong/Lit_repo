@@ -451,10 +451,14 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		<ul class="fl-right logbar hovermenu">
 		
 					<li><a href="#">호스트가 되어보세요</a></li>
-					<li><a href="#">도움말</a></li>
-					<li><a href="#">회원가입</a></li>
-					<li><a href="#">로그인</a></li>
+					<li><a href="#">호스트페이지</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/login">로그인</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/join">회원가입</a></li>
 		</ul>
 	
 	</div>
 </header>
+
