@@ -62,6 +62,12 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
+	@Override
+	public void insertMessage(String content) {
+		lodgedao.insertContent(content);
+		
+	}
+
 	
 
 

@@ -23,7 +23,9 @@ public interface LodgeService {
 	
 	//숙소 저장(좋아요)
 	public void insertLike(Lodge lodge);
-	
+
+	//호스트에게 메시지 보내기
+	public void insertMessage(String content);
 	// 신고
 	public void insertReport(Lodge lodge);
 	

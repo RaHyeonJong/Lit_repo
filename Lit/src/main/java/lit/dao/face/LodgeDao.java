@@ -23,6 +23,9 @@ public interface LodgeDao {
 	
 	//좋아요(숙소 저장)
 	public void inserlodgetLike(Lodge lodge);
+
+	//호스트에게 메시지 보내기
+	public void insertContent(String content);
 	
 	//숙소 신고하기
 	public void insertlodgeReport(Lodge lodge);

@@ -88,10 +88,10 @@ public class LodgeController {
 	}
 	
 	@RequestMapping(value ="/review/delete", method =RequestMethod.GET)
-	public void LodgeDelete() {}
+	public void LodgeReviewDelete() {}
 	
 	@RequestMapping(value ="/review/delete", method =RequestMethod.POST)
-	public void LodgeDelete(Lodge lodge,Comment comment) {
+	public void LodgeReviewDelete(Lodge lodge,Comment comment) {
 		// 요청 정보로 숙소 번호와 댓글번호를 가져온후 댓글 삭제
 		
 		lodgeService.deleteComment(comment);
@@ -105,6 +105,19 @@ public class LodgeController {
 		// favarrite 테이블에 저장되게 한다.
 		lodgeService.insertLike(lodge);
 		
+	}
+	
+	@RequestMapping(value ="/message", method = RequestMethod.GET)
+	public void Message() {
+		// 호스트에서 연락하기 클릭시 이동 되는 페이지
+		// 
+	}
+	@RequestMapping(value ="/message", method = RequestMethod.POST)
+	public void Message(String content) {
+		// 호스트에서 연락하기 클릭시 이동 되는 페이지
+		// 해당숙소의 호스트에게 메시지를 보낼수 있게 한다.
+		
+		lodgeService.insertMessage(content);
 	}
 	
 	@RequestMapping(value ="/report", method =RequestMethod.GET)
