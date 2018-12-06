@@ -19,4 +19,8 @@ public interface MainService {
 
 	List<Lodge> getLocalFestivalList(String location); // 지역별 행사 리스트 location에 지역명을 넣으면 됨(서울, 부산, 제주도 등등)
 
+	List<Lodge> getThemeLodgeList(String string); // 테마별 숙소 리스트
+
+	List<Lodge> getThemeFestivalList(String string); // 테마별 행사 리스트
+
 }

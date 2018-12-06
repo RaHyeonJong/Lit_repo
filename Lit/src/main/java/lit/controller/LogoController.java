@@ -47,7 +47,7 @@ public class LogoController {
 	}
 	
 	@RequestMapping(value = "/searchLocationAjax", method = RequestMethod.GET)
-	public @ResponseBody List logoSearch_ajax(String location) {
+	public @ResponseBody List<String> logoSearch_ajax(String location) {
 		// 검색에서 지역 검색어 추천 보여주는 ajax
 		
 		List<String> ajax = logoService.getLocationAjaxList(location);

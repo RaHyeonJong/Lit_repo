@@ -51,4 +51,16 @@ public class MainServiceImpl implements MainService{
 		return mainDao.selectLocalLodge(location);
 	}
 
+	@Override
+	public List<Lodge> getThemeLodgeList(String theme) {
+		
+		return mainDao.selectThemeLodge(theme);
+	}
+
+	@Override
+	public List<Lodge> getThemeFestivalList(String theme) {
+		
+		return mainDao.selectThemeFestival(theme);
+	}
+
 }
