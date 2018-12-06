@@ -19,6 +19,8 @@ public interface LodgeDao {
 	//후기 입력
 	public void insertReview(Comment comment);
 	
+	public void deleteReview(Comment comment);
+	
 	//좋아요(숙소 저장)
 	public void inserlodgetLike(Lodge lodge);
 	
