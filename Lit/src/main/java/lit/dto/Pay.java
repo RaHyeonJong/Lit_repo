@@ -6,6 +6,10 @@ public class Pay {
 	private final String CARD = "card";			//결제수단: 카드 / pay_method_no: 1
 	private final String PHONE = "phone";		//결제수단: 휴대폰 / pay_mehtod_no: 2
 	
+	private final String NOMAL = "nomal";
+	private final String REFUND_WAITING = "refund_waiting";
+	private final String REFUND_COMPLETE = "refund_complete";
+	
 	private int pay_no;				// 결제번호
 	private int mem_no;				// 구매회원번호
 	private int lodge_no;				// 예약숙소번호
@@ -20,6 +24,8 @@ public class Pay {
 	private Date stay_start;		// 숙박시작날짜
 	private Date stay_end;			// 숙박종료날짜
 	private int stay_heads;			// 숙박인원
+	private int pay_state_no;			// 결제상태 / NOMAL: 정상, REFUND_WAITING: 환불대기, REFUND_COMPLETE: 환불완료
+	private String pay_state;			// NOMAL or REFUND_WAITING or REFUND_COMPLETE
 	
 	@Override
 	public String toString() {
@@ -27,8 +33,36 @@ public class Pay {
 				+ ", pay_method_no=" + pay_method_no + ", pay_method=" + pay_method + ", pay_sum=" + pay_sum
 				+ ", cleaning_cost=" + cleaning_cost + ", service_fee=" + service_fee + ", stay_term=" + stay_term
 				+ ", pay_time=" + pay_time + ", stay_start=" + stay_start + ", stay_end=" + stay_end + ", stay_heads="
-				+ stay_heads + "]";
+				+ stay_heads + ", pay_state_no=" + pay_state_no + ", pay_state=" + pay_state + "]";
 	}
+
+
+
+	public int getPay_state_no() {
+		return pay_state_no;
+	}
+
+
+	public void setPay_state_no(int pay_state_no) {
+		this.pay_state_no = pay_state_no;
+		if(pay_state_no == 0)
+			setPay_state(NOMAL);
+		else if(pay_state_no == 1)
+			setPay_state(REFUND_WAITING);
+		else if(pay_state_no == 2)
+			setPay_state(REFUND_COMPLETE);			
+	}
+
+
+	public String getPay_state() {
+		return pay_state;
+	}
+
+
+	public void setPay_state(String pay_state) {
+		this.pay_state = pay_state;
+	}
+
 
 	public int getPay_no() {
 		return pay_no;

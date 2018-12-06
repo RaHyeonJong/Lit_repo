@@ -41,6 +41,15 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
+	public void deleteComment(Comment comment) {
+		lodgedao.deleteReview(comment);
+		
+		
+	}
+	
+	
+	
+	@Override
 	public void insertLike(Lodge lodge) {
 	
 		lodgedao.inserlodgetLike(lodge);
@@ -52,6 +61,8 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.insertlodgeReport(lodge);
 		
 	}
+
+	
 
 
 
