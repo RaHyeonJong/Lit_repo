@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>TEMP MAIN</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
 a {
 	font-size: 20px;
@@ -19,6 +20,7 @@ a {
 <hr>
 
 <a href="/login">로그인</a><br>
+<button id="login">로그인</button><br>
 <a href="/join">회원가입</a><br>
 <br>
 
@@ -29,7 +31,6 @@ a {
 <a href="/mypage/view_profile">마이페이지</a><br>
 <a href="/cs/cs">고객센터</a><br>
 <br>
-
 
 
 </div></body>
