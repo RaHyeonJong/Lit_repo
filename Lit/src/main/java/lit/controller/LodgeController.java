@@ -1,6 +1,5 @@
 package lit.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +33,14 @@ public class LodgeController {
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
 		//결제한 사람의 정보를 가져온다.
 		//상세 뷰에 숙소에 결제한 사람만 후기 작성 버튼 보이게 한다.
+
 		// 숙소와 회원 결제를 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
-		
+		logger.info("Lodge View");
+
+		// 숙소와, 회원, 결제, 이미지 테이블 을 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
+		// 댓글 정보와 추천 정보도 같이 포함하여 뷰에 보여준다.
+		// 댓글은 페이징 처리를 함
+
 		
 		lodgeService.LodgeView(lodge);
 		
@@ -78,11 +83,21 @@ public class LodgeController {
 		//결제한 사용자가 후기를 작성할 시 파라미터로 후기를 작성한 회원번호,
 		// 숙소번호,내용,작성 시간이 들어가게 한다.
 		
-		
-		
 		lodgeService.insertComment(comment);
 		
 	}
+	
+	@RequestMapping(value ="/review/delete", method =RequestMethod.GET)
+	public void LodgeDelete() {}
+	
+	@RequestMapping(value ="/review/delete", method =RequestMethod.POST)
+	public void LodgeDelete(Lodge lodge,Comment comment) {
+		// 요청 정보로 숙소 번호와 댓글번호를 가져온후 댓글 삭제
+		
+		lodgeService.deleteComment(comment);
+		
+	}
+	
 	
 	@RequestMapping(value ="/like", method =RequestMethod.GET)
 	public void LikeLodge(Lodge lodge) {

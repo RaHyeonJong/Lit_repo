@@ -18,6 +18,9 @@ public interface LodgeService {
 	//후기입력
 	public void insertComment(Comment comment);
 
+	//후기 삭제
+	public void deleteComment(Comment comment);
+	
 	//숙소 저장(좋아요)
 	public void insertLike(Lodge lodge);
 	
