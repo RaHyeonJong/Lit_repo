@@ -4,6 +4,12 @@ import lit.dto.Member;
 
 public interface LoginDao {
 
-	void login(Member member);
+	public int checkMembership(Member member);
+
+	public Member getMember(Member member);
+
+	public int findId(Member member);
+
+	public Member getId(Member member);
 
 }
