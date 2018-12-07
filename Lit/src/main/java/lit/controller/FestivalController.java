@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import lit.dto.Board;
+import lit.dto.Festival;
 import lit.service.face.FestivalService;
 
 
@@ -16,9 +16,9 @@ public class FestivalController {
 	@Autowired FestivalService festivalService;
 	
 	@RequestMapping(value="/festival/View", method=RequestMethod.GET)
-	public void eventView(Model model, int board_no ) { // 축제 상세보이기
+	public void festivalView(Model model, int festival_no ) { // 축제 상세보이기
 		
-		Board festival = festivalService.viewFestival(board_no);
+		Festival festival = festivalService.viewFestival(festival_no);
 		model.addAttribute("festival", festival);			 
 	}
 	
