@@ -1,6 +1,5 @@
 package lit.dto;
 
-<<<<<<< HEAD
 import java.util.Date;
 
 public class Festival {
@@ -83,11 +82,4 @@ public class Festival {
 	public void setStored_name(String stored_name) {
 		this.stored_name = stored_name;
 	}
-	
-	
-=======
-public class Festival {
-	// 행사 dto
-	// 추후 추가 바람
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
