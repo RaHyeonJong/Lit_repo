@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.MainDao;
+import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.service.face.MainService;
@@ -34,13 +35,13 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Lodge> getBestFestivalList() {
+	public List<Festival> getBestFestivalList() {
 		
 		return mainDao.selectBestFestival();
 	}
 
 	@Override
-	public List<Lodge> getLocalFestivalList(String location) {
+	public List<Festival> getLocalFestivalList(String location) {
 		
 		return mainDao.selectLocalFestival(location);
 	}
@@ -58,7 +59,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Lodge> getThemeFestivalList(String theme) {
+	public List<Festival> getThemeFestivalList(String theme) {
 		
 		return mainDao.selectThemeFestival(theme);
 	}

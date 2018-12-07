@@ -6,9 +6,15 @@
 
 
 <style type="text/css">
+
+#wrapper
+{
+	padding-top:40px;
+}
+
 body {
 	margin: 0;
-
+	
 
 }
 ul li {
@@ -424,6 +430,23 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
+
+
+
+#select-title
+{
+	vertical-align:center;
+}
+
+
+
+#content
+{
+	line-height:30.0em;	
+	text-align:center;
+}
+
+
  </style>
 
 <header id="header">
@@ -449,14 +472,44 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		
 		</div>
 		<ul class="fl-right logbar hovermenu">
-		
-					<li><a href="#">호스트가 되어보세요</a></li>
-					<li><a href="#">호스트페이지</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
-					<li><a href="/login">로그인</a></li>
-					<li><a href="/logout">로그아웃</a></li>
+			
+				<!-- 로그인 상태가 아니면 -->
+				<c:if test="${not login }">
+				
 					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/login">로그인</a></li>
 					<li><a href="/join">회원가입</a></li>
+					
+				</c:if>
+		
+				<!-- 일반 로그인 -->
+				<c:if test="${login }">
+					<li><a href="#">호스트가 되어보세요</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				
+				</c:if>
+		
+				<!-- 호스트 로그인 -->
+				<c:if test="${hostlogin }">
+				
+					<li><a href="#">호스트 페이지</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+					
+				
+				</c:if>
+		
+				<!--  관리자 로그인 -->
+				<c:if test="${adminlogin }">
+				
+					<li><a href="#">관리자 페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				
+				</c:if>
+		
 		</ul>
 	
 	</div>
