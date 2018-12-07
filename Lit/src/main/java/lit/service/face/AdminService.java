@@ -4,6 +4,7 @@ import java.util.List;
 
 import lit.dto.Board;
 import lit.dto.Comment;
+import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
