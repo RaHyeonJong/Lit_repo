@@ -7,19 +7,6 @@
 
 <style type="text/css">
 
-#wrapper
-{
-	padding-top:40px;
-}
-
-body {
-	margin: 0;
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-
-}
 ul li {
 	list-style: none;
 	float: left;
@@ -47,14 +34,13 @@ ul li {
 	margin: 0 auto;
 	width: 100%;
 	height: 55px;
-	min-width: 1280px;
+	min-width: 978px;
+	max-width: 1200px;
 	transition: 0.6s;
 	display: block;
 	position: -webkit-sticky;
   	position: sticky;
   	will-change: transform;
-
-  
 }
 
 #header:hover {

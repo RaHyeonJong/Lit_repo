@@ -15,6 +15,6 @@
 			<li><a href="/cs/cs">자주 찾는 질문</a></li>
 			<li><a href="/cs/select">1:1 문의하기</a></li>
 		</ul>
-	</div>
+	</div> 
 
 </div>
