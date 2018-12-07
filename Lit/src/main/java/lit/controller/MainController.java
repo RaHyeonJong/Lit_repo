@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import lit.dto.Board;
+import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.service.face.MainService;
 
@@ -32,19 +33,19 @@ public class MainController {
 		// 추천 숙소 리스트
 		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
 		// 추천 행사 리스트
-		List<Board> recommendFestivalList = mainService.getRecommendFestivalList();
+		List<Board> recommendEventList = mainService.getRecommendEventList();
 
 		// 테마별 숙소 리스트
 		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
 		// 테마별 행사 리스트
-		List<Lodge> themeFestivalList = mainService.getThemeFestivalList("");
+		List<Lodge> themeEventList = mainService.getThemeEventList("");
 		
 		// 도시별 추천 숙소, 행사 리스트 추가
 		
 		model.addAttribute("recommendLodgeList", recommendLodgeList);
-		model.addAttribute("recommendFestivalList", recommendFestivalList);
+		model.addAttribute("recommendEventList", recommendEventList);
 		model.addAttribute("themeLodgeList", themeLodgeList);
-		model.addAttribute("themeFestivalList", themeFestivalList);
+		model.addAttribute("themeEventList", themeEventList);
 	}
 
 	// 메인 숙소 페이지
@@ -71,26 +72,26 @@ public class MainController {
 	}
 
 	// 메인 행사 페이지
-	@RequestMapping(value = "/festival", method = RequestMethod.GET)
-	public void mainFestival(Model model) {
+	@RequestMapping(value = "/event", method = RequestMethod.GET)
+	public void mainEvent(Model model) {
 		logger.info("메인 행사 페이지 띄우기");
 
 		// 최고 평점순 행사 리스트
-		List<Lodge> bestFestivalList = mainService.getBestFestivalList();
+		List<Festival> bestEventList = mainService.getBestEventList();
 
 		// 서울 행사 리스트
-		List<Lodge> seoulFestivalList = mainService.getLocalFestivalList("seoul");
+		List<Board> seoulEventList = mainService.getLocalEventList("seoul");
 
 		// 부산 행사 리스트
-		List<Lodge> busanFestivalList = mainService.getLocalFestivalList("busan");
+		List<Board> busanEventList = mainService.getLocalEventList("busan");
 		
 		// 제주 행사 리스트
-		List<Lodge> jejuFestivalList = mainService.getLocalFestivalList("jeju");
+		List<Board> jejuEventList = mainService.getLocalEventList("jeju");
 		
-		model.addAttribute("bestFestivalList", bestFestivalList);
-		model.addAttribute("seoulFestivalList", seoulFestivalList);
-		model.addAttribute("busanFestivalList", busanFestivalList);
-		model.addAttribute("jejuFestivalList", jejuFestivalList);
+		model.addAttribute("bestEventList", bestEventList);
+		model.addAttribute("seoulEventList", seoulEventList);
+		model.addAttribute("busanEventList", busanEventList);
+		model.addAttribute("jejuEventList", jejuEventList);
 	}
 
 }
