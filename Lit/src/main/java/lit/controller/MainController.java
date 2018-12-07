@@ -37,7 +37,7 @@ public class MainController {
 		// 테마별 숙소 리스트
 		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
 		// 테마별 행사 리스트
-		List<Lodge> themeFestivalList = mainService.getThemeFestivalList("");
+		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
 		
 		// 도시별 추천 숙소, 행사 리스트 추가
 		
@@ -76,16 +76,16 @@ public class MainController {
 		logger.info("메인 행사 페이지 띄우기");
 
 		// 최고 평점순 행사 리스트
-		List<Lodge> bestFestivalList = mainService.getBestFestivalList();
+		List<Festival> bestFestivalList = mainService.getBestFestivalList();
 
 		// 서울 행사 리스트
-		List<Lodge> seoulFestivalList = mainService.getLocalFestivalList("seoul");
+		List<Festival> seoulFestivalList = mainService.getLocalFestivalList("seoul");
 
 		// 부산 행사 리스트
-		List<Lodge> busanFestivalList = mainService.getLocalFestivalList("busan");
+		List<Festival> busanFestivalList = mainService.getLocalFestivalList("busan");
 		
 		// 제주 행사 리스트
-		List<Lodge> jejuFestivalList = mainService.getLocalFestivalList("jeju");
+		List<Festival> jejuFestivalList = mainService.getLocalFestivalList("jeju");
 		
 		model.addAttribute("bestFestivalList", bestFestivalList);
 		model.addAttribute("seoulFestivalList", seoulFestivalList);

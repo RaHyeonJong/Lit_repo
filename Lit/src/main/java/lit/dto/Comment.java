@@ -3,6 +3,7 @@ package lit.dto;
 import java.util.Date;
 
 public class Comment {
+	
 	private int comment_no;
 	private int parent_comment_no;
 	private int board_no;

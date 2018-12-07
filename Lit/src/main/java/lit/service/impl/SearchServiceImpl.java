@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.SearchDao;
-import lit.dto.Festival;
+import lit.dto.Board;
 import lit.dto.Lodge;
 import lit.service.face.SearchService;
 
@@ -22,7 +22,7 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<Festival> getLocalFestivalList(String location) {
+	public List<Board> getLocalFestivalList(String location) {
 		
 		return searchDao.selectLocalFestival(location);
 	}
