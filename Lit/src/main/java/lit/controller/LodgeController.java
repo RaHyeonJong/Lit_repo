@@ -35,14 +35,14 @@ public class LodgeController {
 		//상세 뷰에 숙소에 결제한 사람만 후기 작성 버튼 보이게 한다.
 
 		// 숙소와 회원 결제를 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
-		logger.info("Lodge View");
+		
 
 		// 숙소와, 회원, 결제, 이미지 테이블 을 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
 		// 댓글 정보와 추천 정보도 같이 포함하여 뷰에 보여준다.
 		// 댓글은 페이징 처리를 함
 
 		
-		lodgeService.LodgeView(lodge);
+//		lodgeService.LodgeView(lodge);
 		
 	}
 	
