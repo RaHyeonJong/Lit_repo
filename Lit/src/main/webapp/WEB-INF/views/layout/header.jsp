@@ -14,7 +14,10 @@
 
 body {
 	margin: 0;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 }
 ul li {
