@@ -4,25 +4,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-
 <style>
-
 
 
 </style>
 <script type="text/javascript">
 
 
-
 </script>
-<body style="width: 100%; margin: 0;">
-<div id="header">
-<!-- 헤더부분 -->
-<jsp:include page="../layout/header.jsp" />
+
+<body>
+<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;"> 
+<div><!-- header 시작 -->
+<c:import url="../layout/header.jsp"/>
 </div>
 
-<div id="wrapper"  style="width:978px; margin: 0 auto;">
-<div id="content">
+<div><!-- content시작 -->
+
+
+
+
+
+ 
 
 
 
@@ -32,16 +35,10 @@
 
 
 
-
-
-
-
-
-
-
-
+<!-- content 끝 -->
 </div>
-<jsp:include page="../layout/footer.jsp"/>
+
+<!-- wrapper 끝 -->
 </div>
 
 
