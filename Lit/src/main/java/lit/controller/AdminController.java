@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lit.dto.Board;
+import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
@@ -160,7 +161,7 @@ public class AdminController {
 			
 			) { // 고객문의 리스트 보이기
 
-		Paging paging = adminService.getPaging(curPage, listCount, pageCount);
+		Paging paging = adminService.getCsPaging(curPage, listCount, pageCount);
 		model.addAttribute("paging", paging);
 		
 		List<Board> csList = adminService.csList(paging);
