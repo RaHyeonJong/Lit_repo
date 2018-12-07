@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lit.dto.Comment;
 import lit.dto.Lodge;
-
+import lit.dto.Message;
 import lit.dto.Pay;
 import lit.service.face.LodgeService;
 
@@ -113,11 +113,11 @@ public class LodgeController {
 		// 
 	}
 	@RequestMapping(value ="/message", method = RequestMethod.POST)
-	public void Message(String content) {
+	public void Message(Message message) {
 		// 호스트에서 연락하기 클릭시 이동 되는 페이지
 		// 해당숙소의 호스트에게 메시지를 보낼수 있게 한다.
 		
-		lodgeService.insertMessage(content);
+		lodgeService.insertMessage(message);
 	}
 	
 	@RequestMapping(value ="/report", method =RequestMethod.GET)

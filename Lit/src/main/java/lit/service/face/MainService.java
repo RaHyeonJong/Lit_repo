@@ -2,14 +2,14 @@ package lit.service.face;
 
 import java.util.List;
 
-import lit.dto.Festival;
+import lit.dto.Board;
 import lit.dto.Lodge;
 
 public interface MainService {
 
 	List<Lodge> getRecommendLodge(); // 숙소 추천 리스트(평점순)
 
-	List<Festival> getRecommendFestivalList(); // 행사 추천 리스트(평점순)
+	List<Board> getRecommendFestivalList(); // 행사 추천 리스트(평점순)
 
 	List<Lodge> getBestLodgeList(); // 최고 평점 숙소 리스트
 	

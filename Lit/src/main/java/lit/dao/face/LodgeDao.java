@@ -2,6 +2,7 @@ package lit.dao.face;
 
 import lit.dto.Comment;
 import lit.dto.Lodge;
+import lit.dto.Message;
 import lit.dto.Pay;
 
 public interface LodgeDao {
@@ -25,7 +26,7 @@ public interface LodgeDao {
 	public void inserlodgetLike(Lodge lodge);
 
 	//호스트에게 메시지 보내기
-	public void insertContent(String content);
+	public void insertContent(Message message);
 	
 	//숙소 신고하기
 	public void insertlodgeReport(Lodge lodge);

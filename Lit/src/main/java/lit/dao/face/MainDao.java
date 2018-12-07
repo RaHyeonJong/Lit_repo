@@ -2,14 +2,14 @@ package lit.dao.face;
 
 import java.util.List;
 
-import lit.dto.Festival;
+import lit.dto.Board;
 import lit.dto.Lodge;
 
 public interface MainDao {
 
 	List<Lodge> selectRecommendLodge(); // 추천 숙소 리스트(평점순)
 
-	List<Festival> selectRecommendFestival(); // 추천 행사 리스트(평점순)
+	List<Board> selectRecommendFestival(); // 추천 행사 리스트(평점순)
 
 	List<Lodge> selectBestLodge(); // 최고 평점 숙소 리스트
 	
