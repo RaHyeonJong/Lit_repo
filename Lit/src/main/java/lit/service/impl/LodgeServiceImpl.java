@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
 import lit.dto.Lodge;
+import lit.dto.Message;
 import lit.dto.Pay;
 import lit.service.face.LodgeService;
 
@@ -63,8 +64,8 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
-	public void insertMessage(String content) {
-		lodgedao.insertContent(content);
+	public void insertMessage(Message message) {
+		lodgedao.insertContent(message);
 		
 	}
 
