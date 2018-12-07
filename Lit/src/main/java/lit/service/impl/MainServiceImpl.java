@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.MainDao;
-import lit.dto.Festival;
+import lit.dto.Board;
 import lit.dto.Lodge;
 import lit.service.face.MainService;
 
@@ -22,7 +22,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Festival> getRecommendFestivalList() {
+	public List<Board> getRecommendFestivalList() {
 		
 		return mainDao.selectRecommendFestival();
 	}

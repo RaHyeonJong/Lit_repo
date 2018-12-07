@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lit.dto.Festival;
+import lit.dto.Board;
 import lit.dto.Lodge;
 import lit.service.face.SearchService;
 
@@ -33,7 +33,7 @@ public class SearchController {
 		// 지역 숙소 리스트
 		List<Lodge> localLodgeList = searchService.getLocalLodgeList(location);
 		// 지역 행사 리스트
-		List<Festival> localFestivalList = searchService.getLocalFestivalList(location);
+		List<Board> localFestivalList = searchService.getLocalFestivalList(location);
 		// 테마별 행사 추천 리스트
 		
 		model.addAttribute("localLodgeList", localLodgeList);
@@ -55,7 +55,7 @@ public class SearchController {
 		logger.info("지역 행사 결과 페이지 띄우기");
 
 		// 지역 행사 리스트
-		List<Festival> localFestivalList = searchService.getLocalFestivalList(location);
+		List<Board> localFestivalList = searchService.getLocalFestivalList(location);
 		
 		model.addAttribute("localFestivalList", localFestivalList);
 	}

@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import lit.dto.Festival;
+import lit.dto.Board;
 import lit.dto.Lodge;
 import lit.service.face.MainService;
 
@@ -32,7 +32,7 @@ public class MainController {
 		// 추천 숙소 리스트
 		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
 		// 추천 행사 리스트
-		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
+		List<Board> recommendFestivalList = mainService.getRecommendFestivalList();
 
 		// 테마별 숙소 리스트
 		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
