@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import lit.dto.Board;
+import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.service.face.MainService;
 
@@ -32,12 +33,12 @@ public class MainController {
 		// 추천 숙소 리스트
 		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
 		// 추천 행사 리스트
-		List<Board> recommendFestivalList = mainService.getRecommendFestivalList();
+		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
 
 		// 테마별 숙소 리스트
 		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
 		// 테마별 행사 리스트
-		List<Lodge> themeFestivalList = mainService.getThemeFestivalList("");
+		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
 		
 		// 도시별 추천 숙소, 행사 리스트 추가
 		
@@ -76,16 +77,16 @@ public class MainController {
 		logger.info("메인 행사 페이지 띄우기");
 
 		// 최고 평점순 행사 리스트
-		List<Lodge> bestFestivalList = mainService.getBestFestivalList();
+		List<Festival> bestFestivalList = mainService.getBestFestivalList();
 
 		// 서울 행사 리스트
-		List<Lodge> seoulFestivalList = mainService.getLocalFestivalList("seoul");
+		List<Festival> seoulFestivalList = mainService.getLocalFestivalList("seoul");
 
 		// 부산 행사 리스트
-		List<Lodge> busanFestivalList = mainService.getLocalFestivalList("busan");
+		List<Festival> busanFestivalList = mainService.getLocalFestivalList("busan");
 		
 		// 제주 행사 리스트
-		List<Lodge> jejuFestivalList = mainService.getLocalFestivalList("jeju");
+		List<Festival> jejuFestivalList = mainService.getLocalFestivalList("jeju");
 		
 		model.addAttribute("bestFestivalList", bestFestivalList);
 		model.addAttribute("seoulFestivalList", seoulFestivalList);
