@@ -443,7 +443,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
 				<a href="#"><img style="height: 50px;"
-					src="" alt="로고" /></a>
+					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
    				 <input class="Search-box" type="search" id="Search-box" autocomplete="off">
