@@ -438,7 +438,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
 					<div class= "search_modal "style="left: 101;">
-   					<ul style ="padding : 0;">
+   					<ul style ="padding : 0;" class="prevention">
    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br>
    					<li><button class= "btn">모두</button></li>
    					<li><button class= "btn">숙소</button></li>
@@ -447,7 +447,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</div>
 		
 		</div>
-		<ul class="fl-right logbar hovermenu">
+		<ul class="fl-right logbar hovermenu prevention">
 		
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="#">호스트페이지</a></li>
