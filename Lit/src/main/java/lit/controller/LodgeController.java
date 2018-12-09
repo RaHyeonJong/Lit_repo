@@ -51,7 +51,7 @@ public class LodgeController {
 		// 예약 하기 클릭시 결제 정보를 보여준다.
 		// 로그인이 안되있는 상태에선 리턴으로 로그인모달창을 띄운다.
 		
-		lodgeService.LodgeReservationView(pay);
+//		lodgeService.LodgeReservationView(pay);
 		
 	}
 	
