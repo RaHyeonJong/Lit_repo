@@ -31,6 +31,8 @@
 	}
 	})
 	
+	 
+	
 	$("#update").click(function(){
           var stay_start = $('#start').val(),
          	 stay_end = $('#end').val();
@@ -41,25 +43,31 @@
 	   		data :{ start : stay_start , end : stay_end},
     		dataType:"json",
     		success: function(e) {
-    			console.log("성공");	
+    			var disabledDays = [${abc}];
     			console.log(e);
-    		
+    			$start.datepicker({
+    			       language: 'en',
+    			       onRenderCell: function (date, cellType) {
+    			           if (cellType == 'day') {
+    			               var day = date.getDay(),
+    			                   isDisabled = disabledDays != -1;
+
+    			               return {
+    			                   disabled: isDisabled
+    			               }
+    			           }
+    			       }
+    			   });
     		}
     		, error : function(){
     			console.log("실패");
     		}
     		
     	});	
-         
+			
          
          
       });
-	
-
-		
-
-	
-
 
 	 
 });
@@ -75,6 +83,8 @@
 
 <div><!-- content시작 -->
 
+<br>
+<br>
 <br>
 <br>
 <br>

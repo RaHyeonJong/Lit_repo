@@ -87,7 +87,7 @@ public class LodgeController {
 			}
 			for (String date : dates) {
 				resultMap.put("abc", dates);
-				mav.addObject(resultMap);
+				mav.addObject("abc",resultMap);
 			}
 			
 		} catch (ParseException e) {
