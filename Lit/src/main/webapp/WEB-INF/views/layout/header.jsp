@@ -11,6 +11,20 @@
 
 <style type="text/css">
 
+<<<<<<< HEAD
+#wrapper
+{
+	padding-top:40px;
+}
+
+body {
+	margin: 0;
+
+	
+
+}
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 ul li {
 	list-style: none;
 	float: left;
@@ -423,23 +437,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
-
-
-
-#select-title
-{
-	vertical-align:center;
-}
-
-
-
-#content
-{
-	line-height:30.0em;	
-	text-align:center;
-}
-
-
  </style>
 
 <header id="header">
