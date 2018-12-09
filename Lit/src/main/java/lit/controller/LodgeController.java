@@ -77,7 +77,7 @@ public class LodgeController {
 			Date startDate = sdf.parse(start);
 			Date endDate = sdf.parse(end);
 			ArrayList<String> dates = new ArrayList<String>();
-			Date currentDate = startDate;
+			Date currentDate = startDate; //시작 날짜
 			while (currentDate.compareTo(endDate) <= 0) {
 				dates.add(sdf.format(currentDate));
 				Calendar c = Calendar.getInstance();
@@ -87,7 +87,7 @@ public class LodgeController {
 			}
 			for (String date : dates) {
 				resultMap.put("abc", dates);
-				mav.addObject("abc",resultMap);
+				mav.addObject("qqq",resultMap);
 			}
 			
 		} catch (ParseException e) {

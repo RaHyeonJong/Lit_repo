@@ -16,20 +16,20 @@
 		$end = $('#end');
 	
 		
-	 $start.datepicker({
-		language : 'en',
-		onSelect : function(fd, date){
-			$end.data('datepicker')
-			.update('minDate',date)
-		}
-	})
-	 $end.datepicker({
-		language : 'en',
-	onSelect : function(fd,date){
-		$start.data('datepicker')
-		.update('maxDate',date)
-	}
-	})
+// 	 $start.datepicker({
+// 		language : 'en',
+// 		onSelect : function(fd, date){
+// 			$end.data('datepicker')
+// 			.update('minDate',date)
+// 		}
+// 	})
+// 	 $end.datepicker({
+// 		language : 'en',
+// 	onSelect : function(fd,date){
+// 		$start.data('datepicker')
+// 		.update('maxDate',date)
+// 	}
+// 	})
 	
 	 
 	
@@ -42,22 +42,25 @@
     		url : "/lodge/view",
 	   		data :{ start : stay_start , end : stay_end},
     		dataType:"json",
-    		success: function(e) {
-    			var disabledDays = [${abc}];
-    			console.log(e);
+    		success: function(mav) {
+    		
+    			console.log(mav);
+    			
+    			
     			$start.datepicker({
     			       language: 'en',
-    			       onRenderCell: function (date, cellType) {
-    			           if (cellType == 'day') {
-    			               var day = date.getDay(),
-    			                   isDisabled = disabledDays != -1;
-
+    			       onRenderCell: function(date, cellType) {
+    			           if (cellType == 'day' && date.getDate() == 11) { // 이부분을 잘 풀면 될꺼같음, 맨뒤에 11은 매월 11일이 비활성화 된다.
+    			        	   // http://t1m0n.name/air-datepicker/docs/ 여기서 도큐먼트 활용하거나 controller에서 스플릿으로 '일'만 잘라서 해야될꺼같음.
     			               return {
-    			                   disabled: isDisabled
-    			               }
+    			            	   html: stay_start.split("/"), // Custom cell content 
+    			               
+    			            	   disabled: true
     			           }
     			       }
+    			     }
     			   });
+    			
     		}
     		, error : function(){
     			console.log("실패");
@@ -93,13 +96,11 @@
 <br>
 
 <h1> 데이트 피커 ajax 테스트</h1>
-<!--  	<form action="/lodge/view" method="get">  -->
- 	
- 	<input id="start" name ="stay_start" type="text" data-language="en"class="form-control"/>
-       <input id="end" name ="stay_end" type="text"  data-language="en"class="form-control"/>
+ 
+ 
+ 	<input id="start" name ="stay_start" type="text" data-language="en"class="datepicker-here"/>
+       <input id="end" name ="stay_end" type="text"  data-language="en"class="datepicker-here"/>
 		<button id ="update" >예약하기</button>
-<!-- 	</form> -->
-
 
 
 <!-- content 끝 -->
