@@ -7,10 +7,18 @@
 
 <style type="text/css">
 
-ul li {
-	list-style: none;
-	float: left;
+
+/* 고친부분 */
+/* ul li { */
+/* 	list-style: none; */
+/* 	float: left; */
+/* } */
+
+.prevention>li { 
+list-style:none; 
+float:left;
 }
+
 
 .fl-left {
 	float: left;
@@ -460,16 +468,17 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</div>
 		
 		</div>
-<<<<<<< HEAD
-		<ul class="fl-right logbar hovermenu prevention">
+<!-- <<<<<<< HEAD -->
+		<ul class="fl-right logbar hovermenu prevention">  <!-- class에 prevention추가 -->
 		
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="#">호스트페이지</a></li>
 					<li><a href="/mypage/view_profile">마이페이지</a></li>
 					<li><a href="/login">로그인</a></li>
 					<li><a href="/logout">로그아웃</a></li>
-=======
-		<ul class="fl-right logbar hovermenu">
+		</ul> <!--  이거 추가함 오류나서 -->
+<!-- ======= -->
+		<ul class="fl-right logbar hovermenu prevention">
 			
 				<!-- 로그인 상태가 아니면 -->
 				<c:if test="${not login }">
