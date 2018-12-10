@@ -10,19 +10,14 @@
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 
 
-<div style="display:table; position:fixed; z-index:1; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65);">
-<div style="background-color:#fefefe; margin:15% auto; min-width:300px; padding:0px; width:10%; text-align:center;">
-<br>
+
 <h3>로그인</h3>
-<table style="width:100%;">
-<tr><td>Email</td><td><input type="email" name="mem_id"/></td></tr>
-<tr><td>Password</td><td><input type="password" name="mem_pw"/></td></tr>
-</table>
-<br>
-<button>로그인</button>
-<br><br>
+
+<div style="width:100%; height:100%; position:fixed; top:0; left:0; background-color:#191970; display:block;"> 
+<div style="width:50px; height:50px; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#ffd700;">콘텐츠</div> 
 </div>
-</div>
+
+
 
 
 </div>

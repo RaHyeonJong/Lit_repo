@@ -1,14 +1,18 @@
 package lit.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
 import lit.service.face.LoginService;
@@ -18,25 +22,26 @@ public class LoginController {
 
 	@Autowired LoginService loginService;
 	
-	@GetMapping(value="/login")
-	public String login() { 
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public ModelAndView loginProcess(Member member, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> resultMap = new HashMap<>();
 		
-		return "login/login";
-	}
-	
-	@PostMapping(value="/login")
-	public String loginProcess(Model model, Member member, HttpSession session) {
 		boolean existAccount = loginService.checkMembership(member);
 		
 		if(existAccount) {
 			member = loginService.getMember(member);
 			session.setAttribute("login", true);
 			session.setAttribute("member", member);
-			return "redirect:/main";
+			
+			resultMap.put("login", true);
+		} else {
+			resultMap.put("login", false);
 		}
+		mav.addAllObjects(resultMap);
+		mav.setViewName("jsonView");
 		
-		model.addAttribute("msg_failed", "로그인 실패. 아이디와 비밀번호를 다시 확인해주세요.");
-		return "login/login";
+		return mav;
 	}
 	
 	@RequestMapping(value="/login/findId")
@@ -74,6 +79,6 @@ public class LoginController {
 	public String logout(HttpSession session) { 
 		session.invalidate();
 		
-		return "redirect:/main";
+		return "redirect:/tempmain";
 	}
 }
