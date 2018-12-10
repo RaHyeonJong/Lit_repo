@@ -3,10 +3,28 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+  <!-- 데이트 피커 -->
+  <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+        <script src="/resources/dist/js/datepicker.min.js"></script>
+     <!-- Include English language -->
+        <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <style type="text/css">
 
+<<<<<<< HEAD
+#wrapper
+{
+	padding-top:40px;
+}
+
+body {
+	margin: 0;
+
+	
+
+}
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 ul li {
 	list-style: none;
 	float: left;
@@ -400,7 +418,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
      border-radius: 4px;
      width: 460px;
 }
-.search_modal:hover{
+.search_modal:hover {
   	 opacity:1; 
      transform:scale(1); 
     transition: all .15s ease; 
@@ -419,23 +437,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
-
-
-
-#select-title
-{
-	vertical-align:center;
-}
-
-
-
-#content
-{
-	line-height:30.0em;	
-	text-align:center;
-}
-
-
  </style>
 
 <header id="header">
