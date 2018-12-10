@@ -414,7 +414,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
      border-radius: 4px;
      width: 460px;
 }
-.search_modal:hover{
+.search_modal:hover {
   	 opacity:1; 
      transform:scale(1); 
     transition: all .15s ease; 
