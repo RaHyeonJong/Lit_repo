@@ -9,55 +9,61 @@
      <!-- Include English language -->
         <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	var modal_login = $('#modal-login');
+	
+	$('#login').click(function() {
+		modal_login.css("display", "table-cell");
+	});
+	
+	$(window).click(function(e) {
+		if(e.target == modal_login[0]) {
+			modal_login.css("display", "none");
+		}
+	});
+	
+	$(".closeModal").click(function(){
+		modal_login.css("display", "none");
+	});
+	
+	$("#cancelModal").click(function(){
+		modal_login.css("display", "none");
+	});
+});
+
+</script>      
+        
+        
 <style type="text/css">
-<<<<<<< HEAD
-
-=======
-
-<<<<<<< HEAD
-
 /* 고친부분 */
 /* ul li { */
 /* 	list-style: none; */
 /* 	float: left; */
 /* } */
-
-.prevention>li { 
-list-style:none; 
-float:left;
-=======
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #wrapper
 {
 	padding-top:40px;
 }
-
 body {
 	margin: 0;
+	
 }
-
-ul li {
+#right-menu ul li {
 	list-style: none;
 	float: left;
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
-
-
 .fl-left {
 	float: left;
 }
-
 .fl-right {
 	float: right;
 }
-
 .fix-left {
 	position: fixed;
 	left: 0;
 	top: 75px;
 }
-
 #header {
 /* 	position: relative; */
 	z-index: 100;
@@ -74,17 +80,14 @@ ul li {
   	position: sticky;
   	will-change: transform;
 }
-
 #header:hover {
 	
 }
-
 #header.fix {
 	position: fixed;
 	background: #fffc;
 	transition: 0.6s;
 }
-
 #header .inner {
 	position: relative;
 	z-index: 1;
@@ -94,13 +97,11 @@ ul li {
 	max-width:;
 	*zoom: 1;
 }
-
 #header .inner:after {
 	content: "";
 	display: block;
 	clear: both;
 }
-
 #header h3 {
 	position: relative;
 	float: left;
@@ -110,7 +111,6 @@ ul li {
 	z-index: 2;
 	padding-top: 17px;
 }
-
 #header h1 img {
 	display: block;
 	position: absolute;
@@ -120,11 +120,9 @@ ul li {
 	margin: auto;
 	max-height: 100%;
 }
-
 #header .fl-right {
 	margin: 0;
 }
-
 #header ul.hovermenu.category {
 	padding-inline-start: 25%;
 	text-align: center;
@@ -136,32 +134,26 @@ ul li {
 	right: 0;
 	z-index: 1;
 }
-
 #header .logbar {
 	float: right;
 	text-align: right;
 	z-index: 1;
 	padding-top : 33px;
 }
-
 #header .logbar>li {
 	margin: 0 0 0 26px;
 }
-
 #header .logbar>li.mSearch>a img {
 	margin-left: 1px;
 	vertical-align: -2px;
 }
-
 #header .logbar>li.mCart>a img {
 	vertical-align: -6px;
 	margin-right: 6px;
 }
-
 #header .logbar>li.mCart>a .count {
 	
 }
-
 #header .logbar>li>a {
 	display: inline-block;
 	padding: 3px 0;
@@ -169,11 +161,9 @@ ul li {
 	letter-spacing: 0.18em;
 	line-height: 1.2em;
 }
-
 ul.hovermenu {
 	
 }
-
 ul.hovermenu>li {
 	display: inline-block;
 	position: relative;
@@ -181,12 +171,10 @@ ul.hovermenu>li {
 	margin: 0 13px;
 	vertical-align: middle;
 }
-
 ul.hovermenu>li:hover {
 	position: relative;
 	z-index: 10;
 }
-
 ul.hovermenu>li>a {
 	display: inline-block;
 	padding: 3px 0;
@@ -197,7 +185,6 @@ ul.hovermenu>li>a {
 	text-decoration: none;
 	font-family: '나눔고딕';
 }
-
 #header .inner label {
 	
 	display: inline-block;
@@ -208,14 +195,12 @@ ul.hovermenu>li>a {
 	color: #d4ab00;
 	width : 100px;
 }
-
 ul.hovermenu>li>a:hover {
 	padding: 3px 0 2px;
 	border-bottom: 1px solid #000;
 	transition: 0.2s;
 	text-decoration: none;
 }
-
 ul.hovermenu>li>.sub {
 	visibility: hidden;
 	opacity: 0;
@@ -227,32 +212,27 @@ ul.hovermenu>li>.sub {
 	margin-left: -97px;
 	width: 190px;
 }
-
 ul.hovermenu>li:hover>.sub {
 	visibility: visible;
 	display: block;
 	opacity: 1;
 	transition: 0.2s;
 }
-
 ul.hovermenu>li>.sub ul {
 	margin: 10px 0 0;
 	padding: 10px 0px;
 	background: #fff;
 	text-align: left;
 }
-
 ul.hovermenu>li>.sub li {
 	display: block;
 	padding: 0;
 	margin: 1px 0;
 	padding: 10px 0px 10px 30px;
 }
-
 ul.hovermenu>li>.sub li:hover {
 	background: #e5e5e5;
 }
-
 ul.hovermenu>li>.sub a {
 	display: inline-block;
 	font-size: 16px;
@@ -262,20 +242,16 @@ ul.hovermenu>li>.sub a {
 	line-height: 1.2em;
 	text-decoration: none;
 }
-
 ul.hovermenu>li>.sub a.last {
 	padding: 20px 0px 20px 30px;
 }
-
 ul.hovermenu>li>.sub a:hover, ul.hovermenu>li>.sub li.selected a {
 	color:;
 	transition: 0.2s;
 }
-
 .hovermenu li:hover ul.subCate.sub3 {
 	display: none;
 }
-
 .hovermenu li ul.subCate.sub3::after {
 	border: 5px solid transparent;
 	border-left-color: gray;
@@ -287,7 +263,6 @@ ul.hovermenu>li>.sub a:hover, ul.hovermenu>li>.sub li.selected a {
 	width: 0;
 	z-index: 999;
 }
-
 .hovermenu li ul.subCate.sub3 {
 	position: absolute;
 	left: 190px;
@@ -295,11 +270,9 @@ ul.hovermenu>li>.sub a:hover, ul.hovermenu>li>.sub li.selected a {
 	width: 180px;
 	height: 89.5%;
 }
-
 ul.hovermenu>li>.sub li:hover ul.subCate.sub3 {
 	display: block;
 }
-
 .hovermenu li ul.subCate.sub4::after {
 	border: 5px solid transparent;
 	border-left-color: gray;
@@ -311,11 +284,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub3 {
 	width: 0;
 	z-index: 999;
 }
-
 .hovermenu li:hover ul.subCate.sub4 {
 	display: none;
 }
-
 .hovermenu li ul.subCate.sub4 {
 	position: absolute;
 	left: 190px;
@@ -323,11 +294,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub3 {
 	width: 180px;
 	height: 89.5%;
 }
-
 ul.hovermenu>li>.sub li:hover ul.subCate.sub4 {
 	display: block;
 }
-
 .hovermenu li ul.subCate.sub5::after {
 	border: 5px solid transparent;
 	border-left-color: gray;
@@ -339,11 +308,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub4 {
 	width: 0;
 	z-index: 999;
 }
-
 .hovermenu li:hover ul.subCate.sub5 {
 	display: none;
 }
-
 .hovermenu li ul.subCate.sub5 {
 	position: absolute;
 	left: 190px;
@@ -351,11 +318,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub4 {
 	width: 180px;
 	height: 89.5%;
 }
-
 ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	display: block;
 }
-
 .hovermenu li ul.subCate.sub6::after {
 	border: 5px solid transparent;
 	border-left-color: gray;
@@ -367,11 +332,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	width: 0;
 	z-index: 999;
 }
-
 .hovermenu li:hover ul.subCate.sub6 {
 	display: none;
 }
-
 .hovermenu li ul.subCate.sub6 {
 	position: absolute;
 	left: 190px;
@@ -379,12 +342,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	width: 180px;
 	height: 89.5%;
 }
-
  ul.hovermenu>li>.sub li:hover ul.subCate.sub6 {
 	display: block;
 }
-
-
 .Search {
   position: relative;
   display: flex;
@@ -405,8 +365,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	border-radius: 4px;
 	
 }
-
-
 .Search-label {
   position: absolute;
   top: 14px;
@@ -414,11 +372,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
   font-size: 40px;
   transition: all .15s ease-in-out;
 }
-
  .Search-box:focus + .Search-label {
   transform: translateX(12px);
 }
-
 .search_modal{
  	display: block; 
     position: absolute; 
@@ -437,12 +393,10 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
      transform:scale(1); 
     transition: all .15s ease; 
 }
-
 .inner{
 	background-color: #fff;
 	border-bottom: 1px solid #e4e4e4;
 }
-
 .btn{
 	width: 76px;
     height: 50px;
@@ -451,7 +405,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
- </style>
+td {border:1px solid black;}
+</style>
 
 <header id="header">
 	<div class="inner">
@@ -473,13 +428,15 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					<li><button class= "btn">행사</button></li>
    					</ul>
    					</div>
+		
 		</div>
-<<<<<<< HEAD
+
+		<div id="right-menu">
 		<ul class="fl-right logbar hovermenu">
 			<!-- 로그인 상태가 아니면 -->
 			<c:if test="${not login }">
 				<li><a href="/cs/cs">고객센터</a></li>
-				<li><a id="login" href="#">로그인</a></li>
+				<li><a id="login" href="#login">로그인</a></li>
 				<li><a href="/join">회원가입</a></li>
 			</c:if>
 	
@@ -496,7 +453,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<li><a href="#">호스트 페이지</a></li>
 				<li><a href="/cs/cs">고객센터</a></li>
 				<li><a href="/mypage/view_profile">마이페이지</a></li>
-				<li><a href="/logout">로그아웃</a></li>
+				<li><a href="/logout">로그아웃</a></li>			
 			</c:if>
 	
 			<!--  관리자 로그인 -->
@@ -504,60 +461,22 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<li><a href="#">관리자 페이지</a></li>
 				<li><a href="/logout">로그아웃</a></li>
 			</c:if>
-
-<!-- <<<<<<< HEAD -->
-		<ul class="fl-right logbar hovermenu prevention">  <!-- class에 prevention추가 -->
 		
-					<li><a href="#">호스트가 되어보세요</a></li>
-					<li><a href="#">호스트페이지</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
-					<li><a href="/login">로그인</a></li>
-					<li><a href="/logout">로그아웃</a></li>
-		</ul> <!--  이거 추가함 오류나서 -->
-<!-- ======= -->
-		<ul class="fl-right logbar hovermenu prevention">
-			
-				<!-- 로그인 상태가 아니면 -->
-				<c:if test="${not login }">
-				
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/login">로그인</a></li>
-					<li><a href="/join">회원가입</a></li>
-					
-				</c:if>
-		
-				<!-- 일반 로그인 -->
-				<c:if test="${login }">
-					<li><a href="#">호스트가 되어보세요</a></li>
-					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
-					<li><a href="/logout">로그아웃</a></li>
-				
-				</c:if>
-		
-				<!-- 호스트 로그인 -->
-				<c:if test="${hostlogin }">
-				
-					<li><a href="#">호스트 페이지</a></li>
-					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
-					<li><a href="/logout">로그아웃</a></li>
-					
-				
-				</c:if>
-		
-				<!--  관리자 로그인 -->
-				<c:if test="${adminlogin }">
-				
-					<li><a href="#">관리자 페이지</a></li>
-					<li><a href="/logout">로그아웃</a></li>
-				
-				</c:if>
-		
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 		</ul>
-	
+		</div>
 	</div>
 </header>
 
+<div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); text-align:center;">
+<div style="background-color:#fefefe; width:568px; height:568px; margin:10% auto; padding:0px; text-align:center;">
+<table style="width:100%;">
+<tr><td colspan="2"><div class="closeModal" style="text-align:right; font-size:30px; padding-right:10px;">&times;</div></td></tr>
+<tr><td colspan="2"><h1>LIFE IS TRIP</h1></td></tr>
+<tr><td colspan="2"><div style="border:1px solid #eee;"><input type="email" name="mem_id" style="width:90%; height:40px; font-size:20px;" placeholder="이메일 주소"/><img src=""/></div></td></tr>
+<tr><td>Password</td><td><input type="password" name="mem_pw"/></td></tr>
+</table>
+<br>
+<button>로그인</button><button id="cancelModal" type="button">취소</button>
+<br><br>
+</div>
+</div>
