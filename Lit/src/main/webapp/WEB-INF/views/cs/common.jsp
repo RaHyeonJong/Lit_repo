@@ -1,19 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<div id="select-title">
+
+<style>
+
+	.center
+	{
+		text-align:center;
+		padding:60px;
+		margin-bottom:-60px;
+	}
+
 	
-<<<<<<< HEAD
-	<div id="select-title1"><a href="/cs/cs">자주 찾는 질문</a></div>
-	<div id="select-title2"><a href="/cs/select">1:1 문의하기</a></div>
-			
-</div>
-=======
-		<ul style="margin: 0 auto; display:flex;">
-			<li><a href="/cs/cs">자주 찾는 질문</a></li>
-			<li><a href="/cs/select">1:1 문의하기</a></li>
-		</ul>
-	</div> 
+	.content
+	{
+		text-align:center;
+		padding:40px;
+	}
+	
+	
+	.content #menu
+	{
+		width: 700px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.content #menu li
+	{
+		text-align:left;
+		margin-bottom: 15px;
+	}
+	
+	#menu li ul
+	{
+		display:none;
+	}
 
+
+</style>
+
+<div class="center">
+
+		<span style="font-size:20px; padding:50px;"><a href="/cs/cs">자주찾는 질문</a></span>
+		<span style="font-size:20px; padding:50px;"><a href="/cs/select">1:1 문의</a></span>
 </div>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
+
+
