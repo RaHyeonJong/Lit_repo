@@ -3,11 +3,26 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+  <!-- 데이트 피커 -->
+  <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+        <script src="/resources/dist/js/datepicker.min.js"></script>
+     <!-- Include English language -->
+        <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <style type="text/css">
 
 
+<<<<<<< HEAD
+=======
+
+/* 고친부분 */
+/* ul li { */
+/* 	list-style: none; */
+/* 	float: left; */
+/* } */
+
+
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #wrapper
 {
 	padding-top:40px;
@@ -20,10 +35,17 @@ body {
 
 }
 
+<<<<<<< HEAD
 ul li {
+=======
+
+#right-menu ul li {
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	list-style: none;
 	float: left;
+
 }
+
 
 .fl-left {
 	float: left;
@@ -150,6 +172,8 @@ ul li {
 	letter-spacing: 0.18em;
 	line-height: 1.2em;
 }
+
+
 
 ul.hovermenu {
 	
@@ -413,7 +437,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
      border-radius: 4px;
      width: 460px;
 }
-.search_modal:hover{
+.search_modal:hover {
   	 opacity:1; 
      transform:scale(1); 
     transition: all .15s ease; 
@@ -451,8 +475,13 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
 					<div class= "search_modal "style="left: 101;">
+<<<<<<< HEAD
    					<ul style ="padding : 0;">
    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li>
+=======
+   					<ul style ="padding : 0;" class="prevention">
+   					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
    					<li><button class= "btn">모두</button></li>
    					<li><button class= "btn">숙소</button></li>
    					<li><button class= "btn">행사</button></li>
@@ -460,11 +489,12 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</div>
 		
 		</div>
+
+		<div id="right-menu">
 		<ul class="fl-right logbar hovermenu">
 			
 				<!-- 로그인 상태가 아니면 -->
 				<c:if test="${not login }">
-				
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/login">로그인</a></li>
 					<li><a href="/join">회원가입</a></li>
@@ -500,7 +530,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				</c:if>
 		
 		</ul>
-	
+		</div>
 	</div>
 </header>
 
