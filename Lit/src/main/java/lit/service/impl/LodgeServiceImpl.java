@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
 import lit.dto.Lodge;
+import lit.dto.Message;
 import lit.dto.Pay;
 import lit.service.face.LodgeService;
 
@@ -41,6 +42,15 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
+	public void deleteComment(Comment comment) {
+		lodgedao.deleteReview(comment);
+		
+		
+	}
+	
+	
+	
+	@Override
 	public void insertLike(Lodge lodge) {
 	
 		lodgedao.inserlodgetLike(lodge);
@@ -52,6 +62,14 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.insertlodgeReport(lodge);
 		
 	}
+
+	@Override
+	public void insertMessage(Message message) {
+		lodgedao.insertContent(message);
+		
+	}
+
+	
 
 
 

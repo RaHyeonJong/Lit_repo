@@ -1,30 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
 <title>자주하는 질문</title>
-</head>
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
+<<<<<<< HEAD
+<jsp:include page="/WEB-INF/views/cs/common.jsp" />
+=======
 <body>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
+<<<<<<< HEAD
+	</div>
+	
+=======
+
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+<jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
+<body>
+<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 
-<h1> GIT_자주하는 질문 테스트</h1>
-<hr>
-<!--  Header.jsp 포함 -->
+	<div class="content">
+		
+		<h3>Life is Trip 여행객들이 자주 묻는 질문에 대한 답변 리스트</h3>
+	
+	
+		
+		
+	</div>
 
+</div>
 
-<%-- <jsp:include page="../layout/header.jsp" /> --%>
-
-
-<!--  사용자들이 자주 질문하는 항목들이 여기에 모여 있음 -->
-<!--  항목들 중 하나 누르면 disabled 에서 able로 활성화 되어서 보여준다. -->
-
-<!--  Footer.jsp 포험 -->
-<%-- <jsp:include page="../layout/footer.jsp" /> --%>
-
-
-
+<<<<<<< HEAD
 </body>
-</html>
+
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+</body>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
