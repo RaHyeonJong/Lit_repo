@@ -1,22 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>문의하기 작성하기</title>
-</head>
+    <jsp:include page="/WEB-INF/views/cs/common.jsp" />
+ 
 <body>
-<!--  Header.jsp 포함 -->
-<%-- <jsp:include page="../layout/header.jsp" /> --%>
+<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
+	<div class="content">
 
 
-<!-- 문의제목, 작성자, 사진첨부  + 문의하기, 취소 있음. -->
+	<h1>문의내용 작성하기</h1>
+	<hr>
+	</div>
 
-<h1>문의내용 작성하기</h1>
-<hr>
-
-<!--  Footer.jsp 포험 -->
-<%-- <jsp:include page="../layout/footer.jsp" /> --%>
+</div>
 </body>
-</html>

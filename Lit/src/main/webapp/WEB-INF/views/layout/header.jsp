@@ -12,6 +12,8 @@
 <style type="text/css">
 
 
+<<<<<<< HEAD
+=======
 
 /* 고친부분 */
 /* ul li { */
@@ -20,6 +22,7 @@
 /* } */
 
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #wrapper
 {
 	padding-top:40px;
@@ -32,8 +35,12 @@ body {
 
 }
 
+<<<<<<< HEAD
+ul li {
+=======
 
 #right-menu ul li {
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	list-style: none;
 	float: left;
 
@@ -449,6 +456,10 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
+
+
+
+
  </style>
 
 <header id="header">
@@ -464,8 +475,13 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
 					<div class= "search_modal "style="left: 101;">
+<<<<<<< HEAD
+   					<ul style ="padding : 0;">
+   					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li>
+=======
    					<ul style ="padding : 0;" class="prevention">
    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
    					<li><button class= "btn">모두</button></li>
    					<li><button class= "btn">숙소</button></li>
    					<li><button class= "btn">행사</button></li>

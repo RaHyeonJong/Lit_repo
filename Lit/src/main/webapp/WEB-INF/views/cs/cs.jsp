@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 <title>자주하는 질문</title>
 =======
@@ -17,12 +19,30 @@
 	
 =======
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
-	<div id="content">
-		<h1>선택지1호</h1>
+
+<body>
+<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
+
+	<div class="content">
+		
+		<h3>Life is Trip 여행객들이 자주 묻는 질문에 대한 답변 리스트</h3>
+	
+	
+		
+		
 	</div>
 
+</div>
 
+<<<<<<< HEAD
+</body>
+
+
+
+=======
 >>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 </body>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
