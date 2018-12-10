@@ -47,7 +47,7 @@
     			console.log(mav);
     		
     			// 배열로 전달받은 날짜만 비활성화 시킴  이 var 부분을 전달 받은 값을 다시 넣어주면 될꺼같음
-    			var disabledDates = ['17/12/2018','19/12/2018']
+    			var disabledDates = ['17/12/2018','17/12/2018']
     			$start.datepicker({
     				language: 'en',
     			       onRenderCell: function(d, type) {
