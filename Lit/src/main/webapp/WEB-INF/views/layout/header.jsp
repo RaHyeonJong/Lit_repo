@@ -11,7 +11,7 @@
 
 <style type="text/css">
 
-<<<<<<< HEAD
+
 
 /* 고친부분 */
 /* ul li { */
@@ -19,11 +19,7 @@
 /* 	float: left; */
 /* } */
 
-.prevention>li { 
-list-style:none; 
-float:left;
-=======
-<<<<<<< HEAD
+
 #wrapper
 {
 	padding-top:40px;
@@ -35,12 +31,12 @@ body {
 	
 
 }
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-ul li {
+
+
+#right-menu ul li {
 	list-style: none;
 	float: left;
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
 }
 
 
@@ -169,6 +165,8 @@ ul li {
 	letter-spacing: 0.18em;
 	line-height: 1.2em;
 }
+
+
 
 ul.hovermenu {
 	
@@ -475,22 +473,12 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</div>
 		
 		</div>
-<!-- <<<<<<< HEAD -->
-		<ul class="fl-right logbar hovermenu prevention">  <!-- class에 prevention추가 -->
-		
-					<li><a href="#">호스트가 되어보세요</a></li>
-					<li><a href="#">호스트페이지</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
-					<li><a href="/login">로그인</a></li>
-					<li><a href="/logout">로그아웃</a></li>
-		</ul> <!--  이거 추가함 오류나서 -->
-<!-- ======= -->
-		<ul class="fl-right logbar hovermenu prevention">
+
+		<div id="right-menu">
+		<ul class="fl-right logbar hovermenu">
 			
 				<!-- 로그인 상태가 아니면 -->
 				<c:if test="${not login }">
-				
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/login">로그인</a></li>
 					<li><a href="/join">회원가입</a></li>
@@ -526,7 +514,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				</c:if>
 		
 		</ul>
-	
+		</div>
 	</div>
 </header>
 
