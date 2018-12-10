@@ -1,12 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-=======
-	pageEncoding="UTF-8"%>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-
-<<<<<<< HEAD
 
 <style>
 
@@ -17,8 +10,7 @@
 		margin-bottom:-60px;
 	}
 
-=======
-<<<<<<< HEAD
+
 <!--  이 common은 자주찾는 질문, 1:1문의 버튼을 일컫습니다 -->
 <!--  둘 중 하나 누르면 나올 수 있게 ㅇ.ㅇ -->
 
@@ -30,11 +22,8 @@
 		<jsp:include page="../layout/header.jsp" />
 
 		<div id="select-title">
-=======
+
 <div id="select-title">
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-	
-<<<<<<< HEAD
 	.content
 	{
 		text-align:center;
@@ -59,8 +48,6 @@
 	{
 		display:none;
 	}
-=======
-<<<<<<< HEAD
 	<div id="select-title1"><a href="/cs/cs">자주 찾는 질문</a></div>
 	<div id="select-title2"><a href="/cs/select">1:1 문의하기</a></div>
 			
