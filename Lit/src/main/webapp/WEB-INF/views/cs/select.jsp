@@ -5,19 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>1대1 문의하기</title>
+<jsp:include page="/WEB-INF/views/cs/common.jsp" />
+
 </head>
 <body>
 
+		<div id="content">
+		
+			<h1>선택지</h1>
+			ㅇㅇㅇ
+		</div>
 
-<%-- <jsp:include page="../layout/header.jsp" /> --%>
-
-<!--  문의하기, 문의내역 확인하기 를 고르는 창 -->
-
-<h1>1:1 문의하기</h1>
-<h2>문의하기, 문의내역 확인하기 </h2>
-<hr>
-
-<%-- <jsp:include page="../layout/footer.jsp" /> --%>
 
 
 </body>

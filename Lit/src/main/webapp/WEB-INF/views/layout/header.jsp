@@ -6,10 +6,7 @@
 
 
 <style type="text/css">
-body {
-	margin: 0;
 
-}
 ul li {
 	list-style: none;
 	float: left;
@@ -37,14 +34,13 @@ ul li {
 	margin: 0 auto;
 	width: 100%;
 	height: 55px;
-	min-width: 1280px;
+	min-width: 978px;
+	max-width: 1200px;
 	transition: 0.6s;
 	display: block;
 	position: -webkit-sticky;
   	position: sticky;
   	will-change: transform;
-
-  
 }
 
 #header:hover {
@@ -423,6 +419,23 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
+
+
+
+#select-title
+{
+	vertical-align:center;
+}
+
+
+
+#content
+{
+	line-height:30.0em;	
+	text-align:center;
+}
+
+
  </style>
 
 <header id="header">
@@ -430,7 +443,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
 				<a href="#"><img style="height: 50px;"
-					src="" alt="로고" /></a>
+					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
    				 <input class="Search-box" type="search" id="Search-box" autocomplete="off">
@@ -447,6 +460,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</div>
 		
 		</div>
+<<<<<<< HEAD
 		<ul class="fl-right logbar hovermenu prevention">
 		
 					<li><a href="#">호스트가 되어보세요</a></li>
@@ -454,8 +468,47 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 					<li><a href="/mypage/view_profile">마이페이지</a></li>
 					<li><a href="/login">로그인</a></li>
 					<li><a href="/logout">로그아웃</a></li>
+=======
+		<ul class="fl-right logbar hovermenu">
+			
+				<!-- 로그인 상태가 아니면 -->
+				<c:if test="${not login }">
+				
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/login">로그인</a></li>
 					<li><a href="/join">회원가입</a></li>
+					
+				</c:if>
+		
+				<!-- 일반 로그인 -->
+				<c:if test="${login }">
+					<li><a href="#">호스트가 되어보세요</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				
+				</c:if>
+		
+				<!-- 호스트 로그인 -->
+				<c:if test="${hostlogin }">
+				
+					<li><a href="#">호스트 페이지</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+					
+				
+				</c:if>
+		
+				<!--  관리자 로그인 -->
+				<c:if test="${adminlogin }">
+				
+					<li><a href="#">관리자 페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				
+				</c:if>
+		
 		</ul>
 	
 	</div>
