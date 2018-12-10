@@ -10,7 +10,24 @@
         <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <style type="text/css">
+<<<<<<< HEAD
 
+=======
+
+<<<<<<< HEAD
+
+/* 고친부분 */
+/* ul li { */
+/* 	list-style: none; */
+/* 	float: left; */
+/* } */
+
+.prevention>li { 
+list-style:none; 
+float:left;
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #wrapper
 {
 	padding-top:40px;
@@ -23,7 +40,9 @@ body {
 ul li {
 	list-style: none;
 	float: left;
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
+
 
 .fl-left {
 	float: left;
@@ -447,7 +466,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
 					<div class= "search_modal "style="left: 101;">
-   					<ul style ="padding : 0;">
+   					<ul style ="padding : 0;" class="prevention">
    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br>
    					<li><button class= "btn">모두</button></li>
    					<li><button class= "btn">숙소</button></li>
@@ -455,6 +474,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</ul>
    					</div>
 		</div>
+<<<<<<< HEAD
 		<ul class="fl-right logbar hovermenu">
 			<!-- 로그인 상태가 아니면 -->
 			<c:if test="${not login }">
@@ -484,6 +504,58 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<li><a href="#">관리자 페이지</a></li>
 				<li><a href="/logout">로그아웃</a></li>
 			</c:if>
+=======
+<!-- <<<<<<< HEAD -->
+		<ul class="fl-right logbar hovermenu prevention">  <!-- class에 prevention추가 -->
+		
+					<li><a href="#">호스트가 되어보세요</a></li>
+					<li><a href="#">호스트페이지</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/login">로그인</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+		</ul> <!--  이거 추가함 오류나서 -->
+<!-- ======= -->
+		<ul class="fl-right logbar hovermenu prevention">
+			
+				<!-- 로그인 상태가 아니면 -->
+				<c:if test="${not login }">
+				
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/login">로그인</a></li>
+					<li><a href="/join">회원가입</a></li>
+					
+				</c:if>
+		
+				<!-- 일반 로그인 -->
+				<c:if test="${login }">
+					<li><a href="#">호스트가 되어보세요</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				
+				</c:if>
+		
+				<!-- 호스트 로그인 -->
+				<c:if test="${hostlogin }">
+				
+					<li><a href="#">호스트 페이지</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+					
+				
+				</c:if>
+		
+				<!--  관리자 로그인 -->
+				<c:if test="${adminlogin }">
+				
+					<li><a href="#">관리자 페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				
+				</c:if>
+		
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 		</ul>
 	
 	</div>
