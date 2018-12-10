@@ -45,21 +45,35 @@
     		success: function(mav) {
     		
     			console.log(mav);
-    			
-    			
+    		
+    			// 배열로 전달받은 날짜만 비활성화 시킴  이 var 부분을 전달 받은 값을 다시 넣어주면 될꺼같음
+    			var disabledDates = ['17/12/2018','19/12/2018']
     			$start.datepicker({
-    			       language: 'en',
-    			       onRenderCell: function(date, cellType) {
-    			           if (cellType == 'day' && date.getDate() == 11) { // 이부분을 잘 풀면 될꺼같음, 맨뒤에 11은 매월 11일이 비활성화 된다.
-    			        	   // http://t1m0n.name/air-datepicker/docs/ 여기서 도큐먼트 활용하거나 controller에서 스플릿으로 '일'만 잘라서 해야될꺼같음.
-    			               return {
-    			            	   html: stay_start.split("/"), // Custom cell content 
-    			               
-    			            	   disabled: true
-    			           }
+    				language: 'en',
+    			       onRenderCell: function(d, type) {
+    			           if (type == 'day' ) { 
+    			               var disabled = false,
+    			               formatted = getFormattedDate(d);
+    			               disabled = disabledDates.filter(function(date){
+    			                 	return date == formatted;
+    			                 }).length
+    			             
+    			       					return {
+    			                 	disabled: disabled
+    			                 }
     			       }
     			     }
-    			   });
+    		
+    			   })
+    			   //이 부분이 disabled = disabledDates.filter(function(date) 여기 들어가는 데이터 값 반환 시켜주는듯 함
+    			
+    				function getFormattedDate(date) {
+  				  var year = date.getFullYear(),
+  				    month = date.getMonth() + 1,
+  				    date = date.getDate();
+  				    
+  				    return date + '/' + month + '/' + year;
+  			}
     			
     		}
     		, error : function(){
