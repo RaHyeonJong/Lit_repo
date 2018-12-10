@@ -504,7 +504,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<li><a href="#">관리자 페이지</a></li>
 				<li><a href="/logout">로그아웃</a></li>
 			</c:if>
-=======
+
 <!-- <<<<<<< HEAD -->
 		<ul class="fl-right logbar hovermenu prevention">  <!-- class에 prevention추가 -->
 		
