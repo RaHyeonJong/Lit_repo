@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
 	<!-- DB 접속 정보 -->
-	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="scott"/>
-		<property name="password" value="tiger"/>
-	</bean>
+   <bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@112.149.190.85:8585:xe"/>
+      <property name="username" value="lit"/>
+      <property name="password" value="lit"/>
+   </bean>
 	
 	<!-- JDBC Logger -->
 	<!-- 마이바티스 쿼리 로그 Proxy -->

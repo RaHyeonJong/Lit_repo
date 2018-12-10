@@ -3,10 +3,15 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+  <!-- 데이트 피커 -->
+  <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+        <script src="/resources/dist/js/datepicker.min.js"></script>
+     <!-- Include English language -->
+        <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <style type="text/css">
 
+<<<<<<< HEAD
 #wrapper
 {
 	padding-top:40px;
@@ -14,12 +19,12 @@
 
 body {
 	margin: 0;
-<<<<<<< HEAD
+
 	
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 }
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 ul li {
 	list-style: none;
 	float: left;
@@ -47,14 +52,13 @@ ul li {
 	margin: 0 auto;
 	width: 100%;
 	height: 55px;
-	min-width: 1280px;
+	min-width: 978px;
+	max-width: 1200px;
 	transition: 0.6s;
 	display: block;
 	position: -webkit-sticky;
   	position: sticky;
   	will-change: transform;
-
-  
 }
 
 #header:hover {
@@ -433,23 +437,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
-
-
-
-#select-title
-{
-	vertical-align:center;
-}
-
-
-
-#content
-{
-	line-height:30.0em;	
-	text-align:center;
-}
-
-
  </style>
 
 <header id="header">
@@ -457,7 +444,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
 				<a href="#"><img style="height: 50px;"
-					src="" alt="로고" /></a>
+					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
    				 <input class="Search-box" type="search" id="Search-box" autocomplete="off">
