@@ -27,9 +27,6 @@ $(document).ready(function(){
 		modal_login.css("display", "none");
 	});
 	
-	$("#cancelModal").click(function(){
-		modal_login.css("display", "none");
-	});
 });
 
 </script>      
@@ -405,7 +402,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
-td {border:1px solid black;}
 </style>
 
 <header id="header">
@@ -467,16 +463,26 @@ td {border:1px solid black;}
 	</div>
 </header>
 
+<!-- ==================================// 로그인 모달창 띄우기======================================== -->
 <div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); text-align:center;">
 <div style="background-color:#fefefe; width:568px; height:568px; margin:10% auto; padding:0px; text-align:center;">
 <table style="width:100%;">
-<tr><td colspan="2"><div class="closeModal" style="text-align:right; font-size:30px; padding-right:10px;">&times;</div></td></tr>
-<tr><td colspan="2"><h1>LIFE IS TRIP</h1></td></tr>
-<tr><td colspan="2"><div style="border:1px solid #eee;"><input type="email" name="mem_id" style="width:90%; height:40px; font-size:20px;" placeholder="이메일 주소"/><img src=""/></div></td></tr>
-<tr><td>Password</td><td><input type="password" name="mem_pw"/></td></tr>
+<tr><td colspan="2"><div class="closeModal" style="cursor:pointer; text-align:right; font-size:30px; padding-right:10px;">&times;</div></td></tr>
+<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
+<tr><td colspan="2" style="padding-top:10px;"><div><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
+<tr><td colspan="2" style="padding-top:10px;"><div><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호"/></div></td></tr>
 </table>
+<div style="height:10px;"></div>
+<div style="text-align:left; padding-left:10px;">
+<a href="" style="text-decoration:none; color:#008989; font-size: 15px;">이메일 주소가 생각나지 않으세요?</a><br>
+<a href="" style="text-decoration:none; color:#008989; font-size: 15px;">비밀번호가 생각나지 않으세요?</a>
+</div>
 <br>
-<button>로그인</button><button id="cancelModal" type="button">취소</button>
-<br><br>
+<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F;">
+<div style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
+</div>
+<div style="height:10px;"></div>
+<div>에어비앤비 계정이 없으세요? <a href="" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
 </div>
 </div>
+<!-- ==================================로그인 모달창 띄우기 //======================================== -->
