@@ -3,50 +3,6 @@
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
-<style>
-.button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.button1
-{
-	background-color:#ff0300;
-	color: white;
-	border:2px solid #cc2e2c;
-
-}
-
-.button1:hover
-{
-	background-color:#f74c4a;
-	color: white;
-}
-
-.button2
-{
-	background-color:#f29d00;
-	color:white;
-	border:2px solid #996404;
-}
-
-.button2:hover
-{
-	background-color:#ffb638;
-	color: white;
-}
-
-</style>
-
-
 <body>
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 	

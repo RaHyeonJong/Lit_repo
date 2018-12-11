@@ -26,7 +26,14 @@ public class LogoController {
 	LogoService logoService;
 
 	// 로고 페이지
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/main", method=RequestMethod.GET)
+	public void logo()
+	{
+		
+	}
+	
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public String logo(Model model) {
 		logger.info("로고 페이지 띄우기");
 
@@ -35,7 +42,7 @@ public class LogoController {
 
 		model.addAttribute("reviewList", reviewList);
 		
-		return "main";
+		return "/logo/main";
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
