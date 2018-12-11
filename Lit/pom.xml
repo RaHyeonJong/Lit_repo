@@ -28,6 +28,13 @@
 	
 		<!-- 사용자 라이브러리 -->
 		
+		<!-- mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		
 		<!-- Jackson Databind 2.9.7 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -89,6 +96,11 @@
 	
 	
 		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
