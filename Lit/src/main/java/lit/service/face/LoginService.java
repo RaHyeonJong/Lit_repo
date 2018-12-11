@@ -14,5 +14,9 @@ public interface LoginService {
 
 	public Member getId(Member member);
 
+	public boolean checkEmail(Member member);
+
+	public void sendMail(Member member);
+
 
 }
