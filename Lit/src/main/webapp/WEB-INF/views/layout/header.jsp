@@ -12,19 +12,80 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
+	var modal_findpw = $('#modal-findpw');
 	
 	$('#login').click(function() {
-		modal_login.css("display", "table-cell");
+		modal_login.css("display", "block");
 	});
 	
 	$(window).click(function(e) {
 		if(e.target == modal_login[0]) {
 			modal_login.css("display", "none");
 		}
+		if(e.target == modal_findpw[0]) {
+			modal_findpw.css("display", "none");
+		}
 	});
 	
 	$(".closeModal").click(function(){
 		modal_login.css("display", "none");
+		modal_findpw.css("display", "none");
+	});
+	
+	$('#loginBtn').click(function(){
+		var mem_id = $('input[name=mem_id]').val();
+		var mem_pw = $('input[name=mem_pw]').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "/login",
+			data: {"mem_id": mem_id, "mem_pw": mem_pw},
+			dataType: "json",
+			success : function(res){
+				console.log(res.login);
+				if(res.login == true){
+					window.location.href = "/tempmain";
+				}else{
+					$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+				}
+				
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
+	});
+	
+	$('#findpwBtn').click(function(){
+		modal_login.css("display", "none");
+		modal_findpw.css("display", "block");
+	});
+	
+	$('#goBackLogin').click(function(){
+		modal_login.css("display", "block");
+		modal_findpw.css("display", "none");
+	});
+	
+	$('#findpwSendLinkBtn').click(function(){
+		var mem_id = $('input[name=mem_id_for_findpw]').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "/login/findpw",
+			data: {"mem_id": mem_id},
+			dataType: "json",
+			success : function(res){
+				if(res.existEmail){
+					alert(mem_id+" 로 메일을 전송하였습니다. 메일을 확인해주세요.");
+					modal_findpw.css("display", "none");
+				} else{
+					$('#findpwMsgDiv').html("입력하신 이메일 계정은 존재하지 않습니다. 다시 확인해주세요.");
+				}			
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
 	});
 	
 });
@@ -40,10 +101,6 @@ $(document).ready(function(){
 /* 	float: left; */
 /* } */
 
-#wrapper
-{
-	padding-top:40px;
-}
 body {
 	margin: 0;
 }
@@ -410,7 +467,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	<div class="inner">
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
-				<a href="#"><img style="height: 50px;"
+				<a href="/tempmain"><img style="height: 50px;"
 					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
@@ -438,26 +495,28 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<li><a href="/join">회원가입</a></li>
 			</c:if>
 	
-			<!-- 일반 로그인 -->
 			<c:if test="${login }">
-				<li><a href="#">호스트가 되어보세요</a></li>
-				<li><a href="/cs/cs">고객센터</a></li>
-				<li><a href="/mypage/view_profile">마이페이지</a></li>
-				<li><a href="/logout">로그아웃</a></li>
-			</c:if>
+				<!-- 일반 로그인 -->
+				<c:if test="${member.mem_case eq 'user' }">
+					<li><a href="#">호스트가 되어보세요</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				</c:if>
 	
-			<!-- 호스트 로그인 -->
-			<c:if test="${hostlogin }">
-				<li><a href="#">호스트 페이지</a></li>
-				<li><a href="/cs/cs">고객센터</a></li>
-				<li><a href="/mypage/view_profile">마이페이지</a></li>
-				<li><a href="/logout">로그아웃</a></li>			
-			</c:if>
+				<!-- 호스트 로그인 -->
+				<c:if test="${member.mem_case eq 'host' }">
+					<li><a href="#">호스트 페이지</a></li>
+					<li><a href="/cs/cs">고객센터</a></li>
+					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>			
+				</c:if>
 	
-			<!--  관리자 로그인 -->
-			<c:if test="${adminlogin }">
-				<li><a href="#">관리자 페이지</a></li>
-				<li><a href="/logout">로그아웃</a></li>
+				<!--  관리자 로그인 -->
+				<c:if test="${member.mem_case eq 'admin' }">
+					<li><a href="#">관리자 페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+				</c:if>
 			</c:if>
 		
 		</ul>
@@ -465,26 +524,69 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	</div>
 </header>
 
-<!-- ==================================// 로그인 모달창 띄우기======================================== -->
-<div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); text-align:center;">
-<div style="background-color:#fefefe; width:568px; height:568px; margin:10% auto; padding:0px; text-align:center;">
+<!-- ======// 로그인 모달창 ======================================== -->
+<div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <table style="width:100%;">
-<tr><td colspan="2"><div class="closeModal" style="cursor:pointer; text-align:right; font-size:30px; padding-right:10px;">&times;</div></td></tr>
+<tr><td colspan="2">
+<div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
 <tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
-<tr><td colspan="2" style="padding-top:10px;"><div><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
-<tr><td colspan="2" style="padding-top:10px;"><div><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호"/></div></td></tr>
+<tr><td colspan="2" style="padding-top:10px;">
+<div><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
+<tr><td colspan="2" style="padding-top:10px;">
+<div><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
 </table>
 <div style="height:10px;"></div>
 <div style="text-align:left; padding-left:10px;">
-<a href="" style="text-decoration:none; color:#008989; font-size: 15px;">이메일 주소가 생각나지 않으세요?</a><br>
-<a href="" style="text-decoration:none; color:#008989; font-size: 15px;">비밀번호가 생각나지 않으세요?</a>
+<a id="findpwBtn" href="#findpw" style="text-decoration:none; color:#008989; font-size: 15px;">비밀번호가 생각나지 않으세요?</a>
 </div>
-<br>
-<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F;">
-<div style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
+<div id="loginMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:14px; font-weight:bold;"></div>
+<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
 </div>
 <div style="height:10px;"></div>
-<div>에어비앤비 계정이 없으세요? <a href="" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+<div>에어비앤비 계정이 없으세요? <a href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
 </div>
 </div>
-<!-- ==================================로그인 모달창 띄우기 //======================================== -->
+<!-- ======로그인 모달창 //======================================== -->
+
+
+
+<!-- ======// 비밀번호찾기 모달창 ======================================== -->
+<div id="modal-findpw" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; height:428px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<table style="width:100%;">
+<tr><td colspan="2">
+<div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
+<tr><td colspan="2" style="text-align:left; padding-left:10%;"><h1>비밀번호 재설정</h1></td></tr>
+<tr><td colspan="2" style="text-align:left; padding:1% 10% 5% 10%; font-size:18px; color:#666">
+계정으로 사용하는 이메일 주소를 입력하시면, 비밀번호 재설정 링크를 전송해 드립니다.</td></tr>
+<tr><td colspan="2" style="text-align:left; padding-left:10%; font-size:19px;">이메일 주소</td></tr>
+<tr><td colspan="2" style="text-align:left; padding:0 10% 0 10%;">
+<input type="email" name="mem_id_for_findpw" style="width:95%; height:100%; padding:2% 2%; font-size:20px; " /></td></tr>
+<tr><td colspan="2"><div id="findpwMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:14px; font-weight:bold;"></div></td></tr>
+<tr>
+<td style="width:50%; padding:0 0 0 10%;">
+<a href="#login" id="goBackLogin" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>로그인으로 돌아가기</a>
+</td>
+<td style="width:50%; padding:0 10% 0 0;">
+<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="findpwSendLinkBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">재설정 링크 전송하기</div>
+</div></td></tr>
+</table>
+</div></div>
+<!-- ====== 비밀번호찾기 모달창 //======================================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+

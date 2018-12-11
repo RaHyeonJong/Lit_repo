@@ -2,6 +2,8 @@ package lit.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import lit.service.face.HostService;
 
 @Controller
 public class HostController {
+	
+	Logger logger =  LoggerFactory.getLogger(HostController.class);
 	
 	@Autowired HostService hostService;
 	
@@ -25,7 +29,7 @@ public class HostController {
 	
 	//---------- 숙소등록 ----------
 	
-	
+	//--------------------------1단계
 	//1단계등록페이지
 	@RequestMapping(value="/host/hostFirst", method=RequestMethod.GET)
 	public void hostFirst() {
@@ -44,7 +48,22 @@ public class HostController {
 		
 	}
 	
-
+	//1단계등록페이지
+	@RequestMapping(value="/host/firstRoom", method=RequestMethod.GET)
+	public void firstRoom() {
+		
+		
+		
+	}
+	
+	//1단계등록페이지
+	@RequestMapping(value="/host/firstRoom", method=RequestMethod.POST)
+	public void firstRoomElement(Lodge lodge) {
+	
+	
+	}
+	
+	//---------------------------1단계 끝
 	
 	//2단계등록페이지
 	@RequestMapping(value="/host/hostSecond", method=RequestMethod.GET)
