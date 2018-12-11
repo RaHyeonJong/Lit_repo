@@ -12,4 +12,6 @@ public interface LoginDao {
 
 	public Member getId(Member member);
 
+	public int checkEmail(Member member);
+
 }

@@ -14,7 +14,10 @@
   		WHERE mem_id=#{mem_id }
   	</select>
   	
-  	<select id="findId"></select>
+  	<select id="checkEmail" parameterType="lit.dto.Member" resultType="int">
+  		SELECT COUNT(*) FROM member
+  		WHERE mem_id=#{mem_id }
+  	</select>
   	
   	<select id="getId"></select>
   

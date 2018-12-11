@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,8 @@ import lit.service.face.LoginService;
 @Controller
 public class LoginController {
 
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@Autowired LoginService loginService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -44,35 +48,26 @@ public class LoginController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/login/findId")
-	public String findId(Model model, Member member) {
-		boolean existId = loginService.findId(member);
+	@RequestMapping(value="/login/findpw", method=RequestMethod.POST)
+	public ModelAndView findPw(Member member) {		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> resultMap = new HashMap<>();
 		
-		if(existId) {
-			member = loginService.getId(member);
-			model.addAttribute("existId", true);
-			model.addAttribute("member", member);
-		}else {
-			model.addAttribute("existId", false);
-		}
+		boolean existEmail = loginService.checkEmail(member);
 		
-		return "login/findId_result";
-	}
-	
-	@RequestMapping(value="/login/findPw")
-	public String findPw(Model model, Member member) {
-		boolean existAccount = loginService.checkMembership(member);
-		
-		if(existAccount) {
+		if(existEmail) {
 			member = loginService.getMember(member);
-			model.addAttribute("existAccount", true);
-			model.addAttribute("member", member);
+			resultMap.put("existEmail", true);
+
+			loginService.sendMail(member);
+			
 		}else {
-			model.addAttribute("existAccount", false);
-			model.addAttribute("non-acc", "계정이 존재하지 않습니다. 아이디, 비밀번호를 다시 확인해주세요.");
+			resultMap.put("existEmail", false);
 		}
+		mav.addAllObjects(resultMap);
+		mav.setViewName("jsonView");
 		
-		return "login/findPw_result";
+		return mav;
 	}
 	
 	@GetMapping(value="/logout")
@@ -81,4 +76,10 @@ public class LoginController {
 		
 		return "redirect:/tempmain";
 	}
+	
+	
+	
+
+ 
+
 }
