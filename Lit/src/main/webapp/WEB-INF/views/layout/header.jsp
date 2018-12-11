@@ -150,19 +150,9 @@ $(document).ready(function(){
 /*    float: left; */
 /* } */
 
-<<<<<<< HEAD
 
-#wrapper
-{
-	padding-top:40px;
-}
-
-body {
-   margin: 0;
-=======
 body {
 	margin: 0;
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 
 #right-menu ul li {
@@ -586,17 +576,11 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		</div>
 	</div>
 </header>
-<<<<<<< HEAD
 
-<!-- ==================================// 로그인 모달창 띄우기======================================== -->
-<div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); text-align:center;">
-<div style="background-color:#fefefe; width:568px; height:568px; margin:10% auto; padding:0px; text-align:center;">
-=======
 
 <!-- ======// 로그인 모달창 ======================================== -->
 <div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
