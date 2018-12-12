@@ -19,6 +19,10 @@
   		WHERE mem_id=#{mem_id }
   	</select>
   	
-  	<select id="getId"></select>
+  	<insert id="insertUkey" parameterType="lit.dto.Member">
+  		INSERT INTO member(ukey)
+  		VALUES(#{uKey })
+  		WHERE mem_id=#{mem_id }
+  	</insert>
   
   </mapper>

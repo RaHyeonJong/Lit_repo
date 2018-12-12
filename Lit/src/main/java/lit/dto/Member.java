@@ -15,8 +15,6 @@ public class Member {
 	private String mem_name;
 	private String mem_phone;
 	private Date mem_birth;
-	private String mem_myquestion;
-	private String mem_myanswer;
 	private String origin_name;		//프로필 사진 파일 원본이름
 	private String stored_name;		//프로필 사진 파일 저장이름
 	private String mem_intro;
@@ -27,27 +25,10 @@ public class Member {
 	public String toString() {
 		return "Member [mem_no=" + mem_no + ", mem_case_no="	+ mem_case_no + ", mem_case=" + mem_case + ", mem_id=" 
 				+ mem_id + ", mem_pw=" + mem_pw + ", mem_name="	+ mem_name + ", mem_phone=" + mem_phone 
-				+ ", mem_birth=" + mem_birth + ", mem_myquestion=" + mem_myquestion	+ ", mem_myanswer=" 
-				+ mem_myanswer + ", origin_name=" + origin_name + ", stored_name=" + stored_name
+				+ ", mem_birth=" + mem_birth + ", origin_name=" + origin_name + ", stored_name=" + stored_name
 				+ ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation + ", uKey=" + uKey +"]";
 	}
 	
-	public String getMem_myquestion() {
-		return mem_myquestion;
-	}
-
-	public void setMem_myquestion(String mem_myquestion) {
-		this.mem_myquestion = mem_myquestion;
-	}
-
-	public String getMem_myanswer() {
-		return mem_myanswer;
-	}
-
-	public void setMem_myanswer(String mem_myanswer) {
-		this.mem_myanswer = mem_myanswer;
-	}
-
 	public int getMem_no() {
 		return mem_no;
 	}

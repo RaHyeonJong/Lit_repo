@@ -14,4 +14,6 @@ public interface LoginDao {
 
 	public int checkEmail(Member member);
 
+	public void insertUkey(Member member);
+
 }

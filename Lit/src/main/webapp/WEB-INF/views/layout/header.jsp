@@ -11,54 +11,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-
-   var modal_login = $('#modal-login');
-   
-   $('#login').click(function() {
-      modal_login.css("display", "block");
-   });
-   
-   $(window).click(function(e) {
-      if(e.target == modal_login[0]) {
-         modal_login.css("display", "none");
-      }
-   });
-   
-   $(".closeModal").click(function(){
-      modal_login.css("display", "none");
-   });
-   
-   $('#loginBtn').click(function(){
-      var mem_id = $('input[name=mem_id]').val();
-      var mem_pw = $('input[name=mem_pw]').val();
-      
-      $.ajax({
-         type: "POST",
-         url: "/login",
-         data: {"mem_id": mem_id, "mem_pw": mem_pw},
-         dataType: "json",
-         success : function(res){
-            console.log(res.login);
-            if(res.login == true){
-               window.location.href = "/tempmain";
-            }else{
-               $("#msgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
-            }
-            
-         },
-         error : function(){
-            alert("에러났어요!");
-         }
-      });
-   });
-   
-});
-
-</script>      
-        
-        
-<style type="text/css">
-
 	var modal_login = $('#modal-login');
 	var modal_findpw = $('#modal-findpw');
 	
@@ -139,6 +91,9 @@ $(document).ready(function(){
 });
 
 </script>      
+
+
+
         
         
 <style type="text/css">
