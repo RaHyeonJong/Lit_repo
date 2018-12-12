@@ -198,17 +198,13 @@
 	
 	textarea
 	{
-	height:170px; 
-	width:865px; 
-	resize:none; 
-	font-size:18px;
-	font-family:'Gamja Flower', cursive;
-		}
-	
-	input:focus, textarea:focus
-	{
-		background-color:#FFDDDD;
+		height:170px; 
+		width:865px; 
+		resize:none; 
+		font-size:18px;
+		font-family:'Gamja Flower', cursive;
 	}
+
 
 </style>
 
