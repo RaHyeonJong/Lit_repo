@@ -172,14 +172,7 @@
 		padding-top:20px;
 		
 	}
-	
-	table
-	{
-		width:100%;
-		border : 1px solid black;
-		text-align:left;
-	}
-	
+		
 	th
 	{
 		background-color:#d8d8d8;

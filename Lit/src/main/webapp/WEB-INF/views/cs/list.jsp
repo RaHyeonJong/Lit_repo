@@ -21,7 +21,7 @@
 
 		<div class="table_list">
 
-			<table style="text-align:center">
+			<table style="width:100%; border:1px solid black; text-align:center; ">
 			
 				<tr>
 					<th>번 호</th>

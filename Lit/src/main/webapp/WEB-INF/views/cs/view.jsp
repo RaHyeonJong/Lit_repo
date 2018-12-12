@@ -20,7 +20,7 @@
 	
 		<div class="table_list">
 		
-			<table>
+			<table style="width:100%; border:1px solid black; text-align:left;">
 			
 				<tr>
 					<th> 문의 제목</th>
