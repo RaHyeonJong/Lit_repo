@@ -1,6 +1,10 @@
 package lit.dao.face;
 
+
+import java.util.List;
+
 import lit.dto.Comment;
+import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
 import lit.dto.Pay;
@@ -9,7 +13,10 @@ public interface LodgeDao {
 
 	
 	//상세뷰 보여주기
-	public Lodge SelectLodgeView(Lodge lodge);
+	public List<Lodge> SelectLodgeView();
+	
+	//상세뷰 이미지
+	public List<Image> SelectLodgeImage();
 	
 	//예약뷰 보여주기 
 	public Pay SelectLodgeReservation(Pay pay);
