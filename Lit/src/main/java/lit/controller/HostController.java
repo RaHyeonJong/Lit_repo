@@ -30,7 +30,7 @@ public class HostController {
 	//---------- 숙소등록 ----------
 	
 	//--------------------------1단계
-	//1단계등록페이지
+	//1단계 숙소기본정보등록페이지
 	@RequestMapping(value="/host/hostFirst", method=RequestMethod.GET)
 	public void hostFirst() {
 		
@@ -38,7 +38,7 @@ public class HostController {
 		
 	}
 	
-	//1단계등록페이지
+	//1단계 숙소기본정보등록페이지
 	@RequestMapping(value="/host/hostFirst", method=RequestMethod.POST)
 	public void hostFirstElement(Lodge lodge) {
 		
@@ -47,6 +47,7 @@ public class HostController {
 		hostService.insertFirst(lodge);
 		
 	}
+	
 	
 	//1단계등록페이지
 	@RequestMapping(value="/host/firstRoom", method=RequestMethod.GET)
@@ -62,6 +63,47 @@ public class HostController {
 	
 	
 	}
+	
+	
+	
+	
+	
+	//1단계 주소등록페이지
+	@RequestMapping(value="/host/firstLocation", method=RequestMethod.GET)
+	public void firstLocation() {
+		
+		
+		
+	}
+	
+	//1단계 주소등록페이지
+	@RequestMapping(value="/host/firstLocation", method=RequestMethod.POST)
+	public void firstLocationElement(Lodge lodge) {
+	
+	
+	}
+	
+	
+	
+	//1단계 주소확인페이지
+	@RequestMapping(value="/host/checkLocation", method=RequestMethod.GET)
+	public void checkLocation() {
+		
+		
+		
+	}
+	
+	//1단계 주소확인페이지
+	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
+	public void checkLocationElement(Lodge lodge) {
+	
+	
+	}
+	
+	
+	
+
+	
 	
 	//---------------------------1단계 끝
 	
