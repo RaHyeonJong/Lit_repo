@@ -181,18 +181,7 @@
 		padding-right:150px;
 		
 	}
-<<<<<<< HEAD
-		
-=======
-	
-	table
-	{
-		width:85%;
-		border : 1px solid #dbdbdb;
-		text-align:left;
-	}
-	
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
 	th
 	{
 		background-color:#d8d8d8;
