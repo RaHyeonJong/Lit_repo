@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
   <!-- 데이트 피커 -->
   <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
@@ -11,6 +11,54 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+   var modal_login = $('#modal-login');
+   
+   $('#login').click(function() {
+      modal_login.css("display", "block");
+   });
+   
+   $(window).click(function(e) {
+      if(e.target == modal_login[0]) {
+         modal_login.css("display", "none");
+      }
+   });
+   
+   $(".closeModal").click(function(){
+      modal_login.css("display", "none");
+   });
+   
+   $('#loginBtn').click(function(){
+      var mem_id = $('input[name=mem_id]').val();
+      var mem_pw = $('input[name=mem_pw]').val();
+      
+      $.ajax({
+         type: "POST",
+         url: "/login",
+         data: {"mem_id": mem_id, "mem_pw": mem_pw},
+         dataType: "json",
+         success : function(res){
+            console.log(res.login);
+            if(res.login == true){
+               window.location.href = "/tempmain";
+            }else{
+               $("#msgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+            }
+            
+         },
+         error : function(){
+            alert("에러났어요!");
+         }
+      });
+   });
+   
+});
+
+</script>      
+        
+        
+<style type="text/css">
+
 	var modal_login = $('#modal-login');
 	var modal_findpw = $('#modal-findpw');
 	
@@ -95,11 +143,13 @@ $(document).ready(function(){
         
 <style type="text/css">
 
+
 /* 고친부분 */
 /* ul li { */
-/* 	list-style: none; */
-/* 	float: left; */
+/*    list-style: none; */
+/*    float: left; */
 /* } */
+
 
 body {
 	margin: 0;
@@ -110,296 +160,296 @@ body {
 	float: left;
 }
 .fl-left {
-	float: left;
+   float: left;
 }
 .fl-right {
-	float: right;
+   float: right;
 }
 .fix-left {
-	position: fixed;
-	left: 0;
-	top: 75px;
+   position: fixed;
+   left: 0;
+   top: 75px;
 }
 #header {
-/* 	position: relative; */
-	z-index: 100;
-	left: 0;
-	top: 0;
-	margin: 0 auto;
-	width: 100%;
-	height: 55px;
-	min-width: 978px;
-	max-width: 1200px;
-	transition: 0.6s;
-	display: block;
-	position: -webkit-sticky;
-  	position: sticky;
-  	will-change: transform;
+/*    position: relative; */
+   z-index: 100;
+   left: 0;
+   top: 0;
+   margin: 0 auto;
+   width: 100%;
+   height: 55px;
+   min-width: 978px;
+   max-width: 1200px;
+   transition: 0.6s;
+   display: block;
+   position: -webkit-sticky;
+     position: sticky;
+     will-change: transform;
 }
 #header:hover {
-	
+   
 }
 #header.fix {
-	position: fixed;
-	background: #fffc;
-	transition: 0.6s;
+   position: fixed;
+   background: #fffc;
+   transition: 0.6s;
 }
 #header .inner {
-	position: relative;
-	z-index: 1;
-	margin: 0 auto;
-/* 	padding: 0px 37px 0; */
-	min-width:;
-	max-width:;
-	*zoom: 1;
+   position: relative;
+   z-index: 1;
+   margin: 0 auto;
+/*    padding: 0px 37px 0; */
+   min-width:;
+   max-width:;
+   *zoom: 1;
 }
 #header .inner:after {
-	content: "";
-	display: block;
-	clear: both;
+   content: "";
+   display: block;
+   clear: both;
 }
 #header h3 {
-	position: relative;
-	float: left;
-	margin: 0;
-	width: 20%;
-	height: 60px;
-	z-index: 2;
-	padding-top: 17px;
+   position: relative;
+   float: left;
+   margin: 0;
+   width: 20%;
+   height: 60px;
+   z-index: 2;
+   padding-top: 17px;
 }
 #header h1 img {
-	display: block;
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	max-height: 100%;
+   display: block;
+   position: absolute;
+   left: 0;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   max-height: 100%;
 }
 #header .fl-right {
-	margin: 0;
+   margin: 0;
 }
 #header ul.hovermenu.category {
-	padding-inline-start: 25%;
-	text-align: center;
-	position: absolute;
-	margin: 17px auto 0;
-	top: 0;
-	bottom: 0;
-	left: 3%;
-	right: 0;
-	z-index: 1;
+   padding-inline-start: 25%;
+   text-align: center;
+   position: absolute;
+   margin: 17px auto 0;
+   top: 0;
+   bottom: 0;
+   left: 3%;
+   right: 0;
+   z-index: 1;
 }
 #header .logbar {
-	float: right;
-	text-align: right;
-	z-index: 1;
-	padding-top : 33px;
+   float: right;
+   text-align: right;
+   z-index: 1;
+   padding-top : 33px;
 }
 #header .logbar>li {
-	margin: 0 0 0 26px;
+   margin: 0 0 0 26px;
 }
 #header .logbar>li.mSearch>a img {
-	margin-left: 1px;
-	vertical-align: -2px;
+   margin-left: 1px;
+   vertical-align: -2px;
 }
 #header .logbar>li.mCart>a img {
-	vertical-align: -6px;
-	margin-right: 6px;
+   vertical-align: -6px;
+   margin-right: 6px;
 }
 #header .logbar>li.mCart>a .count {
-	
+   
 }
 #header .logbar>li>a {
-	display: inline-block;
-	padding: 3px 0;
-	font-size: 14px;
-	letter-spacing: 0.18em;
-	line-height: 1.2em;
+   display: inline-block;
+   padding: 3px 0;
+   font-size: 14px;
+   letter-spacing: 0.18em;
+   line-height: 1.2em;
 }
 ul.hovermenu {
-	
+   
 }
 ul.hovermenu>li {
-	display: inline-block;
-	position: relative;
-	z-index: 10;
-	margin: 0 13px;
-	vertical-align: middle;
+   display: inline-block;
+   position: relative;
+   z-index: 10;
+   margin: 0 13px;
+   vertical-align: middle;
 }
 ul.hovermenu>li:hover {
-	position: relative;
-	z-index: 10;
+   position: relative;
+   z-index: 10;
 }
 ul.hovermenu>li>a {
-	display: inline-block;
-	padding: 3px 0;
-	font-size: 16px;
-	letter-spacing: 0.18em;
-	line-height: 1.2em;
-	color: #000;
-	text-decoration: none;
-	font-family: '나눔고딕';
+   display: inline-block;
+   padding: 3px 0;
+   font-size: 16px;
+   letter-spacing: 0.18em;
+   line-height: 1.2em;
+   color: #000;
+   text-decoration: none;
+   font-family: '나눔고딕';
 }
 #header .inner label {
-	
-	display: inline-block;
-	padding: 3px 0;
-	font-size: 14px;
-	letter-spacing: 0.18em;
-	line-height: 1.2em;
-	color: #d4ab00;
-	width : 100px;
+   
+   display: inline-block;
+   padding: 3px 0;
+   font-size: 14px;
+   letter-spacing: 0.18em;
+   line-height: 1.2em;
+   color: #d4ab00;
+   width : 100px;
 }
 ul.hovermenu>li>a:hover {
-	padding: 3px 0 2px;
-	border-bottom: 1px solid #000;
-	transition: 0.2s;
-	text-decoration: none;
+   padding: 3px 0 2px;
+   border-bottom: 1px solid #000;
+   transition: 0.2s;
+   text-decoration: none;
 }
 ul.hovermenu>li>.sub {
-	visibility: hidden;
-	opacity: 0;
-	transition: 0.1s;
-	position: absolute;
-	z-index: 111;
-	top: 100%;
-	left: 50%;
-	margin-left: -97px;
-	width: 190px;
+   visibility: hidden;
+   opacity: 0;
+   transition: 0.1s;
+   position: absolute;
+   z-index: 111;
+   top: 100%;
+   left: 50%;
+   margin-left: -97px;
+   width: 190px;
 }
 ul.hovermenu>li:hover>.sub {
-	visibility: visible;
-	display: block;
-	opacity: 1;
-	transition: 0.2s;
+   visibility: visible;
+   display: block;
+   opacity: 1;
+   transition: 0.2s;
 }
 ul.hovermenu>li>.sub ul {
-	margin: 10px 0 0;
-	padding: 10px 0px;
-	background: #fff;
-	text-align: left;
+   margin: 10px 0 0;
+   padding: 10px 0px;
+   background: #fff;
+   text-align: left;
 }
 ul.hovermenu>li>.sub li {
-	display: block;
-	padding: 0;
-	margin: 1px 0;
-	padding: 10px 0px 10px 30px;
+   display: block;
+   padding: 0;
+   margin: 1px 0;
+   padding: 10px 0px 10px 30px;
 }
 ul.hovermenu>li>.sub li:hover {
-	background: #e5e5e5;
+   background: #e5e5e5;
 }
 ul.hovermenu>li>.sub a {
-	display: inline-block;
-	font-size: 16px;
-	letter-spacing: 0.18em;
-	color: #000;
-	border-bottom: 0px solid #fff;
-	line-height: 1.2em;
-	text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   letter-spacing: 0.18em;
+   color: #000;
+   border-bottom: 0px solid #fff;
+   line-height: 1.2em;
+   text-decoration: none;
 }
 ul.hovermenu>li>.sub a.last {
-	padding: 20px 0px 20px 30px;
+   padding: 20px 0px 20px 30px;
 }
 ul.hovermenu>li>.sub a:hover, ul.hovermenu>li>.sub li.selected a {
-	color:;
-	transition: 0.2s;
+   color:;
+   transition: 0.2s;
 }
 .hovermenu li:hover ul.subCate.sub3 {
-	display: none;
+   display: none;
 }
 .hovermenu li ul.subCate.sub3::after {
-	border: 5px solid transparent;
-	border-left-color: gray;
-	content: '';
-	height: 0;
-	position: absolute;
-	left: 0px;
-	top: 35.5%;
-	width: 0;
-	z-index: 999;
+   border: 5px solid transparent;
+   border-left-color: gray;
+   content: '';
+   height: 0;
+   position: absolute;
+   left: 0px;
+   top: 35.5%;
+   width: 0;
+   z-index: 999;
 }
 .hovermenu li ul.subCate.sub3 {
-	position: absolute;
-	left: 190px;
-	top: 0px;
-	width: 180px;
-	height: 89.5%;
+   position: absolute;
+   left: 190px;
+   top: 0px;
+   width: 180px;
+   height: 89.5%;
 }
 ul.hovermenu>li>.sub li:hover ul.subCate.sub3 {
-	display: block;
+   display: block;
 }
 .hovermenu li ul.subCate.sub4::after {
-	border: 5px solid transparent;
-	border-left-color: gray;
-	content: '';
-	height: 0;
-	position: absolute;
-	left: 0px;
-	top: 48.5%;
-	width: 0;
-	z-index: 999;
+   border: 5px solid transparent;
+   border-left-color: gray;
+   content: '';
+   height: 0;
+   position: absolute;
+   left: 0px;
+   top: 48.5%;
+   width: 0;
+   z-index: 999;
 }
 .hovermenu li:hover ul.subCate.sub4 {
-	display: none;
+   display: none;
 }
 .hovermenu li ul.subCate.sub4 {
-	position: absolute;
-	left: 190px;
-	top: 0px;
-	width: 180px;
-	height: 89.5%;
+   position: absolute;
+   left: 190px;
+   top: 0px;
+   width: 180px;
+   height: 89.5%;
 }
 ul.hovermenu>li>.sub li:hover ul.subCate.sub4 {
-	display: block;
+   display: block;
 }
 .hovermenu li ul.subCate.sub5::after {
-	border: 5px solid transparent;
-	border-left-color: gray;
-	content: '';
-	height: 0;
-	position: absolute;
-	left: 0px;
-	top: 61.5%;
-	width: 0;
-	z-index: 999;
+   border: 5px solid transparent;
+   border-left-color: gray;
+   content: '';
+   height: 0;
+   position: absolute;
+   left: 0px;
+   top: 61.5%;
+   width: 0;
+   z-index: 999;
 }
 .hovermenu li:hover ul.subCate.sub5 {
-	display: none;
+   display: none;
 }
 .hovermenu li ul.subCate.sub5 {
-	position: absolute;
-	left: 190px;
-	top: 0px;
-	width: 180px;
-	height: 89.5%;
+   position: absolute;
+   left: 190px;
+   top: 0px;
+   width: 180px;
+   height: 89.5%;
 }
 ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
-	display: block;
+   display: block;
 }
 .hovermenu li ul.subCate.sub6::after {
-	border: 5px solid transparent;
-	border-left-color: gray;
-	content: '';
-	height: 0;
-	position: absolute;
-	left: 0px;
-	top: 75.5%;
-	width: 0;
-	z-index: 999;
+   border: 5px solid transparent;
+   border-left-color: gray;
+   content: '';
+   height: 0;
+   position: absolute;
+   left: 0px;
+   top: 75.5%;
+   width: 0;
+   z-index: 999;
 }
 .hovermenu li:hover ul.subCate.sub6 {
-	display: none;
+   display: none;
 }
 .hovermenu li ul.subCate.sub6 {
-	position: absolute;
-	left: 190px;
-	top: 0px;
-	width: 180px;
-	height: 89.5%;
+   position: absolute;
+   left: 190px;
+   top: 0px;
+   width: 180px;
+   height: 89.5%;
 }
  ul.hovermenu>li>.sub li:hover ul.subCate.sub6 {
-	display: block;
+   display: block;
 }
 .Search {
   position: relative;
@@ -417,9 +467,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
   transition: all .15s ease-in-out;
   width: 460px;
   vertical-align: middle;
-	border : 1px solid #ebebeb;
-	border-radius: 4px;
-	
+   border : 1px solid #ebebeb;
+   border-radius: 4px;
+   
 }
 .Search-label {
   position: absolute;
@@ -432,7 +482,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
   transform: translateX(12px);
 }
 .search_modal{
- 	display: block; 
+    display: block; 
     position: absolute; 
      top: 65px;
      background: #FFFFFF; 
@@ -445,18 +495,19 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
      width: 460px;
 }
 .search_modal:hover {
-  	 opacity:1; 
+      opacity:1; 
      transform:scale(1); 
     transition: all .15s ease; 
 }
 .inner{
-	background-color: #fff;
-	border-bottom: 1px solid #e4e4e4;
+   background-color: #fff;
+   border-bottom: 1px solid #e4e4e4;
 }
 .btn{
-	width: 76px;
+   width: 76px;
     height: 50px;
     margin-left: 30px;
+
 	font-size: large;
 	font-weight : initial;
 	background-color: white;
@@ -464,6 +515,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 </style>
 
 <header id="header">
+
 	<div class="inner">
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
@@ -485,6 +537,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					</div>
 		
 		</div>
+
 
 		<div id="right-menu">
 		<ul class="fl-right logbar hovermenu">
@@ -523,6 +576,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		</div>
 	</div>
 </header>
+
 
 <!-- ======// 로그인 모달창 ======================================== -->
 <div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
@@ -576,17 +630,3 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 </table>
 </div></div>
 <!-- ====== 비밀번호찾기 모달창 //======================================== -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
