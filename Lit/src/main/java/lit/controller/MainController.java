@@ -25,7 +25,7 @@ public class MainController {
 	MainService mainService;
 
 	// 메인 페이지
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public void main(Model model) {
 		logger.info("메인 페이지 띄우기");
 

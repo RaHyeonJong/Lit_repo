@@ -10,6 +10,16 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#nextbutton").click(function(){
+		location.href="/host/firstRoom";
+		
+		
+	});
+	
+	
+	
+});
 
 
 </script>
@@ -70,10 +80,10 @@ margin:0 auto;
 				    <option value="sixteen">최대16명숙박가능</option>
 				</select> <br>
 				<input type="text" style="width:250px; height:25px;"/> <br><br>
-				<button>계속</button>
-			   </form>
+				</form>
 			</div>
 		</div>
+		<button id="nextbutton">계속</button>
 	</div>
 	<div class="right" style="border: 1px solid blue;">
 		<h3>이미지들어갈곳</h3>

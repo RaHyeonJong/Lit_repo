@@ -8,6 +8,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#backButton").click(function(){
+		location.href="/host/hostFirst";
+	});
+	
+	$("#nextButton").click(function(){
+		location.href="/host/firstLocation";
+		
+	});
+	
+	
+	
+});
+	
+</script>
 <style type="text/css">
 
 #wrapper{
@@ -28,7 +44,9 @@ font-size:13px;
 }
 
 .lodge-name > input {
-width:190px;
+width:185px;
+height:30px;
+font-size:13px;
 }
 
 .left { 
@@ -76,14 +94,28 @@ float:left;
 				<option>집전체</option>
 				<option>개인실</option>
 				<option>다인실</option>
+				<option>게스트하우스</option>
 			</select>
 		</div>
 		<div class="lodge-name category" >
 			<h4>숙소 이름을 입력해주세요</h4>
 			<input type="text"/>
+		
 		</div>
-		<button class="back">뒤로</button>
-		<button class="continue">다음</button>
+		<div class="category">
+			<h4>숙소의 방개수를 선택해주세요</h4>
+			<select>
+				<option>1개</option>
+				<option>2개</option>
+				<option>3개</option>
+				<option>5개</option>
+				<option>6개</option>
+				<option>7개</option>
+				<option>8개</option>
+			</select>
+		</div>
+		<button id="backButton" class="back">뒤로</button>
+		<button id="nextButton" class="continue">다음</button>
 	</div>
 	<div class="right" >
 		<div>
