@@ -1,16 +1,19 @@
 package lit.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +28,11 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired LoginService loginService;
+	
+	@RequestMapping(value="/test")
+	public void test() {
+		
+	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView loginProcess(Member member, HttpSession session) {
@@ -77,9 +85,43 @@ public class LoginController {
 		return "redirect:/tempmain";
 	}
 	
-	
-	
+	@RequestMapping(value="/login/changePw", method=RequestMethod.GET)
+	public String changePw(Model model, Member member, HttpServletResponse resp) {
+		String uKey = loginService.getUkey(member);
+		
+		if(!uKey.equals(member.getuKey())) {
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = null;
+			try {
+				out = resp.getWriter();
+				out.println("<script>alert('잘못된 접근입니다.'); location.href='/tempmain';</script>");
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if(out != null) out.close();
+			}
+		}
+		model.addAttribute("member", member);
+		return "login/changePw";
+	}
 
- 
-
+	@RequestMapping(value="/login/changePw", method=RequestMethod.POST)
+	public String changePwProcess(Member member, HttpServletResponse resp) {
+		loginService.updatePw(member);
+		
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = null;
+		try {
+			out = resp.getWriter();
+			out.println("<script>alert('비밀번호가 성공적으로 변경되었습니다.'); location.href='/tempmain';</script>");
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) out.close();
+		}
+		
+		return "redirect:/tempmain";
+	}
 }
