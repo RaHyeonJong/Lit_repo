@@ -8,7 +8,7 @@
 
 	/*구글에서 폰트 받아왔어요^^ */
 	
-	@import url('https://fonts.googleapis.com/css?family=Gamja+Flower');
+/* 	@import url('https://fonts.googleapis.com/css?family=Gamja+Flower'); */
 	
 	/* 	자주하는질문, 1:1문의하기   가운데*/
 	.center
@@ -169,7 +169,7 @@
 	
 	.sub_title, .sub_title1, .table_list
 	{
-		text-align:left;
+		text-align:center;
 		padding-top:20px;
 		padding-left:100px;
 	}
@@ -182,13 +182,6 @@
 		
 	}
 	
-	table
-	{
-		width:85%;
-		border : 1px solid #dbdbdb;
-		text-align:left;
-	}
-	
 	th
 	{
 		background-color:#d8d8d8;
@@ -198,24 +191,17 @@
 		height:50px;
 	}	
 	
-	.td
-	{
-		padding-left:10px;
-	}
 	
 	textarea
 	{
-	height:170px; 
-	width:865px; 
-	resize:none; 
-	font-size:18px;
-	font-family:'Gamja Flower', cursive;
-		}
-	
-	input:focus, textarea:focus
-	{
-		background-color:#FFDDDD;
+		height:170px; 
+		width:865px; 
+		resize:none; 
+		font-size:18px;
+		font-family:'Gamja Flower', cursive;
 	}
+	
+	
 
 </style>
 

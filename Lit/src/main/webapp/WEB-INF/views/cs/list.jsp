@@ -21,8 +21,7 @@
 
 		<div class="table_list">
 
-			<table style="text-align:center">
-			
+			<table>
 				<tr>
 					<th>번 호</th>
 					<th>제 목 </th>
