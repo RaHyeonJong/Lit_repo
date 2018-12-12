@@ -26,6 +26,11 @@ public class LoginController {
 	
 	@Autowired LoginService loginService;
 	
+	@RequestMapping(value="/test")
+	public void test() {
+		
+	}
+	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView loginProcess(Member member, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
