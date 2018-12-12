@@ -8,8 +8,12 @@ public interface LoginDao {
 
 	public Member getMember(Member member);
 
-	public int findId(Member member);
+	public int checkEmail(Member member);
 
-	public Member getId(Member member);
+	public void updateUkey(Member member);
+
+	public String getUkey(Member member);
+
+	public void updatePw(Member member);
 
 }

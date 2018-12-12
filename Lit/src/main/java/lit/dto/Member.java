@@ -15,39 +15,20 @@ public class Member {
 	private String mem_name;
 	private String mem_phone;
 	private Date mem_birth;
-	private String mem_question;
-	private String mem_answer;
-	
-	public String getMem_question() {
-		return mem_question;
-	}
-
-	public void setMem_question(String mem_question) {
-		this.mem_question = mem_question;
-	}
-
-	public String getMem_answer() {
-		return mem_answer;
-	}
-
-	public void setMem_answer(String mem_answer) {
-		this.mem_answer = mem_answer;
-	}
-
 	private String origin_name;		//프로필 사진 파일 원본이름
 	private String stored_name;		//프로필 사진 파일 저장이름
 	private String mem_intro;
 	private int mem_activation;	// 0 = 비활성화, 1 = 활성화
+	private String uKey;
 	
 	@Override
 	public String toString() {
-		return "Member [ADMIN=" + ADMIN + ", USER=" + USER + ", HOST=" + HOST + ", mem_no=" + mem_no + ", mem_case_no="
-				+ mem_case_no + ", mem_case=" + mem_case + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name="
-				+ mem_name + ", mem_phone=" + mem_phone + ", mem_birth=" + mem_birth + ", mem_question=" + mem_question
-				+ ", mem_answer=" + mem_answer + ", origin_name=" + origin_name + ", stored_name=" + stored_name
-				+ ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation + "]";
+		return "Member [mem_no=" + mem_no + ", mem_case_no="	+ mem_case_no + ", mem_case=" + mem_case + ", mem_id=" 
+				+ mem_id + ", mem_pw=" + mem_pw + ", mem_name="	+ mem_name + ", mem_phone=" + mem_phone 
+				+ ", mem_birth=" + mem_birth + ", origin_name=" + origin_name + ", stored_name=" + stored_name
+				+ ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation + ", uKey=" + uKey +"]";
 	}
-
+	
 	public int getMem_no() {
 		return mem_no;
 	}
@@ -148,6 +129,14 @@ public class Member {
 
 	public void setMem_activation(int mem_activation) {
 		this.mem_activation = mem_activation;
+	}
+
+	public String getuKey() {
+		return uKey;
+	}
+
+	public void setuKey(String uKey) {
+		this.uKey = uKey;
 	}
 	
 	

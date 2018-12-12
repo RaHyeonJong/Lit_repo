@@ -10,9 +10,13 @@ public interface LoginService {
 
 	public Member getMember(Member member);
 
-	public boolean findId(Member member);
+	public boolean checkEmail(Member member);
 
-	public Member getId(Member member);
+	public void sendMail(Member member);
+
+	public String getUkey(Member member);
+
+	public void updatePw(Member member);
 
 
 }
