@@ -8,7 +8,7 @@
         <script src="/resources/dist/js/datepicker.min.js"></script>
      <!-- Include English language -->
         <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
-
+  
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
