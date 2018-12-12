@@ -23,17 +23,17 @@
 			<table>
 				<tr>
 					<th>문의 제목 </th>
-					<td> <input type="text"> </td>
+					<td> <input type="text" placeholder="문의 제목을 입력해주세요" style="margin-left:20px; width:700px; height:35px;"> </td>
 				</tr>
 				
 				<tr>
 					<th>작성자 </th>
-					<td> <input type="text"> </td>
+					<td> 작성자 이름</td>
 				</tr>
 				
 				<tr>
 					<th>사진 첨부 </th>
-					<td> <input type="text"> <button class="button3">찾아보기</button></td>
+					<td> <input type="text" style="width:650px; height:35px; margin-left:20px;"> <button class="button3">찾아보기</button></td>
 				</tr>
 				
 				<tr>

@@ -185,11 +185,9 @@
 		background-color:#d8d8d8;
 		text-align:center;
 		font-size:18px;
+		width:150px;
+		height:50px;
 	}	
-	input[type=text]
-	{
-		width:500px;
-	}
 
 </style>
 

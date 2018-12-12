@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
@@ -17,10 +18,12 @@
 			
 		
 		<br><br><br>	
-		<button class="button button1" onclick="location.href='/cs/enroll'" 
-		style="margin-right:50px;">문 의 하 기</button>
-		<button class="button button2" onclick="location.href='/cs/list'"
-		style="margin-left:50px;">문 의 내 역</button>
+		
+			<button class="button button1" onclick="location.href='/cs/enroll'" 
+			style="margin-right:50px;">문 의 하 기</button>
+			<button class="button button2" onclick="location.href='/cs/list'"
+			style="margin-left:50px;">문 의 내 역</button>
+
 		</div>
 
 </div>
