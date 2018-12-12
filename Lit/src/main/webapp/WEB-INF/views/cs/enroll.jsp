@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:include page="/WEB-INF/views/cs/common.jsp" />
- 
+ <jsp:include page="/WEB-INF/views/cs/common.jsp" />
+
+
 <body>
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 		
@@ -23,17 +24,19 @@
 			<table style="width:100%; border:1px solid black; text-align:left;">
 				<tr>
 					<th>문의 제목 </th>
-					<td> <input type="text" placeholder="문의 제목을 입력해주세요" style="margin-left:20px; width:700px; height:35px;"> </td>
+					<td> <input type="text" placeholder="문의 제목을 입력해주세요"
+						style="font-size:20px; width:700px; height:40px; margin-left:10px;"> </td>
 				</tr>
 				
 				<tr>
 					<th>작성자 </th>
-					<td> 작성자 이름</td>
+					<td><p style="margin-left:10px;">작성자 이름</p></td>
 				</tr>
 				
 				<tr>
 					<th>사진 첨부 </th>
-					<td> <input type="text" style="width:650px; height:35px; margin-left:20px;"> <button class="button3">찾아보기</button></td>
+					<td> <input type="text" style="width:600px; height:40px; margin-left:10px;"> 
+					<button class="button3">찾아보기</button></td>
 				</tr>
 				
 				<tr>
@@ -42,16 +45,18 @@
 				</tr>
 				
 				<tr>
-					<td colspan="2"> <textarea></textarea> </td>
-					
+					<td colspan="2"> 
+					<textarea id="text_area" maxlength="300"></textarea>
+				
+					</td>	
 				</tr>
 				
 			
 			</table>
 			
 			<div class="btnList">
-				<button class="button4" style="margin-right:30px">문의 하기</button>
-				<button class="button4">취 소</button>
+				<button class="button1" onclick="button1_click();" style="margin-right:30px" >문의 하기</button>
+				<button class="button2" onclick="button2_click();">취 소</button>
 			</div>
 		</div>
 	
@@ -60,3 +65,28 @@
 	</div>
 </div>
 </body>
+
+
+<script>
+	
+	function button1_click()
+	{
+		if(confirm("문의내용을 작성하시겠습니까!?"))
+		{
+			alert("리스트로 이동합니다.");
+			window.location.href='/cs/list';
+		}else
+		{
+			alert("다시 입력해주세요.");
+			
+		}
+		
+	}
+	
+	function button2_click()
+	{
+		alert("이전 페이지로 이동합니다.");
+		history.go(-1);
+	}
+
+</script>
