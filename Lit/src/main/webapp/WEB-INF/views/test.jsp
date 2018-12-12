@@ -22,7 +22,5 @@ LIFE IS TRIP</td></tr><tr><td style="padding-top:15px; font-size:18px;">나현�
 </table></div>
 
 
-cccccccccccccccccccccccccccccccccc
-
 </body>
 </html>
