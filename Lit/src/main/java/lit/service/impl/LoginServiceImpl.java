@@ -38,23 +38,6 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public boolean findId(Member member) {
-		int cntId = loginDao.findId(member);
-		
-		if(cntId == 1) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	@Override
-	public Member getId(Member member) {
-
-		return loginDao.getId(member);
-	}
-
-	@Override
 	public boolean checkEmail(Member member) {
 		int cntId = loginDao.checkEmail(member);
 		
@@ -69,7 +52,9 @@ public class LoginServiceImpl implements LoginService{
 	public void sendMail(Member member) {
 		String uKey = UUID.randomUUID().toString();
 		member.setuKey(uKey);
-		loginDao.insertUkey(member);
+		loginDao.updateUkey(member);
+		
+		System.out.println(member);
 	
 		String from = "LifeIsTrip@lit.com";
 		String to = member.getMem_id();
@@ -108,6 +93,16 @@ public class LoginServiceImpl implements LoginService{
 			System.out.println(e);
 		}
 
+	}
+
+	@Override
+	public String getUkey(Member member) {
+		return loginDao.getUkey(member);
+	}
+
+	@Override
+	public void updatePw(Member member) {
+		loginDao.updatePw(member);
 	}
 	
 

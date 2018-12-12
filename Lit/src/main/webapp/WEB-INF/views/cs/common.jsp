@@ -181,7 +181,11 @@
 		padding-right:150px;
 		
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	th
 	{
 		background-color:#d8d8d8;
@@ -202,6 +206,7 @@
 	}
 	
 	
+
 
 </style>
 

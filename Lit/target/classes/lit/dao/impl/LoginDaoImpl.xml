@@ -19,10 +19,21 @@
   		WHERE mem_id=#{mem_id }
   	</select>
   	
-  	<insert id="insertUkey" parameterType="lit.dto.Member">
-  		INSERT INTO member(ukey)
-  		VALUES(#{uKey })
-  		WHERE mem_id=#{mem_id }
-  	</insert>
+  	<update id="updateUkey" parameterType="lit.dto.Member">
+  		UPDATE member
+  		SET ukey = #{uKey }
+  		WHERE mem_id = #{mem_id }
+  	</update>
+  	
+  	<select id="getUkey" parameterType="lit.dto.Member" resultType="String">
+  		SELECT ukey FROM member
+  		WHERE mem_id = #{mem_id }
+  	</select>
+  	
+  	<update id="updatePw" parameterType="lit.dto.Member">
+  		UPDATE member
+  		SET mem_pw = #{mem_pw }
+  		WHERE mem_id = #{mem_id }
+  	</update>
   
   </mapper>

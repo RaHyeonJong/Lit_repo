@@ -21,7 +21,12 @@
 
 		<div class="table_list">
 
+<<<<<<< HEAD
 			<table>
+=======
+			<table style="width:100%; border:1px solid black; text-align:center; ">
+			
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 				<tr>
 					<th>번 호</th>
 					<th>제 목 </th>

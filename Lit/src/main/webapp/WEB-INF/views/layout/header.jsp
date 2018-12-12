@@ -482,14 +482,14 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
-					<div class= "search_modal "style="left: 101;">
-   					<ul style ="padding : 0;" class="prevention">
-   					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br>
-   					<li><button class= "btn">모두</button></li>
-   					<li><button class= "btn">숙소</button></li>
-   					<li><button class= "btn">행사</button></li>
-   					</ul>
-   					</div>
+<!-- 					<div class= "search_modal "style="left: 101;"> -->
+<!--    					<ul style ="padding : 0;" class="prevention"> -->
+<!--    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br> -->
+<!--    					<li><button class= "btn">모두</button></li> -->
+<!--    					<li><button class= "btn">숙소</button></li> -->
+<!--    					<li><button class= "btn">행사</button></li> -->
+<!--    					</ul> -->
+<!--    					</div> -->
 		
 		</div>
 
@@ -541,15 +541,15 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
 <tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
-<div><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
+<div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
-<div><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
+<div style="text-align:center;"><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
 </table>
 <div style="height:10px;"></div>
 <div style="text-align:left; padding-left:10px;">
 <a id="findpwBtn" href="#findpw" style="text-decoration:none; color:#008989; font-size: 15px;">비밀번호가 생각나지 않으세요?</a>
 </div>
-<div id="loginMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:14px; font-weight:bold;"></div>
+<div id="loginMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:16px; font-weight:bold;"></div>
 <div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
 <div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
 </div>
