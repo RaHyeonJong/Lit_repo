@@ -21,7 +21,7 @@ public class Member {
 	private String stored_name;		//프로필 사진 파일 저장이름
 	private String mem_intro;
 	private int mem_activation;	// 0 = 비활성화, 1 = 활성화
-	
+	private String uKey;
 	
 	@Override
 	public String toString() {
@@ -29,7 +29,7 @@ public class Member {
 				+ mem_id + ", mem_pw=" + mem_pw + ", mem_name="	+ mem_name + ", mem_phone=" + mem_phone 
 				+ ", mem_birth=" + mem_birth + ", mem_myquestion=" + mem_myquestion	+ ", mem_myanswer=" 
 				+ mem_myanswer + ", origin_name=" + origin_name + ", stored_name=" + stored_name
-				+ ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation + "]";
+				+ ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation + ", uKey=" + uKey +"]";
 	}
 	
 	public String getMem_myquestion() {
@@ -148,6 +148,14 @@ public class Member {
 
 	public void setMem_activation(int mem_activation) {
 		this.mem_activation = mem_activation;
+	}
+
+	public String getuKey() {
+		return uKey;
+	}
+
+	public void setuKey(String uKey) {
+		this.uKey = uKey;
 	}
 	
 	
