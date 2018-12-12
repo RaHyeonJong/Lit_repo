@@ -4,6 +4,12 @@
 <jsp:include page="../layout/header.jsp" />
 
 <style>
+
+
+	/*구글에서 폰트 받아왔어요^^ */
+	
+	@import url('https://fonts.googleapis.com/css?family=Gamja+Flower');
+	
 	/* 	자주하는질문, 1:1문의하기   가운데*/
 	.center
 	{
@@ -36,52 +42,52 @@
     position: relative;
 	}
 	
-.faq-list dt:first-child {
-    border-top: 0;
-}
-.faq-list dt {
-    cursor: pointer;
-    padding-right: 50px;
-}
-.faq-list dt:before {
-    width: 35px;
-    content: "Q.";
-    display: inline-block;
-    padding-right: 20px;
-}
-.faq-list dt:after {
-    content: "+";
-    display: inline-block;
-    position: absolute;
-    width: 15px;
-    text-align: center;
-    right: 30px;
-    top: 23px;
-}
-.faq-list dd {
-    display: none;
-    color: #777
-}
-.faq-list dt.selected {
-    color: #148a75;
-}
-.faq-list dt.selected:before {
-    color: #148a75;
-}
-.faq-list dt.selected:after {
-    content: "-";
-}
-.faq-list dd:before {
-    width: 35px;
-    content: "A.";
-    display: inline-block;
-    padding-right: 20px;
-}
-.faq-list dd {
-    background: #f8f7f2;
-    text-align:left;
-    font-size:15px;
-}
+	.faq-list dt:first-child {
+	    border-top: 0;
+	}
+	.faq-list dt {
+	    cursor: pointer;
+	    padding-right: 50px;
+	}
+	.faq-list dt:before {
+	    width: 35px;
+	    content: "Q.";
+	    display: inline-block;
+	    padding-right: 20px;
+	}
+	.faq-list dt:after {
+	    content: "+";
+	    display: inline-block;
+	    position: absolute;
+	    width: 15px;
+	    text-align: center;
+	    right: 30px;
+	    top: 23px;
+	}
+	.faq-list dd {
+	    display: none;
+	    color: #777
+	}
+	.faq-list dt.selected {
+	    color: #148a75;
+	}
+	.faq-list dt.selected:before {
+	    color: #148a75;
+	}
+	.faq-list dt.selected:after {
+	    content: "-";
+	}
+	.faq-list dd:before {
+	    width: 35px;
+	    content: "A.";
+	    display: inline-block;
+	    padding-right: 20px;
+	}
+	.faq-list dd {
+	    background: #f8f7f2;
+	    text-align:left;
+	    font-size:15px;
+	}
 
 	/* 버튼 설정 */
 	.button {
@@ -133,6 +139,8 @@
 		background-color:#77a7f4;
 		color:white;
 		border:2px solid #2676f2;
+		height:40px;
+		width:80px;
 	}
 	
 	.button3:hover
@@ -170,13 +178,14 @@
 	{
 		text-align:right;
 		padding-top:20px;
+		padding-right:150px;
 		
 	}
 	
 	table
 	{
-		width:100%;
-		border : 1px solid black;
+		width:85%;
+		border : 1px solid #dbdbdb;
 		text-align:left;
 	}
 	
@@ -188,6 +197,25 @@
 		width:150px;
 		height:50px;
 	}	
+	
+	.td
+	{
+		padding-left:10px;
+	}
+	
+	textarea
+	{
+	height:170px; 
+	width:865px; 
+	resize:none; 
+	font-size:18px;
+	font-family:'Gamja Flower', cursive;
+		}
+	
+	input:focus, textarea:focus
+	{
+		background-color:#FFDDDD;
+	}
 
 </style>
 

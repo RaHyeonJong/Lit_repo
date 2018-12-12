@@ -41,8 +41,19 @@
 		</div>
 
 		<div class="btnList">
-			<button class="button2">뒤 로 가 기</button>
+			<button class="button2" onclick="button2_click();">이 전 으 로</button>
 		</div>
 	</div>
 </div>
 </body>
+
+<script>
+	
+	function button2_click()
+	{
+		alert("이전으로 이동합니다.");
+		history.go(-1);
+		
+	}
+
+</script>
