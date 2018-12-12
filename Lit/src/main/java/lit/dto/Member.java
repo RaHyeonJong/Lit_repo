@@ -22,6 +22,7 @@ public class Member {
 	private String mem_intro;
 	private int mem_activation;	// 0 = 비활성화, 1 = 활성화
 	
+	
 	@Override
 	public String toString() {
 		return "Member [mem_no=" + mem_no + ", mem_case_no="	+ mem_case_no + ", mem_case=" + mem_case + ", mem_id=" 

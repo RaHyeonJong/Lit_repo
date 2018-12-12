@@ -65,6 +65,7 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public void sendMail(Member member) {
+	
 		String from = "LifeIsTrip@lit.com";
 		String to = member.getMem_id();
 		String title = "[LIFE IS TRIP] 비밀번호 재설정 링크메일 입니다.";
