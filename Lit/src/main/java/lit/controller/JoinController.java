@@ -16,19 +16,7 @@ import lit.service.face.JoinService;
 public class JoinController {
 	
 	@Autowired JoinService joinService;
-	
-	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String join() {
-		return "join/join";
-	}
-	
-	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinProcess(Member member) {
-		joinService.insertMember(member);
 		
-		return "join/result";
-	}
-	
 	@RequestMapping(value="/join/checkId")
 	public ModelAndView checkId(Member member) {
 		ModelAndView mav = new ModelAndView();
@@ -37,7 +25,7 @@ public class JoinController {
 		Map<String, Boolean> map = new HashMap<>();
 		map.put("existId", existId);
 		
-		mav.addObject("map", map);
+		mav.addAllObjects(map);
 		mav.setViewName("jsonView");
 		
 		return mav;

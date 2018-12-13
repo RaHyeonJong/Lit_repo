@@ -102,31 +102,141 @@ $(document).ready(function(){
 		});
 	});
 	
-// 	id_for_join
-// 	name_for_join
-// 	pw_for_join
-// 	repw_for_join
-// 	birth_for_join
-
-	var joinValid = true;
+	var validId = false, validName = false, validPw = false, validRepw = false, validBirth = false;
 	
+// 	회원가입 창에서 이메일 주소 형식검사, 중복검사
+	$('#id_for_join').focus(function(){
+		$('#valid_id').html("");
+	});
 	$('#id_for_join').focusout(function(){
-		var id =$('#id_for_join').val();
+		var mem_id =$('#id_for_join').val();
 		var emailFormat = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		
-		if(id.match(emailFormat) != null){
-			// 이메일 검증 성공
-			// ajax로 이메일 중복 체크
-			$('#valid_id').html("사용가능한 이메일 아이디 입니다.");
+		if(mem_id.match(emailFormat) != null){
+			$.ajax({
+				type: "GET",
+				url: "/join/checkId",
+				data: {"mem_id": mem_id},
+				dataType: "json",
+				success : function(res){
+					if(res.existId){
+						$('#valid_id').css("color", "red");
+						$('#valid_id').html("이미 가입된 이메일 주소입니다.");
+					} else {
+						$('#valid_id').css("color", "#03CF5D");
+						$('#valid_id').html("사용가능한 이메일 아이디 입니다.");
+						validId = true;
+					}		
+				},
+				error : function(){
+					alert("에러났어요!");
+					return;
+				}
+			});
 		} else {
+			$('#valid_id').css("color", "red");
 			$('#valid_id').html("이메일 형식에 맞게 작성해주세요.");
-			joinValid = false;
 		}
 	});
 	
+// 	회원가입 창에서 이름에 특수기호가 포함되었는지 검사
+	$('#name_for_join').focus(function(){
+		$('#valid_name').html("");
+	});
+	$('#name_for_join').focusout(function(){
+		var mem_name = $('#name_for_join').val();
+		var pattern = /[~!@#$%^&*\+=|(){}:;＃＆＆＠§※☆★○●◎◇◆□■△▲▽▼→←←↑↓↔〓◁◀▷▶♤♠♡♥♧♣⊙◈▣◐◑▒▤▥▨▧▦▩♨☏☎☜☞¶†‡↕↗↙↖↘♭♩♪♬㉿㈜№㏇™㏂㏘℡®]/;
+
+		if(pattern.test(mem_name)){
+			$('#valid_name').css("color", "red");
+			$('#valid_name').html("이름에는 특수기호를 포함할 수 없습니다.");
+		} else {
+			validName = true;
+		}
+	});
+	
+// 	회원가입창에서 비밀번호 형식 검사
+	$('#pw_for_join').focus(function(){
+		$('#valid_pw').html("");
+	});
+	$('#pw_for_join').focusout(function(){
+		var mem_pw = $('#pw_for_join').val();
+		
+		var pw_form1 = /[a-zA-Z]/;
+		var pw_form2 = /[0-9]/;
+		var pw_form3 = /[~!@#$%^&*+-=?]/;
+		
+		if(mem_pw.length < 8){
+			$('#valid_pw').css("color", "red");
+			$('#valid_pw').html("비밀번호는 최소 8자 이상이어야 합니다.");
+		} else {
+			if(!(pw_form1.test(mem_pw) && (pw_form2.test(mem_pw) || pw_form3.test(mem_pw)))){
+				$('#valid_pw').css("color", "red");
+				$('#valid_pw').html("비밀번호는 숫자나 특수문자를 최소 1자리 이상 포함해야 합니다.");
+			} else {
+				$('#valid_pw').css("color", "#03CF5D");
+				$('#valid_pw').html("사용가능한 비밀번호입니다.");
+				validPw = true;
+			}
+		}
+	});
+	
+// 	회원가입창에서 비밀번호 재입력 검사
+	$('#repw_for_join').focus(function(){
+		$('#valid_repw').html("");
+	});
+	$('#repw_for_join').focusout(function(){
+		var pw = $('#pw_for_join').val();
+		var repw = $('#repw_for_join').val();
+		
+		if(validPw){
+			if(pw == repw){
+				validRepw = true;
+			} else {
+				$('#valid_repw').css("color", "red");
+				$('#valid_repw').html("비밀번호가 일치하지 않습니다.");
+			}
+		}
+	});
+	
+// 	회원가입창에서 생일 입력 후 만 18세 이상인지 검사
+	$('#birth_for_join').focus(function(){
+		$('#valid_birth').html("");
+	});
+	$('#birth_for_join').focusout(function(){
+		var mem_birth = new Date($('#birth_for_join').val());
+		var today = new Date();
+		var years = today.getFullYear() - mem_birth.getFullYear();
+		
+		mem_birth.setFullYear(today.getFullYear());
+		if(today < mem_birth)
+			years--;
+		
+		if(year<18){
+			$('#valid_birth').html("만 18세 미만은 가입하실 수 없습니다.");
+		}else{
+			validBirth = true;
+		}
+	});
+		
+// 	회원가입창에서 가입하기 버튼을 눌렀을 때...
+	$('#joinBtn').click(function(){
+		if(validId && validName && validPw && validRepw && validBirth){
+			var mem_id =$('#id_for_join').val();
+			var mem_name = $('#name_for_join').val();
+			var mem_pw = $('#pw_for_join').val();
+			var mem_birth = new Date($('#birth_for_join').val());
+			
+			$.ajax({
+				// 등록 -> 사진 등록 -> 전화번호 인증 -> 이메일 전송 -> 회원가입 완료
+			});
+			
+		} else {
+			alert("입력하신 회원정보를 다시 한번 확인해 주세요.");
+		}
+	});
 	
 });
-
 </script>      
 
 <style type="text/css">
@@ -628,26 +738,30 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 
 <!-- ======// 회원가입 모달창 ======================================== -->
 <div id="modal-join" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div style="position:fixed; width:568px; height:698px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<div style="position:fixed; width:568px; padding-bottom: 20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
 <tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입</h1></td></tr>
 <tr><td colspan="2"><hr style="width:90%; height:2px; background-color:#999; border:0;"></td></tr>
-<tr><td colspan="2" style="padding-top:20px;">
+<tr><td colspan="2" style="padding-top:5px;">
 <div style="text-align:center;"><input type="email" id="id_for_join" name="mem_id" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이메일 주소"/></div></td></tr>
-<tr><td colspan="2" style="padding-top:16px;"><div id="valid_id" style="text-align:left;"></div></td></tr>
+<tr><td colspan="2" style="padding-top:0px;"><div id="valid_id" style="text-align:left; padding-left:40px;"></div></td></tr>
 <tr><td colspan="2" style="padding-top:16px;">
 <div style="text-align:center;"><input type="text" id="name_for_join" name="mem_name" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이름" /></div></td></tr>
+<tr><td colspan="2" style="padding-top:0px;"><div id="valid_name" style="text-align:left; padding-left:40px;"></div></td></tr>
 <tr><td colspan="2" style="padding-top:16px;">
-<div style="text-align:center;"><input type="password" id="pw_for_join" name="mem_pw" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 입력" /></div></td></tr>
+<div style="text-align:center;"><input type="password" id="pw_for_join" name="mem_pw" style="width:458px; height:100%; padding:10px; font-size:16px;" placeholder="비밀번호 입력 (특수문자나 숫자를 포함한 최소 8자 이상)" /></div></td></tr>
+<tr><td colspan="2" style="padding-top:0px;"><div id="valid_pw" style="text-align:left; padding-left:40px;"></div></td></tr>
 <tr><td colspan="2" style="padding-top:16px;">
-<div style="text-align:center;"><input type="password" id="repw_for_join" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 재입력" /></div></td></tr>
-<tr><td colspan="2" style="padding:16px 0 0 30px; text-align:left;">
+<div style="text-align:center;"><input type="password" id="repw_for_join" style="width:458px; height:100%; padding:10px; font-size:16px;" placeholder="비밀번호 재입력" /></div></td></tr>
+<tr><td colspan="2" style="padding-top:0px;"><div id="valid_repw" style="text-align:left; padding-left:40px;"></div></td></tr>
+<tr><td colspan="2" style="padding:16px 0 0 40px; text-align:left;">
 <h3 style="margin:0; padding:0; line-height: 36px;">생일</h3>회원가입을 하시려면 만 18세 이상이어야 합니다.<br>생일은 다른 회원에게는 공개되지 않습니다.</td></tr>
-<tr><td colspan="2" style="padding:16px 0 0 30px; text-align:left;">
-<input type="date" id="birth_for_join" name="mem_birth" style="width:180px; height:100%; padding-left:10px; font-size:20px; color:#666;"/>
+<tr><td colspan="2" style="padding:16px 0 0 40px; text-align:left;">
+<input type="date" id="birth_for_join" name="mem_birth" style="width:180px; height:100%; padding-left:10px; font-size:16px; color:#666;"/>
 </td></tr>
+<tr><td colspan="2" style="padding-top:0px;"><div id="valid_birth" style="text-align:left; padding-left:40px;"></div></td></tr>
 </table>
 
 <div style="display:table; width:90%; height:50px; margin:36px auto 10px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
