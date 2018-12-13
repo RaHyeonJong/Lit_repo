@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,8 @@
 
 	<form action="/main" method="POST">
 
-		
+		<input type="text" id="cityLat" name="cityLat"/>
+		<input type="text" id="cityLng" name="cityLng"/>
 
 		목적지<br> <input id="location-input" type="text" name="location" placeholder="Search Box"/><br> 
 		<label  for="checkin_input"><small >체크인</small></label>
@@ -55,12 +57,26 @@
 </div> <!-- wrapper end -->
 
 <script>
+
+
+////////// 자동완성기능 /////////
 function initAutocomplete() {
 	var input = document.getElementById('location-input');
-	var searchBox = new google.maps.places.SearchBox(input);
+	var searchBox = new google.maps.places.Autocomplete(input);
+	
+	 google.maps.event.addListener(searchBox, 'place_changed', function () {
+	        var place = searchBox.getPlace();
+	        
+	        document.getElementById('cityLat').value = place.geometry.location.lat();
+	        document.getElementById('cityLng').value = place.geometry.location.lng();
+	    });
+	
 }
-</script>
 
+google.maps.event.addDomListener(window, 'load', initAutocomplete);
+///////////////////////////////
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete"
          async defer></script>
 </body>
