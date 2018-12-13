@@ -7,7 +7,7 @@ import lit.dto.Member;
 
 public interface CustomerService {
 
-	public void writer(Member member);
+	public void writer(Board board);
 	
 	public List<Board> list();
 	

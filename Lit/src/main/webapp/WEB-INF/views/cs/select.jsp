@@ -19,10 +19,22 @@
 		
 		<br><br><br>	
 		
-			<button class="button button1" onclick="button1_click();" 
-			style="margin-right:50px;">문 의 하 기</button>
-			<button class="button button2" onclick="button2_click();"
-			style="margin-left:50px;">문 의 내 역</button>
+			<c:if test="${not login }">
+			<button class="button button1" id="modal" style="margin-right:50px;">문 의 하 기</button>
+			<button class="button button2" id="modal1" style="margin-left:50px;">문 의 내 역</button>
+			
+			
+			</c:if>
+		
+			<c:if test="${login }">
+			
+			<button class="button button1" onclick="button1_click();" style="margin-right:50px;">문 의 하 기</button>
+			<button class="button button2" onclick="button2_click();" style="margin-left:50px;">문 의 내 역</button>
+			
+			
+			</c:if>
+		
+			
 
 		</div>
 
@@ -30,20 +42,38 @@
 </body>
 
 <script>
-
-	function button1_click()
+	//비로그인 버튼 누르면 벌어지는 일
+	
+	//header의 <div id="modal-login">을 불러온다
+	var modal = document.getElementById("modal-login");
+	
+	//현재 /cs/select에 <button id="modal_login">
+	var btn = document.getElementById("modal");
+	var btn1 = document.getElementById("modal1");
+	
+	btn.onclick=function()
 	{
-		alert("문의등록 페이지로 이동합니다.")
-		window.location.href="/cs/enroll";
-		
+		modal.style.display="block";
 	}
 	
+	btn1.onclick=function()
+	{
+		modal.style.display="block";
+	}
+
+
+
+
+
+	//로그인 후 버튼 누르면 벌어지는 일
+	function button1_click()
+	{
+		window.location.href="/cs/enroll";	
+	}
+
 	function button2_click()
 	{
-		
-		alert("사용자의 문의내역 페이지로 이동합니다.");
 		window.location.href="/cs/list";
-		
 	}
 
 </script>
