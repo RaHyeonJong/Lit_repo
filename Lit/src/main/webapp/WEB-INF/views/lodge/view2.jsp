@@ -72,7 +72,7 @@
   				    month = date.getMonth() + 1,
   				    date = date.getDate();
   				    
-  				    return date + '/' + month + '/' + year;
+  				    return year + '/' + month + '/' + date;
   			}
     			
     		}

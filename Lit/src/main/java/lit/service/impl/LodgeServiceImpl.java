@@ -1,6 +1,7 @@
 package lit.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,11 @@ public class LodgeServiceImpl implements LodgeService {
 	@Autowired LodgeDao lodgedao;
 
 	@Override
-	public List<Lodge> LodgeView() {
-		
-		return lodgedao.SelectLodgeView();
+	public Lodge LodgeView(Lodge lodge) {
+	
+		return lodgedao.SelectLodgeView(lodge);
+
+	
 	}
 
 	@Override
@@ -32,7 +35,18 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.SelectLodgeImage();
 	}
 
-	
+	@Override
+	public List LodgeConvenient(Lodge lodge) {
+		lodgedao.selectConvenient(lodge);
+		String[] sub = lodge.getConvenient_facility().split("#"); 
+		List<String> list = new ArrayList<>();
+		for(String conven : sub) {
+			  list.add(conven);
+		}
+		
+		return list; 
+	}
+
 	
 	@Override
 	public boolean LodgeReservationView(Pay pay) {
@@ -80,6 +94,7 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.insertContent(message);
 		
 	}
+
 
 	
 	

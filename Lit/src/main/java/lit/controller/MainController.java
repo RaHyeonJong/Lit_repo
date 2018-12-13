@@ -57,9 +57,11 @@ public class MainController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String main(Model model,
 			@RequestParam(required=false, defaultValue="") String location, 
-			@RequestParam(required=false, defaultValue="") Date checkin, 
-			@RequestParam(required=false, defaultValue="") Date checkout, 
-			@RequestParam(required=false, defaultValue="") int people) {
+			@RequestParam(required=false, defaultValue="") String checkin, 
+			@RequestParam(required=false, defaultValue="") String checkout, 
+			@RequestParam(required=false, defaultValue="") int people, 
+			@RequestParam(required=false, defaultValue="") String cityLat, 
+			@RequestParam(required=false, defaultValue="") String cityLng) {
 		
 		logger.info("메인 페이지 띄우기");
 		
@@ -67,6 +69,9 @@ public class MainController {
 		System.out.println(checkin);
 		System.out.println(checkout);
 		System.out.println(people);
+		System.out.println(cityLat);
+		System.out.println(cityLng);
+		
 
 //		// 추천 숙소 리스트
 //		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
@@ -84,6 +89,9 @@ public class MainController {
 //		model.addAttribute("recommendFestivalList", recommendFestivalList);
 //		model.addAttribute("themeLodgeList", themeLodgeList);
 //		model.addAttribute("themeFestivalList", themeFestivalList);
+		
+		model.addAttribute("cityLat", cityLat);
+		model.addAttribute("cityLng", cityLng);
 		
 		return "main/main";
 	}

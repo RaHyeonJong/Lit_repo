@@ -13,7 +13,10 @@ public interface LodgeDao {
 
 	
 	//상세뷰 보여주기
-	public List<Lodge> SelectLodgeView();
+	public Lodge SelectLodgeView(Lodge lodge);
+	
+	//편의시설 스플릿 
+	public List selectConvenient(Lodge lodge);
 	
 	//상세뷰 이미지
 	public List<Image> SelectLodgeImage();
