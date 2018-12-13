@@ -143,6 +143,12 @@ body {
 	margin: 0;
 }
 
+#wrapper {
+	min-width: 978px; 
+	width: 100%;
+	margin: 0 auto;
+}
+
 #right-menu ul li {
 	list-style: none;
 	float: left;
@@ -164,15 +170,15 @@ body {
    left: 0;
    top: 0;
    margin: 0 auto;
-   width: 100%;
+   width: 90%;
    height: 55px;
    min-width: 978px;
-   max-width: 1200px;
    transition: 0.6s;
    display: block;
    position: -webkit-sticky;
      position: sticky;
      will-change: transform;
+    padding:0 5% 0 5%;
 }
 #header:hover {
    
