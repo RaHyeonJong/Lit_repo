@@ -44,7 +44,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   height: 32px;
-  z-index: 1; }
+  z-index: 100; }
   .datepicker--cell.-focus- {
     background: #f0f0f0; }
   .datepicker--cell.-current- {
@@ -160,6 +160,7 @@
 /* -------------------------------------------------
     Datepicker
    ------------------------------------------------- */
+   
 .datepickers-container {
   position: absolute;
   left: 0;

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Life if Trip 인생은 여행이다</title>
 </head>
 <body>
 

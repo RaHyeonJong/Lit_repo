@@ -102,6 +102,29 @@ $(document).ready(function(){
 		});
 	});
 	
+// 	id_for_join
+// 	name_for_join
+// 	pw_for_join
+// 	repw_for_join
+// 	birth_for_join
+
+	var joinValid = true;
+	
+	$('#id_for_join').focusout(function(){
+		var id =$('#id_for_join').val();
+		var emailFormat = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		if(id.match(emailFormat) != null){
+			// 이메일 검증 성공
+			// ajax로 이메일 중복 체크
+			$('#valid_id').html("사용가능한 이메일 아이디 입니다.");
+		} else {
+			$('#valid_id').html("이메일 형식에 맞게 작성해주세요.");
+			joinValid = false;
+		}
+	});
+	
+	
 });
 
 </script>      
@@ -607,17 +630,18 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입</h1></td></tr>
 <tr><td colspan="2"><hr style="width:90%; height:2px; background-color:#999; border:0;"></td></tr>
 <tr><td colspan="2" style="padding-top:20px;">
-<div style="text-align:center;"><input type="email" name="mem_id" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이메일 주소"/></div></td></tr>
+<div style="text-align:center;"><input type="email" id="id_for_join" name="mem_id" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이메일 주소"/></div></td></tr>
+<tr><td colspan="2" style="padding-top:16px;"><div id="valid_id" style="text-align:left;"></div></td></tr>
 <tr><td colspan="2" style="padding-top:16px;">
-<div style="text-align:center;"><input type="text" name="mem_name" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이름" /></div></td></tr>
+<div style="text-align:center;"><input type="text" id="name_for_join" name="mem_name" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이름" /></div></td></tr>
 <tr><td colspan="2" style="padding-top:16px;">
-<div style="text-align:center;"><input type="password" name="mem_pw" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 입력" /></div></td></tr>
+<div style="text-align:center;"><input type="password" id="pw_for_join" name="mem_pw" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 입력" /></div></td></tr>
 <tr><td colspan="2" style="padding-top:16px;">
-<div style="text-align:center;"><input type="password" name="re_pw" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 재입력" /></div></td></tr>
+<div style="text-align:center;"><input type="password" id="repw_for_join" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 재입력" /></div></td></tr>
 <tr><td colspan="2" style="padding:16px 0 0 30px; text-align:left;">
 <h3 style="margin:0; padding:0; line-height: 36px;">생일</h3>회원가입을 하시려면 만 18세 이상이어야 합니다.<br>생일은 다른 회원에게는 공개되지 않습니다.</td></tr>
 <tr><td colspan="2" style="padding:16px 0 0 30px; text-align:left;">
-<input type="date" name="mem_birth" placeholder="날짜 선택" style="width:200px; height:100%; font-size:20px; color:#666;"/>
+<input type="date" id="birth_for_join" name="mem_birth" style="width:180px; height:100%; padding-left:10px; font-size:20px; color:#666;"/>
 </td></tr>
 </table>
 
