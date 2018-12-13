@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-  <!-- 데이트 피커 -->
-  <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
-        <script src="/resources/dist/js/datepicker.min.js"></script>
-     <!-- Include English language -->
-        <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+	<!-- 데이트 피커 -->
+<link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="/resources/dist/js/datepicker.min.js"></script>
+	<!-- Include English language -->
+<script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -474,7 +475,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	<div class="inner">
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
-				<a href="/tempmain"><img style="height: 50px;"
+				<a href="/main/main"><img style="height: 50px;"
 					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">

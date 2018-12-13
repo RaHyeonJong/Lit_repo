@@ -56,6 +56,7 @@ public class LodgeController {
 		
 		
 	}
+	
 	@RequestMapping(value ="/view", method = RequestMethod.POST)
 	public ModelAndView LodgeView(
 			@RequestParam(defaultValue="00/00/0000") String start,
