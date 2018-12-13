@@ -43,7 +43,7 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/view", method = RequestMethod.GET)
-	public void LodgeView( Model model ) {
+	public void LodgeView(Lodge lodge, Model model ) {
 		//숙소 썸네일 클릭시 보여지는 상세 뷰
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
 		//결제한 사람의 정보를 가져온다.
@@ -56,10 +56,14 @@ public class LodgeController {
 		// 댓글은 페이징 처리를 함
 		
 		
-		List<Lodge> view = lodgeService.LodgeView();
-		model.addAttribute("view",view);
+		lodge = lodgeService.LodgeView(lodge);
+		model.addAttribute("view",lodge);
+		System.out.println(lodge.toString());
+		
 		List<Image> lodgeimage = lodgeService.LodgeImage();
 		model.addAttribute("lodgeimg", lodgeimage);
+		List<String> convenient = lodgeService.LodgeConvenient(lodge);
+		model.addAttribute("item", convenient);
 		
 	}
 	@RequestMapping(value ="/view2", method = RequestMethod.GET)

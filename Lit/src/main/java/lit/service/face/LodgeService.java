@@ -12,7 +12,9 @@ import lit.dto.Pay;
 public interface LodgeService {
 
 	//숙소 번호를 받아와서 숙소 조회
-	public List<Lodge> LodgeView();
+	public Lodge LodgeView(Lodge lodge);
+	
+	public List LodgeConvenient(Lodge lodge);
 	
 	//상세뷰 이미지
 	public List<Image> LodgeImage();
