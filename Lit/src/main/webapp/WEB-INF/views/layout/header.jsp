@@ -14,25 +14,41 @@
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
 	var modal_findpw = $('#modal-findpw');
+	var modal_join = $('#modal-join');
 	
-	$('#login').click(function() {
-		modal_login.css("display", "block");
+// 	로그인으로 가는 버튼을 클릭했을 때...
+	$('.goLogin').click(function(){
+		modal_findpw.css("display", "none");
+		modal_join.css("display", "none");
+		modal_login.css("display", "block");		
 	});
 	
+// 	회원가입으로 가는 버튼을 클릭했을 때...
+	$('.goJoin').click(function(){
+		modal_findpw.css("display", "none");
+		modal_login.css("display", "none");
+		modal_join.css("display", "block");		
+	});
+		
+// 	모달창의 검은색 반투명 배경을 클릭했을 때...
 	$(window).click(function(e) {
 		if(e.target == modal_login[0]) {
 			modal_login.css("display", "none");
-		}
-		if(e.target == modal_findpw[0]) {
+		} else if(e.target == modal_findpw[0]) {
 			modal_findpw.css("display", "none");
+		} else if(e.target == modal_join[0]) {
+			modal_join.css("display", "none");
 		}
 	});
 	
+// 	모달창의 X버튼을 클릭했을 때...
 	$(".closeModal").click(function(){
 		modal_login.css("display", "none");
 		modal_findpw.css("display", "none");
+		modal_join.css("display", "none");
 	});
 	
+// 	로그인창에서 id, pw 입력하고 로그인 버튼을 클릭했을 때...
 	$('#loginBtn').click(function(){
 		var mem_id = $('input[name=mem_id]').val();
 		var mem_pw = $('input[name=mem_pw]').val();
@@ -57,16 +73,13 @@ $(document).ready(function(){
 		});
 	});
 	
+// 	로그인창에서 비밀번호가 생각나지 않으세요? 버튼을 클릭했을 때...
 	$('#findpwBtn').click(function(){
 		modal_login.css("display", "none");
 		modal_findpw.css("display", "block");
 	});
 	
-	$('#goBackLogin').click(function(){
-		modal_login.css("display", "block");
-		modal_findpw.css("display", "none");
-	});
-	
+// 	비밀번호 재설정 창에서 재설정 링크 전송하기 버튼을 클릭했을 때...
 	$('#findpwSendLinkBtn').click(function(){
 		var mem_id = $('input[name=mem_id_for_findpw]').val();
 		
@@ -88,6 +101,29 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+// 	id_for_join
+// 	name_for_join
+// 	pw_for_join
+// 	repw_for_join
+// 	birth_for_join
+
+	var joinValid = true;
+	
+	$('#id_for_join').focusout(function(){
+		var id =$('#id_for_join').val();
+		var emailFormat = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		if(id.match(emailFormat) != null){
+			// 이메일 검증 성공
+			// ajax로 이메일 중복 체크
+			$('#valid_id').html("사용가능한 이메일 아이디 입니다.");
+		} else {
+			$('#valid_id').html("이메일 형식에 맞게 작성해주세요.");
+			joinValid = false;
+		}
+	});
+	
 	
 });
 
@@ -496,8 +532,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			<!-- 로그인 상태가 아니면 -->
 			<c:if test="${not login }">
 				<li><a href="/cs/cs">고객센터</a></li>
-				<li><a id="login" href="#login">로그인</a></li>
-				<li><a id="join" href="#join">회원가입</a></li>
+				<li><a class="goLogin" href="#login">로그인</a></li>
+				<li><a class="goJoin" href="#join">회원가입</a></li>
 			</c:if>
 	
 			<c:if test="${login }">
@@ -551,7 +587,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
 </div>
 <div style="height:10px;"></div>
-<div>에어비앤비 계정이 없으세요? <a href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+<div>에어비앤비 계정이 없으세요? <a class="goJoin" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
 </div>
 </div>
 <!-- ======로그인 모달창 //======================================== -->
@@ -573,7 +609,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td colspan="2"><div id="findpwMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:14px; font-weight:bold;"></div></td></tr>
 <tr>
 <td style="width:50%; padding:0 0 0 10%;">
-<a href="#login" id="goBackLogin" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>로그인으로 돌아가기</a>
+<a href="#login" class="goLogin" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>로그인으로 돌아가기</a>
 </td>
 <td style="width:50%; padding:0 10% 0 0;">
 <div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
@@ -587,29 +623,53 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 
 <!-- ======// 회원가입 모달창 ======================================== -->
 <div id="modal-join" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<div style="position:fixed; width:568px; height:698px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
-<tr><td colspan="2" style="padding-top:10px;">
-<div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
-<tr><td colspan="2" style="padding-top:10px;">
-<div style="text-align:center;"><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
+<tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입</h1></td></tr>
+<tr><td colspan="2"><hr style="width:90%; height:2px; background-color:#999; border:0;"></td></tr>
+<tr><td colspan="2" style="padding-top:20px;">
+<div style="text-align:center;"><input type="email" id="id_for_join" name="mem_id" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이메일 주소"/></div></td></tr>
+<tr><td colspan="2" style="padding-top:16px;"><div id="valid_id" style="text-align:left;"></div></td></tr>
+<tr><td colspan="2" style="padding-top:16px;">
+<div style="text-align:center;"><input type="text" id="name_for_join" name="mem_name" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="이름" /></div></td></tr>
+<tr><td colspan="2" style="padding-top:16px;">
+<div style="text-align:center;"><input type="password" id="pw_for_join" name="mem_pw" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 입력" /></div></td></tr>
+<tr><td colspan="2" style="padding-top:16px;">
+<div style="text-align:center;"><input type="password" id="repw_for_join" style="width:458px; height:100%; padding:10px; font-size:20px;" placeholder="비밀번호 재입력" /></div></td></tr>
+<tr><td colspan="2" style="padding:16px 0 0 30px; text-align:left;">
+<h3 style="margin:0; padding:0; line-height: 36px;">생일</h3>회원가입을 하시려면 만 18세 이상이어야 합니다.<br>생일은 다른 회원에게는 공개되지 않습니다.</td></tr>
+<tr><td colspan="2" style="padding:16px 0 0 30px; text-align:left;">
+<input type="date" id="birth_for_join" name="mem_birth" style="width:180px; height:100%; padding-left:10px; font-size:20px; color:#666;"/>
+</td></tr>
 </table>
-<div style="height:10px;"></div>
-<div style="text-align:left; padding-left:10px;">
-<a id="findpwBtn" href="#findpw" style="text-decoration:none; color:#008989; font-size: 15px;">비밀번호가 생각나지 않으세요?</a>
-</div>
-<div id="loginMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:16px; font-weight:bold;"></div>
-<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
-<div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
+
+<div style="display:table; width:90%; height:50px; margin:36px auto 10px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="joinBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">가입하기</div>
 </div>
 <div style="height:10px;"></div>
-<div>에어비앤비 계정이 없으세요? <a href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+<div>잠깐!! 이미 아이디가 있으시다고요?! <a class="goLogin" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">&nbsp;&nbsp;&nbsp;로그인 하러 가기</a></div>
 </div>
 </div>
 <!-- ======회원가입 모달창 //======================================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
