@@ -10,7 +10,7 @@ public interface CustomerServiceDao {
 
 	//-문의내용 작성
 
-	public void writer(Member member);
+	public void writer(Board board);
 
 	//-문의내용 리스트
 

@@ -85,9 +85,6 @@ public class LoginController {
 		return "redirect:/tempmain";
 	}
 	
-<<<<<<< HEAD
-}
-=======
 	@RequestMapping(value="/login/changePw", method=RequestMethod.GET)
 	public String changePw(Model model, Member member, HttpServletResponse resp) {
 		String uKey = loginService.getUkey(member);
@@ -128,4 +125,4 @@ public class LoginController {
 		return "redirect:/tempmain";
 	}
 }
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+

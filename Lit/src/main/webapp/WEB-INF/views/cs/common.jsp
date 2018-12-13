@@ -4,11 +4,6 @@
 <jsp:include page="../layout/header.jsp" />
 
 <style>
-
-
-	/*구글에서 폰트 받아왔어요^^ */
-	
-/* 	@import url('https://fonts.googleapis.com/css?family=Gamja+Flower'); */
 	
 	/* 	자주하는질문, 1:1문의하기   가운데*/
 	.center
@@ -166,26 +161,23 @@
 
 
 	/* enroll.jsp 설정 */
+	/*아까의 오류는 .table_list 엿다 */
 	
-	.sub_title, .sub_title1, .table_list
+	.table_list
 	{
-		text-align:center;
-		padding-top:20px;
-		padding-left:100px;
+		width:70%;
+		margin-left:15%;
+		margin-right:15%;
 	}
 	
 	.btnList
 	{
 		text-align:right;
-		padding-top:20px;
+		padding-top:40px;
 		padding-right:150px;
 		
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	th
 	{
 		background-color:#d8d8d8;
@@ -194,7 +186,11 @@
 		width:150px;
 		height:50px;
 	}	
-	
+
+	.td
+	{
+		padding-left:10px;	
+	}
 	
 	textarea
 	{
@@ -202,17 +198,12 @@
 		width:865px; 
 		resize:none; 
 		font-size:18px;
-		font-family:'Gamja Flower', cursive;
 	}
-	
-	
-
-
 </style>
 
 <div class="center">
 
-		<span style="font-size:20px; padding:50px;"><a href="/cs/cs">자주찾는 질문</a></span>
-		<span style="font-size:20px; padding:50px;"><a href="/cs/select">1:1 문의</a></span>
+		<span style="font-size:20px; padding:20px;"><a href="/cs/cs">자주찾는 질문</a></span>
+		<span style="font-size:20px; padding:20px;"><a href="/cs/select">1:1 문의</a></span>
 </div>
 
