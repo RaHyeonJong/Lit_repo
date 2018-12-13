@@ -62,8 +62,6 @@ public class LodgeController {
 		model.addAttribute("lodgeimg", lodgeimage);
 		
 	}
-	@RequestMapping(value ="/view2", method = RequestMethod.GET)
-	public void LodgeView2( ) {}
 	
 	@RequestMapping(value ="/view", method = RequestMethod.POST)
 	public ModelAndView LodgeView(
