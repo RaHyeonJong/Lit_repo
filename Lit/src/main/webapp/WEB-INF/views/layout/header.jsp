@@ -143,6 +143,12 @@ body {
 	margin: 0;
 }
 
+#wrapper {
+	min-width:978px; 
+	width: 100%;
+	margin:0 auto;"
+}
+
 #right-menu ul li {
 	list-style: none;
 	float: left;
@@ -167,7 +173,6 @@ body {
    width: 100%;
    height: 55px;
    min-width: 978px;
-   max-width: 1200px;
    transition: 0.6s;
    display: block;
    position: -webkit-sticky;
@@ -183,13 +188,13 @@ body {
    transition: 0.6s;
 }
 #header .inner {
-   position: relative;
-   z-index: 1;
-   margin: 0 auto;
-/*    padding: 0px 37px 0; */
-   min-width:;
-   max-width:;
-   *zoom: 1;
+	position: relative;
+   	z-index: 1;
+   	margin: 0 auto;
+	padding: 0px 36px 0;
+   	min-width:;
+   	max-width:;
+   	*zoom: 1;
 }
 #header .inner:after {
    content: "";

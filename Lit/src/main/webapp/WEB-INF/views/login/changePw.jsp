@@ -49,7 +49,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body><div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
+<body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <div style="width:568px; height:468px; margin:5%; text-align: center;">
