@@ -13,4 +13,6 @@ public interface LogoDao {
 	List<String> selectLocationAjax(String location); // 숙소 검색어 추천 리스트
 
 	List<Comment> selectReview(); // 숙소 후기 리스트
+	
+	
 }

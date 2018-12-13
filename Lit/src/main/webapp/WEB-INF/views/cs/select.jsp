@@ -1,50 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
-
-
-<style>
-.button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.button1
-{
-	background-color:#ff0300;
-	color: white;
-	border:2px solid #cc2e2c;
-
-}
-
-.button1:hover
-{
-	background-color:#f74c4a;
-	color: white;
-}
-
-.button2
-{
-	background-color:#f29d00;
-	color:white;
-	border:2px solid #996404;
-}
-
-.button2:hover
-{
-	background-color:#ffb638;
-	color: white;
-}
-
-</style>
 
 
 <body>
@@ -61,11 +18,62 @@
 			
 		
 		<br><br><br>	
-		<button class="button button1" onclick="location.href='/cs/enroll'" 
-		style="margin-right:50px;">문 의 하 기</button>
-		<button class="button button2" onclick="location.href='/cs/list'"
-		style="margin-left:50px;">문 의 내 역</button>
+		
+			<c:if test="${not login }">
+			<button class="button button1" id="modal" style="margin-right:50px;">문 의 하 기</button>
+			<button class="button button2" id="modal1" style="margin-left:50px;">문 의 내 역</button>
+			
+			
+			</c:if>
+		
+			<c:if test="${login }">
+			
+			<button class="button button1" onclick="button1_click();" style="margin-right:50px;">문 의 하 기</button>
+			<button class="button button2" onclick="button2_click();" style="margin-left:50px;">문 의 내 역</button>
+			
+			
+			</c:if>
+		
+			
+
 		</div>
 
 </div>
 </body>
+
+<script>
+	//비로그인 버튼 누르면 벌어지는 일
+	
+	//header의 <div id="modal-login">을 불러온다
+	var modal = document.getElementById("modal-login");
+	
+	//현재 /cs/select에 <button id="modal_login">
+	var btn = document.getElementById("modal");
+	var btn1 = document.getElementById("modal1");
+	
+	btn.onclick=function()
+	{
+		modal.style.display="block";
+	}
+	
+	btn1.onclick=function()
+	{
+		modal.style.display="block";
+	}
+
+
+
+
+
+	//로그인 후 버튼 누르면 벌어지는 일
+	function button1_click()
+	{
+		window.location.href="/cs/enroll";	
+	}
+
+	function button2_click()
+	{
+		window.location.href="/cs/list";
+	}
+
+</script>

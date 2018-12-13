@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.MainDao;
-import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.service.face.MainService;

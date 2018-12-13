@@ -4,7 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lit.dao.face.CustomerServiceDao">
 
-	<insert id="writer" parameterType="lit.dto.Member"></insert>
+	<insert id="writer" parameterType="lit.dto.Board">
+	
+	insert into 
+
+		
+	
+	</insert>
 	<select id="list" resultType="lit.dto.Board"></select>
 	<select id="view" resultType="lit.dto.Board" parameterType="int"></select>
 </mapper>

@@ -1,5 +1,6 @@
 package lit.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lit.dto.Festival;
 import lit.dto.Lodge;
@@ -25,26 +27,73 @@ public class MainController {
 	MainService mainService;
 
 	// 메인 페이지
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public void main(Model model) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String getMain(Model model) {
+		
 		logger.info("메인 페이지 띄우기");
-
-		// 추천 숙소 리스트
-		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
-		// 추천 행사 리스트
-		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
-
-		// 테마별 숙소 리스트
-		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
-		// 테마별 행사 리스트
-		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
+		
+		
+//		// 추천 숙소 리스트
+//		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
+//		// 추천 행사 리스트
+//		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
+//
+//		// 테마별 숙소 리스트
+//		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
+//		// 테마별 행사 리스트
+//		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
 		
 		// 도시별 추천 숙소, 행사 리스트 추가
 		
-		model.addAttribute("recommendLodgeList", recommendLodgeList);
-		model.addAttribute("recommendFestivalList", recommendFestivalList);
-		model.addAttribute("themeLodgeList", themeLodgeList);
-		model.addAttribute("themeFestivalList", themeFestivalList);
+//		model.addAttribute("recommendLodgeList", recommendLodgeList);
+//		model.addAttribute("recommendFestivalList", recommendFestivalList);
+//		model.addAttribute("themeLodgeList", themeLodgeList);
+//		model.addAttribute("themeFestivalList", themeFestivalList);
+		
+		return "main/main";
+	}
+	
+	// 메인 페이지
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String main(Model model,
+			@RequestParam(required=false, defaultValue="") String location, 
+			@RequestParam(required=false, defaultValue="") String checkin, 
+			@RequestParam(required=false, defaultValue="") String checkout, 
+			@RequestParam(required=false, defaultValue="") int people, 
+			@RequestParam(required=false, defaultValue="") String cityLat, 
+			@RequestParam(required=false, defaultValue="") String cityLng) {
+		
+		logger.info("메인 페이지 띄우기");
+		
+		System.out.println(location);
+		System.out.println(checkin);
+		System.out.println(checkout);
+		System.out.println(people);
+		System.out.println(cityLat);
+		System.out.println(cityLng);
+		
+
+//		// 추천 숙소 리스트
+//		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
+//		// 추천 행사 리스트
+//		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
+//
+//		// 테마별 숙소 리스트
+//		List<Lodge> themeLodgeList = mainService.getThemeLodgeList("");
+//		// 테마별 행사 리스트
+//		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
+		
+		// 도시별 추천 숙소, 행사 리스트 추가
+		
+//		model.addAttribute("recommendLodgeList", recommendLodgeList);
+//		model.addAttribute("recommendFestivalList", recommendFestivalList);
+//		model.addAttribute("themeLodgeList", themeLodgeList);
+//		model.addAttribute("themeFestivalList", themeFestivalList);
+		
+		model.addAttribute("cityLat", cityLat);
+		model.addAttribute("cityLng", cityLng);
+		
+		return "main/main";
 	}
 
 	// 메인 숙소 페이지

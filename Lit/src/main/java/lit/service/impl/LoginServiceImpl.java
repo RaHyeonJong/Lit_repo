@@ -1,5 +1,7 @@
 package lit.service.impl;
 
+import java.util.UUID;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
@@ -36,23 +38,6 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public boolean findId(Member member) {
-		int cntId = loginDao.findId(member);
-		
-		if(cntId == 1) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	@Override
-	public Member getId(Member member) {
-
-		return loginDao.getId(member);
-	}
-
-	@Override
 	public boolean checkEmail(Member member) {
 		int cntId = loginDao.checkEmail(member);
 		
@@ -65,6 +50,12 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public void sendMail(Member member) {
+		String uKey = UUID.randomUUID().toString();
+		member.setuKey(uKey);
+		loginDao.updateUkey(member);
+		
+		System.out.println(member);
+	
 		String from = "LifeIsTrip@lit.com";
 		String to = member.getMem_id();
 		String title = "[LIFE IS TRIP] 비밀번호 재설정 링크메일 입니다.";
@@ -79,7 +70,7 @@ public class LoginServiceImpl implements LoginService{
 				"<tr><td style=\"padding-top:15px; font-size:18px;\">회원님이 요청하지 않은 경우 아무런 조치를 취하실 필요가 없습니다.<br>\r\n" + 
 				"요청하셨다면 다음 링크를 이용해 비밀번호를 재설정하세요.</td></tr>\r\n" + 
 				"<tr><td style=\"padding-top:30px;\">\r\n" + 
-				"<a style=\"text-decoration:none;\" href=\"localhost:8585/login/changePw?mem_id="+ member.getMem_id() +"\">\r\n" + 
+				"<a style=\"text-decoration:none;\" href=\"localhost:8585/login/changePw?mem_id="+ member.getMem_id()+"&uKey="+member.getuKey()+"\">\r\n" + 
 				"<div style=\"display:table; width:200px; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;\">\r\n" + 
 				"<div style=\"display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;\">비밀번호 재설정하기</div>\r\n" + 
 				"</div></a>\r\n" + 
@@ -102,6 +93,16 @@ public class LoginServiceImpl implements LoginService{
 			System.out.println(e);
 		}
 
+	}
+
+	@Override
+	public String getUkey(Member member) {
+		return loginDao.getUkey(member);
+	}
+
+	@Override
+	public void updatePw(Member member) {
+		loginDao.updatePw(member);
 	}
 	
 

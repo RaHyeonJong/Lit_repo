@@ -4,5 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lit.dao.face.LodgeDao">
 
+<select id="SelectLodgeView" resultType="lit.dto.Lodge">
+
+	SELECT
+	lodge_no, 
+	bc.building_case_no,
+    building_case,
+	l.lodge_case_no,
+	lodge_case,
+    lodge_name, 
+	lodge_capacity, 
+	lodge_room, 
+	lodge_addr,
+	convenient_facility,
+	convenient_area,
+	ready_time, 
+	check_in_time, 
+	regit_date,
+	activation,
+	latitude, 
+	longitude
+	FROM lodge l , lodge_case lc, building_case bc
+    WHERE l.lodge_case_no = lc.lodge_case_no
+    AND l.lodge_case_no = bc.building_case_no
+    AND lodge_no = 21
+
+</select>
+
+<select id="SelectLodgeImage" resultType = "lit.dto.Image">
+
+	SELECT
+	image_no,
+	origin_name,
+	stored_name,
+	lodge_no,
+	mem_no,
+	board_no,
+	thumb_nail
+	FROM image
+	WHERE lodge_no = 1
+
+</select>
+
+<select id = "selectConvenient" resultType ="lit.dto.Lodge">
+	SELECT convenient_facility FROM lodge
+	WHERE lodge_no = 21
+
+</select>
+
+
 
 </mapper>
+

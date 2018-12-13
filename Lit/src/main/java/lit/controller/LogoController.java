@@ -1,5 +1,6 @@
 package lit.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,17 +27,18 @@ public class LogoController {
 	LogoService logoService;
 
 	// 로고 페이지
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String logo(Model model) {
 		logger.info("로고 페이지 띄우기");
 
 		// 후기 가져오는 서비스
-		List<Comment> reviewList = logoService.getReviewList();
+//		List<Comment> reviewList = logoService.getReviewList();
 
-		model.addAttribute("reviewList", reviewList);
+//		model.addAttribute("reviewList", reviewList);
 		
-		return "main";
+		return "logo/main";
 	}
+	
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String logoSearch(Model model, LodgeSearch search) {
