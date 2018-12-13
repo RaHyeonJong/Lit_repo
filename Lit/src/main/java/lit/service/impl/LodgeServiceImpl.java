@@ -1,10 +1,14 @@
 package lit.service.impl;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
+import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
 import lit.dto.Pay;
@@ -17,11 +21,19 @@ public class LodgeServiceImpl implements LodgeService {
 	@Autowired LodgeDao lodgedao;
 
 	@Override
-	public Lodge LodgeView(Lodge lodge) {
+	public List<Lodge> LodgeView() {
 		
-		return lodgedao.SelectLodgeView(lodge);
+		return lodgedao.SelectLodgeView();
 	}
 
+	@Override
+	public List<Image> LodgeImage() {
+		
+		return lodgedao.SelectLodgeImage();
+	}
+
+	
+	
 	@Override
 	public boolean LodgeReservationView(Pay pay) {
 		
@@ -69,6 +81,7 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
+	
 	
 
 

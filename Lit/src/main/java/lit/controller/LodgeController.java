@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Comment;
+import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
 import lit.dto.Pay;
@@ -41,7 +43,7 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/view", method = RequestMethod.GET)
-	public void LodgeView(Lodge lodge ) {
+	public void LodgeView( Model model ) {
 		//숙소 썸네일 클릭시 보여지는 상세 뷰
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
 		//결제한 사람의 정보를 가져온다.
@@ -52,10 +54,17 @@ public class LodgeController {
 		// 숙소와, 회원, 결제, 이미지 테이블 을 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
 		// 댓글 정보와 추천 정보도 같이 포함하여 뷰에 보여준다.
 		// 댓글은 페이징 처리를 함
-//		lodgeService.LodgeView(lodge);
 		
+		
+		List<Lodge> view = lodgeService.LodgeView();
+		model.addAttribute("view",view);
+		List<Image> lodgeimage = lodgeService.LodgeImage();
+		model.addAttribute("lodgeimg", lodgeimage);
 		
 	}
+	@RequestMapping(value ="/view2", method = RequestMethod.GET)
+	public void LodgeView2( ) {}
+	
 	@RequestMapping(value ="/view", method = RequestMethod.POST)
 	public ModelAndView LodgeView(
 			@RequestParam(defaultValue="00/00/0000") String start,

@@ -1,6 +1,10 @@
 package lit.service.face;
 
+
+import java.util.List;
+
 import lit.dto.Comment;
+import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
 import lit.dto.Pay;
@@ -8,7 +12,11 @@ import lit.dto.Pay;
 public interface LodgeService {
 
 	//숙소 번호를 받아와서 숙소 조회
-	public Lodge LodgeView(Lodge lodge);
+	public List<Lodge> LodgeView();
+	
+	//상세뷰 이미지
+	public List<Image> LodgeImage();
+	
 	
 	//예약 하고 자하는 숙소의 결제 정보 보여주기
 	public boolean LodgeReservationView(Pay pay);
