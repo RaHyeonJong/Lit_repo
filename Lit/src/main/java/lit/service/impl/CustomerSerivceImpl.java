@@ -16,9 +16,9 @@ public class CustomerSerivceImpl implements CustomerService{
 	@Autowired CustomerServiceDao customerserviceDao;
 
 	@Override
-	public void writer(Member member) {
+	public void writer(Board board) {
 
-		customerserviceDao.writer(member);
+		customerserviceDao.writer(board);
 	}
 
 	@Override

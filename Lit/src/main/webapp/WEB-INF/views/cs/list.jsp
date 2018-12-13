@@ -20,8 +20,7 @@
 		
 
 		<div class="table_list">
-
-			<table style="width:100%; border:1px solid black; text-align:center; ">
+			<table style="width:100%; border:1px solid #ededed; text-align:center; ">
 			
 				<tr>
 					<th>번 호</th>
@@ -39,10 +38,10 @@
 				
 			</table>
 		</div>
-
-		<div class="btnList">
+			<div class="btnList">
 			<button class="button2" onclick="button2_click();">이 전 으 로</button>
 		</div>
+		
 	</div>
 </div>
 </body>

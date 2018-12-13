@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import lit.dto.Board;
 import lit.service.face.CustomerService;
 
 @Controller
@@ -47,12 +47,17 @@ public class CustomerServiceController {
 	
 	//작성 후, DB저장
 	@RequestMapping(value="/enroll", method=RequestMethod.POST)
-	public void enrollProc()
+	public String enrollProc(HttpSession session, Board board)
 	{
-		logger.info("문의 등록 처리");
+		logger.info("문의 등록 테스트 중");
+		board.setTitle((String) session.getAttribute("title"));
+		board.setContents((String)session.getAttribute("content"));
+		customerService.writer(board);
+		
+		return "redirect:/cs/list";
 	}
 	
-	//문의내역 리스트
+	//문의내역 리스트	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void list()
 	{

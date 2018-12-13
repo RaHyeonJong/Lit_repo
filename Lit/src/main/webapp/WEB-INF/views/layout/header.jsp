@@ -4,12 +4,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<<<<<<< HEAD
 	<!-- 데이트 피커 -->
 <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="/resources/dist/js/datepicker.min.js"></script>
 	<!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
+=======
+  <!-- 데이트 피커 -->
+  <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+        <script src="/resources/dist/js/datepicker.min.js"></script>
+     <!-- Include English language -->
+        <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+  
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
@@ -93,10 +102,6 @@ $(document).ready(function(){
 
 </script>      
 
-
-
-        
-        
 <style type="text/css">
 
 
@@ -501,7 +506,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			<c:if test="${not login }">
 				<li><a href="/cs/cs">고객센터</a></li>
 				<li><a id="login" href="#login">로그인</a></li>
-				<li><a href="/join">회원가입</a></li>
+				<li><a id="join" href="#join">회원가입</a></li>
 			</c:if>
 	
 			<c:if test="${login }">
@@ -586,3 +591,36 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 </table>
 </div></div>
 <!-- ====== 비밀번호찾기 모달창 //======================================== -->
+
+
+
+<!-- ======// 회원가입 모달창 ======================================== -->
+<div id="modal-join" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<table style="width:100%;">
+<tr><td colspan="2">
+<div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
+<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
+<tr><td colspan="2" style="padding-top:10px;">
+<div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
+<tr><td colspan="2" style="padding-top:10px;">
+<div style="text-align:center;"><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
+</table>
+<div style="height:10px;"></div>
+<div style="text-align:left; padding-left:10px;">
+<a id="findpwBtn" href="#findpw" style="text-decoration:none; color:#008989; font-size: 15px;">비밀번호가 생각나지 않으세요?</a>
+</div>
+<div id="loginMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:16px; font-weight:bold;"></div>
+<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
+</div>
+<div style="height:10px;"></div>
+<div>에어비앤비 계정이 없으세요? <a href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+</div>
+</div>
+<!-- ======회원가입 모달창 //======================================== -->
+
+
+
+
+
