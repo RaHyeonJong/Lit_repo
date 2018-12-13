@@ -27,7 +27,7 @@ public class MainController {
 	MainService mainService;
 
 	// 메인 페이지
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getMain(Model model) {
 		
 		logger.info("메인 페이지 띄우기");
@@ -54,7 +54,7 @@ public class MainController {
 	}
 	
 	// 메인 페이지
-	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String main(Model model,
 			@RequestParam(required=false, defaultValue="") String location, 
 			@RequestParam(required=false, defaultValue="") Date checkin, 

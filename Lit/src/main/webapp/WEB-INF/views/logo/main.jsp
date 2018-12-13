@@ -18,7 +18,7 @@
 	
 	<h1>로고 페이지</h1>
 
-	<form action="/main/main" method="POST">
+	<form action="/main" method="POST">
 
 		
 

@@ -4,21 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<<<<<<< HEAD
 	<!-- 데이트 피커 -->
 <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="/resources/dist/js/datepicker.min.js"></script>
 	<!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
-
-=======
-  <!-- 데이트 피커 -->
-  <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
-        <script src="/resources/dist/js/datepicker.min.js"></script>
-     <!-- Include English language -->
-        <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
   
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
