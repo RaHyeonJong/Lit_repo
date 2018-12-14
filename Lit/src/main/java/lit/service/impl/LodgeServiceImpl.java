@@ -68,7 +68,6 @@ public class LodgeServiceImpl implements LodgeService {
 	public void insertComment(Comment comment) {
 
 //		int member = Integer.parseInt(req.getParameter("member_no"));
-		comment.setMem_no(member);
 		Date date = new Date();
 		comment.setWritten_time(date);
 		
