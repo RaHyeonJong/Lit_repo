@@ -637,7 +637,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	<div class="inner">
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
-				<a href="/main/main"><img style="height: 50px;"
+				<a href="/main"><img style="height: 50px;"
 					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
@@ -762,7 +762,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td style="padding:40px 40px 0 40px; text-align:left;"><p style="margin:0; font-weight:bold;">Life is Trip 커뮤니티를 위한 약속</p>
 모든 Life is Trip 커뮤니티 회원을 인종, 종교, 출신, 국가, 민족, 피부색, 장애, 성별, 
 성적 정체성, 성적 취향 또는 연령에 상관없이 존중하며 개인적 판단이나 편견없이 대하겠습니다.</td></tr>
-<tr><td style="padding:40px 40px 0 40px; text-align:left;"><p style="margin:0; font-weight:bold;">Life is Trip 서비스 약관</p>
+<tr><td style="padding:40px 40px 0 40px; text-align:left;"><p style="margin:0; font-weight:bold;">Life is Trip 서비스 약관 <a href="/terms" style="text-decoration:none; color:#008989;">[바로가기]</a></p>
 Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 동의합니다. 
 또한, Life is Trip 개인정보 보호정책에 따른 개인정보 이용 및 처리에도 동의합니다.</td></tr>
 <tr><td style="padding:40px 40px 0 40px; text-align:left;">
