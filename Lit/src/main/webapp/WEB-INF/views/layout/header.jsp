@@ -166,19 +166,18 @@ body {
 }
 #header {
 /*    position: relative; */
-   z-index: 100;
-   left: 0;
-   top: 0;
-   margin: 0 auto;
-   width: 90%;
-   height: 55px;
-   min-width: 978px;
-   transition: 0.6s;
-   display: block;
-   position: -webkit-sticky;
-     position: sticky;
-     will-change: transform;
-    padding:0 5% 0 5%;
+	z-index: 100;
+   	left: 0;
+   	top: 0;
+   	margin: 0 auto;
+   	width: 100%;
+   	height: 55px;
+   	min-width: 978px;
+   	transition: 0.6s;
+   	display: block;
+   	position: -webkit-sticky;
+    position: sticky;
+    will-change: transform;
 }
 #header:hover {
    
@@ -189,13 +188,13 @@ body {
    transition: 0.6s;
 }
 #header .inner {
-   position: relative;
-   z-index: 1;
-   margin: 0 auto;
-/*    padding: 0px 37px 0; */
-   min-width:;
-   max-width:;
-   *zoom: 1;
+   	position: relative;
+   	z-index: 1;
+  	margin: 0 auto;
+	padding: 0px 15px 0 20px;
+   	min-width:;
+   	max-width:;
+   	*zoom: 1;
 }
 #header .inner:after {
    content: "";
@@ -238,7 +237,7 @@ body {
    float: right;
    text-align: right;
    z-index: 1;
-   padding-top : 33px;
+   padding-top : 25px;
 }
 #header .logbar>li {
    margin: 0 0 0 26px;

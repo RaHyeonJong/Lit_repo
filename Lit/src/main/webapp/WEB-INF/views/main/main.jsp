@@ -13,6 +13,33 @@
 	width: 33%;
 	float: right;
 }
+#search_filter {
+	border-bottom: 1px solid #EBEBEB;
+    width: 100%;
+    margin-top: 24px;
+    padding: 16px 72px !important;
+}
+#search_filter button {
+	font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: normal !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    text-transform: undefined !important;
+    color: #484848 !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    background: none !important;
+    border: 1px solid #dce0e0 !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    position: relative !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    width: auto !important;
+}
 </style>
 
 </head>
@@ -20,13 +47,21 @@
 
 
 
-<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;"> 
+<div id="wrapper"> 
 
 	<div><!-- header 시작 -->
 	<c:import url="../layout/header.jsp"/>
 	</div><!-- header 끝 -->
 	
+	<div id="search_filter">
+		<button>날짜</button>
+		<button>인원</button>
+		<button>숙소 종류</button>
+		<button>가격</button>
+	</div>
+	
 	<h1>main page</h1>
+	
 </div>
 	<div id="map"></div>
 

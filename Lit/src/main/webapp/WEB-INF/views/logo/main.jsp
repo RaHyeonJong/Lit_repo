@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;"> 
+<div id="wrapper"> 
 
 	<div><!-- header 시작 -->
 	<c:import url="../layout/header.jsp"/>
