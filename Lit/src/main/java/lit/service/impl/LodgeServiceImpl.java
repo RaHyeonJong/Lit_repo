@@ -2,7 +2,10 @@ package lit.service.impl;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +66,14 @@ public class LodgeServiceImpl implements LodgeService {
 
 	@Override
 	public void insertComment(Comment comment) {
+
+//		int member = Integer.parseInt(req.getParameter("member_no"));
+		comment.setMem_no(member);
+		Date date = new Date();
+		comment.setWritten_time(date);
+		
+		
+		
 		
 		lodgedao.insertReview(comment);
 	}

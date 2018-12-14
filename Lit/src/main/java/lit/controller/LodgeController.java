@@ -13,11 +13,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lit.dto.Comment;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
 import lit.service.face.LodgeService;
@@ -42,7 +46,7 @@ public class LodgeController {
 	
 	
 	
-	@RequestMapping(value ="/view", method = RequestMethod.GET)
+	@RequestMapping(value ="/view")
 	public void LodgeView(Lodge lodge, Model model ) {
 		//숙소 썸네일 클릭시 보여지는 상세 뷰
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
@@ -58,7 +62,6 @@ public class LodgeController {
 		
 		lodge = lodgeService.LodgeView(lodge);
 		model.addAttribute("view",lodge);
-		System.out.println(lodge.toString());
 		
 		List<Image> lodgeimage = lodgeService.LodgeImage();
 		model.addAttribute("lodgeimg", lodgeimage);
@@ -66,54 +69,6 @@ public class LodgeController {
 		model.addAttribute("item", convenient);
 		
 	}
-	
-	@RequestMapping(value ="/view", method = RequestMethod.POST)
-	public ModelAndView LodgeView(
-			@RequestParam(defaultValue="00/00/0000") String start,
-            @RequestParam(defaultValue="00/00/0000") String end ) {
-	
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsonView");
-		
-			Map resultMap = new HashMap();
-			
-		
-		
-	final String DATE_PATTERN = "MM/dd/yyyy"; 
-		
-		SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
-		
-		try {
-			Date startDate = sdf.parse(start);
-			Date endDate = sdf.parse(end);
-			ArrayList<String> dates = new ArrayList<String>();
-			Date currentDate = startDate; //시작 날짜
-			while (currentDate.compareTo(endDate) <= 0) {
-				dates.add(sdf.format(currentDate));
-				Calendar c = Calendar.getInstance();
-				c.setTime(currentDate);
-				c.add(Calendar.DAY_OF_MONTH, 1);
-				currentDate = c.getTime();
-			}
-			for (String date : dates) {
-				resultMap.put("abc", dates);
-				mav.addObject("qqq",resultMap);
-			}
-			
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return mav;
-		
-
-		
-	}
-	
-	
-	
 	
 	
 	@RequestMapping(value ="/reservation", method =RequestMethod.GET)
@@ -145,18 +100,19 @@ public class LodgeController {
 		
 	}
 	
-	@RequestMapping(value ="/review", method =RequestMethod.GET)
-	public void LodgeReview() {}
+	@RequestMapping(value ="/lodgereview",method =RequestMethod.POST)
+	public String LodgeReview(Comment comment) {
+		
+		
+		logger.info(comment.toString());
 
-	
-	@RequestMapping(value ="/review", method =RequestMethod.POST)
-	public void LodgeReview(Comment comment) {
-		//결제한 사용자가 후기를 작성할 시 파라미터로 후기를 작성한 회원번호,
-		// 숙소번호,내용,작성 시간이 들어가게 한다.
+
+//			lodgeService.insertComment(comment);
 		
-		lodgeService.insertComment(comment);
-		
+		return "redirect:/lodge/view";
 	}
+
+
 	
 	@RequestMapping(value ="/review/delete", method =RequestMethod.GET)
 	public void LodgeReviewDelete() {}
