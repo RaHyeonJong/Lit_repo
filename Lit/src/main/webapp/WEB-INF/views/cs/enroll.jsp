@@ -21,7 +21,7 @@
 		
 		<div class="table_list">
 		
-			<table style="width:100%; border:1px solid black; text-align:left;">
+			<table style="align:center; width:100%; border:1px solid #ededed; text-align:left;">
 				<tr>
 					<th>문의 제목 </th>
 					<td> <input type="text" placeholder="문의 제목을 입력해주세요"
@@ -30,7 +30,8 @@
 				
 				<tr>
 					<th>작성자 </th>
-					<td><p style="margin-left:10px;">작성자 이름</p></td>
+					<!-- 세션이 이미 받아와져서 상관없음 -->
+					<td><p style="margin-left:10px;">${member.mem_name }</p></td>
 				</tr>
 				
 				<tr>
@@ -54,13 +55,13 @@
 			
 			</table>
 			
-			<div class="btnList">
-				<button class="button1" onclick="button1_click();" style="margin-right:30px" >문의 하기</button>
-				<button class="button2" onclick="button2_click();">취 소</button>
-			</div>
+			
 		</div>
 	
-	
+		<div class="btnList">
+				<button class="button button1" onclick="button1_click();" style="margin-right:30px" >문의 하기</button>
+				<button class="button button2" onclick="button2_click();" >취 소</button>
+		</div>
 	
 	</div>
 </div>

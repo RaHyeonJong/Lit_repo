@@ -47,7 +47,7 @@
     			console.log(mav);
     		
     			// 배열로 전달받은 날짜만 비활성화 시킴  이 var 부분을 전달 받은 값을 다시 넣어주면 될꺼같음
-    			var disabledDates =  []
+    			var disabledDates =  ['12/12/2018','02/12/2018','31/12/2018','11/12/2018',]
     			$start.datepicker({
     				language: 'en',
     			       onRenderCell: function(d, type) {
@@ -72,7 +72,7 @@
   				    month = date.getMonth() + 1,
   				    date = date.getDate();
   				    
-  				    return date + '/' + month + '/' + year;
+  				    return year + '/' + month + '/' + date;
   			}
     			
     		}
@@ -112,8 +112,8 @@
 <h1> 데이트 피커 ajax 테스트</h1>
  
  
- 	<input id="start" name ="stay_start" type="text" data-language="en"class="datepicker-here"/>
-       <input id="end" name ="stay_end" type="text"  data-language="en"class="datepicker-here"/>
+ 	<input id="start" name ="stay_start" type="text" data-language="en" class="datepicker-here"/>
+       <input id="end" name ="stay_end" type="text"  data-language="en" class="datepicker-here"/>
 		<button id ="update" >예약하기</button>
 
 

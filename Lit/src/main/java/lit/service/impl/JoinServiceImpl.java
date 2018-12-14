@@ -15,8 +15,8 @@ public class JoinServiceImpl implements JoinService{
 	@Override
 	public boolean checkId(Member member) {
 		
-		int existId = joinDao.checkId(member);
-		if(existId == 1)
+		int idCnt = joinDao.checkId(member);
+		if(idCnt > 0)
 			return true;
 		
 		return false;
