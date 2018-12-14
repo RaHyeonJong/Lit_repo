@@ -3,6 +3,8 @@ package lit.service.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import lit.dto.Comment;
 import lit.dto.Image;
 import lit.dto.Lodge;

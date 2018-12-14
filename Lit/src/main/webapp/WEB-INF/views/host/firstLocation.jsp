@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVZshgMFwiPl0L4xp4unmDwNRwlSBI6U8&libraries=places&callback=initAutocomplete"
          async defer></script>
 <script type="text/javascript">
@@ -29,7 +29,7 @@ google.maps.event.addDomListener(window, 'load', init);
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#backButton").click(function(){
-		location.href="/host/hostRoom";
+		location.href="/host/firstRoom";
 	});
 	
 	$("#nextButton").click(function(){

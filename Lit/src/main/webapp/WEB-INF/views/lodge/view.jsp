@@ -231,6 +231,16 @@ a{color:#000;}
 #modalLayer{display:none; position:relative;}
 #modalLayer .modalContent{width:440px; height:200px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer;}
+
+.reply{
+border: 1px solid gray;
+ width: 600px;
+ padding: 5px;
+ margin-top: 5px;
+ display: inline-block;
+
+}
+
 </style>
  
 
@@ -238,7 +248,7 @@ a{color:#000;}
 var map;
 var latVal = ${view.latitude};//숙소 위도
 var lngVal = ${view.longitude}; //숙소 경도
-
+var infoWindow;
 // function initMap() {
 // 	  var uluru = {lat: latVal, lng: lngVal};
 // 	  var map = new google.maps.Map(
@@ -271,44 +281,13 @@ var lngVal = ${view.longitude}; //숙소 경도
         } else {
           marker.setAnimation(google.maps.Animation.BOUNCE);
         }
-      }  
-  
-  
-  
-  var map;
-  function initialize() {
-  var myLatlng = new google.maps.LatLng(latVal.lngVal); 
-  var myOptions = {   
-  zoom: 19,     
-  center: myLatlng,
-  mapTypeId: google.maps.MapTypeId.ROADMAP
-  } 
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  //클릭했을 때 이벤트
-  google.maps.event.addListener(map, 'click', function(event) {
-  placeMarker(event.latLng);
-  infowindow.setContent("latLng: " + event.latLng); // 인포윈도우 안에 클릭한 곳위 좌표값을 넣는다.
-  infowindow.setPosition(event.latLng);             // 인포윈도우의 위치를 클릭한 곳으로 변경한다.
-  });
-  //클릭 했을때 이벤트 끝
-  //인포윈도우의 생성
-   var infowindow = new google.maps.InfoWindow(
-   { content: '<br><b>원하는 위치을 클릭</b>하면 좌표값생성<br> <b>복사하여 좌료값 입력</b>하십시요',
-   size: new google.maps.Size(50,50),
-   position: myLatlng 
-   });  
-   infowindow.open(map);
-  } // function initialize() 함수 끝
+      };
+      
+      
+      
+ 
 
-  // 마커 생성 합수
-  function placeMarker(location)
-  { 
-  var clickedLocation = new google.maps.LatLng(location);
-  var marker = new google.maps.Marker({       position: location,        map: map   });
-  map.setCenter(location);
-  }
 </script>
-
 
 
 <script type="text/javascript">
@@ -335,6 +314,22 @@ $(document).ready(function(){
 
 </script>
 
+<script type="text/javascript">
+function fn_formSubmit(){
+    var form1 = document.replyform;
+    
+    if (form1.contents.value=="") {
+        alert("글 내용을 입력해주세요.");
+        form1.contents.focus();
+        return;
+    }
+    form1.submit();    
+} 
+
+
+
+
+</script>
 
 
 
@@ -449,7 +444,7 @@ $(document).ready(function(){
 			<!-- 유형 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 편의시설 -->
-			<p class="facility">
+			<div class="facility">
 				<h3>편의 시설</h3>
 				<span > 
 				<svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="m12 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 5a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm5.92-5.78a.5.5 0 1 1 -.84.55c-1.19-1.81-3.07-2.77-5.08-2.77s-3.89.96-5.08 2.78a.5.5 0 0 1 -.84-.55c1.38-2.1 3.58-3.23 5.92-3.23s4.54 1.13 5.92 3.23zm2.98-3.03a.5.5 0 1 1 -.79.61c-1.66-2.14-5.22-3.8-8.11-3.8-2.83 0-6.26 1.62-8.12 3.82a.5.5 0 0 1 -.76-.65c2.05-2.42 5.75-4.17 8.88-4.17 3.19 0 7.05 1.8 8.9 4.19zm2.95-2.33a.5.5 0 0 1 -.71-.02c-2.94-3.07-6.71-4.84-11.14-4.84s-8.2 1.77-11.14 4.85a.5.5 0 0 1 -.72-.69c3.12-3.27 7.14-5.16 11.86-5.16s8.74 1.89 11.86 5.16a.5.5 0 0 1 -.02.71z" fill-rule="evenodd"></path></svg>
@@ -465,7 +460,7 @@ $(document).ready(function(){
 				 <span> ${item.get(8)}</span> 
 				  <br> 
 				</span>
-			</p>
+			</div>
 			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
 			<div id="modalLayer">
  			 <div class="modalContent">
@@ -484,19 +479,37 @@ $(document).ready(function(){
 			<!-- 달력 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
- 				<div class="_e296pg" style="height:48px;width:48px;display:block">
- 				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
- 				<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필">
- 				</a>
- 				</div>	
- 			
+				
+				
+				<c:if test = "${login }">
+				<div style="border: 1px solid; width: 600px; padding: 5px">
+   				 <form name = "replyform" action="lodgereview" method="post">
+        		<input type="hidden" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
+        		<input type="hidden" name = "mem_no" value="${member.mem_no }"> 
+      			  <textarea id ="contents" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
+       			 <a href ="#" onclick="fn_formSubmit()">저장</a>  				 
+       			  </form>
+				</div>
+				</c:if>	
+<!-- 				<div id = "replyList"> -->
+<%-- 				 <c:forEach var="replylist" items="${replylist}" varStatus="status"> --%>
+<!--  				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false"> -->
+<!--  				<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"> -->
+<!--  				</a> -->
+<%--  				<div id="replyItem <c:out value ="${reply.comment_no}"/>"> --%>
+<%--  				<c:out value = "${reply. mem_name}"/><c:out value ="${reply.written_time }"/> <!-- 작성자, 작성 시간 --> --%>
+<%--  				<a href="#" onclick="fn_replyDelete('<c:out value="${reply.comment_no}"/>')">삭제</a> --%>
+<%--    				<a href="#" onclick="fn_replyUpdate('<c:out value="${reply.comment_no}"/>')">수정</a> --%>
+<%--    				<a href="#" onclick="fn_replyReply('<c:out value="${reply.comment_no}"/>')">댓글</a> --%>
+<!--  				</div> -->
+<%--  				</c:forEach> --%>
+<!--  				</div>	 -->
 			<!-- 후기 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 지역정보 -->
 			<div>
 				구글 맵 사용 하여 숙소 위치 표시		
 			<div id="map"></div>
-			<div id="map_canvas"></div>
 			
 			</div>
 

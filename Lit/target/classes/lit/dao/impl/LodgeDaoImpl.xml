@@ -51,6 +51,18 @@
 	WHERE lodge_no = 21
 
 </select>
+<insert id="insertReview" parameterType="lit.dto.Comment">
+INSERT INTO comment_tb(
+comment_no,
+lodge_no,
+contents,
+mem_no,
+written_time
+)
+VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no}#{Written_time})
+
+
+</insert>
 
 
 
