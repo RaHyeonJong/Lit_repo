@@ -16,6 +16,7 @@ $(document).ready(function(){
 	var modal_findpw = $('#modal-findpw');
 	var modal_terms = $('#modal-terms');
 	var modal_join = $('#modal-join');
+	var modal_certification = $('#modal-certification');
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
@@ -28,6 +29,7 @@ $(document).ready(function(){
 	$('.goJoin').click(function(){
 		modal_findpw.css("display", "none");
 		modal_login.css("display", "none");
+		modal_certification.css("display", "none");
 		modal_terms.css("display", "block");		
 	});
 		
@@ -41,6 +43,8 @@ $(document).ready(function(){
 			modal_terms.css("display", "none");
 		} else if(e.target == modal_join[0]) {
 			modal_join.css("display", "none");
+		} else if(e.target == modal_certification[0]){
+			modal_certification.css("display", "none");
 		}
 	});
 	
@@ -49,6 +53,7 @@ $(document).ready(function(){
 		modal_login.css("display", "none");
 		modal_findpw.css("display", "none");
 		modal_join.css("display", "none");
+		modal_certification.css("display", "none");
 	});
 	
 // 	로그인창에서 id, pw 입력하고 로그인 버튼을 클릭했을 때...
@@ -234,17 +239,18 @@ $(document).ready(function(){
 		}
 	});
 		
+	var mem_id, mem_name, mem_pw, mem_birth;
+	
 // 	회원가입창에서 가입하기 버튼을 눌렀을 때...
 	$('#joinBtn1').click(function(){
 		if(validId && validName && validPw && validRepw && validBirth){
-			var mem_id =$('#id_for_join').val();
-			var mem_name = $('#name_for_join').val();
-			var mem_pw = $('#pw_for_join').val();
-			var mem_birth = new Date($('#birth_for_join').val());
-			
-			$.ajax({
-				// 등록 -> 전화번호 인증 -> 사진 등록 -> 이메일 전송 -> 회원가입 완료
-			});
+			mem_id =$('#id_for_join').val();
+			mem_name = $('#name_for_join').val();
+			mem_pw = $('#pw_for_join').val();
+			mem_birth = new Date($('#birth_for_join').val());
+						
+			modal_join.css("display", "none");
+			modal_certification.css("display", "block");
 			
 		} else {
 			alert("입력하신 회원정보를 다시 한번 확인해 주세요.");
@@ -769,11 +775,6 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <button id="agree_terms" style="border:0; border-radius:5px; width:30%; height:50px; background-color:#FF5A5F; font-size:20px; color:white; cursor:pointer; margin-right:40px;">동의</button>
 <button id="deny_terms" style="border:0; border-radius:5px; width:30%; height:50px; background-color:orange; font-size:20px; color:white; cursor:pointer;">거부</button>
 </td></tr>
-
-
-
-
-
 </table></div></div>
 <!-- ====== 이용약관 동의 모달창 // ======================================== -->
 
@@ -818,10 +819,30 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 
 
 
+<!-- ======// 전화번호인증 모달창 ======================================== -->
+<div id="modal-certification" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<table style="width:100%;">
+<tr><td colspan="2">
+<div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
+<tr><td colspan="2" style="text-align:left; padding-left:10%;"><h1>전화번호 인증</h1></td></tr>
 
 
 
 
+
+<tr>
+<td style="width:50%; padding:0 0 0 10%;">
+<a href="#join" class="goJoin" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>돌아가기</a>
+</td>
+<td style="width:50%; padding:0 10% 0 0;">
+<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">다음</div>
+</div></td></tr>
+</table>
+</div></div>
+
+<!-- ====== 전화번호인증 모달창 //======================================== -->
 
 
 
