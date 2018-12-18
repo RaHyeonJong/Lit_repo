@@ -69,7 +69,7 @@
                   for(var i=3; i>=0; i--){
                       str += " "+results[0].address_components[i].short_name;
                   }
-                  document.getElementById("txtAddress").innerHTML=str;
+                  document.getElementById("txtAddress").value=str;
                   //document.getElementById("txtAddress").innerHTML=results[0].address_components[0].long_name;
                   
 
@@ -125,6 +125,10 @@ margin:0 auto;
         height: 500px;
         width: 580px;
       }
+#txtAddress{
+width:348px;
+
+}
       /* Optional: Makes the sample page fill the window. */
     
 </style>
@@ -136,13 +140,16 @@ margin:0 auto;
 	<div class="category">
 		<h3>주소를 확인해주세요</h3>
 	</div>
+	<div>
 		<input id="markerX"/>
 		<input id="markerY"/> <br>
-		<span id="txtAddress"></span> <br>
-	
+		<input id="txtAddress"/> <br>
+	</div>
+	<div>
 	
 		<button id="backButton">뒤로</button>
 		<button id="nextButton">다음</button>
+	</div>	
 	</div>
 	<div class="right" style="border:1px solid blue;">
 		<div>
