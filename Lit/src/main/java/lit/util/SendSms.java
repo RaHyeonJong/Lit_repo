@@ -26,14 +26,15 @@ public class SendSms {
 		params.put("text", "[Life is Trip] 본인확인 인증번호 ["+ ukey +"]를 화면에 입력해주세요.");
 		params.put("app_version", "test app 1.2"); // application name and version
 
-		try {
-			JSONObject obj = (JSONObject) coolsms.send(params);
-			System.out.println(obj.toString());
-		} catch (CoolsmsException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCode());
-		}
+//		try {
+//			JSONObject obj = (JSONObject) coolsms.send(params);
+//			System.out.println(obj.toString());
+//			return ukey;
+//		} catch (CoolsmsException e) {
+//			System.out.println(e.getMessage());
+//			System.out.println(e.getCode());
+//		}
 		
-		return ukey;
+		return 851210;
 	}
 }

@@ -20,12 +20,16 @@ $(document).ready(function(){
 	var modal_terms = $('#modal-terms');
 	var modal_join = $('#modal-join');
 	var modal_certification = $('#modal-certification');
+	var modal_joinResult = $('#modal-joinResult');
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
 		modal_findpw.css("display", "none");
 		modal_join.css("display", "none");
-		modal_login.css("display", "block");		
+		$('#inputKeyDiv').css("display", "none");
+		dur = 0;
+		modal_login.css("display", "block");
+		modal_joinResult.css("display", "none");
 	});
 	
 // 	회원가입으로 가는 버튼을 클릭했을 때...
@@ -33,12 +37,17 @@ $(document).ready(function(){
 		modal_findpw.css("display", "none");
 		modal_login.css("display", "none");
 		modal_certification.css("display", "none");
-		modal_terms.css("display", "block");		
+		$('#inputKeyDiv').css("display", "none");
+		dur = 0;
+		modal_terms.css("display", "block");	
+		modal_joinResult.css("display", "none");
 	});
 	
 	$('.goJoin').click(function(){
 		modal_certification.css("display", "none");
+		$('#inputKeyDiv').css("display", "none");
 		modal_join.css("display", "block");
+		dur = 0;
 	});
 		
 // 	모달창의 검은색 반투명 배경을 클릭했을 때...
@@ -49,10 +58,18 @@ $(document).ready(function(){
 			modal_findpw.css("display", "none");
 		} else if(e.target == modal_terms[0]) {
 			modal_terms.css("display", "none");
+			$('#inputKeyDiv').css("display", "none");
+			dur = 0;
 		} else if(e.target == modal_join[0]) {
 			modal_join.css("display", "none");
+			$('#inputKeyDiv').css("display", "none");
+			clearInterval(timer);
 		} else if(e.target == modal_certification[0]){
 			modal_certification.css("display", "none");
+			$('#inputKeyDiv').css("display", "none");
+			clearInterval(timer);
+		} else if(e.target == modal_joinResult[0]){
+			modal_joinResult.css("display", "none");
 		}
 	});
 	
@@ -62,6 +79,9 @@ $(document).ready(function(){
 		modal_findpw.css("display", "none");
 		modal_join.css("display", "none");
 		modal_certification.css("display", "none");
+		$('#inputKeyDiv').css("display", "none");
+		dur = 0;
+		modal_joinResult.css("display", "none");
 	});
 	
 // 	로그인창에서 id, pw 입력하고 로그인 버튼을 클릭했을 때...
@@ -81,7 +101,6 @@ $(document).ready(function(){
 				}else{
 					$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
 				}
-				
 			},
 			error : function(){
 				alert("에러났어요!");
@@ -250,7 +269,7 @@ $(document).ready(function(){
 	var mem_id, mem_name, mem_pw, mem_birth, mem_phone;
 	
 // 	회원가입창에서 가입하기 버튼을 눌렀을 때...
-	$('#joinBtn1').click(function(){
+	$('#joinBtn1').click(function(){	
 		if(validId && validName && validPw && validRepw && validBirth){
 			mem_id =$('#id_for_join').val();
 			mem_name = $('#name_for_join').val();
@@ -267,9 +286,12 @@ $(document).ready(function(){
 	
 // 	쿨sms 휴대폰 인증 기능
 	var ukey;
+	var timer;
+	var dur;
 	
+// 	전화번호 인증창에서 인증번호 받기 버튼을 눌렀을 때...
 	$('#mobile-certi').click(function(){
-		var mem_phone = $('#mem_phone').val();
+		mem_phone = $('#mem_phone').val();
 		
 		$.ajax({
 			type: "GET",
@@ -278,7 +300,29 @@ $(document).ready(function(){
 			dataType: "json",
 			success : function(res){
 				ukey = res.ukey;
-				console.log(ukey);
+				if(ukey != 0){
+					console.log(ukey);
+					$('#inputKey').val("");
+					$('#inputKeyDiv').css("display", "block");
+					
+					dur = 180;
+					var min, sec;
+					timer = setInterval(function(){
+						min = parseInt(dur/60%60, 10);
+						sec = parseInt(dur%60, 10);
+						
+				        sec = sec < 10 ? "0" + sec : sec;
+						
+						$('#min').text(min+" :");
+						$('#sec').text(sec);
+						
+						if(dur-- < 1){
+							clearInterval(timer);
+							alert("인증 실패!! 다시 시도해주세요.");
+							$('#inputKeyDiv').css("display", "none");
+						}
+					}, 1000);
+				}
 			},
 			error : function(){
 				alert("에러났어요!");
@@ -287,13 +331,40 @@ $(document).ready(function(){
 		});
 	});
 	
+// 	전화번호 인증창에서 확인 버튼을 눌렀을 때...
 	$('#joinBtn2').click(function(){
 		var inputKey = $('#inputKey').val();
 		
-		if(ukey == inputKey){
-			console.log("인증 성공!!");
+		if(ukey == inputKey && dur > 0){
+			dur = 0;
+			mem_phone = $('#mem_phone').val();
+			
+			$.ajax({
+				type: "POST",
+				url: "/join/register",
+				data: {"mem_id": mem_id,
+					"mem_name": mem_name,
+					"mem_pw": mem_pw,
+					"mem_birth": mem_birth,
+					"mem_phone": mem_phone},
+				dataType: "json",
+				success : function(res){
+					if(res.result == 'success'){
+						modal_certification.css("display", "none");
+						modal_joinResult.css("display", "block");
+					} else {
+						modal_certification.css("display", "none");
+						alert("회원가입 실패!! 관리자에게 문의해주세요.");
+					}		
+				},
+				error : function(){
+					alert("에러났어요!");
+					return;
+				}
+			});
 		} else {
-			console.log("인증 실패!!");
+			$('#inputKeyDiv').css("display", "none");
+			dur = 0;
 		}
 	});
 	
@@ -769,7 +840,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <!-- ======로그인 모달창 //======================================== -->
 
 
-
 <!-- ======// 비밀번호찾기 모달창 ======================================== -->
 <div id="modal-findpw" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div style="position:fixed; width:568px; height:428px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
@@ -785,7 +855,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td colspan="2"><div id="findpwMsgDiv" style="padding-top:10px; color:red; height:30px; font-size:14px; font-weight:bold;"></div></td></tr>
 <tr>
 <td style="width:50%; padding:0 0 0 10%;">
-<a href="#login" class="goLogin" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>로그인으로 돌아가기</a>
+<a href="#login" class="goLogin" style="text-decoration:none; color:#008989;"><span style="font-size:22px;">&lt;</span>로그인으로 돌아가기</a>
 </td>
 <td style="width:50%; padding:0 10% 0 0;">
 <div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
@@ -794,7 +864,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 </table>
 </div></div>
 <!-- ====== 비밀번호찾기 모달창 //======================================== -->
-
 
 
 <!-- ====== // 이용약관 동의 모달창 ======================================== -->
@@ -817,7 +886,6 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </td></tr>
 </table></div></div>
 <!-- ====== 이용약관 동의 모달창 // ======================================== -->
-
 
 
 <!-- ======// 회원가입 모달창 ======================================== -->
@@ -858,38 +926,45 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <!-- ======회원가입 모달창 //======================================== -->
 
 
-
 <!-- ======// 전화번호인증 모달창 ======================================== -->
 <div id="modal-certification" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2" style="text-align:left; padding-left:10%;"><h1>전화번호 인증</h1></td></tr>
-<tr><td><input type="text" id="mem_phone"/><button id="mobile-certi">인증번호 받기</button></td></tr>
-<tr><td><input type="text" id="inputKey"/></td></tr>
-
-
-
-
-<tr><td style="width:50%; padding:0 0 0 10%;">
-<a href="#join" class="goCerti" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>돌아가기</a>
+<tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">전화번호 인증</h1></td></tr>
+<tr><td colspan="2"><hr style="width:90%; height:2px; background-color:#999; border:0;"></td></tr>
+<tr><td colspan="2" style="padding-top:5px;">
+<div style="text-align:left; padding-left:36px;"><input type="text" id="mem_phone" style="width:258px; height:100%; padding:10px; font-size:14px;" placeholder="전화번호 입력 ( ' - ' 없이 번호만 입력 )"/>
+<button id="mobile-certi" style="width: 120px; padding:9px; font-size:14px;">인증번호 받기</button>
+</div></td></tr>
+<tr><td colspan="2"><div id="inputKeyDiv" style="display:none; text-align:left; padding:20px 0 10px 36px;">
+<input type="text" id="inputKey" style="width:258px; height:100%; padding:10px; font-size:14px;" placeholder="인증번호 입력"/>
+<span id="min" style="color:red; font-size: 20px; font-style: italic;"></span>
+<span id="sec" style="color:red; font-size: 20px; font-style: italic;"></span></div></td></tr>
+<tr><td style="width:30%; text-align:center; padding-top:36px;">
+<a href="#join" class="goJoin" style="text-decoration:none; color:#008989;"><span style="font-size:22px;">&lt;</span>돌아가기</a>
 </td>
-<td style="width:50%; padding:0 10% 0 0;">
-<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<td style="width:70%; text-align:right; padding:36px 36px 0 0;">
+<div style="display:table; margin:0 0 0 200px;; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
 <div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div>
 </div></td></tr>
 </table>
 </div></div>
-
 <!-- ====== 전화번호인증 모달창 //======================================== -->
 
 
+<!-- ====== // 회원가입 결과 (+ 프로필 사진 등록) 모달창 ======================================== -->
+<div id="modal-joinResult" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<table style="width:100%;">
+<tr><td colspan="2">
+<div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
+<tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입 완료</h1></td></tr>
 
-
-
-
-
+</table>
+</div></div>
+<!-- ====== 회원가입 결과 (+ 프로필 사진 등록) 모달창 // ======================================== -->
 
 
 
