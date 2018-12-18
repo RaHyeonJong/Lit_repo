@@ -8,7 +8,13 @@
 		WHERE mem_id = #{mem_id }
 	</select>
 	
-	<insert id="insertMember"></insert>
+	<insert id="insertMember" parameterType="lit.dto.Member">
+		<selectKey resultType="int" keyProperty="mem_no" order="BEFORE">
+	        SELECT member_seq.nextval FROM dual        
+	    </selectKey>
+		INSERT INTO member(mem_no, mem_case_no, mem_id, mem_name, mem_pw, mem_birth, mem_phone, mem_activation)
+		VALUES (#{mem_no }, 1, #{mem_id }, #{mem_name }, #{mem_pw }, #{mem_birth }, #{mem_phone }, 1)
+	</insert>
 
 
 </mapper>
