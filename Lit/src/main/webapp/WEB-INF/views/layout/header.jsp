@@ -9,6 +9,9 @@
 <script src="/resources/dist/js/datepicker.min.js"></script>
 	<!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
   
 <script type="text/javascript">
 $(document).ready(function(){
@@ -26,11 +29,16 @@ $(document).ready(function(){
 	});
 	
 // 	회원가입으로 가는 버튼을 클릭했을 때...
-	$('.goJoin').click(function(){
+	$('.goTerms').click(function(){
 		modal_findpw.css("display", "none");
 		modal_login.css("display", "none");
 		modal_certification.css("display", "none");
 		modal_terms.css("display", "block");		
+	});
+	
+	$('.goJoin').click(function(){
+		modal_certification.css("display", "none");
+		modal_join.css("display", "block");
 	});
 		
 // 	모달창의 검은색 반투명 배경을 클릭했을 때...
@@ -239,7 +247,7 @@ $(document).ready(function(){
 		}
 	});
 		
-	var mem_id, mem_name, mem_pw, mem_birth;
+	var mem_id, mem_name, mem_pw, mem_birth, mem_phone;
 	
 // 	회원가입창에서 가입하기 버튼을 눌렀을 때...
 	$('#joinBtn1').click(function(){
@@ -254,6 +262,38 @@ $(document).ready(function(){
 			
 		} else {
 			alert("입력하신 회원정보를 다시 한번 확인해 주세요.");
+		}
+	});
+	
+// 	쿨sms 휴대폰 인증 기능
+	var ukey;
+	
+	$('#mobile-certi').click(function(){
+		var mem_phone = $('#mem_phone').val();
+		
+		$.ajax({
+			type: "GET",
+			url: "/join/smsCerti",
+			data: {"mem_phone": mem_phone},
+			dataType: "json",
+			success : function(res){
+				ukey = res.ukey;
+				console.log(ukey);
+			},
+			error : function(){
+				alert("에러났어요!");
+				return;
+			}
+		});
+	});
+	
+	$('#joinBtn2').click(function(){
+		var inputKey = $('#inputKey').val();
+		
+		if(ukey == inputKey){
+			console.log("인증 성공!!");
+		} else {
+			console.log("인증 실패!!");
 		}
 	});
 	
@@ -669,7 +709,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			<c:if test="${not login }">
 				<li><a href="/cs/cs">고객센터</a></li>
 				<li><a class="goLogin" href="#login">로그인</a></li>
-				<li><a class="goJoin" href="#join">회원가입</a></li>
+				<li><a class="goTerms" href="#join">회원가입</a></li>
 			</c:if>
 	
 			<c:if test="${login }">
@@ -723,7 +763,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
 </div>
 <div style="height:10px;"></div>
-<div>에어비앤비 계정이 없으세요? <a class="goJoin" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+<div>에어비앤비 계정이 없으세요? <a class="goTerms" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
 </div>
 </div>
 <!-- ======로그인 모달창 //======================================== -->
@@ -826,18 +866,18 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
 <tr><td colspan="2" style="text-align:left; padding-left:10%;"><h1>전화번호 인증</h1></td></tr>
+<tr><td><input type="text" id="mem_phone"/><button id="mobile-certi">인증번호 받기</button></td></tr>
+<tr><td><input type="text" id="inputKey"/></td></tr>
 
 
 
 
-
-<tr>
-<td style="width:50%; padding:0 0 0 10%;">
-<a href="#join" class="goJoin" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>돌아가기</a>
+<tr><td style="width:50%; padding:0 0 0 10%;">
+<a href="#join" class="goCerti" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>돌아가기</a>
 </td>
 <td style="width:50%; padding:0 10% 0 0;">
 <div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
-<div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">다음</div>
+<div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div>
 </div></td></tr>
 </table>
 </div></div>

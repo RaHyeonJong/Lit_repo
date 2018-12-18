@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
 import lit.service.face.JoinService;
+import lit.util.SendSms;
 
 @Controller
 public class JoinController {
@@ -34,5 +35,19 @@ public class JoinController {
 	public String viewTerms() {
 		
 		return "join/terms";
+	}
+	
+	@RequestMapping(value="/join/smsCerti")
+	public ModelAndView sendSms(String mem_phone) {
+		ModelAndView mav = new ModelAndView();
+		int ukey = SendSms.sendSms(mem_phone);
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("ukey", ukey);
+		
+		mav.addAllObjects(map);
+		mav.setViewName("jsonView");
+		
+		return mav;
 	}
 }
