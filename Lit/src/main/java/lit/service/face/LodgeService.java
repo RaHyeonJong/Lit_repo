@@ -28,11 +28,22 @@ public interface LodgeService {
 	//결제하기
 	public void LodgePay(Pay pay);
 
+	//후기 리스트
+	public List<Comment> commentList();
+	
 	//후기입력
 	public void insertComment(Comment comment);
 
+	//후기 업데이트
+	public void updateComment(Comment comment);
 	//후기 삭제
 	public void deleteComment(Comment comment);
+	
+	//대댓글 입력
+	public void insertLodgeComment(Comment comment);
+	
+	//대댓글 리스트
+	public List<Comment> replyList();
 	
 	//숙소 저장(좋아요)
 	public void insertLike(Lodge lodge);

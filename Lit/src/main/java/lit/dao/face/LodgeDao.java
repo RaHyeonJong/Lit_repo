@@ -27,10 +27,22 @@ public interface LodgeDao {
 	//결제하기
 	public void payment(Pay pay);
 	
+	//후기 리스트
+	public List<Comment> lodgeComment();
+	
 	//후기 입력
 	public void insertReview(Comment comment);
 	
+	//후기 업데이트
+	public void updateReview(Comment comment);
+	//후기 삭제
 	public void deleteReview(Comment comment);
+	
+	//대댓글 입력
+	public void insertLodgeReply(Comment comment);
+	
+	//대댓글 리스트
+	public List<Comment> lodgeReply();
 	
 	//좋아요(숙소 저장)
 	public void inserlodgetLike(Lodge lodge);

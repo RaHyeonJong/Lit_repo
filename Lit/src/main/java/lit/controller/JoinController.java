@@ -50,4 +50,24 @@ public class JoinController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/join/register")
+	public ModelAndView joinMember(Member mem) {
+		joinService.insertMember(mem);
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> map = new HashMap<>();
+		
+		String result ="fail";
+		if(mem.getMem_no() != 0)
+			result = "success";
+		
+		map.put("result", result);
+		map.put("mem", mem);
+		
+		mav.addAllObjects(map);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
 }
