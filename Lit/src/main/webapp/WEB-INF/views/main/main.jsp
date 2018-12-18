@@ -20,13 +20,18 @@
 
 
 
-<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;"> 
+<div id="wrapper"> 
 
 	<div><!-- header 시작 -->
 	<c:import url="../layout/header.jsp"/>
 	</div><!-- header 끝 -->
 	
 	<h1>main page</h1>
+	<div style="text-align: center">
+	<img style="width:500px;" src="/resources/images/ps.jpg"/>
+	</div>
+	
+	
 </div>
 	<div id="map"></div>
 

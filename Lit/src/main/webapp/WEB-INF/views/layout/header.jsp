@@ -9,12 +9,17 @@
 <script src="/resources/dist/js/datepicker.min.js"></script>
 	<!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
   
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
 	var modal_findpw = $('#modal-findpw');
+	var modal_terms = $('#modal-terms');
 	var modal_join = $('#modal-join');
+	var modal_certification = $('#modal-certification');
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
@@ -24,10 +29,16 @@ $(document).ready(function(){
 	});
 	
 // 	회원가입으로 가는 버튼을 클릭했을 때...
-	$('.goJoin').click(function(){
+	$('.goTerms').click(function(){
 		modal_findpw.css("display", "none");
 		modal_login.css("display", "none");
-		modal_join.css("display", "block");		
+		modal_certification.css("display", "none");
+		modal_terms.css("display", "block");		
+	});
+	
+	$('.goJoin').click(function(){
+		modal_certification.css("display", "none");
+		modal_join.css("display", "block");
 	});
 		
 // 	모달창의 검은색 반투명 배경을 클릭했을 때...
@@ -36,8 +47,12 @@ $(document).ready(function(){
 			modal_login.css("display", "none");
 		} else if(e.target == modal_findpw[0]) {
 			modal_findpw.css("display", "none");
+		} else if(e.target == modal_terms[0]) {
+			modal_terms.css("display", "none");
 		} else if(e.target == modal_join[0]) {
 			modal_join.css("display", "none");
+		} else if(e.target == modal_certification[0]){
+			modal_certification.css("display", "none");
 		}
 	});
 	
@@ -46,6 +61,7 @@ $(document).ready(function(){
 		modal_login.css("display", "none");
 		modal_findpw.css("display", "none");
 		modal_join.css("display", "none");
+		modal_certification.css("display", "none");
 	});
 	
 // 	로그인창에서 id, pw 입력하고 로그인 버튼을 클릭했을 때...
@@ -100,6 +116,17 @@ $(document).ready(function(){
 				alert("에러났어요!");
 			}
 		});
+	});
+	
+// 	이용약관 창에서 동의를 클릭했을 때...
+	$('#agree_terms').click(function(){
+		$('#modal-terms').css("display", "none");
+		$('#modal-join').css("display", "block");
+	});
+	
+// 	이용약관 창에서 거부를 클릭했을 때...
+	$('#deny_terms').click(function(){
+		$('#modal-terms').css("display", "none");
 	});
 	
 	var validId = false, validName = false, validPw = false, validRepw = false, validBirth = false;
@@ -212,27 +239,61 @@ $(document).ready(function(){
 		if(today < mem_birth)
 			years--;
 		
-		if(year<18){
+		if(years < 18){
+			$('#valid_birth').css("color", "red");
 			$('#valid_birth').html("만 18세 미만은 가입하실 수 없습니다.");
 		}else{
 			validBirth = true;
 		}
 	});
 		
+	var mem_id, mem_name, mem_pw, mem_birth, mem_phone;
+	
 // 	회원가입창에서 가입하기 버튼을 눌렀을 때...
-	$('#joinBtn').click(function(){
+	$('#joinBtn1').click(function(){
 		if(validId && validName && validPw && validRepw && validBirth){
-			var mem_id =$('#id_for_join').val();
-			var mem_name = $('#name_for_join').val();
-			var mem_pw = $('#pw_for_join').val();
-			var mem_birth = new Date($('#birth_for_join').val());
-			
-			$.ajax({
-				// 등록 -> 사진 등록 -> 전화번호 인증 -> 이메일 전송 -> 회원가입 완료
-			});
+			mem_id =$('#id_for_join').val();
+			mem_name = $('#name_for_join').val();
+			mem_pw = $('#pw_for_join').val();
+			mem_birth = new Date($('#birth_for_join').val());
+						
+			modal_join.css("display", "none");
+			modal_certification.css("display", "block");
 			
 		} else {
 			alert("입력하신 회원정보를 다시 한번 확인해 주세요.");
+		}
+	});
+	
+// 	쿨sms 휴대폰 인증 기능
+	var ukey;
+	
+	$('#mobile-certi').click(function(){
+		var mem_phone = $('#mem_phone').val();
+		
+		$.ajax({
+			type: "GET",
+			url: "/join/smsCerti",
+			data: {"mem_phone": mem_phone},
+			dataType: "json",
+			success : function(res){
+				ukey = res.ukey;
+				console.log(ukey);
+			},
+			error : function(){
+				alert("에러났어요!");
+				return;
+			}
+		});
+	});
+	
+	$('#joinBtn2').click(function(){
+		var inputKey = $('#inputKey').val();
+		
+		if(ukey == inputKey){
+			console.log("인증 성공!!");
+		} else {
+			console.log("인증 실패!!");
 		}
 	});
 	
@@ -622,8 +683,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	<div class="inner">
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
-				<a href="/main/main"><img style="height: 50px;"
-					src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2" alt="로고" /></a>
+				<a href="/main"><img style="height: 50px;"
+					src="/resources/images/ps.jpg" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
    				 <input class="Search-box" type="search" id="Search-box" autocomplete="off">
@@ -648,7 +709,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			<c:if test="${not login }">
 				<li><a href="/cs/cs">고객센터</a></li>
 				<li><a class="goLogin" href="#login">로그인</a></li>
-				<li><a class="goJoin" href="#join">회원가입</a></li>
+				<li><a class="goTerms" href="#join">회원가입</a></li>
 			</c:if>
 	
 			<c:if test="${login }">
@@ -702,7 +763,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
 </div>
 <div style="height:10px;"></div>
-<div>에어비앤비 계정이 없으세요? <a class="goJoin" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+<div>에어비앤비 계정이 없으세요? <a class="goTerms" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
 </div>
 </div>
 <!-- ======로그인 모달창 //======================================== -->
@@ -736,6 +797,29 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 
 
 
+<!-- ====== // 이용약관 동의 모달창 ======================================== -->
+<div id="modal-terms" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; padding-bottom: 40px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<table style="width:100%;">
+<tr><td style="padding:0 40px 0 40px; text-align:left;"><h1>가입하시기 전에</h1></td></tr>
+<tr><td style="padding:0 40px 0 40px; text-align:left;">Life is Trip은 모두가 환영받을 수 있고 서로 신뢰할 수 있는 커뮤니티를 만들어 나가고자 합니다.
+이를 위해, 회원님에게 Life is Trip 서비스 약관에 동의하고, 
+커뮤니티의 회원 모두를 존중하고 차별없이 대할 것을 약속해 주시기를 부탁드리고 있습니다.</td></tr>
+<tr><td style="padding:40px 40px 0 40px; text-align:left;"><p style="margin:0; font-weight:bold;">Life is Trip 커뮤니티를 위한 약속</p>
+모든 Life is Trip 커뮤니티 회원을 인종, 종교, 출신, 국가, 민족, 피부색, 장애, 성별, 
+성적 정체성, 성적 취향 또는 연령에 상관없이 존중하며 개인적 판단이나 편견없이 대하겠습니다.</td></tr>
+<tr><td style="padding:40px 40px 0 40px; text-align:left;"><p style="margin:0; font-weight:bold;">Life is Trip 서비스 약관 <a href="/terms" style="text-decoration:none; color:#008989;">[바로가기]</a></p>
+Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 동의합니다. 
+또한, Life is Trip 개인정보 보호정책에 따른 개인정보 이용 및 처리에도 동의합니다.</td></tr>
+<tr><td style="padding:40px 40px 0 40px; text-align:left;">
+<button id="agree_terms" style="border:0; border-radius:5px; width:30%; height:50px; background-color:#FF5A5F; font-size:20px; color:white; cursor:pointer; margin-right:40px;">동의</button>
+<button id="deny_terms" style="border:0; border-radius:5px; width:30%; height:50px; background-color:orange; font-size:20px; color:white; cursor:pointer;">거부</button>
+</td></tr>
+</table></div></div>
+<!-- ====== 이용약관 동의 모달창 // ======================================== -->
+
+
+
 <!-- ======// 회원가입 모달창 ======================================== -->
 <div id="modal-join" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div style="position:fixed; width:568px; padding-bottom: 20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
@@ -764,9 +848,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td colspan="2" style="padding-top:0px;"><div id="valid_birth" style="text-align:left; padding-left:40px;"></div></td></tr>
 </table>
 
-<div style="display:table; width:90%; height:50px; margin:36px auto 10px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
-<div id="joinBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">가입하기</div>
-</div>
+<div style="display:table; width:30%; height:50px; margin:36px auto 10px; text-align:center; background-color:#FF5A5F; border-radius:5px;">
+<div id="joinBtn1" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">다음</div></div>
+
 <div style="height:10px;"></div>
 <div>잠깐!! 이미 아이디가 있으시다고요?! <a class="goLogin" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">&nbsp;&nbsp;&nbsp;로그인 하러 가기</a></div>
 </div>
@@ -775,10 +859,30 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 
 
 
+<!-- ======// 전화번호인증 모달창 ======================================== -->
+<div id="modal-certification" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<table style="width:100%;">
+<tr><td colspan="2">
+<div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
+<tr><td colspan="2" style="text-align:left; padding-left:10%;"><h1>전화번호 인증</h1></td></tr>
+<tr><td><input type="text" id="mem_phone"/><button id="mobile-certi">인증번호 받기</button></td></tr>
+<tr><td><input type="text" id="inputKey"/></td></tr>
 
 
 
 
+<tr><td style="width:50%; padding:0 0 0 10%;">
+<a href="#join" class="goCerti" style="text-decoration:none; color:#008989;"><span style="font-size:30px;">&lt;</span>돌아가기</a>
+</td>
+<td style="width:50%; padding:0 10% 0 0;">
+<div style="display:table; width:90%; height:50px; margin:0 auto; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div>
+</div></td></tr>
+</table>
+</div></div>
+
+<!-- ====== 전화번호인증 모달창 //======================================== -->
 
 
 
