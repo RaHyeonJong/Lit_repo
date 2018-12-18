@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Comment;
@@ -60,13 +61,21 @@ public class LodgeController {
 		// 댓글은 페이징 처리를 함
 		
 		
+		//기본 리스트
 		lodge = lodgeService.LodgeView(lodge);
 		model.addAttribute("view",lodge);
-		
+
+		//이미지
 		List<Image> lodgeimage = lodgeService.LodgeImage();
 		model.addAttribute("lodgeimg", lodgeimage);
+		
+		//편의시설
 		List<String> convenient = lodgeService.LodgeConvenient(lodge);
 		model.addAttribute("item", convenient);
+		
+		// 댓글
+		List<Comment> lodgereview = lodgeService.commentList();
+		model.addAttribute("lodgeReview",lodgereview);
 		
 	}
 	
@@ -100,30 +109,54 @@ public class LodgeController {
 		
 	}
 	
-	@RequestMapping(value ="/lodgereview",method =RequestMethod.POST)
-	public String LodgeReview(Comment comment) {
+	@RequestMapping(value ="/insertReview",method =RequestMethod.POST)
+	public String LodgeReview(Comment comment,Model model) {
 		
+			lodgeService.insertComment(comment);
+			
+			List<Comment> lodgereview = lodgeService.commentList();
+			model.addAttribute("lodgeReview",lodgereview);
 		
-		logger.info(comment.toString());
-
-
-//			lodgeService.insertComment(comment);
-		
-		return "redirect:/lodge/view";
+		return "/lodge/ajaxReviewList";
 	}
+	@RequestMapping(value ="/updateReview",method =RequestMethod.POST)
+	public String LodgeupdateReview(Comment comment,Model model) {
+		
+		lodgeService.updateComment(comment);
+		List<Comment> lodgereview = lodgeService.commentList();
+		model.addAttribute("lodgeReview",lodgereview);
 
-
+		
+		return "/lodge/ajaxReviewList";
+	}
 	
-	@RequestMapping(value ="/review/delete", method =RequestMethod.GET)
-	public void LodgeReviewDelete() {}
-	
-	@RequestMapping(value ="/review/delete", method =RequestMethod.POST)
-	public void LodgeReviewDelete(Lodge lodge,Comment comment) {
+	@RequestMapping(value ="/reviewDelete")
+	public ModelAndView LodgeReviewDelete(Comment comment,ModelAndView mav) {
 		// 요청 정보로 숙소 번호와 댓글번호를 가져온후 댓글 삭제
+
+		mav.setViewName("jsonView");
+
 		
 		lodgeService.deleteComment(comment);
 		
+		return mav;
 	}
+	
+	
+	@RequestMapping(value ="/lodgeReview", method=RequestMethod.POST)
+	public String InsertLodgeReply(Comment comment,Model model) {
+
+		
+		
+		lodgeService.insertLodgeComment(comment);
+		List<Comment> replyList = lodgeService.replyList();
+		model.addAttribute("replyList",replyList);		
+	
+	
+		return "/lodge/plyList";
+	}
+	
+	
 	
 	
 	@RequestMapping(value ="/like", method =RequestMethod.GET)
@@ -147,7 +180,7 @@ public class LodgeController {
 		lodgeService.insertMessage(message);
 	}
 	
-	@RequestMapping(value ="/report", method =RequestMethod.GET)
+	@RequestMapping(value ="/dd", method =RequestMethod.GET)
 	public void ReportLodge() {
 		
 	}
