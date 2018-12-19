@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
@@ -75,8 +76,8 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value="/join/insertMyPhoto")
-	public String insertMyPhoto() {
-		
+	public String insertMyPhoto(MultipartFile file) {
+		// 이미지 파일 업로드
 		
 		return "redirect:/main";
 	}
