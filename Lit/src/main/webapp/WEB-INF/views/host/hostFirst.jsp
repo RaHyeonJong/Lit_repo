@@ -33,7 +33,10 @@ margin:0 auto;
 
 .left { width: 50%; float: left; }
 .right {.width: 50%; float: right; height:500px; }
+#nextbutton{
+float:right;
 
+}
 
 </style>
 </head>

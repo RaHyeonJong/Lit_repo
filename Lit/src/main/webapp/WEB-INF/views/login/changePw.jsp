@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Life Is Trip</title>
+<title>Life Is Trip 인생은 여행이다</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -49,7 +49,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body><div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
+<body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <div style="width:568px; height:468px; margin:5%; text-align: center;">

@@ -1,5 +1,6 @@
 package lit.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public class LogoController {
 		
 		return "logo/main";
 	}
+	
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String logoSearch(Model model, LodgeSearch search) {

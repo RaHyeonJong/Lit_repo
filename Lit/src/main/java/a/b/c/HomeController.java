@@ -28,7 +28,7 @@ public class HomeController {
 	public String tempmain() {
 		
 		
-		return "tempmain";
+		return "redirect:/main";
 	}
 	
 }

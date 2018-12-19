@@ -27,12 +27,20 @@
 	<dependencies>
 	
 		<!-- 사용자 라이브러리 -->
+<<<<<<< HEAD
 		<!--  cos 라이브러리[file_uploader.jsp의 import 중 oreilly를 되게 하는 방법 -->
 		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
 		<dependency>
 	    	<groupId>servlets.com</groupId>
 	    	<artifactId>cos</artifactId>
 	    	<version>05Nov2002</version>
+=======
+		<!-- SMS 보내기 -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 		</dependency>
 		
 		<!-- mail -->

@@ -28,17 +28,44 @@ public class Lodge {
 	private int stay_cost;		//숙박단가(원)
 	private Date regit_date;		//숙소등록일
 	private int lodge_activation;	//숙소활성여부. 0=비활성화, 1=활성화
+	private double latitude; //위도
+	private double longitude; //경도
 	
+
 	@Override
 	public String toString() {
-		return "Lodge [lodge_no=" + lodge_no + ", building_case_no=" + building_case_no + ", building_case="
-				+ building_case + ", lodge_case_no=" + lodge_case_no + ", lodge_case=" + lodge_case + ", lodge_name="
-				+ lodge_name + ", lodge_capacity=" + lodge_capacity + ", lodge_room=" + lodge_room + ", lodge_addr="
-				+ lodge_addr + ", convenient_facility=" + convenient_facility + ", convenient_area=" + convenient_area
+		return "Lodge [APARTMENT=" + APARTMENT + ", DETACHED_HOUSE=" + DETACHED_HOUSE + ", TOWN_HOUSE=" + TOWN_HOUSE
+				+ ", PENSION=" + PENSION + ", MOTEL=" + MOTEL + ", GUESTHOUSE=" + GUESTHOUSE + ", lodge_no=" + lodge_no
+				+ ", building_case_no=" + building_case_no + ", building_case=" + building_case + ", lodge_case_no="
+				+ lodge_case_no + ", lodge_case=" + lodge_case + ", lodge_name=" + lodge_name + ", lodge_capacity="
+				+ lodge_capacity + ", lodge_room=" + lodge_room + ", lodge_addr=" + lodge_addr
+				+ ", convenient_facility=" + convenient_facility + ", convenient_area=" + convenient_area
 				+ ", ready_time=" + ready_time + ", check_in_time=" + check_in_time + ", available_term="
 				+ available_term + ", stay_cost=" + stay_cost + ", regit_date=" + regit_date + ", lodge_activation="
-				+ lodge_activation + "]";
+				+ lodge_activation + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
+
+	
+
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+
+
 
 	public int getLodge_no() {
 		return lodge_no;

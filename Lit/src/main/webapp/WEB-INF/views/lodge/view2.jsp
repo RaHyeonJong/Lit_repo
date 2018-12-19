@@ -72,7 +72,7 @@
   				    month = date.getMonth() + 1,
   				    date = date.getDate();
   				    
-  				    return date + '/' + month + '/' + year;
+  				    return year + '/' + month + '/' + date;
   			}
     			
     		}
@@ -112,8 +112,8 @@
 <h1> 데이트 피커 ajax 테스트</h1>
  
  
- 	<input id="start" name ="stay_start" type="text" data-language="en"class="datepicker-here"/>
-       <input id="end" name ="stay_end" type="text"  data-language="en"class="datepicker-here"/>
+ 	<input id="start" name ="stay_start" type="text" data-language="en" class="datepicker-here"/>
+       <input id="end" name ="stay_end" type="text"  data-language="en" class="datepicker-here"/>
 		<button id ="update" >예약하기</button>
 
 
