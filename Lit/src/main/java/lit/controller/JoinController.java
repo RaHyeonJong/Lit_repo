@@ -3,9 +3,12 @@ package lit.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
@@ -15,6 +18,7 @@ import lit.util.SendSms;
 @Controller
 public class JoinController {
 	
+	@Autowired ServletContext context;
 	@Autowired JoinService joinService;
 		
 	@RequestMapping(value="/join/checkId")
@@ -53,15 +57,13 @@ public class JoinController {
 	
 	@RequestMapping(value="/join/register")
 	public ModelAndView joinMember(Member mem) {
-//		joinService.insertMember(mem);
+		joinService.insertMember(mem);
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();
 		
 		String result ="fail";
-		
-		result = "success";
-		
+				
 		if(mem.getMem_no() != 0)
 			result = "success";
 		
@@ -75,8 +77,8 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value="/join/insertMyPhoto")
-	public String insertMyPhoto() {
-		
+	public String insertMyPhoto(MultipartFile fileupload) {
+		joinService.insertMyPhoto(context, fileupload);
 		
 		return "redirect:/main";
 	}
