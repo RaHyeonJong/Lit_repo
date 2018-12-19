@@ -6,33 +6,27 @@
 
 	<insert id="writer" parameterType="lit.dto.Board">
 	
-	insert into board(board_no, title, contents, mem_no)
-	values(board_seq.nextval, #{title }, #{contents }, #{mem_no })
+		insert into board(board_no, title, contents, mem_no)
+		values(board_seq.nextval, #{title }, #{contents }, #{mem_no })
 
 	</insert>
 	
 	<select id="boardlist" resultType="lit.dto.Board" parameterType="lit.dto.Board">
 	
-	SELECT board_no, title, written_time, hit
-	FROM board
-	WHERE mem_no= #{mem_no}
-	ORDER BY board_no DESC
+		SELECT board_no, title, written_time, hit
+		FROM board
+		WHERE mem_no= #{mem_no}
+		ORDER BY board_no DESC
 	
 	</select>
 	
 	<select id="view" resultType="lit.dto.Board" parameterType="lit.dto.Board">
 	
-	SELECT title, contents
-	FROM board
-	WHERE board_no = #{board_no}
+		SELECT title, contents
+		FROM board
+		WHERE board_no = #{board_no}
 	
 	</select>
 	
-	<select id="checkanswer" resultType="int" parameterType="lit.dto.Board">
-	
-	SELECT COUNT(*) FROM comment_tb
-	WHERE  board_no = #{board_no};
-	
-	</select>
-	
+
 </mapper>

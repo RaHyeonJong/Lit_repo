@@ -10,18 +10,12 @@ public class Board {
 	private String mem_name;
 	private Date written_time;
 	private int hit;
-	@Override
-	public String toString() {
-		return "Board [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", mem_no=" + mem_no
-				+ ", mem_name=" + mem_name + ", written_time=" + written_time + ", hit=" + hit + "]";
-	}
 	public int getBoard_no() {
 		return board_no;
 	}
 	public void setBoard_no(int board_no) {
 		this.board_no = board_no;
 	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -58,5 +52,12 @@ public class Board {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-
+	@Override
+	public String toString() {
+		return "Board [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", mem_no=" + mem_no
+				+ ", mem_name=" + mem_name + ", written_time=" + written_time + ", hit=" + hit + "]";
+	}
+	
+	
+	
 }

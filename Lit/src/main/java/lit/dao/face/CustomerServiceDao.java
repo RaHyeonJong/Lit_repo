@@ -15,8 +15,5 @@ public interface CustomerServiceDao {
 	//-리스트에서 버튼 누르면 나오는 것
 	public Board view(Board board);
 
-	//답변 있는지 없는지 카운트 세주기
-	public int checkanswer(Board board);
-	
 	
 }

@@ -8,7 +8,6 @@
 <script type="text/javascript" src="../../../resources/editor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 
 <body>
-
 <input type="hidden" value="${member.mem_no }" name="mem_no" />
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 		
@@ -27,7 +26,7 @@
 	<!-- onsubmit을 return false를 막아준다 -->	
 	<!-- 막아주는 이유 : 스마트에디터 내용을 textarea로 먼저 복사 붙여넣기!! 실행 후, 제출하기 위해서 -->
 	<!--  만일 막아주지 않으면 충돌이 일어나서 textarea가 불러오지 않는다. -->
-	<form action="/cs/enroll" method="post" name="inquiry" id="form" enctype="multipart/form-data" onsubmit="return false;">
+	<form action="/cs/enroll" method="post" name="inquiry" enctype="multipart/form-data" onsubmit="return false;">
 	
 		<div class="table_list">
 		
@@ -53,7 +52,7 @@
 				
 				<tr>
 					<td colspan="2"> 
-					<textarea name="contents" name="contents" id="contents" form="form"></textarea>
+					<textarea name="contents" id="abcd"></textarea>
 				
 					</td>	
 				</tr>
@@ -80,7 +79,7 @@
     //스마트에디터 프레임생성
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
-        elPlaceHolder: "contents", //textarea의 id와 일치시켜야한다
+        elPlaceHolder: "abcd", //textarea의 id와 일치시켜야한다
         sSkinURI: "/resources/editor/SmartEditor2Skin.html", //자신이 적용한 스마트에디터의 SmartEditor2Skin.html 경로를 지정해준다
         fCreator:"createSEditor2", 
         htParams : {
@@ -107,13 +106,13 @@
     		return;
     	}
  
-    	oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
- 		var contents =$("#contents").val();
+    	oEditors.getById["abcd"].exec("UPDATE_CONTENTS_FIELD", []);
+ 		var contents =$("#abcd").val();
  		
  		if(contents == "" || contents== null ||contents=='&nbsp;'  || contents == '<p>&nbsp;</p>' || contents=='<br>')
  		{
  			alert("내용을 입력해주세요!!");
- 			oEditors.getById["contents"].exec("FOCUS"); //포커싱
+ 			oEditors.getById["abcd"].exec("FOCUS"); //포커싱
  			return;
  			
  		}
@@ -135,7 +134,7 @@
     	//img src에 스타일 넣어주기
     	//width:100%를 주면 textarea크기 맞게 나온다
         var sHTML = '<img style="width:100%" src="<%=request.getContextPath()%>/resources/images/'+filepath+'">';
-        oEditors.getById["contents"].exec("PASTE_HTML", [sHTML]);
+        oEditors.getById["abcd"].exec("PASTE_HTML", [sHTML]);
     }
     
  	

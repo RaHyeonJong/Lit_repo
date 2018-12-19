@@ -16,7 +16,7 @@ public class CustomerSerivceImpl implements CustomerService{
 
 	@Override
 	public void writer(Board board) {
-
+			
 		customerserviceDao.writer(board);
 	}
 
@@ -32,17 +32,6 @@ public class CustomerSerivceImpl implements CustomerService{
 		return customerserviceDao.view(board);
 	}
 
-	@Override
-	public boolean checkanswer(Board board) {
 
-		int checkanswer = customerserviceDao.checkanswer(board);
-		
-		if(checkanswer ==1)
-		{
-			return true;
-		}
-		
-		return false;
-	}
 	
 }
