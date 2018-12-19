@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
-<div id="wrapper">
+<div id="wrapper" style="max-width:978px; margin:0 auto;">
 
 	<div class="content">
 		
@@ -14,7 +14,7 @@
 		
 		
 		<!-- 질문 답변 종합 -->
-		<div class="faq-list" style="text-align:left;">
+		<div class="faq-list">
 			<dl>
 				<dt>Life Is Trip에 신분증 제출은 어떻게 하나요?</dt>
 				<dd>

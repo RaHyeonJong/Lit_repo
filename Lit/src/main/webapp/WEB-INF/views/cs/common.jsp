@@ -26,15 +26,17 @@
 	    margin: 0;
 	    padding: 0;
 	    
+	    
 	}
 	.faq-list {
 	    border-top: 2px solid #b2b2b2;
 	    border-bottom: 1px solid #ddd;	
+	    text-align:left;
 	}
 	.faq-list dt, .faq-list dd {
-    border-top: 1px solid #ddd;
-    padding: 20px;
-    position: relative;
+	    border-top: 1px solid #ddd;
+	    padding: 20px;
+	    position: relative;
 	}
 	
 	.faq-list dt:first-child {
@@ -173,14 +175,15 @@
 	table
 	{
 		width:100%;
-		border:1px solid #c6f9ff;
+		border:1px solid #757575;
 	}
 	
 	th
 	{
-		background-color:#ccdefc;
+		background-color:black;
 		text-align:center;
 		font-size:18px;
+		color:white;
 		width:200px;
 		height:50px;
 	}	
