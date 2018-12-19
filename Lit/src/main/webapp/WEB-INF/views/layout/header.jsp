@@ -387,7 +387,7 @@ $(document).ready(function(){
 	});
 	
 // 	회원가입 창에서 사진업로드 후 확인 버튼을 눌렀을 때...
-	$('#upload-complete').click(function(){
+	$('#upload-complete').click(function(){		
 		$("#form").attr("onsubmit", "return true;");
 		$("#form").submit();
 	});
@@ -985,7 +985,7 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <table style="width:100%;">
 <tr><td>
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입을 축하합니다.</h1></td></tr>
+<tr><td><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입을 축하합니다.${mem.mem_no }</h1></td></tr>
 <tr><td style="text-align:left; padding:1% 10% 5% 10%; font-size:18px; color:#666">
 회원님의 사진을 올려주세요.<br> 
 사진은 프로필에 추가되어 라이프이즈트립의 다른 회원에게 표시됩니다.<br> 
@@ -993,6 +993,7 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 호스트나 게스트가 보게 되는 사진이므로 개인 정보나 민감한 정보가 표시되지 않은 사진을 사용하세요.</td></tr>
 <tr><td><div style="width:30%; margin:0 auto;"><img id="profile-photo" style="width:100%;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
 <tr><td style="padding-top:36px;">
+<input type="hidden" name="mem_no" value="${mem.mem_no }"/>
 <input type="file" id="input-photo" name="mem_photo" hidden="hidden"/>
 <div style="display:table; margin:0 auto; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
 <div id="photo-upload-btn" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">사진 업로드</div></div></td></tr>
