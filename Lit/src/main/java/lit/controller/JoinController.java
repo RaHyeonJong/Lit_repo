@@ -53,12 +53,15 @@ public class JoinController {
 	
 	@RequestMapping(value="/join/register")
 	public ModelAndView joinMember(Member mem) {
-		joinService.insertMember(mem);
+//		joinService.insertMember(mem);
 		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();
 		
 		String result ="fail";
+		
+		result = "success";
+		
 		if(mem.getMem_no() != 0)
 			result = "success";
 		
@@ -69,5 +72,12 @@ public class JoinController {
 		mav.setViewName("jsonView");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/join/insertMyPhoto")
+	public String insertMyPhoto() {
+		
+		
+		return "redirect:/main";
 	}
 }
