@@ -1,64 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     <!-- 구글 맵 -->  
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFaqOV0p_zrPFa70xwici5EGqDN9qq0fw&callback=initMap"async defer></script>
 <style>
-.lodge_image {
-  width: 100%;
-  height: auto;
-  vertical-align: middle;
+
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: "m m s1 s2" "m m s3 s4";
+  height: 600px;
+  overflow: hidden;
+  background-color: #393939;
+  gap: 2px;
+  width: -webkit-fill-available;
 }
 
-.Grid {
-  font-size: 0;
+#gallery div.photo img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+#gallery div.photo img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
   
 }
 
-.Grid-cell {
-  font-size: 16px;
-  font-size: 1rem;
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
+#gallery #photo1 {
+  grid-area: m;
 }
-
-.Grid--withGutter {
-  margin-left: -16px;
-  margin-left: -1rem;
+#gallery #photo2 {
+  grid-area: s1;
 }
-
-.Grid--withGutter > .Grid-cell {
-  box-sizing: border-box;
-  padding-left: 16px;
-  padding-left: 1rem;
-  padding-bottom: 16px;
-  padding-bottom: 1rem;
+#gallery #photo3 {
+  grid-area: s2;
 }
-
-.u-size1of2 { width: 50%; }
-
-.Tile {
-  position: relative;
-  overflow: hidden;
+#gallery #photo4 {
+  grid-area: s3;
 }
-
-.Tile-content {
+#gallery #photo5 {
+  grid-area: s4;
+}
+#gallery #photo6 {
+  display: none;
+}
+#gallery #photo7 {
+  display: none;
+}
+#gallery #photo8 {
+  display: none;
+}
+#gallery #photo9 {
+  display: none;
+}
+#gallery.lightbox {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 8fr 2fr;
+  grid-template-areas: "photo1 photo1 photo1 photo1" "photo2 photo3 photo4 photo5";
+  padding: 1em 4em;
 }
-
-.u-size1to2 { padding-top: 50%; }
-.u-size1to1 { padding-top: 100%; }
-img:hover {
-      transform: scale(1.1);
-      transition: transform 0.3s;
-    }
-  }
 /* 이미지 css 끝*/
 
 
@@ -240,7 +256,11 @@ border: 1px solid gray;
  display: inline-block;
 
 }
+.lodgeReview{
+	list-style: none;
 
+
+}
 </style>
  
 
@@ -315,91 +335,178 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-function fn_formSubmit(){
-    var form1 = document.replyform;
+function fn_formSubmit(){ //후기 입력
+	if($("#contents").val()==""){
+		alert("내용을 입력해주세요.");
+		return;
+		}
     
-    if (form1.contents.value=="") {
-        alert("글 내용을 입력해주세요.");
-        form1.contents.focus();
-        return;
+	$.ajax({
+    	url : "insertReview",
+    	type : "post",
+    	data : {lodge_no:$("#lodge_no").val(),mem_name : $("#mem_name").val(), mem_no:$("#mem_no").val(), contents :$("#contents").val() },
+    	dataType :"html",
+    	success : function(result){
+    		
+    		alert("저장되었습니다.");
+//    		console.log(result);
+// 			$("#review").append(result);
+    		
+     		document.getElementById("review").innerHTML = result;
+    	}
+    	})
+    	
+ }
+
+function fn_replyDelete(comment_no){ //후기 삭제
+	if(!confirm("삭제하시겠습니까?")){
+		return;
+	}
+	
+	$.ajax({
+        url: "reviewDelete",
+        type:"post", 
+        data: {"comment_no":comment_no},
+       	dataType : "json",
+        success: function(result){
+           
+                $("#reviewitem"+comment_no).remove();
+                alert("삭제되었습니다.");
+            
+        }
+    })
+
+    
+     }
+    
+    
+    var updateComm = updateContents = null;
+    
+    function fn_replyUpdate(comment_no){
+		hideDiv("#replyDialog");
+		
+		if(updateComm){
+			$("#replyDiv").appendTo(document.body);
+			$("#reply"+updateComm).text(updateContents);
+		}
+    	
+		updateComm = comment_no;
+		updateContents = $("#reply"+comment_no).html();
+		
+		$("#comment_no2").val(comment_no);
+		$("#contents2").val(updateContents);
+		$("#reply"+comment_no).text("");
+		$("#replyDiv").appendTo($("#reply"+comment_no));
+		$("#replyDiv").show();
+		$("#contents2").focus();
     }
-    form1.submit();    
-} 
+    
+    function fn_replyUpdateSave(){
+    	if($("#contents2").val()==""){
+    		alert("내용을 입력해주세요.");
+    		return;
+    		}
+    		
+    	$.ajax({
+    		url : "updateReview",
+    		type:"post",
+    		data : {"lodge_no":$("#lodge_no2").val(),"comment_no":$("#comment_no2").val(), "contents": $("#contents2").val()},
+    		dataType : "html",
+    		success : function(result){
+    			if(result!==""){
+    				document.getElementById("review").innerHTML = result;
+    				$("#replyDiv").hide();
+    				alert("수정되었습니다.");
+    			}
+    			updateComm = updateContents = null;
+    		}
+    	});
+    }
+    
+    function fn_replyUpdateCancel(){
+    	hideDiv("#replyDiv");
+    	
+    	$("#reply"+updateComm).html(updateContents);
+    	updateComm = updateContents = null;
+    	
+    }
+	
+    function hideDiv(id){
+    	$(id).hide();
+    	$(id).appendTo(document.body);
+    }
+	
+    function fn_replyReply(comment_no){
+		$("#replyDialog").show();
 
+		if(updateComm){
+			fn_replyUpdateCancel();
+		}
+    
+    $("#parent_comment_no3").val(comment_no);
+	$("#contents3").val("");
+	$("#replyDialog").appendTo($("#reply"+comment_no));
+	$("#contents3").focus();
 
+    }
+    
+    function fn_replyReplyCencle(){
+    	hideDiv("#replyDialog");
+    }
+    
+    function fn_replyReplySave(){
+    	
+    $.ajax({
 
-
+    	url :"lodgeReview",
+    	type : "post",
+    	data : {"lodge_no":$("#lodge_no3").val(),"mem_no":$("#mem_no3").val(),"contents":$("#contents3").val(),"parent_comment_no":$("#parent_comment_no3").val()},
+    	dataType : "html" ,
+    	success : function(result){
+    		alert("내용이 저장되었습니다.");
+    		document.getElementById("reply").innerHTML =result;
+    		
+    	}
+    	
+    	
+    });
+	
+    }
 </script>
 
 
 
 <body>
-	<div id="wrapper"
-		style="min-width: 978px; max-width: 1200px; margin: 0 auto;">
+	<div id="wrapper">
 		<div>
 			<!-- header 시작 -->
 			<c:import url="../layout/header.jsp" />
-
 		</div>
+
 
 		<div>
 			<!-- content시작 -->
-
-			<h3>숙소 이미지</h3>
-			<div class="Grid">
-				<div class="Grid-cell  u-size1of2">
-					<div class="Tile  u-size1to1">
-						<div class="Tile-content">
-							<img class="lodge_image" src="/resources/images/lodge_image/${lodgeimg[0].stored_name }" alt="placeholder" 
-							style="height: 524px;">
-						</div>
-						<!-- .Tile-content -->
-					</div>
-					<!-- .Tile -->
-				</div>
-				<!-- .Grid-cell -->
-				<div class="Grid-cell  u-size1of2">
-					<div class="Tile  u-size1to2">
-						<div class="Tile-content">
-							<img class="lodge_image" src="/resources/images/lodge_image/${lodgeimg[1].stored_name }" alt="placeholder">
-						</div>
-						<!-- .Tile-content -->
-					</div>
-					<!-- .Tile -->
-					<div class="Grid">
-						<div class="Grid-cell  u-size1of2">
-							<div class="Tile  u-size1to1">
-								<div class="Tile-content">
-									<img class="lodge_image" src="/resources/images/lodge_image/${lodgeimg[2].stored_name }" alt="placeholder">
-								</div>
-								<!-- .Tile-content -->
-							</div>
-							<!-- .Tile -->
-						</div>
-						<!-- .Grid-cell -->
-						<div class="Grid-cell  u-size1of2">
-							<div class="Tile  u-size1to1">
-								<div class="Tile-content">
-									<img class="lodge_image" src="/resources/images/lodge_image/${lodgeimg[3].stored_name }" alt="placeholder">
-								</div>
-								<!-- .Tile-content -->
-							</div>
-							<!-- .Tile -->
-						</div>
-						<!-- .Grid-cell -->
-					</div>
-					<!-- .Grid -->
-				</div>
-				<!-- .Grid-cell -->
-			</div>
-			<!-- .Grid -->
+    <div id="gallery">
+      <div class="photo " id="photo1" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
+      <div class="photo " id="photo2" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[1].stored_name }"/></div>
+      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/></div>
+      <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
+      <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
+      <div class="photo " id="photo6" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/80x60"/></div>
+      <div class="photo " id="photo7" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/60x40"/></div>
+      <div class="photo " id="photo8" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/100x80"/></div>
+      <div class="photo " id="photo9" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/90x50"/></div>
+      </div>
+      
+      
+			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!--  호스트 정보 -->
 			<div style="padding-top: 24px; padding-bottom: 24px">
 				<table class="row">
 					<tbody>
 						<tr>
-							<th class="small-10 large-10 columns first">
+							<th class="small-10 large-10 columns first"style ="width :500px;">
 								<p class="body-text-lg heavy row-pad-bot-1"
 									style="font-size: smaller;">${view.building_case }</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
@@ -480,30 +587,65 @@ function fn_formSubmit(){
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
 				
-				
-				<c:if test = "${login }">
-				<div style="border: 1px solid; width: 600px; padding: 5px">
-   				 <form name = "replyform" action="lodgereview" method="post">
-        		<input type="hidden" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
-        		<input type="hidden" name = "mem_no" value="${member.mem_no }"> 
-      			  <textarea id ="contents" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
-       			 <a href ="#" onclick="fn_formSubmit()">저장</a>  				 
-       			  </form>
+				<!-- 후기 작성 -->
+				<div name = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
+        		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
+        		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
+        		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
+      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
+       			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
-				</c:if>	
-<!-- 				<div id = "replyList"> -->
-<%-- 				 <c:forEach var="replylist" items="${replylist}" varStatus="status"> --%>
-<!--  				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false"> -->
-<!--  				<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"> -->
-<!--  				</a> -->
-<%--  				<div id="replyItem <c:out value ="${reply.comment_no}"/>"> --%>
-<%--  				<c:out value = "${reply. mem_name}"/><c:out value ="${reply.written_time }"/> <!-- 작성자, 작성 시간 --> --%>
-<%--  				<a href="#" onclick="fn_replyDelete('<c:out value="${reply.comment_no}"/>')">삭제</a> --%>
-<%--    				<a href="#" onclick="fn_replyUpdate('<c:out value="${reply.comment_no}"/>')">수정</a> --%>
-<%--    				<a href="#" onclick="fn_replyReply('<c:out value="${reply.comment_no}"/>')">댓글</a> --%>
-<!--  				</div> -->
-<%--  				</c:forEach> --%>
-<!--  				</div>	 -->
+				
+					<div id="review"> <!-- 후기 리스트 -->
+				
+					<c:forEach items = "${lodgeReview}" var = "review">
+					<div id="reviewitem<c:out value ="${review.comment_no }"/>" style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;">    
+       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+ 					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
+       				 <c:out value="${review.mem_name}"/><br>
+	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
+       				 <br/>
+       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
+
+<%--        				<c:if test ="${login && mem_no eq sessionScope.mem_no }"> --%>
+       				<button onclick="fn_replyUpdate('<c:out value ="${review.comment_no }"/>')">수정</button>
+       				 <button  onclick="fn_replyDelete('<c:out value ="${review.comment_no }"/>')">삭제</button>
+ 					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no }"/>')">댓글</button>
+						
+<%--						</c:if> --%>
+   				 	<div id = "reply"></div>
+   				 </div>
+					</c:forEach>
+				</div>
+				
+				<!-- 후기 리스트 끝 -->
+					<!-- 댓글 수정 -->
+				<div id = "replyDiv" style ="width:99%; display:none">
+							<input type ="hidden" id = "lodge_no2" name ="lodge_no" value ="<c:out value ="${view.lodge_no }"/>">
+							<input type ="hidden" id = "mem_no2" name ="mem_no2">
+							<input type ="hidden" id = "comment_no2" name ="comment_no">
+							<textarea class = "form-control" id ="contents2"  name = "contents2" rows="5" cols="60"></textarea>
+							<button onclick ="fn_replyUpdateSave()">저장</button>
+							<button onclick ="fn_replyUpdateCancel()">취소</button>
+					</div>
+				<!-- 댓글수정 끝 -->
+	
+				<div id = "replyDialog" style = "width:99%; display: none">
+				<input type = "hidden" id = "lodge_no3" name = "lodge_no" value = "<c:out value="${view.lodge_no }"/>">
+				<input type = "hidden" id = "comment_no3" name = "comment_no">
+				<input type = "hidden" id = "parent_comment_no3" name = "parent_comment_no">
+				<input type = "hidden" id = "mem_no3" name = mem_no3 value = "<c:out value ="${member.mem_no}"/>">	<br>
+					<textarea class ="form-control" id="contents3" name = "contents3"rows="5" cols="60"></textarea>
+				<button onclick ="fn_replyReplySave()">저장</button>				
+				<button  onclick ="fn_replyReplyCencle()">취소</button>				
+				</div>
+				
+				
+			
+				
+
+
+
 			<!-- 후기 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 지역정보 -->

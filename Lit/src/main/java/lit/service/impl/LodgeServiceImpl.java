@@ -64,27 +64,47 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.payment(pay);
 	}
 
+	
+	@Override
+	public List<Comment> commentList() {
+		// TODO Auto-generated method stub
+		return lodgedao.lodgeComment();
+	}
+
+	
+	
 	@Override
 	public void insertComment(Comment comment) {
 
-//		int member = Integer.parseInt(req.getParameter("member_no"));
-		Date date = new Date();
-		comment.setWritten_time(date);
-		
-		
-		
-		
 		lodgedao.insertReview(comment);
+		
 	}
 
 	@Override
+	public void updateComment(Comment comment) {
+		
+		lodgedao.updateReview(comment);
+	}
+
+	
+	
+	@Override
 	public void deleteComment(Comment comment) {
 		lodgedao.deleteReview(comment);
-		
-		
 	}
 	
-	
+	@Override
+	public void insertLodgeComment(Comment comment) {
+		
+		lodgedao.insertLodgeReply(comment);
+	}
+
+
+	@Override
+	public List<Comment> replyList() {
+		
+		return lodgedao.lodgeReply();
+	}
 	
 	@Override
 	public void insertLike(Lodge lodge) {
@@ -104,6 +124,9 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.insertContent(message);
 		
 	}
+
+
+
 
 
 	

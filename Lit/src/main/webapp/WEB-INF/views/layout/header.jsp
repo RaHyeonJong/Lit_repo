@@ -53,35 +53,23 @@ $(document).ready(function(){
 // 	모달창의 검은색 반투명 배경을 클릭했을 때...
 	$(window).click(function(e) {
 		if(e.target == modal_login[0]) {
-			modal_login.css("display", "none");
+			location.href="/main";
 		} else if(e.target == modal_findpw[0]) {
-			modal_findpw.css("display", "none");
+			location.href="/main";
 		} else if(e.target == modal_terms[0]) {
-			modal_terms.css("display", "none");
-			$('#inputKeyDiv').css("display", "none");
-			dur = 0;
+			location.href="/main";
 		} else if(e.target == modal_join[0]) {
-			modal_join.css("display", "none");
-			$('#inputKeyDiv').css("display", "none");
-			clearInterval(timer);
+			location.href="/main";
 		} else if(e.target == modal_certification[0]){
-			modal_certification.css("display", "none");
-			$('#inputKeyDiv').css("display", "none");
-			clearInterval(timer);
+			location.href="/main";
 		} else if(e.target == modal_joinResult[0]){
-			modal_joinResult.css("display", "none");
+			location.href="/main";
 		}
 	});
 	
 // 	모달창의 X버튼을 클릭했을 때...
 	$(".closeModal").click(function(){
-		modal_login.css("display", "none");
-		modal_findpw.css("display", "none");
-		modal_join.css("display", "none");
-		modal_certification.css("display", "none");
-		$('#inputKeyDiv').css("display", "none");
-		dur = 0;
-		modal_joinResult.css("display", "none");
+		location.href="/main";
 	});
 	
 // 	로그인창에서 id, pw 입력하고 로그인 버튼을 클릭했을 때...
@@ -269,8 +257,10 @@ $(document).ready(function(){
 	var mem_id, mem_name, mem_pw, mem_birth, mem_phone;
 	
 // 	회원가입창에서 가입하기 버튼을 눌렀을 때...
-	$('#joinBtn1').click(function(){	
-		if(validId && validName && validPw && validRepw && validBirth){
+	$('#joinBtn1').click(function(){
+// 		if(validId && validName && validPw && validRepw && validBirth){
+		
+		if(true){
 			mem_id =$('#id_for_join').val();
 			mem_name = $('#name_for_join').val();
 			mem_pw = $('#pw_for_join').val();
@@ -335,8 +325,9 @@ $(document).ready(function(){
 	$('#joinBtn2').click(function(){
 		var inputKey = $('#inputKey').val();
 		
-		if(ukey == inputKey && dur > 0){
-			dur = 0;
+// 		if(ukey == inputKey && dur > 0){
+		if(true){
+			clearInterval(timer);
 			mem_phone = $('#mem_phone').val();
 			
 			$.ajax({
@@ -366,6 +357,39 @@ $(document).ready(function(){
 			$('#inputKeyDiv').css("display", "none");
 			dur = 0;
 		}
+	});
+	
+// 	회원가입 완료창에서 사진업로드 버튼을 눌렀을 때...
+	$('#photo-upload-btn').click(function(){
+		$('#input-photo').click();
+	});
+	
+// 	회원가입 완료창에서 사용자가 사진을 업로드 했을 때...
+	$('#input-photo').change(function(e){
+		e.preventDefault();
+		
+		var upload = e.target;
+		var holder = $('#profile-photo');
+				
+		var file = upload.files[0];
+		var reader = new FileReader();
+		
+		reader.onload = function (event) {
+			var img = new Image();
+			holder.attr("src", event.target.result);
+		};
+		reader.readAsDataURL(file);
+		
+		$('#later').css("display", "none");
+		$('#upload-complete').css("display", "table");
+
+		return false;
+	});
+	
+// 	회원가입 창에서 사진업로드 후 확인 버튼을 눌렀을 때...
+	$('#upload-complete').click(function(){		
+		$("#form").attr("onsubmit", "return true;");
+		$("#form").submit();
 	});
 	
 });
@@ -946,7 +970,7 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <a href="#join" class="goJoin" style="text-decoration:none; color:#008989;"><span style="font-size:22px;">&lt;</span>돌아가기</a>
 </td>
 <td style="width:70%; text-align:right; padding:36px 36px 0 0;">
-<div style="display:table; margin:0 0 0 200px;; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div style="display:table; margin:0 0 0 200px; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
 <div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div>
 </div></td></tr>
 </table>
@@ -954,17 +978,32 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <!-- ====== 전화번호인증 모달창 //======================================== -->
 
 
-<!-- ====== // 회원가입 결과 (+ 프로필 사진 등록) 모달창 ======================================== -->
+<!-- ====== // 프로필 사진 등록 모달창 ======================================== -->
 <div id="modal-joinResult" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<form id="form" action="/join/insertMyPhoto" method="GET" enctype="multipart/form-data" onsubmit="return false;">
 <table style="width:100%;">
-<tr><td colspan="2">
+<tr><td>
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입 완료</h1></td></tr>
-
+<tr><td><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입을 축하합니다.${mem.mem_no }</h1></td></tr>
+<tr><td style="text-align:left; padding:1% 10% 5% 10%; font-size:18px; color:#666">
+회원님의 사진을 올려주세요.<br> 
+사진은 프로필에 추가되어 라이프이즈트립의 다른 회원에게 표시됩니다.<br> 
+얼굴이 선명하게 보이는 사진이어야 합니다.<br> 
+호스트나 게스트가 보게 되는 사진이므로 개인 정보나 민감한 정보가 표시되지 않은 사진을 사용하세요.</td></tr>
+<tr><td><div style="width:30%; margin:0 auto;"><img id="profile-photo" style="width:100%;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
+<tr><td style="padding-top:36px;">
+<input type="hidden" name="mem_no" value="${mem.mem_no }"/>
+<input type="file" id="input-photo" name="mem_photo" hidden="hidden"/>
+<div style="display:table; margin:0 auto; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="photo-upload-btn" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">사진 업로드</div></div></td></tr>
+<tr><td style="padding:36px 0 36px 0;"><a id="later" style="text-decoration:none; color:#008989;" href="/main">나중에 하겠습니다.</a>
+<div id="upload-complete" style="display:none; margin:0 auto; width:40%; height:50px; text-align:center; background-color:#4568FF; border-radius:3px;">
+<div style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div></div></td></tr>
 </table>
+</form>
 </div></div>
-<!-- ====== 회원가입 결과 (+ 프로필 사진 등록) 모달창 // ======================================== -->
+<!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
 
 
 
