@@ -6,8 +6,7 @@
 
 <body>
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
-	
-	
+
 		<div class="content">
 		
 		<span style="font-size:1.3em; padding-top:100px"><b>
@@ -73,7 +72,7 @@
 
 	function button2_click()
 	{
-		window.location.href="/cs/list";
+		window.location.href="/cs/list?mem_no=${member.mem_no}";
 	}
 
 </script>

@@ -161,7 +161,7 @@
 
 
 	/* enroll.jsp 설정 */
-	/*아까의 오류는 .table_list 엿다 */
+	/*아까의 오류는  table_list 엿다  */
 	
 	.table_list
 	{
@@ -170,35 +170,35 @@
 		margin-right:15%;
 	}
 	
+	table
+	{
+		width:100%;
+		border:1px solid #c6f9ff;
+	}
+	
+	th
+	{
+		background-color:#ccdefc;
+		text-align:center;
+		font-size:18px;
+		width:200px;
+		height:50px;
+	}	
+
+	textarea
+	{
+		height:170px; 
+		width:772px; 
+	}
+	
 	.btnList
 	{
 		text-align:right;
 		padding-top:40px;
-		padding-right:150px;
+		padding-right:170px;
 		
 	}
-
-	th
-	{
-		background-color:#d8d8d8;
-		text-align:center;
-		font-size:18px;
-		width:150px;
-		height:50px;
-	}	
-
-	.td
-	{
-		padding-left:10px;	
-	}
 	
-	textarea
-	{
-		height:170px; 
-		width:865px; 
-		resize:none; 
-		font-size:18px;
-	}
 </style>
 
 <div class="center">

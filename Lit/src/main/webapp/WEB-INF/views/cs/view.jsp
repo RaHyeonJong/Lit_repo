@@ -5,6 +5,8 @@
 
 <body>
 
+
+<input type="hidden" value="${boardlist.mem_no }" name="mem_no" />
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 	<div class="content">
 
@@ -24,42 +26,52 @@
 			
 				<tr>
 					<th> 문의 제목</th>
-					<td> 문의 제목 내용</td>
+					<td> ${boardlist.title }</td>
 				</tr>
 				
 				
 				<tr>
 					<th> 작성자</th>
-					<td> 작성자 이름 불러오기</td>
+					<td> ${member.mem_name }</td>
 				</tr>	
+				
+				<tr>
+					<th colspan="2"> 문의 내용</th>
+					
+				</tr>	
+				
+				<tr>
+					<td colspan="2"  style="height:150px;">${boardlist.contents }</td>
+				</tr>
 				
 				
 				<tr>
-					<th> 사진 첨부</th>
-					<td> 사진 누르면 다운로드</td>
-				</tr>	
-				
-				
-				<tr>
-					<th> 문의 내용</th>
-					<td> 사용자 문의 내역</td>
-				</tr>	
-				
-				
-				<tr>
-					<th> 문의 답변</th>
-					<td> 관리자 답변 내용</td>
+					<th colspan="2"> 문의 답변</th>
 				</tr>		
+				
+				<tr>
+					<td colspan="2" style="height:150px;">답변 내용 </td>
+				</tr>
 			
 			</table>
 		
 		</div>
 	
 		<div class="btnList">
-			<button class="button2">뒤 로 가 기</button>
+			<button class="button2" onclick="button2_click()">뒤 로 가 기</button>
 		</div>
 	
 	
 	</div>
 </div>
 </body>
+
+<script>
+
+function button2_click()
+{
+	alert("이전 페이지로 이동합니다.");
+	history.go(-1);
+}
+
+</script>
