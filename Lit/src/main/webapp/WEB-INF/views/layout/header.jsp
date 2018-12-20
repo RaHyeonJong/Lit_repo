@@ -12,7 +12,6 @@
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-  
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
@@ -95,6 +94,13 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+// 	로그인창에서 비밀번호까지 입력 후 엔터키를 눌렀을 때...
+	$("#pw_for_login").keypress(function (e) {
+        if (e.which == 13){
+			$('#loginBtn').click();  // 실행할 이벤트
+        }
+    });
 	
 // 	로그인창에서 비밀번호가 생각나지 않으세요? 버튼을 클릭했을 때...
 	$('#findpwBtn').click(function(){
@@ -826,7 +832,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'user' }">
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/mypage/viewProfile">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -840,7 +846,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'host' }">
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/mypage/viewProfile">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -852,7 +858,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!--  관리자 로그인 -->
 				<c:if test="${member.mem_case eq 'admin' }">
-					<li><a href="#">관리자 페이지</a></li>
+					<li><a href="/admin/main">관리자 페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -879,7 +885,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td colspan="2" style="padding-top:10px;">
 <div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
-<div style="text-align:center;"><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
+<div style="text-align:center;"><input type="password" id="pw_for_login" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
 </table>
 <div style="height:10px;"></div>
 <div style="text-align:left; padding-left:10px;">
@@ -1036,11 +1042,3 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </form>
 </div></div>
 <!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
-
-
-
-
-
-
-
-
