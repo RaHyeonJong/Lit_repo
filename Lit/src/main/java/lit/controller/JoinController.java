@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +70,7 @@ public class JoinController {
 		
 		map.put("result", result);
 		map.put("mem", mem);
-		
+				
 		mav.addAllObjects(map);
 		mav.setViewName("jsonView");
 		
@@ -77,8 +78,9 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value="/join/insertMyPhoto")
-	public String insertMyPhoto(MultipartFile fileupload) {
-		joinService.insertMyPhoto(context, fileupload);
+	public String insertMyPhoto(MultipartFile file, int mem_no) {
+		
+		joinService.insertMyPhoto(context, file, mem_no);
 		
 		return "redirect:/main";
 	}

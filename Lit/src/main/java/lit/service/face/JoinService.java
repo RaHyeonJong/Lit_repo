@@ -12,6 +12,6 @@ public interface JoinService {
 
 	public void insertMember(Member member);
 
-	public void insertMyPhoto(ServletContext context, MultipartFile fileupload);
+	public void insertMyPhoto(ServletContext context, MultipartFile fileupload, int mem_no);
 
 }

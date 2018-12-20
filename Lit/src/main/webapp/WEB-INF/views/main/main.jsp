@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Life is trip 인생은 여행이다</title>
 
 <style>
 #map {
@@ -26,9 +26,11 @@
 	<c:import url="../layout/header.jsp"/>
 	</div><!-- header 끝 -->
 	
-	<h1>main page</h1>
+	
 	<div style="text-align: center">
-	<img style="width:500px;" src="/resources/images/ps.jpg"/>
+	<br>
+	<h1>Main Page</h1>
+	<h3>Life Is Trip 인생은 여행이다</h3>
 	</div>
 	
 	

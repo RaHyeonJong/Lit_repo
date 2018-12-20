@@ -15,6 +15,11 @@
 		INSERT INTO member(mem_no, mem_case_no, mem_id, mem_name, mem_pw, mem_birth, mem_phone, mem_activation)
 		VALUES (#{mem_no }, 1, #{mem_id }, #{mem_name }, #{mem_pw }, #{mem_birth }, #{mem_phone }, 1)
 	</insert>
+	
+	<insert id="insertMyPhoto" parameterType="lit.dto.Image">
+		INSERT INTO image(image_no, origin_name, stored_name, mem_no, thumb_nail)
+		VALUES (image_seq.nextval, #{origin_name }, #{stored_name }, #{mem_no }, 1)
+	</insert>
 
 
 </mapper>
