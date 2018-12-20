@@ -8,7 +8,7 @@ public class Member {
 	private final String HOST = "host";		//회원유형: 호스트 / mem_case_no = 2
 	
 	private int mem_no;
-	private int mem_case_no;		// 0 = ADMIN, 1 = USER, 2 = HOST
+	private int mem_case_no;		// 0 = ADMIN, 1 = fUSER, 2 = HOST
 	private String mem_case;		// ADMIN or USER or HOST
 	private String mem_id;
 	private String mem_pw;

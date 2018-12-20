@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />    
 
 <body>
@@ -20,25 +21,36 @@
 		
 
 		<div class="table_list">
-			<table style="width:100%; border:1px solid #ededed; text-align:center; ">
+			<table style="text-align:center; ">
 			
 				<tr>
-					<th>번 호</th>
-					<th>제 목 </th>
-					<th>날 짜 </th>
-					<th>상 태 </th>
+					<th style="width:70px;">번 호</th>
+					<th style="width:180px;">제 목 </th>
+					<th style="width:100px;">날 짜 </th>
+					<th style="width:100px;">상 태 </th>
 				</tr>
 				
+				<c:forEach items="${boardlist }" var="b">
 				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
+					<td>${b.board_no }</td>
+					<td><a href="/cs/view?board_no=${b.board_no }">${b.title }</a></td>
+					<td>${b.written_time }</td>
+				
+					<c:choose>
+						<c:when test="${b.answer > 0 }">
+							<td style="color:red; font-weight:bold;">답변 완료 </td>
+						</c:when>
+						<c:when test="${b.answer eq 0 }">
+							<td style="color:blue; font-weight:bold">답변 대기</td>
+						</c:when>
+					</c:choose>
 				</tr>
+				</c:forEach>
 				
 			</table>
 		</div>
-			<div class="btnList">
+		
+		<div class="btnList">
 			<button class="button2" onclick="button2_click();">이 전 으 로</button>
 		</div>
 		
