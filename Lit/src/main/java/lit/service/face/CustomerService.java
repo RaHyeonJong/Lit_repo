@@ -13,9 +13,6 @@ public interface CustomerService {
 	public List<Board> boardlist(Board board);
 	
 	//문의내역 상세페이지
-	public Board view(Board board);
-	
-
-
+	public Board boardview(Board board);
 	
 }

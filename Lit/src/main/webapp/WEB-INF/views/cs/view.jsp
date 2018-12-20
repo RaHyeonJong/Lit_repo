@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
@@ -22,7 +23,7 @@
 	
 		<div class="table_list">
 		
-			<table style="width:100%; border:1px solid #ededed; text-align:left;">
+			<table style="width:100%; border:1px solid #000000; text-align:left;">
 			
 				<tr>
 					<th> 문의 제목</th>
@@ -41,7 +42,9 @@
 				</tr>	
 				
 				<tr>
-					<td colspan="2"  style="height:150px;">${boardlist.contents }</td>
+					<td colspan="2"  style="height:150px;">
+					${boardlist.contents }
+					</td>
 				</tr>
 				
 				
@@ -50,7 +53,21 @@
 				</tr>		
 				
 				<tr>
-					<td colspan="2" style="height:150px;">답변 내용 </td>
+					<c:choose>
+						<c:when test="${boardlist.cmt eq NULL}">
+						
+							<td colspan="2" style="height:150px; color:red; font-weight:bold">
+								답변 대기중 </td>
+						</c:when>
+						<c:when test="${boardlist.cmt ne NULL }">
+							
+							<td colspan="2" style="height:150px; font-weight:bold">
+								${boardlist.cmt }
+							</td>
+						</c:when>
+					
+					</c:choose>
+					
 				</tr>
 			
 			</table>
@@ -70,7 +87,6 @@
 
 function button2_click()
 {
-	alert("이전 페이지로 이동합니다.");
 	history.go(-1);
 }
 

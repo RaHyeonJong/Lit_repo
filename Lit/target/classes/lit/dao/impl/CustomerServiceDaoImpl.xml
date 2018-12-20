@@ -13,20 +13,20 @@
 	
 	<select id="boardlist" resultType="lit.dto.Board" parameterType="lit.dto.Board">
 	
-		SELECT board_no, title, written_time, hit
+		SELECT board_no, title, written_time, answer
 		FROM board
-		WHERE mem_no= #{mem_no}
+		WHERE mem_no = #{mem_no}
 		ORDER BY board_no DESC
 	
 	</select>
 	
 	<select id="view" resultType="lit.dto.Board" parameterType="lit.dto.Board">
 	
-		SELECT title, contents
-		FROM board
-		WHERE board_no = #{board_no}
-	
+		SELECT b.title, b.contents, c.contents cmt
+		FROM board b, comment_tb c
+		WHERE b.board_no = #{board_no } 
+		AND b.board_no = c.board_no(+)
+
 	</select>
-	
 
 </mapper>

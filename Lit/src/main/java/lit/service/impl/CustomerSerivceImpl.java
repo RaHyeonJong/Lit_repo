@@ -16,22 +16,17 @@ public class CustomerSerivceImpl implements CustomerService{
 
 	@Override
 	public void writer(Board board) {
-			
 		customerserviceDao.writer(board);
 	}
 
 	@Override
 	public List<Board> boardlist(Board board) {
-
 		return customerserviceDao.boardlist(board);
 	}
 
 	@Override
-	public Board view(Board board) {
-
+	public Board boardview(Board board) {
 		return customerserviceDao.view(board);
 	}
-
-
 	
 }

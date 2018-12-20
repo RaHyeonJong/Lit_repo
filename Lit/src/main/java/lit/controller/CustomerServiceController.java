@@ -17,8 +17,7 @@ import lit.dto.Board;
 import lit.service.face.CustomerService;
 
 @Controller
-//views에 있는 cs폴더
-@RequestMapping("/cs")
+@RequestMapping("/cs") //views에 있는 cs폴더
 public class CustomerServiceController {
 
 	@Autowired CustomerService customerService;
@@ -30,7 +29,6 @@ public class CustomerServiceController {
 	public void cs()
 	{
 		logger.info("고객센터 시작 알림");
-
 	}
 	
 	//1:1문의하기 선택지
@@ -46,41 +44,36 @@ public class CustomerServiceController {
 	public void enroll()
 	{
 		logger.info("문의 등록");
-	
 	}
 	
 	//작성 후, DB저장
 	@RequestMapping(value="/enroll", method=RequestMethod.POST)
 	public String enrollProc(Board board)
 	{
-
 		logger.info("출력1 : " + board.toString());
 		customerService.writer(board);
 		logger.info("출력2 : " + board.toString());
 		return "redirect:/cs/cs";		
 	}
 	
-
 	//문의내역 리스트	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void list(Model model, Board board)
 	{
-		logger.info("문의 리스트");
-		//board테이블에 mem_no 를 불러오는거
+		logger.info("문의 리스트");	//board테이블에 mem_no 를 불러오는거
 		List<Board> boardlist = customerService.boardlist(board);
 		
 		model.addAttribute("boardlist", boardlist);
 	}
 	
-	//문의 답변 보기 /cs/view
+	//문의 답변 보기
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void view(Model model, Board board)
 	{
 		logger.info("문의 답변 보기");
 		
-		board = customerService.view(board);
-		
+		board = customerService.boardview(board);
+	
 		model.addAttribute("boardlist",board);
 	}
-	
 }
