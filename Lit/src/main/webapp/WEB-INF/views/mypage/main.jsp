@@ -45,6 +45,21 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$('#update-profile-btn').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "/mypage/updateMyProfile",
+			data: {}, 
+			dataType: "html",
+			success : function(res){
+				$('#contents-div').html(res);
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
+	});
 });
 </script>
 </head>

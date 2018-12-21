@@ -25,19 +25,13 @@ public class MypageController {
 	@Autowired MypageService mypageService;
 	
 	@RequestMapping(value="/mypage/main")
-	public void mypageMain(){}
+	public void mypageMain() { }
 	
 	@RequestMapping(value="/mypage/viewMyProfile")
-	public void viewMyProfile(){}
+	public void viewMyProfile() { }
 
-		
-	
-	@RequestMapping(value="/mypage/update_profile", method=RequestMethod.GET)
-	public void updateProfile(Model model, Member member) {
-		member = loginService.getMember(member);
-		
-		model.addAttribute("member", member);
-	}
+	@RequestMapping(value="/mypage/updateMyProfile", method=RequestMethod.GET)
+	public void updateMyProfile() {	}
 	
 	@RequestMapping(value="/mypage/update_profile", method=RequestMethod.POST)
 	public String updateProfileProcess(Member member) {

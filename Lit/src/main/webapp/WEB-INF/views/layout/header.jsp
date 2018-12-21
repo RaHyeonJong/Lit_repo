@@ -1029,7 +1029,7 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 사진은 프로필에 추가되어 라이프이즈트립의 다른 회원에게 표시됩니다.<br> 
 얼굴이 선명하게 보이는 사진이어야 합니다.<br> 
 호스트나 게스트가 보게 되는 사진이므로 개인 정보나 민감한 정보가 표시되지 않은 사진을 사용하세요.</td></tr>
-<tr><td><div style="width:160px; height:160px; margin:0 auto; overflow:hidden;"><img id="profile-photo" style="width:90%; height:90%; border: 3px solid #999; -webkit-border-radius:160px;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
+<tr><td><div style="width:160px; height:160px; margin:0 auto; overflow:hidden;"><img id="profile-photo" style="width:90%; height:90%; border: 3px solid #999; border-radius:50%;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
 <tr><td style="padding-top:36px;">
 <input id="mem_no_join" type="hidden" name="mem_no" />
 <input type="file" id="input-photo" name="file" hidden="hidden"/>
