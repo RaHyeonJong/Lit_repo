@@ -101,9 +101,9 @@ public class LodgeServiceImpl implements LodgeService {
 
 
 	@Override
-	public List<Comment> replyList() {
+	public List<Comment> replyList(Comment comment) {
 		
-		return lodgedao.lodgeReply();
+		return lodgedao.lodgeReply(comment);
 	}
 	
 	@Override

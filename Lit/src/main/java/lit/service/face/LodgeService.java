@@ -43,7 +43,7 @@ public interface LodgeService {
 	public void insertLodgeComment(Comment comment);
 	
 	//대댓글 리스트
-	public List<Comment> replyList();
+	public List<Comment> replyList(Comment comment);
 	
 	//숙소 저장(좋아요)
 	public void insertLike(Lodge lodge);
