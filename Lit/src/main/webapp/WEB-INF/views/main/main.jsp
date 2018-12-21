@@ -112,68 +112,68 @@
 //	 			});
 
 
-				map.addListener('bounds_changed', function() {
-					
-					var bounds = map.getBounds();
-					var ne = bounds.getNorthEast();
-					var sw = bounds.getSouthWest();
-					
-	 				console.log('bounds_changed');
-					console.log(ne.lat());
-					console.log(ne.lng());
-					console.log(sw.lat());
-					console.log(sw.lng());
-					
-					var neLat = ne.lat();
-					var neLng = ne.lng();
-					var swLat = sw.lat();
-					var swLng = sw.lng();
-					
-					$.ajax({
-						type: "get",
-						url: "/main/lodgeListAjax",
-						data: {"neLat" : neLat, "neLng" : neLng,
-							"swLat" : swLat, "swLng" : swLng},
-						dataType: "json",
-						success: function(list) {
-
-							console.log("성공");
-							console.log(list[0]);
-							
-							setMarkers(map);
-							
-							function setMarkers(map) {
-								for(var i=0; i<list.length; i++) {
-													
-									var marker = new google.maps.Marker({
-										position: {lat: list[i].latitude, lng: list[i].longitude},
-										map: map,
-										title: list[i].lodge_name,
-										zIndex: i+1
-									});
+					map.addListener('dragend', function() { // dragend 시작
+						
+						var bounds = map.getBounds();
+						var ne = bounds.getNorthEast();
+						var sw = bounds.getSouthWest();
+						
+		 				console.log('bounds_changed');
+						console.log(ne.lat());
+						console.log(ne.lng());
+						console.log(sw.lat());
+						console.log(sw.lng());
+						
+						var neLat = ne.lat();
+						var neLng = ne.lng();
+						var swLat = sw.lat();
+						var swLng = sw.lng();
+						
+						$.ajax({
+							type: "get",
+							url: "/main/lodgeListAjax",
+							data: {"neLat" : neLat, "neLng" : neLng,
+								"swLat" : swLat, "swLng" : swLng},
+							dataType: "json",
+							success: function(list) {
+	
+								console.log("성공");
+								console.log(list[0]);
+								
+								setMarkers(map);
+								
+								function setMarkers(map) {
+									for(var i=0; i<list.length; i++) {
+														
+										var marker = new google.maps.Marker({
+											position: {lat: list[i].latitude, lng: list[i].longitude},
+											map: map,
+											title: list[i].lodge_name,
+											zIndex: i+1
+										});
+									}
 								}
+								
+								$("#lodgeList").html("");
+								
+								for(var i=0; i<list.length; i++) {
+									
+									console.log(list[i]);
+									
+									$("#lodgeList").append(list[i].lodge_name);
+									$("#lodgeList").append("<br>");
+									
+									
+									
+									
+								}
+								$("#lodgeList").append("<hr>");
+							},
+							error: function() {
+								console.log("실패");
 							}
-							
-							$("#lodgeList").html("");
-							
-							for(var i=0; i<list.length; i++) {
-								
-								console.log(list[i]);
-								
-								$("#lodgeList").append(list[i].lodge_name);
-								$("#lodgeList").append("<br>");
-								
-								
-								
-								
-							}
-							$("#lodgeList").append("<hr>");
-						},
-						error: function() {
-							console.log("실패");
-						}
-					});
-	 			});
+						});
+					}); // dragend 끝
 
 				
 				// 동서남북 좌표
