@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="lit.dao.face.MessageDao">
+
+	<select id="messagelist" resultType="lit.dto.Message"></select>
+	<delete id="delete" parameterType="lit.dto.Message"></delete>
+	<insert id="writer" parameterType="lit.dto.Message"></insert>
+	<select id="messageview" parameterType="lit.dto.Message" resultType="lit.dto.Message"></select>
+  
+  
+  </mapper>

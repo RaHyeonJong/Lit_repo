@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lit.dto.Festival;
 import lit.dto.Lodge;
+import lit.dto.MapBounds;
 import lit.service.face.MainService;
 
 @Controller
@@ -61,7 +63,9 @@ public class MainController {
 			@RequestParam(required=false, defaultValue="") String checkout, 
 			@RequestParam(required=false, defaultValue="") int people, 
 			@RequestParam(required=false, defaultValue="") String cityLat, 
-			@RequestParam(required=false, defaultValue="") String cityLng) {
+			@RequestParam(required=false, defaultValue="") String cityLng
+			
+			) {
 		
 		logger.info("메인 페이지 띄우기");
 		
@@ -71,6 +75,7 @@ public class MainController {
 		System.out.println(people);
 		System.out.println(cityLat);
 		System.out.println(cityLng);
+		
 		
 
 //		// 추천 숙소 리스트
@@ -92,6 +97,7 @@ public class MainController {
 		
 		model.addAttribute("cityLat", cityLat);
 		model.addAttribute("cityLng", cityLng);
+		
 		
 		return "main/main";
 	}
@@ -142,4 +148,30 @@ public class MainController {
 		model.addAttribute("jejuFestivalList", jejuFestivalList);
 	}
 
+	@RequestMapping(value="/lodgeListAjax")
+	public @ResponseBody List lodgeAjax(MapBounds bounds
+			) {
+		
+		System.out.println(bounds);
+		
+		bounds.setNeLat2( Double.parseDouble( bounds.getNeLat()));
+		bounds.setNeLng2( Double.parseDouble( bounds.getNeLng()));
+		bounds.setSwLat2( Double.parseDouble( bounds.getSwLat()));
+		bounds.setSwLng2( Double.parseDouble( bounds.getSwLng()));
+		System.out.println(bounds);
+		////////marker test //////////////
+		
+//		List<Lodge> lodgeList = mainService.getLodgeList(); // 전체 숙소 리스트
+		List<Lodge> lodgeList = mainService.getLodgeListByBounds(bounds); // bounds 숙소 리스트
+		
+		
+		
+		///////////////////////////////////
+		
+		
+		
+		
+		return lodgeList;
+	}
+	
 }

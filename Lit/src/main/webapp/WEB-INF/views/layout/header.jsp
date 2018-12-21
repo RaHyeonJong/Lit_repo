@@ -12,7 +12,6 @@
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-  
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
@@ -53,35 +52,23 @@ $(document).ready(function(){
 // 	모달창의 검은색 반투명 배경을 클릭했을 때...
 	$(window).click(function(e) {
 		if(e.target == modal_login[0]) {
-			modal_login.css("display", "none");
+			location.href="/main";
 		} else if(e.target == modal_findpw[0]) {
-			modal_findpw.css("display", "none");
+			location.href="/main";
 		} else if(e.target == modal_terms[0]) {
-			modal_terms.css("display", "none");
-			$('#inputKeyDiv').css("display", "none");
-			dur = 0;
+			location.href="/main";
 		} else if(e.target == modal_join[0]) {
-			modal_join.css("display", "none");
-			$('#inputKeyDiv').css("display", "none");
-			clearInterval(timer);
+			location.href="/main";
 		} else if(e.target == modal_certification[0]){
-			modal_certification.css("display", "none");
-			$('#inputKeyDiv').css("display", "none");
-			clearInterval(timer);
+			location.href="/main";
 		} else if(e.target == modal_joinResult[0]){
-			modal_joinResult.css("display", "none");
+			location.href="/main";
 		}
 	});
 	
 // 	모달창의 X버튼을 클릭했을 때...
 	$(".closeModal").click(function(){
-		modal_login.css("display", "none");
-		modal_findpw.css("display", "none");
-		modal_join.css("display", "none");
-		modal_certification.css("display", "none");
-		$('#inputKeyDiv').css("display", "none");
-		dur = 0;
-		modal_joinResult.css("display", "none");
+		location.href="/main";
 	});
 	
 // 	로그인창에서 id, pw 입력하고 로그인 버튼을 클릭했을 때...
@@ -107,6 +94,13 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+// 	로그인창에서 비밀번호까지 입력 후 엔터키를 눌렀을 때...
+	$("#pw_for_login").keypress(function (e) {
+        if (e.which == 13){
+			$('#loginBtn').click();  // 실행할 이벤트
+        }
+    });
 	
 // 	로그인창에서 비밀번호가 생각나지 않으세요? 버튼을 클릭했을 때...
 	$('#findpwBtn').click(function(){
@@ -251,6 +245,7 @@ $(document).ready(function(){
 	});
 	$('#birth_for_join').focusout(function(){
 		var mem_birth = new Date($('#birth_for_join').val());
+		
 		var today = new Date();
 		var years = today.getFullYear() - mem_birth.getFullYear();
 		
@@ -258,7 +253,10 @@ $(document).ready(function(){
 		if(today < mem_birth)
 			years--;
 		
-		if(years < 18){
+		if($('#birth_for_join').val() == ""){
+			$('#valid_birth').css("color", "red");
+			$('#valid_birth').html("생년월일을 정확하게 입력해주세요.");
+		} else if(years < 18){
 			$('#valid_birth').css("color", "red");
 			$('#valid_birth').html("만 18세 미만은 가입하실 수 없습니다.");
 		}else{
@@ -269,7 +267,7 @@ $(document).ready(function(){
 	var mem_id, mem_name, mem_pw, mem_birth, mem_phone;
 	
 // 	회원가입창에서 가입하기 버튼을 눌렀을 때...
-	$('#joinBtn1').click(function(){	
+	$('#joinBtn1').click(function(){
 		if(validId && validName && validPw && validRepw && validBirth){
 			mem_id =$('#id_for_join').val();
 			mem_name = $('#name_for_join').val();
@@ -331,12 +329,14 @@ $(document).ready(function(){
 		});
 	});
 	
+	var mem_no;
+	
 // 	전화번호 인증창에서 확인 버튼을 눌렀을 때...
 	$('#joinBtn2').click(function(){
 		var inputKey = $('#inputKey').val();
 		
 		if(ukey == inputKey && dur > 0){
-			dur = 0;
+			clearInterval(timer);
 			mem_phone = $('#mem_phone').val();
 			
 			$.ajax({
@@ -352,6 +352,8 @@ $(document).ready(function(){
 					if(res.result == 'success'){
 						modal_certification.css("display", "none");
 						modal_joinResult.css("display", "block");
+						mem_no = res.mem.mem_no;
+						$('#mem_no_join').val(mem_no);
 					} else {
 						modal_certification.css("display", "none");
 						alert("회원가입 실패!! 관리자에게 문의해주세요.");
@@ -366,6 +368,40 @@ $(document).ready(function(){
 			$('#inputKeyDiv').css("display", "none");
 			dur = 0;
 		}
+	});
+	
+// 	회원가입 완료창에서 사진업로드 버튼을 눌렀을 때...
+	$('#photo-upload-btn').click(function(){
+		$('#input-photo').click();
+	});
+	
+// 	회원가입 완료창에서 사용자가 사진을 업로드 했을 때...
+	$('#input-photo').change(function(e){
+		e.preventDefault();
+		
+		var upload = e.target;
+		var holder = $('#profile-photo');
+				
+		var file = upload.files[0];
+		var reader = new FileReader();
+		
+		reader.onload = function (event) {
+			var img = new Image();
+			holder.attr("src", event.target.result);
+		};
+		reader.readAsDataURL(file);
+		
+		$('#later').css("display", "none");
+		$('#upload-complete').css("display", "table");
+
+		return false;
+	});
+	
+// 	회원가입 창에서 사진업로드 후 확인 버튼을 눌렀을 때...
+	$('#upload-complete').click(function(){		
+
+		$("#form").attr("onsubmit", "return true;");
+		$("#form").submit();
 	});
 	
 });
@@ -386,9 +422,15 @@ body {
 }
 
 #wrapper {
+<<<<<<< HEAD
+	min-width: 978px; 
+	width: 100%;
+	margin: 0 auto;
+=======
 	min-width:978px; 
 	width: 100%;
 	margin:0 auto;"
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 
 #right-menu ul li {
@@ -408,6 +450,20 @@ body {
 }
 #header {
 /*    position: relative; */
+<<<<<<< HEAD
+	z-index: 100;
+   	left: 0;
+   	top: 0;
+   	margin: 0 auto;
+   	width: 100%;
+   	height: 55px;
+   	min-width: 978px;
+   	transition: 0.6s;
+   	display: block;
+   	position: -webkit-sticky;
+    position: sticky;
+    will-change: transform;
+=======
    z-index: 100;
    left: 0;
    top: 0;
@@ -420,6 +476,7 @@ body {
    position: -webkit-sticky;
      position: sticky;
      will-change: transform;
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
    
@@ -430,10 +487,17 @@ body {
    transition: 0.6s;
 }
 #header .inner {
+<<<<<<< HEAD
+   	position: relative;
+   	z-index: 1;
+  	margin: 0 auto;
+	padding: 0px 15px 0 20px;
+=======
 	position: relative;
    	z-index: 1;
    	margin: 0 auto;
 	padding: 0px 36px 0;
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
    	min-width:;
    	max-width:;
    	*zoom: 1;
@@ -479,7 +543,11 @@ body {
    float: right;
    text-align: right;
    z-index: 1;
-   padding-top : 33px;
+<<<<<<< HEAD
+   padding-top : 25px;
+=======
+   padding-top : 10px; 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header .logbar>li {
    margin: 0 0 0 26px;
@@ -497,7 +565,7 @@ body {
 }
 #header .logbar>li>a {
    display: inline-block;
-   padding: 3px 0;
+   padding: 23px 0 3px 0;
    font-size: 14px;
    letter-spacing: 0.18em;
    line-height: 1.2em;
@@ -526,6 +594,14 @@ ul.hovermenu>li>a {
    text-decoration: none;
    font-family: '나눔고딕';
 }
+#header #right-menu .fl-right li img {
+	border: 3px solid #999;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	-webkit-border-radius:50px;
+}
+
 #header .inner label {
    
    display: inline-block;
@@ -755,7 +831,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 		<div class="fl-left">
 			<h3 module="Layout_LogoTop">
 				<a href="/main"><img style="height: 50px;"
-					src="/resources/images/ps.jpg" alt="로고" /></a>
+					src="/resources/images/logo.jpg" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
    				 <input class="Search-box" type="search" id="Search-box" autocomplete="off">
@@ -788,22 +864,40 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'user' }">
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
+					<li><a href="/mypage/viewProfile">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
+					<c:if test="${member.stored_name eq null}">
+						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
+					</c:if>
+					<c:if test="${member.stored_name ne null}">
+						<li><img style="width:50px; height:50px" src="/resources/images/${member.stored_name }"/></li>	
+					</c:if>
 				</c:if>
 	
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/view_profile">마이페이지</a></li>
-					<li><a href="/logout">로그아웃</a></li>			
+					<li><a href="/mypage/viewProfile">마이페이지</a></li>
+					<li><a href="/logout">로그아웃</a></li>
+					<c:if test="${member.stored_name eq null}">
+						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
+					</c:if>
+					<c:if test="${member.stored_name ne null}">
+						<li><img style="width:50px; height:50px" src="/resources/images/${member.stored_name }"/></li>	
+					</c:if>
 				</c:if>
 	
 				<!--  관리자 로그인 -->
 				<c:if test="${member.mem_case eq 'admin' }">
-					<li><a href="#">관리자 페이지</a></li>
+					<li><a href="/admin/main">관리자 페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
+					<c:if test="${member.stored_name eq null}">
+						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
+					</c:if>
+					<c:if test="${member.stored_name ne null}">
+						<li><img style="width:50px; height:50px" src="/resources/images/${member.stored_name }"/></li>	
+					</c:if>
 				</c:if>
 			</c:if>
 		
@@ -823,7 +917,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <tr><td colspan="2" style="padding-top:10px;">
 <div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
-<div style="text-align:center;"><input type="password" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
+<div style="text-align:center;"><input type="password" id="pw_for_login" name="mem_pw" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="비밀번호" /></div></td></tr>
 </table>
 <div style="height:10px;"></div>
 <div style="text-align:left; padding-left:10px;">
@@ -946,7 +1040,7 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <a href="#join" class="goJoin" style="text-decoration:none; color:#008989;"><span style="font-size:22px;">&lt;</span>돌아가기</a>
 </td>
 <td style="width:70%; text-align:right; padding:36px 36px 0 0;">
-<div style="display:table; margin:0 0 0 200px;; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div style="display:table; margin:0 0 0 200px; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
 <div id="joinBtn2" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div>
 </div></td></tr>
 </table>
@@ -954,22 +1048,29 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 <!-- ====== 전화번호인증 모달창 //======================================== -->
 
 
-<!-- ====== // 회원가입 결과 (+ 프로필 사진 등록) 모달창 ======================================== -->
+<!-- ====== // 프로필 사진 등록 모달창 ======================================== -->
 <div id="modal-joinResult" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<form id="form" action="/join/insertMyPhoto" method="POST" enctype="multipart/form-data" onsubmit="return false;">
 <table style="width:100%;">
-<tr><td colspan="2">
+<tr><td>
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2"><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입 완료</h1></td></tr>
-
+<tr><td><h1 style="text-align:left; margin:0; padding:0 30px 10px 30px;">회원가입을 축하합니다.</h1></td></tr>
+<tr><td style="text-align:left; padding:1% 10% 5% 10%; font-size:18px; color:#666">
+회원님의 사진을 올려주세요.<br> 
+사진은 프로필에 추가되어 라이프이즈트립의 다른 회원에게 표시됩니다.<br> 
+얼굴이 선명하게 보이는 사진이어야 합니다.<br> 
+호스트나 게스트가 보게 되는 사진이므로 개인 정보나 민감한 정보가 표시되지 않은 사진을 사용하세요.</td></tr>
+<tr><td><div style="width:160px; height:160px; margin:0 auto; overflow:hidden;"><img id="profile-photo" style="width:90%; height:90%; border: 3px solid #999; -webkit-border-radius:160px;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
+<tr><td style="padding-top:36px;">
+<input id="mem_no_join" type="hidden" name="mem_no" />
+<input type="file" id="input-photo" name="file" hidden="hidden"/>
+<div style="display:table; margin:0 auto; width:40%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:3px;">
+<div id="photo-upload-btn" style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">사진 업로드</div></div></td></tr>
+<tr><td style="padding:36px 0 36px 0;"><a id="later" style="text-decoration:none; color:#008989;" href="/main">나중에 하겠습니다.</a>
+<div id="upload-complete" style="display:none; margin:0 auto; width:40%; height:50px; text-align:center; background-color:#4568FF; border-radius:3px;">
+<div style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">확인</div></div></td></tr>
 </table>
+</form>
 </div></div>
-<!-- ====== 회원가입 결과 (+ 프로필 사진 등록) 모달창 // ======================================== -->
-
-
-
-
-
-
-
-
+<!-- ====== 프로필 사진 등록 모달창 // ======================================== -->

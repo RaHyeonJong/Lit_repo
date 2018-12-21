@@ -3,9 +3,13 @@ package lit.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
@@ -15,6 +19,7 @@ import lit.util.SendSms;
 @Controller
 public class JoinController {
 	
+	@Autowired ServletContext context;
 	@Autowired JoinService joinService;
 		
 	@RequestMapping(value="/join/checkId")
@@ -59,15 +64,24 @@ public class JoinController {
 		Map<String, Object> map = new HashMap<>();
 		
 		String result ="fail";
+				
 		if(mem.getMem_no() != 0)
 			result = "success";
 		
 		map.put("result", result);
 		map.put("mem", mem);
-		
+				
 		mav.addAllObjects(map);
 		mav.setViewName("jsonView");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/join/insertMyPhoto")
+	public String insertMyPhoto(MultipartFile file, int mem_no) {
+		
+		joinService.insertMyPhoto(context, file, mem_no);
+		
+		return "redirect:/main";
 	}
 }
