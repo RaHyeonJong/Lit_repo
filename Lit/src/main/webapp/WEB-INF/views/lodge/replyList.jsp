@@ -5,8 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     
-    <c:forEach items = "${replyList}" var = "reply">
-					<div id="replyitem<c:out value ="${reply.comment_no }"/>" style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;
+   <c:forEach items = "${replyList}" var = "reply">
+					<div id="replyitem<c:out value ="${reply.parent_comment_no }"/>" style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;
 					margin-left: 10px;">    
        				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
  					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
@@ -21,5 +21,7 @@
  					 <button  onclick="fn_replyReply('<c:out value ="${reply.comment_no}"/>')">댓글</button>
 						
 <%--						</c:if> --%>
+					<div id = "parent_comment<c:out value ="${review.parent_comment_no }"/>"></div>
    				 </div>
 					</c:forEach>
+					

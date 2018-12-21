@@ -5,7 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     <!-- 구글 맵 -->  
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFaqOV0p_zrPFa70xwici5EGqDN9qq0fw&callback=initMap"async defer></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXFWcGZfctodSrxJThdhJKa0XPSP2sVlk&callback=initMap"
+    async defer></script>
 <style>
 
 #gallery {
@@ -37,9 +38,11 @@
   
 }
 
+
 #gallery #photo1 {
   grid-area: m;
 }
+
 #gallery #photo2 {
   grid-area: s1;
 }
@@ -245,8 +248,9 @@ a{color:#000;}
 .mask{width:100%; height:100%; position:fixed; left:0; top:0; z-index:10; background:#000; opacity:.5; filter:alpha(opacity=50);}
 
 #modalLayer{display:none; position:relative;}
-#modalLayer .modalContent{width:440px; height:200px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
-#modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer;}
+#modalLayer .modalContent{width:300px; height:700px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
+#modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer; 
+border: none; width: 40px; height: 40px;background: url("/resources/images/close.png") no-repeat;}
 
 .reply{
 border: 1px solid gray;
@@ -261,6 +265,8 @@ border: 1px solid gray;
 
 
 }
+
+
 </style>
  
 
@@ -344,15 +350,14 @@ function fn_formSubmit(){ //후기 입력
 	$.ajax({
     	url : "insertReview",
     	type : "post",
-    	data : {lodge_no:$("#lodge_no").val(),mem_name : $("#mem_name").val(), mem_no:$("#mem_no").val(), contents :$("#contents").val() },
+    	data : {"lodge_no":$("#lodge_no").val(),"mem_name" : $("#mem_name").val(), "mem_no":$("#mem_no").val(), "contents" :$("#contents").val() },
     	dataType :"html",
     	success : function(result){
-    		
     		alert("저장되었습니다.");
 //    		console.log(result);
 // 			$("#review").append(result);
-    		
-     		document.getElementById("review").innerHTML = result;
+    		$("#contents").val("");
+//     		document.getElementById("review").innerHTML = result;
     	}
     	})
     	
@@ -414,7 +419,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
     		dataType : "html",
     		success : function(result){
     			if(result!==""){
-    				document.getElementById("review").innerHTML = result;
+   				document.getElementById("review").innerHTML = result;
     				$("#replyDiv").hide();
     				alert("수정되었습니다.");
     			}
@@ -438,7 +443,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 	
     function fn_replyReply(comment_no){
 		$("#replyDialog").show();
-
+			
 		if(updateComm){
 			fn_replyUpdateCancel();
 		}
@@ -455,16 +460,21 @@ function fn_replyDelete(comment_no){ //후기 삭제
     }
     
     function fn_replyReplySave(){
-    	
-    $.ajax({
+
+    	$.ajax({
 
     	url :"lodgeReview",
     	type : "post",
     	data : {"lodge_no":$("#lodge_no3").val(),"mem_no":$("#mem_no3").val(),"contents":$("#contents3").val(),"parent_comment_no":$("#parent_comment_no3").val()},
     	dataType : "html" ,
     	success : function(result){
+
+    		$("#reviewitem").html("");
+    		hideDiv("#replyDialog");
     		alert("내용이 저장되었습니다.");
-    		document.getElementById("reply").innerHTML =result;
+    		$("#contents3").val("");
+    		document.getElementById("review").innerHTML = result;
+
     		
     	}
     	
@@ -492,10 +502,10 @@ function fn_replyDelete(comment_no){ //후기 삭제
       <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/></div>
       <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
       <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
-      <div class="photo " id="photo6" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/80x60"/></div>
-      <div class="photo " id="photo7" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/60x40"/></div>
-      <div class="photo " id="photo8" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/100x80"/></div>
-      <div class="photo " id="photo9" style =" overflow: hidden;"><img src="https://source.unsplash.com/random/90x50"/></div>
+      <div class="photo " id="photo6" style =" overflow: hidden;"><img src=""/></div>
+      <div class="photo " id="photo7" style =" overflow: hidden;"><img src=""/></div>
+      <div class="photo " id="photo8" style =" overflow: hidden;"><img src=""/></div>
+      <div class="photo " id="photo9" style =" overflow: hidden;"><img src=""/></div>
       </div>
       
       
@@ -571,8 +581,14 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
 			<div id="modalLayer">
  			 <div class="modalContent">
-    			<a href="#">모든 편의 시설</a> 
-    			<button type="button">닫기</button>
+    			<a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
+    			<c:forEach items="${item}" var = "lodgeItem">
+    			${lodgeItem }<br><br>
+    			</c:forEach>
+ 				
+    			<p style = "font-size: 20px;font-weight: bold;">노트북 작업공간</p>
+    			<c:out value = "${view.convenient_area }"/>
+    			<button class = "close_btn" type="button"></button>
  			 </div>
 			</div>
 			<!-- 편의시설 끝 -->
@@ -588,7 +604,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			<!-- 후기 -->
 				
 				<!-- 후기 작성 -->
-				<div name = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
+				<div id = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
         		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
         		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
@@ -598,8 +614,9 @@ function fn_replyDelete(comment_no){ //후기 삭제
 				
 					<div id="review"> <!-- 후기 리스트 -->
 				
-					<c:forEach items = "${lodgeReview}" var = "review">
-					<div id="reviewitem<c:out value ="${review.comment_no }"/>" style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;">    
+				    <c:forEach items = "${lodgeReview}" var = "review">
+    	<c:if test = "${review.parent_comment_no == 0 }">
+					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
        				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
  					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
        				 <c:out value="${review.mem_name}"/><br>
@@ -607,18 +624,40 @@ function fn_replyDelete(comment_no){ //후기 삭제
        				 <br/>
        				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
 
-<%--        				<c:if test ="${login && mem_no eq sessionScope.mem_no }"> --%>
-       				<button onclick="fn_replyUpdate('<c:out value ="${review.comment_no }"/>')">수정</button>
-       				 <button  onclick="fn_replyDelete('<c:out value ="${review.comment_no }"/>')">삭제</button>
- 					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no }"/>')">댓글</button>
+       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+       				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
+       				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
+ 					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
 						
-<%--						</c:if> --%>
-   				 	<div id = "reply"></div>
+						</c:if>
+   			
    				 </div>
+				</c:if>
+				<c:forEach items = "${lodgeReview}" var = "review2">
+					<c:if test="${review2.parent_comment_no == review.comment_no }">
+						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 10px;">    
+	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+	 					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
+	       				 <c:out value="${review2.mem_name}"/><br>
+		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
+	       				 <br/>
+	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
+	
+	       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
+	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
+	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button>
+					</c:if>
+					</div>
+					</c:if>
+				</c:forEach>
+			
 					</c:forEach>
 				</div>
 				
 				<!-- 후기 리스트 끝 -->
+				
+				
 					<!-- 댓글 수정 -->
 				<div id = "replyDiv" style ="width:99%; display:none">
 							<input type ="hidden" id = "lodge_no2" name ="lodge_no" value ="<c:out value ="${view.lodge_no }"/>">
