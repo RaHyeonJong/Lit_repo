@@ -24,9 +24,13 @@ public class MypageController {
 	@Autowired LoginService loginService;
 	@Autowired MypageService mypageService;
 	
-	@RequestMapping(value="/mypage/viewProfile")
-	public void viewProfile(){}
+	@RequestMapping(value="/mypage/main")
+	public void mypageMain(){}
+	
+	@RequestMapping(value="/mypage/viewMyProfile")
+	public void viewMyProfile(){}
 
+		
 	
 	@RequestMapping(value="/mypage/update_profile", method=RequestMethod.GET)
 	public void updateProfile(Model model, Member member) {

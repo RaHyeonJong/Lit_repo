@@ -832,7 +832,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'user' }">
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/viewProfile">마이페이지</a></li>
+					<li><a href="/mypage/main">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -846,7 +846,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'host' }">
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
-					<li><a href="/mypage/viewProfile">마이페이지</a></li>
+					<li><a href="/mypage/main">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -896,7 +896,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <div id="loginBtn" style="display:table-cell; vertical-align:middle; color:white; font-size: 20px; cursor:pointer;">로그인</div>
 </div>
 <div style="height:10px;"></div>
-<div>에어비앤비 계정이 없으세요? <a class="goTerms" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
+<div>라이프이즈트립 계정이 없으세요? <a class="goTerms" href="#join" style="text-decoration:none; color:#008989; font-size: 16px; font-weight:bold;">회원 가입</a></div>
 </div>
 </div>
 <!-- ======로그인 모달창 //======================================== -->
