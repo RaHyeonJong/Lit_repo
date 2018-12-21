@@ -100,6 +100,49 @@ public class HostController {
 	
 	}
 	
+	//1단계 편의시설
+	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.GET)
+	public void firstCon() {
+			
+			
+				}
+		
+	//1단계 편의시설
+	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.POST)
+	public void firstConproc(Lodge lodge) {
+		
+		
+		}
+	
+	//1단계 기타시설
+	@RequestMapping(value="/host/otherUse", method=RequestMethod.GET)
+	public void otherUse() {
+				
+				
+			}
+			
+	//1단계 기타시설
+	@RequestMapping(value="/host/otherUse", method=RequestMethod.POST)
+	public void otherUseproc(Lodge lodge) {
+			
+			
+			}
+	
+	//1단계 숙소관리
+		@RequestMapping(value="/host/manageLodge", method=RequestMethod.GET)
+		public void manageLodge() {
+					
+					
+				}
+				
+		//1단계 숙소관리
+		@RequestMapping(value="/host/manageLodge", method=RequestMethod.POST)
+		public void manageLodgeProc(Lodge lodge) {
+				
+				
+				}
+		
+	
 	
 	
 

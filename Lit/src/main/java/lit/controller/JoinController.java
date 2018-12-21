@@ -3,32 +3,25 @@ package lit.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
 import lit.service.face.JoinService;
+import lit.util.SendSms;
 
 @Controller
 public class JoinController {
 	
+	@Autowired ServletContext context;
 	@Autowired JoinService joinService;
-	
-	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String join() {
-		return "join/join";
-	}
-	
-	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinProcess(Member member) {
-		joinService.insertMember(member);
 		
-		return "join/result";
-	}
-	
 	@RequestMapping(value="/join/checkId")
 	public ModelAndView checkId(Member member) {
 		ModelAndView mav = new ModelAndView();
@@ -37,9 +30,58 @@ public class JoinController {
 		Map<String, Boolean> map = new HashMap<>();
 		map.put("existId", existId);
 		
-		mav.addObject("map", map);
+		mav.addAllObjects(map);
 		mav.setViewName("jsonView");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/terms")
+	public String viewTerms() {
+		
+		return "join/terms";
+	}
+	
+	@RequestMapping(value="/join/smsCerti")
+	public ModelAndView sendSms(String mem_phone) {
+		ModelAndView mav = new ModelAndView();
+		int ukey = SendSms.sendSms(mem_phone);
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("ukey", ukey);
+		
+		mav.addAllObjects(map);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/join/register")
+	public ModelAndView joinMember(Member mem) {
+		joinService.insertMember(mem);
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> map = new HashMap<>();
+		
+		String result ="fail";
+				
+		if(mem.getMem_no() != 0)
+			result = "success";
+		
+		map.put("result", result);
+		map.put("mem", mem);
+				
+		mav.addAllObjects(map);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/join/insertMyPhoto")
+	public String insertMyPhoto(MultipartFile file, int mem_no) {
+		
+		joinService.insertMyPhoto(context, file, mem_no);
+		
+		return "redirect:/main";
 	}
 }

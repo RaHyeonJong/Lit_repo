@@ -1,6 +1,6 @@
 package lit.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Board {
 	private int board_no;
@@ -9,19 +9,16 @@ public class Board {
 	private int mem_no;
 	private String mem_name;
 	private Date written_time;
-	private int hit;
-	@Override
-	public String toString() {
-		return "Board [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", mem_no=" + mem_no
-				+ ", mem_name=" + mem_name + ", written_time=" + written_time + ", hit=" + hit + "]";
-	}
+	private int answer;
+	
+	private String cmt; //Comment_tb에 있는 cmt (View 항목 참고할 것)
+	
 	public int getBoard_no() {
 		return board_no;
 	}
 	public void setBoard_no(int board_no) {
 		this.board_no = board_no;
 	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -52,11 +49,25 @@ public class Board {
 	public void setWritten_time(Date written_time) {
 		this.written_time = written_time;
 	}
-	public int getHit() {
-		return hit;
+	public int getAnswer() {
+		return answer;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setAnswer(int answer) {
+		this.answer = answer;
 	}
-
+	public String getCmt() {
+		return cmt;
+	}
+	public void setCmt(String cmt) {
+		this.cmt = cmt;
+	}
+	@Override
+	public String toString() {
+		return "Board [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", mem_no=" + mem_no
+				+ ", mem_name=" + mem_name + ", written_time=" + written_time + ", answer=" + answer + ", cmt=" + cmt
+				+ "]";
+	}
+	
+	
+		
 }

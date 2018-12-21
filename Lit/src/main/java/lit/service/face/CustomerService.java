@@ -3,14 +3,16 @@ package lit.service.face;
 import java.util.List;
 
 import lit.dto.Board;
-import lit.dto.Member;
 
 public interface CustomerService {
 
+	//문의내역 글쓰기
 	public void writer(Board board);
 	
-	public List<Board> list();
+	//문의내역 리스트 뿌려주기
+	public List<Board> boardlist(Board board);
 	
-	public Board view(int boardno);
+	//문의내역 상세페이지
+	public Board boardview(Board board);
 	
 }

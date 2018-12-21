@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Life is trip 인생은 여행이다</title>
 
 <style>
 #map {
@@ -53,8 +53,13 @@
 
 
 
+<<<<<<< HEAD
 	<div id="wrapper">
+=======
+<div id="wrapper"> 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
+<<<<<<< HEAD
 		<div>
 			<!-- header 시작 -->
 			<c:import url="../layout/header.jsp" />
@@ -74,6 +79,21 @@
 
 
 	</div>
+=======
+	<div><!-- header 시작 -->
+	<c:import url="../layout/header.jsp"/>
+	</div><!-- header 끝 -->
+	
+	
+	<div style="text-align: center">
+	<br>
+	<h1>Main Page</h1>
+	<h3>Life Is Trip 인생은 여행이다</h3>
+	</div>
+	
+	
+</div>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	<div id="map"></div>
 
 
