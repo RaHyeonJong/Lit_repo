@@ -22,11 +22,27 @@
 	
 	<select id="view" resultType="lit.dto.Board" parameterType="lit.dto.Board">
 	
-		SELECT b.title, b.contents, c.contents cmt
-		FROM board b, comment_tb c
+		SELECT b.board_no, b.title, b.contents, b.mem_no, m.mem_name, c.contents cmt
+		FROM board b, comment_tb c, member m
 		WHERE b.board_no = #{board_no } 
 		AND b.board_no = c.board_no(+)
-
+		AND b.mem_no = m.mem_no
+	
 	</select>
+
+	<insert id="contentwriter" parameterType="lit.dto.Comment">
+	
+		INSERT INTO comment_tb(comment_no, board_no, contents, mem_no)
+		VALUES(comment_seq.nextval, #{board_no }, #{contents }, 3)
+	
+	</insert>
+	
+	<update id="updateanswer" parameterType="lit.dto.Board">
+	
+		UPDATE board
+		SET answer = 1
+		WHERE board_no = #{board_no }
+	
+	</update>	
 
 </mapper>

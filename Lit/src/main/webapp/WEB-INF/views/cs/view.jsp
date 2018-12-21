@@ -6,19 +6,24 @@
 
 <body>
 
-
+<!-- board에 해당하는 멤버번호들의 리스트가 출력된다. -->
 <input type="hidden" value="${boardlist.mem_no }" name="mem_no" />
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
-	<div class="content">
+ 
 
+	<div class="content">
 
 		<div class="sub_title">
 				<b>Life Is Trip은 고객님의 목소리를 소중히 여깁니다.<br>
 				문의하신 내용은 확인 즉시, 빠르게 답변 드리도록 하겠습니다.</b> 
 		</div>
+
+
+		<!-- 관리자가 아닌 사용자 입장에서 보여주기 -->
+		<c:if test="${member.mem_case_no ne 0 }">
 	
 		<div class="sub_title1">
-				<h2>문의 확인하기</h2>
+				<h2>문의 확인 하기</h2>
 		</div>
 	
 		<div class="table_list">
@@ -57,7 +62,7 @@
 						<c:when test="${boardlist.cmt eq NULL}">
 						
 							<td colspan="2" style="height:150px; color:red; font-weight:bold">
-								답변 대기중 </td>
+								답변 대기중 </td	>
 						</c:when>
 						<c:when test="${boardlist.cmt ne NULL }">
 							
@@ -73,11 +78,68 @@
 			</table>
 		
 		</div>
-	
+		
 		<div class="btnList">
 			<button class="button2" onclick="button2_click()">뒤 로 가 기</button>
 		</div>
 	
+		</c:if>
+
+<!-- ========================================================================= -->	
+	
+		<!-- 관리자 입장  -->
+		<c:if test="${member.mem_case_no eq 0 }">
+	
+		${boardlist.board_no }
+		<input type="text" value="${boardlist.board_no }" name="board_no"/>
+		<div class="sub_title1">
+				<h2>문의 답변 하기</h2>
+		</div>
+		
+		<form action="/cs/view" method="post">
+		<div class="table_list">
+		
+			<table style="width:100%; border:1px solid #000000; text-align:left;">
+			
+				<tr>
+					<th> 문의 제목</th>
+					<td> ${boardlist.title }</td>
+				</tr>
+				
+				<tr>
+					<th> 작성자</th>
+					<td> ${boardlist.mem_name }</td>
+				</tr>	
+				
+				<tr>
+					<th colspan="2"> 문의 내용</th>
+				</tr>	
+				
+				<tr>
+					<td colspan="2"  style="height:150px;">
+						${boardlist.contents }
+					</td>
+				</tr>
+				
+				<tr>
+					<th colspan="2"> 문의 답변</th>
+				</tr>		
+				
+				<tr>
+					<td colspan="2" style="height:150px;">
+					<textarea name="contents" id="contents" style="line-height:150%; resize:none"></textarea>
+					</td>
+				</tr>
+			
+			</table>
+		
+		</div>
+		
+		<div class="btnList">
+			<button type="submit" class="button1">답 변 하 기</button>
+		</div>
+		</form>
+		</c:if>
 	
 	</div>
 </div>

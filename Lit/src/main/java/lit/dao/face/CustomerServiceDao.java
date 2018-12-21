@@ -3,6 +3,7 @@ package lit.dao.face;
 import java.util.List;
 
 import lit.dto.Board;
+import lit.dto.Comment;
 
 public interface CustomerServiceDao {
 
@@ -16,4 +17,7 @@ public interface CustomerServiceDao {
 	public Board view(Board board);
 
 	
+	public void contentwriter(Comment comment);
+
+	public void updateanswer(Board board);
 }

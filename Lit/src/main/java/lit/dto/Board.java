@@ -7,11 +7,12 @@ public class Board {
 	private String title;
 	private String contents;
 	private int mem_no;
-	private String mem_name;
 	private Date written_time;
 	private int answer;
 	
+	private String mem_name; //관리자 입장에서 문의사항 적은 작성자 불러오기
 	private String cmt; //Comment_tb에 있는 cmt (View 항목 참고할 것)
+	
 	
 	public int getBoard_no() {
 		return board_no;
