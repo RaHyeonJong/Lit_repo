@@ -422,16 +422,9 @@ body {
 }
 
 #wrapper {
-<<<<<<< HEAD
-	min-width: 978px; 
-	width: 100%;
-	margin: 0 auto;
-
-=======
 	min-width:978px; 
 	width: 100%;
 	margin:0 auto;"
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 
 #right-menu ul li {
@@ -450,23 +443,6 @@ body {
    top: 75px;
 }
 #header {
-<<<<<<< HEAD
-/*    position: relative; */
-
-	z-index: 100;
-   	left: 0;
-   	top: 0;
-   	margin: 0 auto;
-   	width: 100%;
-   	height: 55px;
-   	min-width: 978px;
-   	transition: 0.6s;
-   	display: block;
-   	position: -webkit-sticky;
-    position: sticky;
-    will-change: transform;
-
-=======
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -480,7 +456,6 @@ body {
    position: -webkit-sticky;
    position: sticky;
    will-change: transform;
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
    
@@ -490,12 +465,8 @@ body {
    background: #fffc;
    transition: 0.6s;
 }
-<<<<<<< HEAD
-#header .inner {
 
-=======
 #header .inner {
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	position: relative;
    	z-index: 1;
    	margin: 0 auto;
@@ -545,12 +516,7 @@ body {
    float: right;
    text-align: right;
    z-index: 1;
-<<<<<<< HEAD
-   padding-top : 25px;
-
-=======
    padding-top : 10px; 
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header .logbar>li {
    margin: 0 0 0 26px;
