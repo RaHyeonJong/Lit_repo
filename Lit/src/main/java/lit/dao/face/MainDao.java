@@ -5,6 +5,7 @@ import java.util.List;
 import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Lodge;
+import lit.dto.MapBounds;
 
 public interface MainDao {
 
@@ -23,5 +24,9 @@ public interface MainDao {
 	List<Lodge> selectThemeLodge(String theme); // 테마별 숙소 리스트
 
 	List<Festival> selectThemeFestival(String theme); // 테마별 행사 리스트
+
+	List<Lodge> selectLodge(); // 모든 숙소 리스트
+
+	List<Lodge> selectLodgeByBounds(MapBounds bounds);
 
 }

@@ -48,7 +48,7 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/view")
-	public void LodgeView(Lodge lodge, Model model ) {
+	public void LodgeView(Lodge lodge, Model model, Comment comment ) {
 		//숙소 썸네일 클릭시 보여지는 상세 뷰
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
 		//결제한 사람의 정보를 가져온다.
@@ -76,7 +76,10 @@ public class LodgeController {
 		// 댓글
 		List<Comment> lodgereview = lodgeService.commentList();
 		model.addAttribute("lodgeReview",lodgereview);
-		
+				
+		List<Comment> replyList = lodgeService.replyList(comment);
+		model.addAttribute("replyList",replyList);		
+	
 	}
 	
 	
@@ -116,16 +119,20 @@ public class LodgeController {
 			
 			List<Comment> lodgereview = lodgeService.commentList();
 			model.addAttribute("lodgeReview",lodgereview);
+			
 		
 		return "/lodge/ajaxReviewList";
 	}
+	
 	@RequestMapping(value ="/updateReview",method =RequestMethod.POST)
 	public String LodgeupdateReview(Comment comment,Model model) {
 		
 		lodgeService.updateComment(comment);
 		List<Comment> lodgereview = lodgeService.commentList();
 		model.addAttribute("lodgeReview",lodgereview);
-
+		List<Comment> replyList = lodgeService.replyList(comment);
+		model.addAttribute("replyList",replyList);		
+	
 		
 		return "/lodge/ajaxReviewList";
 	}
@@ -149,11 +156,17 @@ public class LodgeController {
 		
 		
 		lodgeService.insertLodgeComment(comment);
-		List<Comment> replyList = lodgeService.replyList();
+
+		//댓글
+		List<Comment> lodgereview = lodgeService.commentList();
+		model.addAttribute("lodgeReview",lodgereview);
+		
+		//대댓글
+		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
 	
 	
-		return "/lodge/plyList";
+		return "/lodge/ajaxReviewList";
 	}
 	
 	
