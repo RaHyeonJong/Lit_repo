@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import lit.dao.face.CustomerServiceDao;
 import lit.dto.Board;
-import lit.dto.Member;
 import lit.service.face.CustomerService;
 
 @Service
@@ -17,20 +16,17 @@ public class CustomerSerivceImpl implements CustomerService{
 
 	@Override
 	public void writer(Board board) {
-
 		customerserviceDao.writer(board);
 	}
 
 	@Override
-	public List<Board> list() {
-
-		return customerserviceDao.list();
+	public List<Board> boardlist(Board board) {
+		return customerserviceDao.boardlist(board);
 	}
 
 	@Override
-	public Board view(int boardno) {
-
-		return customerserviceDao.view(boardno);
+	public Board boardview(Board board) {
+		return customerserviceDao.view(board);
 	}
 	
 }

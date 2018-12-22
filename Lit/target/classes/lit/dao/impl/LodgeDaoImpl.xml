@@ -61,7 +61,14 @@ ORDER BY comment_no desc
 
 </select>
 
+<select id="lodgeReply" parameterType="lit.dto.Comment" resultType="lit.dto.Comment">
+	SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
+	WHERE c.mem_no = m.mem_no
+	AND lodge_no = #{lodge_no}
+    AND c.parent_comment_no =#{parent_comment_no}
+	ORDER BY comment_no desc
 
+</select>
 
 
 <insert id="insertReview" parameterType="lit.dto.Comment">
@@ -94,13 +101,7 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	VALUES(comment_seq.nextval,#{parent_comment_no},#{lodge_no},#{contents},#{mem_no})
 </insert>
 
-<select id="lodgeReply" resultType="lit.dto.Comment">
-	SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
-	WHERE c.mem_no = m.mem_no
-	AND lodge_no = 21
-	ORDER BY comment_no desc
 
-</select>
 
 
 </mapper>

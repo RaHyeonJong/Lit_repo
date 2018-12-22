@@ -42,7 +42,7 @@ public interface LodgeDao {
 	public void insertLodgeReply(Comment comment);
 	
 	//대댓글 리스트
-	public List<Comment> lodgeReply();
+	public List<Comment> lodgeReply(Comment comment);
 	
 	//좋아요(숙소 저장)
 	public void inserlodgetLike(Lodge lodge);

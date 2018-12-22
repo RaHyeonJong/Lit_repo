@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lit.dao.face.JoinDao">
+	<select id="checkId" parameterType="lit.dto.Member" resultType="int">
+		SELECT COUNT(*) FROM member
+		WHERE mem_id = #{mem_id }
+	</select>
+	
+	<insert id="insertMember" parameterType="lit.dto.Member">
+		<selectKey resultType="int" keyProperty="mem_no" order="BEFORE">
+	        SELECT member_seq.nextval FROM dual        
+	    </selectKey>
+		INSERT INTO member(mem_no, mem_case_no, mem_id, mem_name, mem_pw, mem_birth, mem_phone, mem_activation)
+		VALUES (#{mem_no }, 1, #{mem_id }, #{mem_name }, #{mem_pw }, #{mem_birth }, #{mem_phone }, 1)
+	</insert>
+
+
+</mapper>

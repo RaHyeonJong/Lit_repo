@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;"> 
+<div id="wrapper"> 
 
 	<div><!-- header 시작 -->
 	<c:import url="../layout/header.jsp"/>
@@ -26,10 +26,10 @@
 
 		목적지<br> <input id="location-input" type="text" name="location" placeholder="Search Box"/><br> 
 		<label  for="checkin_input"><small >체크인</small></label>
-		<input type="text" name="checkin" placeholder="년/월/일" data-language="en" class="datepicker-here" data-date-format="yyyy/mm/dd"/>
+		<input type="text" name="checkin" placeholder="년-월-일" data-language="en" class="datepicker-here" data-date-format="yyyy-mm-dd"/>
 		
 		<label  for="checkout_input"><small >체크아웃</small></label>
-		<input type="text" name="checkout" placeholder="년/월/일" data-language="en" class="datepicker-here" data-date-format="yyyy/mm/dd"/><br> 
+		<input type="text" name="checkout" placeholder="년-월-일" data-language="en" class="datepicker-here" data-date-format="yyyy-mm-dd"/><br> 
 		
 		인원수<br>
 		<select name="people" data-vars-select-name="people">

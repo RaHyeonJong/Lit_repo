@@ -2,6 +2,8 @@ package lit.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,19 +24,14 @@ public class MypageController {
 	@Autowired LoginService loginService;
 	@Autowired MypageService mypageService;
 	
-	@RequestMapping(value="/mypage/view_profile")
-	public void viewProfile(Model model, Member member) {
-		member = loginService.getMember(member);
-		
-		model.addAttribute("member", member);
-	}
+	@RequestMapping(value="/mypage/main")
+	public void mypageMain() { }
 	
-	@RequestMapping(value="/mypage/update_profile", method=RequestMethod.GET)
-	public void updateProfile(Model model, Member member) {
-		member = loginService.getMember(member);
-		
-		model.addAttribute("member", member);
-	}
+	@RequestMapping(value="/mypage/viewMyProfile")
+	public void viewMyProfile() { }
+
+	@RequestMapping(value="/mypage/updateMyProfile", method=RequestMethod.GET)
+	public void updateMyProfile() {	}
 	
 	@RequestMapping(value="/mypage/update_profile", method=RequestMethod.POST)
 	public String updateProfileProcess(Member member) {
