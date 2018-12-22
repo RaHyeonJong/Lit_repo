@@ -67,7 +67,7 @@ $(document).ready(function(){
 <body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/><br>
 
-<div style="width:60%; margin:0 auto;">
+<div style="width:80%; margin:0 auto;">
 <table style="width:100%;">
 <tr>
 <!-- 메뉴 -->
@@ -86,14 +86,6 @@ $(document).ready(function(){
 </tr>
 </table>
 </div>
-
-
-
-
-
-
-
-
 
 
 

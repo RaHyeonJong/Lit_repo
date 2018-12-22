@@ -422,7 +422,7 @@ body {
 }
 
 #wrapper {
-	min-width:978px; 
+	min-width:1200px; 
 	width: 100%;
 	margin:0 auto;"
 }
