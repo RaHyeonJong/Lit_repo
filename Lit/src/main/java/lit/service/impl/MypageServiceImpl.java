@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import lit.dto.Comment;
 import lit.dto.Image;
 import lit.dto.Member;
 import lit.service.face.MypageService;
+import lit.util.Paging;
 
 @Service
 public class MypageServiceImpl implements MypageService{
@@ -62,10 +64,14 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public List<Comment> getCommentList(Comment comm) {
-		return mypageDao.getCommentList(comm);
+	public int getTotalCommCnt(int mem_no) {
+		return mypageDao.getTotalCommCnt(mem_no);
 	}
 
+	@Override
+	public List<Comment> getCommentList(Paging paging) {
+		return mypageDao.getCommentList(paging);
+	}
 	
 	
 }

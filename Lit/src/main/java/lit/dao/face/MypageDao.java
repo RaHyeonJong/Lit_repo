@@ -5,6 +5,7 @@ import java.util.List;
 import lit.dto.Comment;
 import lit.dto.Image;
 import lit.dto.Member;
+import lit.util.Paging;
 
 public interface MypageDao {
 
@@ -21,6 +22,9 @@ public interface MypageDao {
 	public Member getMemberByNo(Member mem);
 
 	// mem_no으로 댓글 목록 가져오기
-	public List<Comment> getCommentList(Comment comm);
+	public List<Comment> getCommentList(Paging paging);
+
+	// mem_no로 작성한 댓글 수 조회하기
+	public int getTotalCommCnt(int mem_no);
 
 }

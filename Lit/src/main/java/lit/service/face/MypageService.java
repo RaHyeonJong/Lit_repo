@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lit.dto.Comment;
 import lit.dto.Member;
+import lit.util.Paging;
 
 public interface MypageService {
 
@@ -15,6 +16,8 @@ public interface MypageService {
 
 	public Member getMemberByNo(Member mem);
 
-	public List<Comment> getCommentList(Comment comm);
+	public List<Comment> getCommentList(Paging paging);
+
+	public int getTotalCommCnt(int mem_no);
 
 }

@@ -20,6 +20,7 @@ import lit.dto.Member;
 import lit.dto.Pay;
 import lit.service.face.LoginService;
 import lit.service.face.MypageService;
+import lit.util.Paging;
 
 @Controller
 public class MypageController {
@@ -62,14 +63,21 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage/viewMyContents")
-	public void viewMyContents(Model model, HttpSession session) {
+	public void viewMyContents(
+			Model model, 
+			HttpSession session,
+			@RequestParam(defaultValue="1") int curPage ) {
 		
-		Comment comm = new Comment();
-		comm.setMem_no(((Member)session.getAttribute("member")).getMem_no());
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		int totalCount = mypageService.getTotalCommCnt(mem_no);
 		
-		List<Comment> commList = mypageService.getCommentList(comm);
+		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		paging.setMem_no(mem_no);
+				
+		List<Comment> commList = mypageService.getCommentList(paging);
 		
 		model.addAttribute("commList", commList);
+		model.addAttribute("paging", paging);
 	}
 	
 	
