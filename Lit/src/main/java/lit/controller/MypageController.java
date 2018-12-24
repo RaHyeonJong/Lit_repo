@@ -2,6 +2,7 @@ package lit.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lit.dto.Board;
 import lit.dto.Comment;
@@ -21,60 +24,63 @@ import lit.service.face.MypageService;
 @Controller
 public class MypageController {
 	
+	@Autowired ServletContext context;
 	@Autowired LoginService loginService;
 	@Autowired MypageService mypageService;
 	
 	@RequestMapping(value="/mypage/main")
-	public void mypageMain() { }
+	public void mypageMain() {}
 	
 	@RequestMapping(value="/mypage/viewMyProfile")
-	public void viewMyProfile() { }
+	public void viewMyProfile() {}
 
 	@RequestMapping(value="/mypage/updateMyProfile", method=RequestMethod.GET)
-	public void updateMyProfile() {	}
+	public void updateMyProfile() {}
 	
-	@RequestMapping(value="/mypage/update_profile", method=RequestMethod.POST)
-	public String updateProfileProcess(Member member) {
-		mypageService.updateProfile(member);
+	@RequestMapping(value="/mypage/updateMyProfile", method=RequestMethod.POST)
+	public String updateProfileProcess(
+			MultipartFile file, 
+			HttpSession session,
+			@RequestParam(value="name-for-update") String mem_name,
+			@RequestParam(value="pw-for-update") String mem_pw,
+			@RequestParam(value="mem-phone-for-update") String mem_phone,
+			@RequestParam(value="intro-for-update") String mem_intro	) {
+				
+		Member mem = new Member();
+		mem.setMem_no(((Member)session.getAttribute("member")).getMem_no());
+		mem.setMem_name(mem_name);
+		mem.setMem_pw(mem_pw);
+		mem.setMem_phone(mem_phone);
+		mem.setMem_intro(mem_intro);
 		
-		return "redirect:/mypage/view_profile?mem_no="+member.getMem_no();
+		mypageService.updateProfile(context, file, mem);
+		mem = mypageService.getMemberByNo(mem);
+		
+		session.setAttribute("member", mem);
+		
+		return "redirect:/mypage/main";
 	}
 	
-	@RequestMapping(value="/mypage/view_favorite", method=RequestMethod.GET)
-	public void viewFavorite(Model model, Member member) {
-		List<Favorite> favorList = mypageService.getFavoriteList(member);
+	@RequestMapping(value="/mypage/viewMyContents")
+	public void viewMyContents(Model model, HttpSession session) {
 		
-		model.addAttribute("favorList", favorList);
+		Comment comm = new Comment();
+		comm.setMem_no(((Member)session.getAttribute("member")).getMem_no());
+		
+		List<Comment> commList = mypageService.getCommentList(comm);
+		
+		model.addAttribute("commList", commList);
 	}
 	
-	@RequestMapping(value="/mypage/delete_favorite", method=RequestMethod.POST)
-	public String deleteFavorite(Member member, Favorite favorite) {
-		mypageService.deleteFavorite(member, favorite);
-		
-		return "redirect:/mypage/view_favorite?mem_no="+member.getMem_no();
-	}
 	
-	@RequestMapping(value="/mypage/view_mywriting")
-	public void viewMywriting(Model model, Member member) {
-		List<Board> boardList = mypageService.getMyboardList(member);
-		List<Comment> commentList = mypageService.getMycommentList(member);
-		
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("commentList", commentList);
-	}
 	
-	@RequestMapping(value="/mypage/view_pay")
-	public void viewPay(Model model, Member member) {
-		List<Pay> payList = mypageService.getPayList(member);
-		
-		model.addAttribute("payList", payList);
-	}
 	
-	@RequestMapping(value="/mypage/update_pay")
-	public String updatePay(Pay pay, Member member) {
-		mypageService.updatePay(pay, member);
-		
-		return "redirect:/mypage/view_pay?mem_no="+member.getMem_no();
-	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

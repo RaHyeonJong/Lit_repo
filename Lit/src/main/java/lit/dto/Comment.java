@@ -8,6 +8,7 @@ public class Comment {
 	private int parent_comment_no;
 	private int board_no;
 	private int lodge_no;
+	private String lodge_name;
 	private String contents;
 	private int mem_no;
 	private String mem_name;
@@ -82,6 +83,14 @@ public class Comment {
 
 	public void setWritten_time(Date written_time) {
 		this.written_time = written_time;
+	}
+
+	public String getLodge_name() {
+		return lodge_name;
+	}
+
+	public void setLodge_name(String lodge_name) {
+		this.lodge_name = lodge_name;
 	}
 	
 	
