@@ -13,19 +13,19 @@ $(document).ready(function(){
 	// 왼쪽 사이드 메뉴 버튼을 클릭했을 때 css처리
 	$(window).click(function(e){
 		if(e.target.id == 'view-profile-btn' || e.target.id == 'update-profile-btn' || e.target.id == 'view-mycontents-btn'
-				|| e.target.id == 'view-myfavorites-btn' || e.target.id == 'view-mypayment-btn' || e.target.id == 'delete-membership-btn'){
+				|| e.target.id == 'view-myfavorites-btn' || e.target.id == 'view-mypayments-btn' || e.target.id == 'delete-membership-btn'){
 			$('#view-profile-btn').css("color", "#666");
 			$('#update-profile-btn').css("color", "#666");
 			$('#view-mycontents-btn').css("color", "#666");
 			$('#view-myfavorites-btn').css("color", "#666");
-			$('#view-mypayment-btn').css("color", "#666");
+			$('#view-mypayments-btn').css("color", "#666");
 			$('#delete-membership-btn').css("color", "#666");
 			
 			$('#view-profile-btn').css("font-weight", "normal");
 			$('#update-profile-btn').css("font-weight", "normal");
 			$('#view-mycontents-btn').css("font-weight", "normal");
 			$('#view-myfavorites-btn').css("font-weight", "normal");
-			$('#view-mypayment-btn').css("font-weight", "normal");
+			$('#view-mypayments-btn').css("font-weight", "normal");
 			$('#delete-membership-btn').css("font-weight", "normal");
 			
 			$('#'+e.target.id).css("color", "#333");
@@ -97,6 +97,22 @@ $(document).ready(function(){
 		});
 	});
 	
+	// 구매내역 보기를 클릭했을 때...
+	$('#view-mypayments-btn').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "/mypage/viewMyPayments",
+			data: {}, 
+			dataType: "html",
+			success : function(res){
+				$('#contents-div').html(res);
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
+	});
+	
 	
 });
 </script>
@@ -114,7 +130,7 @@ $(document).ready(function(){
 <div id="update-profile-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">회원정보 수정</div>
 <div id="view-mycontents-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">내가 쓴 글 보기</div>
 <div id="view-myfavorites-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">내가 찜한 숙소 보기</div>
-<div id="view-mypayment-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">구매내역 보기</div>
+<div id="view-mypayments-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">결제내역 보기</div>
 <div id="delete-membership-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">회원 탈퇴하기</div>
 </td>
 <!-- 내용 -->

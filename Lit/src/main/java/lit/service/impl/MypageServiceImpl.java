@@ -18,6 +18,7 @@ import lit.dto.Comment;
 import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Member;
+import lit.dto.Pay;
 import lit.service.face.MypageService;
 import lit.util.Paging;
 
@@ -87,6 +88,16 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public void deleteMyFavor(Favorite favor) {
 		mypageDao.deleteMyFavor(favor);
+	}
+
+	@Override
+	public int getTotalPayCnt(int mem_no) {
+		return mypageDao.getTotalPayCnt(mem_no);
+	}
+
+	@Override
+	public List<Pay> getPayList(Paging paging) {
+		return mypageDao.getPayList(paging);
 	}
 	
 	

@@ -5,7 +5,7 @@
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <style>
-.my-favor-tr:hover {
+.my-pay-tr:hover {
 	background-color: #eee;
 }
 #paging-table a {
@@ -29,7 +29,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type: "GET",
-			url: "/mypage/viewMyFavorites",
+			url: "/mypage/viewMypayments",
 			data: {"curPage": curPage}, 
 			dataType: "html",
 			success : function(res){
@@ -41,14 +41,14 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('.delete-favor-btn').click(function(e){
-		var favorite_no = $(e.target).attr("data-favorNo");
+	$('.delete-pay-btn').click(function(e){
+		var pay_no = $(e.target).attr("data-payNo");
 		var curPage = ${paging.curPage };
 				
 		$.ajax({
 			type: "POST",
-			url: "/mypage/deleteMyFavorites",
-			data: {"favorite_no": favorite_no, "curPage": curPage}, 
+			url: "/mypage/deleteMypays",
+			data: {"pay_no": pay_no, "curPage": curPage}, 
 			dataType: "html",
 			success : function(res){
 				$('#contents-div').html(res);
@@ -63,26 +63,26 @@ $(document).ready(function(){
 </script>
 
 <div id="contents-div">
-<h3 style="color:#565;">내가 찜한 숙소 보기</h3>
+<h3 style="color:#565;">결제내역 보기</h3>
 
 <div style="width:75%;">
-<table id="my-favor-table" style="border-collapse:collapse; ">
+<table id="my-pay-table" style="border-collapse:collapse; font-size:14px;">
 <tr style="height:50px; background-color:#333; color:white;">
-<td style="width:85px; text-align:center; white-space:nowrap;">번호</td>
+<td style="width:120px; text-align:center; padding:0 10px 0 10px; white-space:nowrap;">결제일 (결제번호)</td>
+<td style="width:380px; text-align:center;">숙박기간 / 숙박인원</td>
 <td style="width:180px; text-align:center;">숙소이름</td>
-<td style="width:380px; text-align:center;">숙소주소</td>
-<td style="width:80px; text-align:center;">옵션</td>
+<td style="width:80px; text-align:center;">결제상태</td>
 </tr>
 
-<c:forEach items="${favorList }" var="favor">
-<tr class="my-favor-tr" style="height:50px; cursor:pointer;" >
-<td  onclick="location.href='/lodge/view?lodge_no=${favor.lodge_no }'" ><div style="width:85px; text-align:center;">${favor.favorite_no }</div></td>
-<td  onclick="location.href='/lodge/view?lodge_no=${favor.lodge_no }'"class="my-favor-td">
-<div style="width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;text-align:center; padding:0 10px 0 10px;">${favor.lodge_name }</div></td>
-<td  onclick="location.href='/lodge/view?lodge_no=${favor.lodge_no }'"class="my-favor-td" >
-<div style="width:380px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; padding:0 10px 0 10px;">${favor.lodge_addr }</div></td>
+<c:forEach items="${payList }" var="pay">
+<tr class="my-pay-tr" style="height:100px;" >
+<td><div style="width:120px; text-align:center; padding:0 10px 0 10px; font-size:14px;"><fmt:formatDate value="${pay.pay_time }" pattern="yyyy-MM-dd"/> <span style="color:#666;">(${pay.pay_no })</span></div></td>
+<td  onclick="location.href='/lodge/view?lodge_no=${pay.lodge_no }'"class="my-pay-td">
+<div style="width:380px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;text-align:center; padding:0 10px 0 10px;">${pay.lodge_name }</div></td>
+<td  onclick="location.href='/lodge/view?lodge_no=${pay.lodge_no }'"class="my-pay-td" >
+<div style="width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; padding:0 10px 0 10px;">${pay.lodge_name }</div></td>
 <td style="text-align:center; padding:0 10px 0 10px;">
-<button class="delete-favor-btn" style="width:80px; height:40px; cursor:pointer; border:none; background-color:#FF5A5F; color:white; font-size:15px;" data-favorNo="${favor.favorite_no }">삭 제</button></td>
+<button class="delete-pay-btn" style="width:80px; height:40px; cursor:pointer; border:none; background-color:#FF5A5F; color:white; font-size:15px;" data-payNo="${pay.pay_no }">삭 제</button></td>
 </tr>
 <tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #ccc; margin:0; padding:0;"></td></tr>
 </c:forEach>

@@ -54,7 +54,7 @@
 		WHERE mem_no = #{mem_no }
 	</select>
 	
-		<select id="getFavorList" parameterType="lit.util.Paging" resultType="lit.dto.Favorite">
+	<select id="getFavorList" parameterType="lit.util.Paging" resultType="lit.dto.Favorite">
 		SELECT *
 		FROM (
 		SELECT rownum rnum, f.* 
@@ -70,5 +70,22 @@
 		DELETE FROM favorite
 		WHERE favorite_no = #{favorite_no }
 	</delete>
+	
+	<select id="getTotalPayCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM pay
+		WHERE mem_no = #{mem_no }
+	</select>
+	
+	<select id="getPayList" parameterType="lit.util.Paging" resultType="lit.dto.Pay">
+		SELECT *
+		FROM (
+		SELECT rownum rnum, p.* 
+		FROM(
+		SELECT p.*, l.lodge_name
+		FROM pay p, lodge l 
+		WHERE p.lodge_no = l.lodge_no  AND p.mem_no = #{mem_no }
+		ORDER BY pay_no DESC) p)
+		WHERE rnum BETWEEN #{startNo} AND #{endNo }
+	</select>
   
   </mapper>

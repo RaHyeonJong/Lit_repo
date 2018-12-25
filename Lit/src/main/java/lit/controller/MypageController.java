@@ -123,7 +123,23 @@ public class MypageController {
 		return "mypage/viewMyFavorites";
 	}
 	
-	
+	@RequestMapping(value="/mypage/viewMyPayments", method=RequestMethod.GET)
+	public void viewMyPayments(
+			Model model,
+			HttpSession session,
+			@RequestParam(defaultValue="1") int curPage ) {
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		int totalCount = mypageService.getTotalPayCnt(mem_no);
+		
+		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		paging.setMem_no(mem_no);
+		
+		List<Pay> payList = mypageService.getPayList(paging);
+		
+		model.addAttribute("payList", payList);
+		model.addAttribute("paging", paging);
+	}
 	
 	
 	
