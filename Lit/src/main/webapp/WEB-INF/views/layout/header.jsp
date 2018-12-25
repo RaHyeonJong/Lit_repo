@@ -422,7 +422,7 @@ body {
 }
 
 #wrapper {
-	min-width:978px; 
+	min-width:1200px; 
 	width: 100%;
 	margin:0 auto;"
 }
@@ -878,11 +878,11 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 
 <!-- ======// 로그인 모달창 ======================================== -->
 <div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<div style="position:fixed; width:568px; padding-bottom:36px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
+<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/caitlyn999.jpg"/></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
 <div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
@@ -1030,7 +1030,7 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 사진은 프로필에 추가되어 라이프이즈트립의 다른 회원에게 표시됩니다.<br> 
 얼굴이 선명하게 보이는 사진이어야 합니다.<br> 
 호스트나 게스트가 보게 되는 사진이므로 개인 정보나 민감한 정보가 표시되지 않은 사진을 사용하세요.</td></tr>
-<tr><td><div style="width:160px; height:160px; margin:0 auto; overflow:hidden;"><img id="profile-photo" style="width:90%; height:90%; border: 3px solid #999; -webkit-border-radius:160px;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
+<tr><td><div style="width:160px; height:160px; margin:0 auto; overflow:hidden;"><img id="profile-photo" style="width:90%; height:90%; border: 3px solid #999; border-radius:50%;" src="/resources/images/empty_profile_photo.jpg"></div></td></tr>
 <tr><td style="padding-top:36px;">
 <input id="mem_no_join" type="hidden" name="mem_no" />
 <input type="file" id="input-photo" name="file" hidden="hidden"/>
