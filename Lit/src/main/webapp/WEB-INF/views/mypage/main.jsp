@@ -81,6 +81,22 @@ $(document).ready(function(){
 		});
 	});
 	
+	// 내가 찜한 숙소 보기를 클릭했을 때...
+	$('#view-myfavorites-btn').click(function(){
+		$.ajax({
+			type: "GET",
+			url: "/mypage/viewMyFavorites",
+			data: {}, 
+			dataType: "html",
+			success : function(res){
+				$('#contents-div').html(res);
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
+	});
+	
 	
 });
 </script>

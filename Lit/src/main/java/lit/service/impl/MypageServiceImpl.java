@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lit.dao.face.JoinDao;
 import lit.dao.face.MypageDao;
 import lit.dto.Comment;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Member;
 import lit.service.face.MypageService;
@@ -71,6 +72,21 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<Comment> getCommentList(Paging paging) {
 		return mypageDao.getCommentList(paging);
+	}
+
+	@Override
+	public int getTotalFavorCnt(int mem_no) {
+		return mypageDao.getTotalFavorCnt(mem_no);
+	}
+
+	@Override
+	public List<Favorite> getFavorList(Paging paging) {
+		return mypageDao.getFavorList(paging);
+	}
+
+	@Override
+	public void deleteMyFavor(Favorite favor) {
+		mypageDao.deleteMyFavor(favor);
 	}
 	
 	

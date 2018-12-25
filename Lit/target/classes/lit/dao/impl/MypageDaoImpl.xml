@@ -48,5 +48,27 @@
 		SELECT COUNT(*) FROM comment_tb
 		WHERE mem_no = #{mem_no }
 	</select>
+	
+	<select id="getTotalFavorCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM favorite
+		WHERE mem_no = #{mem_no }
+	</select>
+	
+		<select id="getFavorList" parameterType="lit.util.Paging" resultType="lit.dto.Favorite">
+		SELECT *
+		FROM (
+		SELECT rownum rnum, f.* 
+		FROM(
+		SELECT f.*, l.lodge_name, l.lodge_addr
+		FROM favorite f, lodge l 
+		WHERE f.lodge_no = l.lodge_no  AND f.mem_no = #{mem_no }
+		ORDER BY favorite_no DESC) f)
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<delete id="deleteMyFavor" parameterType="lit.dto.Favorite">
+		DELETE FROM favorite
+		WHERE favorite_no = #{favorite_no }
+	</delete>
   
   </mapper>
