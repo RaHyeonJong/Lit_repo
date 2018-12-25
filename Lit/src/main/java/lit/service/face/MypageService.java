@@ -2,26 +2,22 @@ package lit.service.face;
 
 import java.util.List;
 
-import lit.dto.Board;
+import javax.servlet.ServletContext;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lit.dto.Comment;
-import lit.dto.Favorite;
 import lit.dto.Member;
-import lit.dto.Pay;
+import lit.util.Paging;
 
 public interface MypageService {
 
-	public void updateProfile(Member member);
+	public void updateProfile(ServletContext context, MultipartFile multipartFile, Member mem);
 
-	public List<Favorite> getFavoriteList(Member member);
+	public Member getMemberByNo(Member mem);
 
-	public void deleteFavorite(Member member, Favorite favorite);
+	public List<Comment> getCommentList(Paging paging);
 
-	public List<Board> getMyboardList(Member member);
-
-	public List<Comment> getMycommentList(Member member);
-
-	public List<Pay> getPayList(Member member);
-
-	public void updatePay(Pay pay, Member member);
+	public int getTotalCommCnt(int mem_no);
 
 }

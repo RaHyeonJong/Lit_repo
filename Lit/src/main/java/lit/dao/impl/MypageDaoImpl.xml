@@ -3,18 +3,50 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="lit.dao.face.MypageDao">
-	<insert id="updateProfile"></insert>
+  
+	<update id="updateMyPhoto" parameterType="lit.dto.Image">
+		UPDATE image
+		SET origin_name = #{origin_name },
+			Stored_name = #{stored_name }
+		WHERE mem_no = #{mem_no }
+	</update>
 	
-	<select id="getFavoriteList"></select>
+	<select id="checkMyPhoto" parameterType="lit.dto.Image" resultType="int">
+		SELECT COUNT(*)
+		FROM image
+		WHERE mem_no = #{mem_no }
+	</select>
+  
+	<update id="updateProfile" parameterType="lit.dto.Member">
+		UPDATE member
+		SET mem_name = #{mem_name },
+			mem_pw = #{mem_pw },
+			mem_phone = #{mem_phone },
+			mem_intro = #{mem_intro }
+		WHERE mem_no = #{mem_no }
+	</update>
 	
-	<delete id="deleteFavorite"></delete>
+	<select id="getMemberByNo" parameterType="lit.dto.Member" resultType="lit.dto.Member">
+		SELECT m.*, i.origin_name, i.stored_name
+		FROM member m, image i
+		WHERE m.mem_no = #{mem_no }
+		    AND m.mem_no = i.mem_no(+)
+	</select>
 	
-	<select id="getMyboardList"></select>
+	<select id="getCommentList" parameterType="lit.util.Paging" resultType="lit.dto.Comment">
+		SELECT *
+		FROM (
+		SELECT rownum rnum, c.* 
+		FROM(SELECT c.*, l.lodge_name 
+		FROM comment_tb c, lodge l 
+		WHERE c.lodge_no = l.lodge_no  AND c.mem_no = #{mem_no }
+		ORDER BY comment_no DESC) c)
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
 	
-	<select id="getMycommentList"></select>
-	
-	<select id="getPayList"></select>
-	
-	<update id="updatePay"></update>
+	<select id="getTotalCommCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM comment_tb
+		WHERE mem_no = #{mem_no }
+	</select>
   
   </mapper>
