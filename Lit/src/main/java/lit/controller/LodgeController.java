@@ -4,6 +4,7 @@ package lit.controller;
 import java.io.IOException;
 import java.io.Writer;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -103,11 +104,14 @@ public class LodgeController {
 	}
 	
 	@RequestMapping(value ="/search", method =RequestMethod.POST)
-	public @ResponseBody ModelAndView re(Pay pay,Lodge lodge,Model model,
+	public @ResponseBody ModelAndView re(Pay pay,Lodge lodge,
 			@RequestParam(defaultValue="00/00/0000") String start,
           @RequestParam(defaultValue="00/00/0000") String end ) {
 		
 		ModelAndView mav = new ModelAndView();
+		
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		
 		
 		mav.setViewName("jsonView");
 		
@@ -132,30 +136,35 @@ public class LodgeController {
 				currentDate = c.getTime();
 			}
 			//요금 계산 
-			for(int i =0; i < dates.size(); i++) {
+			for(int i =1; i < dates.size(); i++) {
 				
 				int add = lodge.getStay_cost()*i;
 				
-				mav.addObject("add", add);
+				String cost =  formatter.format(add);
+				
+				String st  = lodge.getStay_cost() +"x"+ i+"박";
+				
+				double service = add*0.1;
+				
+				String ser = "서비스 수수료" +formatter.format(service)+"원";
+				
+				int sum = add + (int)service;
+				
+				String total = "합계"+formatter.format(sum)+"원";
+				
+				mav.addObject("add", cost);
+				mav.addObject("st", st);
+				mav.addObject("ser", ser);
+				mav.addObject("total",total);
 			}
-			
-			
 
 		} catch (ParseException e) {
 
 			e.printStackTrace();
 		}
-
-		
-		
 		
 		return mav;
 	}
-	
-	
-	
-	
-	
 	
 	
 	

@@ -48,11 +48,13 @@ $(document).ready(function(){
 	e.preventDefault();
 	var stat = $('#numberUpDown').text();
 	var num = parseInt(stat,10);
-	num++;
+	
+// 		parseInt(stat,10);
+		num++;
 
-	if(num>5){
+	if(num>"${view.lodge_capacity}"){
 	alert('더이상 늘릴수 없습니다.');
-	num=5;
+	num= ${view.lodge_capacity};
 	}
 	$('#numberUpDown').text(num);
 	
@@ -62,6 +64,22 @@ $(document).ready(function(){
 	
 	var $start = $('#start'),
 		$end = $('#end');
+	
+	 $start.datepicker({
+		language : 'en',
+		onSelect : function(fd, date){
+			$end.data('datepicker')
+			.update('minDate',date)
+		}
+	})
+	 $end.datepicker({
+		language : 'en',
+	onSelect : function(fd,date){
+		$start.data('datepicker')
+		.update('maxDate',date)
+	}
+	})
+	
 	
 	
 	$("#search").on("click", function(){
@@ -86,6 +104,9 @@ $(document).ready(function(){
 		
 			console.log(mav);
 			$("#stay_cost").html(mav.add);
+			$("#cost").html(mav.st);
+			$("#service").html(mav.ser);
+			$("#sum").html(mav.total);
 	
 			}
 			
@@ -130,7 +151,7 @@ $(document).ready(function(){
 
 <div class="nav_side">
 		
-		<div><span  id = "stay_cost"><c:out value = "${view.stay_cost }"/></span>원/박</div>
+		<div><span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
 		<div id ="date">날짜<br>
 		
 		
@@ -143,9 +164,21 @@ $(document).ready(function(){
 		</div>
 		
 		<br><br>	
-		<div class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a></div>
+		
+		<div class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
+		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
+		<div>
+		<p id = "cost"></p>
+		<p id = "service"></p>
+		<p id="sum"></p>
+		</div>
+		
+		
+<!-- 		<button id = "reserBtn">예약 요청</button> -->
 	
-	<button id = "reserBtn">예약 요청</button>
+		</div>
+
+
 </div>
   			
   			

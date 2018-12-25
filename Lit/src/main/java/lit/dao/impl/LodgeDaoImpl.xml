@@ -6,20 +6,20 @@
 
 <select id="SelectLodgeView" resultType="lit.dto.Lodge">
 
-	SELECT
+		SELECT
 	lodge_no, 
 	bc.building_case_no,
-    building_case,
+    bc.building_case,
 	l.lodge_case_no,
 	lodge_case,
     lodge_name, 
 	lodge_capacity, 
 	lodge_room, 
 	lodge_addr,
-	convenient_facility,
+    convenient_facility,
 	convenient_area,
-	ready_time, 
-	stay_cost,
+	ready_time,
+    stay_cost,
 	check_in_time, 
 	regit_date,
 	latitude, 
