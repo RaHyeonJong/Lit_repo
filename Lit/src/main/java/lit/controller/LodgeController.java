@@ -93,6 +93,72 @@ public class LodgeController {
 		
 	}
 	
+	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
+	public void LodgeReservation2(Pay pay) {
+		// 예약 하기 클릭시 결제 정보를 보여준다.
+		// 로그인이 안되있는 상태에선 리턴으로 로그인모달창을 띄운다.
+		
+//		lodgeService.LodgeReservationView(pay);
+
+	}
+	
+	@RequestMapping(value ="/search", method =RequestMethod.POST)
+	public @ResponseBody ModelAndView re(Pay pay,Lodge lodge,Model model,
+			@RequestParam(defaultValue="00/00/0000") String start,
+          @RequestParam(defaultValue="00/00/0000") String end ) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("jsonView");
+		
+		Map resultMap = new HashMap();
+	
+		final String DATE_PATTERN = "MM/dd/yyyy"; 
+
+		SimpleDateFormat simple = new SimpleDateFormat(DATE_PATTERN);
+
+		try {
+			Date startDate = simple.parse(start);
+			Date endDate = simple.parse(end);
+			
+			ArrayList<String> dates = new ArrayList<String>();
+			
+			Date currentDate = startDate; //시작 날짜
+			while (currentDate.compareTo(endDate) <= 0) {
+				dates.add(simple.format(currentDate));
+				Calendar c = Calendar.getInstance();
+				c.setTime(currentDate);
+				c.add(Calendar.DAY_OF_MONTH, 1);
+				currentDate = c.getTime();
+			}
+			//요금 계산 
+			for(int i =0; i < dates.size(); i++) {
+				
+				int add = lodge.getStay_cost()*i;
+				
+				mav.addObject("add", add);
+			}
+			
+			
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value ="/pay",method =RequestMethod.GET)
 	public void LodgePay(Pay pay, Model model) {
 		//결제하기 클릭시 결제정보를 보여주고 확인을 하면 결제가 완료되게 한다.
@@ -203,4 +269,12 @@ public class LodgeController {
 		
 		lodgeService.insertReport(lodge);
 	}
+	
+	@RequestMapping(value ="/sidebar", method =RequestMethod.GET)
+	public void sidebar() {}
+	
+	
+	
+	
+	
 }
