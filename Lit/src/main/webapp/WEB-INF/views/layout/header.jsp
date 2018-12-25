@@ -877,11 +877,11 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 
 <!-- ======// 로그인 모달창 ======================================== -->
 <div id="modal-login" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<div style="position:fixed; width:568px; padding-bottom:36px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
+<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/caitlyn999.jpg"/></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
 <div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
