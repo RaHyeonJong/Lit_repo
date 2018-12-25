@@ -81,11 +81,14 @@
 		FROM (
 		SELECT rownum rnum, p.* 
 		FROM(
-		SELECT p.*, l.lodge_name
-		FROM pay p, lodge l 
-		WHERE p.lodge_no = l.lodge_no  AND p.mem_no = #{mem_no }
+		SELECT p.*, l.lodge_name, i.stored_name
+		FROM pay p, lodge l, image i
+		WHERE p.lodge_no = l.lodge_no  
+        AND p.lodge_no = i.lodge_no (+)
+        AND i.thumb_nail(+) = 1
+        AND p.mem_no = #{mem_no }
 		ORDER BY pay_no DESC) p)
-		WHERE rnum BETWEEN #{startNo} AND #{endNo }
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
   
   </mapper>

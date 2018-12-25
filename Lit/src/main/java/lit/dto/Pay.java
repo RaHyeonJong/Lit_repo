@@ -28,6 +28,8 @@ public class Pay {
 	private int pay_state_no;			// 결제상태 / NOMAL: 정상, REFUND_WAITING: 환불대기, REFUND_COMPLETE: 환불완료
 	private String pay_state;			// NOMAL or REFUND_WAITING or REFUND_COMPLETE
 	
+	private String stored_name;		// 숙소 썸네일 이미지
+	
 	@Override
 	public String toString() {
 		return "Pay [pay_no=" + pay_no + ", mem_no=" + mem_no + ", lodge_no=" + lodge_no + ", room_no=" + room_no
@@ -46,11 +48,11 @@ public class Pay {
 
 	public void setPay_state_no(int pay_state_no) {
 		this.pay_state_no = pay_state_no;
-		if(pay_state_no == 0)
+		if(pay_state_no == 1)
 			setPay_state(NOMAL);
-		else if(pay_state_no == 1)
-			setPay_state(REFUND_WAITING);
 		else if(pay_state_no == 2)
+			setPay_state(REFUND_WAITING);
+		else if(pay_state_no == 3)
 			setPay_state(REFUND_COMPLETE);			
 	}
 
@@ -191,6 +193,18 @@ public class Pay {
 
 	public void setLodge_name(String lodge_name) {
 		this.lodge_name = lodge_name;
+	}
+
+
+
+	public String getStored_name() {
+		return stored_name;
+	}
+
+
+
+	public void setStored_name(String stored_name) {
+		this.stored_name = stored_name;
 	}
 	
 	

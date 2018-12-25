@@ -5,9 +5,6 @@
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <style>
-.my-pay-tr:hover {
-	background-color: #eee;
-}
 #paging-table a {
 	text-decoration: none;
 }
@@ -68,23 +65,32 @@ $(document).ready(function(){
 <div style="width:75%;">
 <table id="my-pay-table" style="border-collapse:collapse; font-size:14px;">
 <tr style="height:50px; background-color:#333; color:white;">
-<td style="width:120px; text-align:center; padding:0 10px 0 10px; white-space:nowrap;">결제일 (결제번호)</td>
-<td style="width:380px; text-align:center;">숙박기간 / 숙박인원</td>
-<td style="width:180px; text-align:center;">숙소이름</td>
+<td style="width:140px; text-align:center; padding:0 10px 0 10px; white-space:nowrap;">결제일 (결제번호)</td>
+<td style="width:280px; text-align:center;">숙소</td>
+<td style="width:280px; text-align:center;">숙박정보</td>
 <td style="width:80px; text-align:center;">결제상태</td>
 </tr>
 
 <c:forEach items="${payList }" var="pay">
-<tr class="my-pay-tr" style="height:100px;" >
-<td><div style="width:120px; text-align:center; padding:0 10px 0 10px; font-size:14px;"><fmt:formatDate value="${pay.pay_time }" pattern="yyyy-MM-dd"/> <span style="color:#666;">(${pay.pay_no })</span></div></td>
-<td  onclick="location.href='/lodge/view?lodge_no=${pay.lodge_no }'"class="my-pay-td">
-<div style="width:380px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;text-align:center; padding:0 10px 0 10px;">${pay.lodge_name }</div></td>
-<td  onclick="location.href='/lodge/view?lodge_no=${pay.lodge_no }'"class="my-pay-td" >
-<div style="width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; padding:0 10px 0 10px;">${pay.lodge_name }</div></td>
-<td style="text-align:center; padding:0 10px 0 10px;">
-<button class="delete-pay-btn" style="width:80px; height:40px; cursor:pointer; border:none; background-color:#FF5A5F; color:white; font-size:15px;" data-payNo="${pay.pay_no }">삭 제</button></td>
+<tr>
+<td style="border-right:1px solid #ddd; border-bottom:1px solid #ddd;"><div style="width:140px; text-align:center; padding:10px; font-size:14px;"><fmt:formatDate value="${pay.pay_time }" pattern="yyyy-MM-dd"/> <span style="color:#666;">(${pay.pay_no })</span></div></td>
+<td  rowspan="2" style="padding:5px;">
+<table onclick="location.href='/lodge/view?lodge_no=${pay.lodge_no }'" style="width:100%; cursor:pointer;"><tr>
+<td style="width:50px;"><img src="/resources/images/${pay.stored_name }" width=50px; height=50px;/></td>
+<td><div style="width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left;">${pay.lodge_name }</div></td>
+</tr></table>
+</td>
+<td  rowspan="2">
+<div style="width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;text-align:left; padding:5px;">
+<fmt:formatDate value="${pay.stay_start }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${pay.stay_end }" pattern="yyyy-MM-dd"/> ( ${pay.stay_term-1 }박 ${pay.stay_term }일 )<br>
+숙박인원 : ${pay.stay_heads }명</div></td>
+<td rowspan="2" style="text-align:center; padding:10px;"><div style="width:80px;">${pay.pay_state }</div></td>
 </tr>
+<tr><td rowspan="2" style="padding:10px; line-height:24px; border-right:1px solid #ddd;">결제금액: <span style="font-weight:bold;"><fmt:formatNumber value="${pay.pay_sum }"/></span>원<br>
+<a style="text-decoration:underline; cursor:pointer; color:blue;">주문상세보기</a></td></tr>
+<tr><td colspan="3" style="padding:10px; border-top:1px solid #ddd;">호스트에게 문의하기&nbsp;&nbsp;&nbsp;<button>결제취소 요청</button></td></tr>
 <tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #ccc; margin:0; padding:0;"></td></tr>
+
 </c:forEach>
 
 <tr><td colspan="4" style="padding-top:30px;">
