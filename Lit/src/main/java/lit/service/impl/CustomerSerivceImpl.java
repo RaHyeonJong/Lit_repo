@@ -41,5 +41,11 @@ public class CustomerSerivceImpl implements CustomerService{
 		customerserviceDao.updateanswer(board);
 		
 	}
+
+	@Override
+	public void updatecomment(Comment comment) {
+		customerserviceDao.updatecomment(comment);
+		
+	}
 	
 }

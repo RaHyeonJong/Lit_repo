@@ -20,7 +20,8 @@ public interface CustomerService {
 	public void contentwriter(Comment comment);
 	
 	//답변을 쓰면 answer는 0에서 1로 바꿔준다
-	
 	public void updateanswer(Board board);
+	
+	public void updatecomment(Comment comment);
 	
 }

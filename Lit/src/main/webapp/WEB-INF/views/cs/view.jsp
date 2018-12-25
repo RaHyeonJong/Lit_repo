@@ -28,7 +28,7 @@
 	
 		<div class="table_list">
 		
-			<table style="width:100%; border:1px solid #000000; text-align:left;">
+			<table class="table2">
 			
 				<tr>
 					<th> 문의 제목</th>
@@ -89,17 +89,16 @@
 	
 		<!-- 관리자 입장  -->
 		<c:if test="${member.mem_case_no eq 0 }">
-	
-		${boardlist.board_no }
-		<input type="text" value="${boardlist.board_no }" name="board_no"/>
 		<div class="sub_title1">
 				<h2>문의 답변 하기</h2>
 		</div>
 		
+		<!-- Form태그 안에 boarD_no을 받아줘야한다 밖에 쓰면 적용이 안되니 주의할 것 -->
 		<form action="/cs/view" method="post">
+		<input type="hidden" value="${boardlist.board_no }" name="board_no" />
 		<div class="table_list">
 		
-			<table style="width:100%; border:1px solid #000000; text-align:left;">
+			<table class="table2">
 			
 				<tr>
 					<th> 문의 제목</th>
@@ -127,7 +126,7 @@
 				
 				<tr>
 					<td colspan="2" style="height:150px;">
-					<textarea name="contents" id="contents" style="line-height:150%; resize:none"></textarea>
+					<textarea name="contents" id="contents" style="line-height:150%; resize:none">${boardlist.cmt }</textarea>
 					</td>
 				</tr>
 			

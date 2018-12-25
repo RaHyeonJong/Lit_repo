@@ -72,12 +72,10 @@ public class CustomerServiceController {
 	public void view(Model model, Board board)
 	{
 		logger.info("문의 답변 보기");
-		System.out.println(board);
 		
 		board = customerService.boardview(board);
 	
 		model.addAttribute("boardlist",board);
-		System.out.println(board);
 	}
 	
 	//관리자 입장에서 문의 답변 하기
@@ -85,15 +83,18 @@ public class CustomerServiceController {
 	public String viewProc(Model model, Board board, Comment comment)
 	{
 		logger.info("관리자 문의 답변 처리하기");
-		logger.info(comment.toString());
+		logger.info("전 : " + comment.toString());
 				
-		//댓글 달기
+		//관리자가 이용자의 문의 질문을 답변해줌
 		customerService.contentwriter(comment);
 		
 		//board 테이블에 answer 컬럼을 0에서 1로 바뀌기
 		customerService.updateanswer(board);
 		
-		logger.info(comment.toString());
+		//답변 수정 (의문, update 쿼리문을 짯는데 왜 추가가 되는 걸까?)
+		customerService.updatecomment(comment);
+		
+		logger.info("후 : " + comment.toString());
 		return "redirect:/cs/cs";
 	}
 }

@@ -11,8 +11,15 @@ public class Board {
 	private int answer;
 	
 	private String mem_name; //관리자 입장에서 문의사항 적은 작성자 불러오기
-	private String cmt; //Comment_tb에 있는 cmt (View 항목 참고할 것)
+	private String cmt; //Comment_tb에 있는 cmt (View 항목 참고할 것)	
 	
+	
+	@Override
+	public String toString() {
+		return "Board [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", mem_no=" + mem_no
+				+ ", written_time=" + written_time + ", answer=" + answer + ", mem_name=" + mem_name + ", cmt=" + cmt
+				+ "]";
+	}
 	
 	public int getBoard_no() {
 		return board_no;
@@ -38,12 +45,6 @@ public class Board {
 	public void setMem_no(int mem_no) {
 		this.mem_no = mem_no;
 	}
-	public String getMem_name() {
-		return mem_name;
-	}
-	public void setMem_name(String mem_name) {
-		this.mem_name = mem_name;
-	}
 	public Date getWritten_time() {
 		return written_time;
 	}
@@ -56,19 +57,16 @@ public class Board {
 	public void setAnswer(int answer) {
 		this.answer = answer;
 	}
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
 	public String getCmt() {
 		return cmt;
 	}
 	public void setCmt(String cmt) {
 		this.cmt = cmt;
-	}
-	@Override
-	public String toString() {
-		return "Board [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", mem_no=" + mem_no
-				+ ", mem_name=" + mem_name + ", written_time=" + written_time + ", answer=" + answer + ", cmt=" + cmt
-				+ "]";
-	}
-	
-	
-		
+	}	
 }
