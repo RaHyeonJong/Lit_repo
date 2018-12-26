@@ -65,8 +65,11 @@ $(document).ready(function(){
 	var $start = $('#start'),
 		$end = $('#end');
 	
+	
+	
 	 $start.datepicker({
 		language : 'en',
+		minDate : new Date(),
 		onSelect : function(fd, date){
 			$end.data('datepicker')
 			.update('minDate',date)
@@ -74,6 +77,7 @@ $(document).ready(function(){
 	})
 	 $end.datepicker({
 		language : 'en',
+		minDate : new Date(),
 	onSelect : function(fd,date){
 		$start.data('datepicker')
 		.update('maxDate',date)
@@ -82,9 +86,10 @@ $(document).ready(function(){
 	
 	
 	
-	$("#search").on("click", function(){
+	$("#search").click(function(){
 		var stay_start = $('#start').val(),
-			stay_end = $('#end').val()
+			stay_end = $('#end').val(),
+			cost = ${view.stay_cost };
 			 // 숙박 가격	
 	
 			if(stay_start == "" || stay_end ==""){
@@ -93,27 +98,35 @@ $(document).ready(function(){
 			} 
 			 
 		
-		cost = ${view.stay_cost };
+		
 		
 		$.ajax({
 		type : "post",
 		url : "search",
 			data :{ "stay_cost" : cost , "start" : stay_start, "end" : stay_end},
-		dataType:"json",
+		dataType:"html",
 		success: function(mav) {
 		
 			console.log(mav);
-			$("#stay_cost").html(mav.add);
-			$("#cost").html(mav.st);
-			$("#service").html(mav.ser);
-			$("#sum").html(mav.total);
-	
+			document.getElementById("total").innerHTML = mav;
+// 			$("#stay_cost").html(mav.add);
+// 			$("#cost").html(mav.st);
+// 			$("#service").html(mav.ser);
+// 			$("#sum").html(mav.total);
+// 			 $("#reserBtn").click(function(){
+// 					location.href = "/lodge/reservation";
+// 				});	
 			}
 			
+			 
 		});
-		
-	});
 	
+			
+	
+	
+	});
+			
+		
 	});
 
 
@@ -129,6 +142,15 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
 
+$(document).ready(function(){
+	
+	
+
+	
+	
+	
+	
+});
 
 
 </script>
@@ -153,29 +175,26 @@ $(document).ready(function(){
 		
 		<div><span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
 		<div id ="date">날짜<br>
-		
-		
-      		 <div  id = "picker" class = "form-control">
+      		 <div  id = "picker">
 			<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">
       		 <input id="start" name ="stay_start" type="text"  data-language="en" placeholder ="체크인"/>
       		 <input id="end" class = "form-control" name ="stay_end" type="text"  data-language="en"placeholder ="체크아웃"/>
       		 <button id = "search">검색</button>
-			</div>
+			
 		</div>
 		
 		<br><br>	
-		
-		<div class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
+		<div id ="people" class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
 		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
-		<div>
+		
+		<div id ="total">
 		<p id = "cost"></p>
 		<p id = "service"></p>
 		<p id="sum"></p>
-		</div>
+		<button id = "reserBtn">예약 요청</button>
 		
-		
-<!-- 		<button id = "reserBtn">예약 요청</button> -->
-	
+		</div><!-- 토탈 -->
+		</div><!-- 사람수 -->
 		</div>
 
 

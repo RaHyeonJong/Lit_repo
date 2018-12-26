@@ -80,11 +80,66 @@ public class MypageController {
 		model.addAttribute("paging", paging);
 	}
 	
+	@RequestMapping(value="/mypage/viewMyFavorites", method=RequestMethod.GET)
+	public void viewMyFavorites(
+			Model model,
+			HttpSession session,
+			@RequestParam(defaultValue="1") int curPage ) {
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		int totalCount = mypageService.getTotalFavorCnt(mem_no);
+		
+		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		paging.setMem_no(mem_no);
+		
+		List<Favorite> favorList = mypageService.getFavorList(paging);
+		
+		model.addAttribute("favorList", favorList);
+		model.addAttribute("paging", paging);
+	}
 	
+	@RequestMapping(value="/mypage/deleteMyFavorites", method=RequestMethod.POST)
+	public String deleteMyFavorites(
+			Model model,
+			HttpSession session,
+			Favorite favor,
+			@RequestParam(defaultValue="1") int curPage ) {
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		favor.setMem_no(mem_no);
+		
+		mypageService.deleteMyFavor(favor);
+		
+		int totalCount = mypageService.getTotalFavorCnt(mem_no);
+		
+		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		paging.setMem_no(mem_no);
+		
+		List<Favorite> favorList = mypageService.getFavorList(paging);
+		
+		model.addAttribute("favorList", favorList);
+		model.addAttribute("paging", paging);
+		
+		return "mypage/viewMyFavorites";
+	}
 	
-	
-	
-	
+	@RequestMapping(value="/mypage/viewMyPayments", method=RequestMethod.GET)
+	public void viewMyPayments(
+			Model model,
+			HttpSession session,
+			@RequestParam(defaultValue="1") int curPage ) {
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		int totalCount = mypageService.getTotalPayCnt(mem_no);
+		
+		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		paging.setMem_no(mem_no);
+		
+		List<Pay> payList = mypageService.getPayList(paging);
+		
+		model.addAttribute("payList", payList);
+		model.addAttribute("paging", paging);
+	}
 	
 	
 	

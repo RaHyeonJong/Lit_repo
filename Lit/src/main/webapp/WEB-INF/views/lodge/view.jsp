@@ -495,21 +495,6 @@ $(function() {
     $("#datepicker2").datepicker();
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <body>
@@ -548,8 +533,7 @@ $(function() {
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
-									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> <span class="dot">• </span> <span> <a href="#"
-										class="color-rausch light"> </a>
+									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> 
 									</span>
 								</p>
 							</th>
@@ -628,7 +612,7 @@ $(function() {
 			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
-				
+				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
 				<!-- 후기 작성 -->
 				<div id = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
@@ -637,6 +621,7 @@ $(function() {
       			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
        			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
+				</c:if>
 				
 					<div id="review"> <!-- 후기 리스트 -->
 				
@@ -669,7 +654,7 @@ $(function() {
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
 	
-	       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+	       				<c:if test ="${login && view.mem_no eq sessionScope.mem_no }">
 	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
 	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
 	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button>
