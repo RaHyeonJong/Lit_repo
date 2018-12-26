@@ -3,16 +3,17 @@ package lit.dto;
 import java.util.Date;
 
 public class Pay {
-	private final String CARD = "card";			//결제수단: 카드 / pay_method_no: 1
-	private final String PHONE = "phone";		//결제수단: 휴대폰 / pay_mehtod_no: 2
+	private final String CARD = "카드";			//결제수단: 카드 / pay_method_no: 1
+	private final String PHONE = "휴대폰";		//결제수단: 휴대폰 / pay_mehtod_no: 2
 	
-	private final String NOMAL = "nomal";
-	private final String REFUND_WAITING = "refund_waiting";
-	private final String REFUND_COMPLETE = "refund_complete";
+	private final String NOMAL = "정상결제";
+	private final String REFUND_WAITING = "결제 취소 요청";
+	private final String REFUND_COMPLETE = "결제 취소";
 	
 	private int pay_no;				// 결제번호
 	private int mem_no;				// 구매회원번호
 	private int lodge_no;				// 예약숙소번호
+	private String lodge_name;	// 숙소이름
 	private int room_no;				// 예약방번호(숙소유형이 motel에 해당되는 경우에만)
 	private int pay_method_no;	// 1=CARD, 2=PHONE
 	private String pay_method;	// card or phone
@@ -26,6 +27,8 @@ public class Pay {
 	private int stay_heads;			// 숙박인원
 	private int pay_state_no;			// 결제상태 / NOMAL: 정상, REFUND_WAITING: 환불대기, REFUND_COMPLETE: 환불완료
 	private String pay_state;			// NOMAL or REFUND_WAITING or REFUND_COMPLETE
+	
+	private String stored_name;		// 숙소 썸네일 이미지
 	
 	@Override
 	public String toString() {
@@ -45,11 +48,11 @@ public class Pay {
 
 	public void setPay_state_no(int pay_state_no) {
 		this.pay_state_no = pay_state_no;
-		if(pay_state_no == 0)
+		if(pay_state_no == 1)
 			setPay_state(NOMAL);
-		else if(pay_state_no == 1)
-			setPay_state(REFUND_WAITING);
 		else if(pay_state_no == 2)
+			setPay_state(REFUND_WAITING);
+		else if(pay_state_no == 3)
 			setPay_state(REFUND_COMPLETE);			
 	}
 
@@ -178,6 +181,30 @@ public class Pay {
 
 	public void setStay_heads(int stay_heads) {
 		this.stay_heads = stay_heads;
+	}
+
+
+
+	public String getLodge_name() {
+		return lodge_name;
+	}
+
+
+
+	public void setLodge_name(String lodge_name) {
+		this.lodge_name = lodge_name;
+	}
+
+
+
+	public String getStored_name() {
+		return stored_name;
+	}
+
+
+
+	public void setStored_name(String stored_name) {
+		this.stored_name = stored_name;
 	}
 	
 	

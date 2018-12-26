@@ -3,8 +3,10 @@ package lit.dao.face;
 import java.util.List;
 
 import lit.dto.Comment;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Member;
+import lit.dto.Pay;
 import lit.util.Paging;
 
 public interface MypageDao {
@@ -26,5 +28,20 @@ public interface MypageDao {
 
 	// mem_no로 작성한 댓글 수 조회하기
 	public int getTotalCommCnt(int mem_no);
+
+	// mem_no로 찜한 숙소 수 조회하기
+	public int getTotalFavorCnt(int mem_no);
+
+	// mem_no으로 찜숙소 목록 가져오기
+	public List<Favorite> getFavorList(Paging paging);
+
+	// 특정 찜 데이터 삭제하기
+	public void deleteMyFavor(Favorite favor);
+
+	// mem_no의 구매내역 수 조회하기
+	public int getTotalPayCnt(int mem_no);
+
+	// mem_no으로 결제내역 목록 가져오기
+	public List<Pay> getPayList(Paging paging);
 
 }
