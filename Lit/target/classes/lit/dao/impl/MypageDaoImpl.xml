@@ -96,5 +96,20 @@
 		SET pay_state_no = 2
 		WHERE pay_no = #{pay_no }
 	</update>
+	
+	<select id="getPay" parameterType="lit.dto.Pay" resultType="lit.dto.Pay">
+		SELECT * FROM pay
+		WHERE pay_no = #{pay_no }
+	</select>
   
+	<select id="getLodge" parameterType="lit.dto.Pay" resultType="lit.dto.Lodge">
+		SELECT * FROM lodge
+		WHERE lodge_no = #{lodge_no }
+	</select>
+	
+	<select id="getHost" parameterType="lit.dto.Lodge" resultType="lit.dto.Member">
+		SELECT * FROM Member
+		WHERE mem_no = #{mem_no }
+	</select>
+	
   </mapper>
