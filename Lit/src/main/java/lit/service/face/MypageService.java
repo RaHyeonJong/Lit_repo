@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lit.dto.Comment;
 import lit.dto.Favorite;
+import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
 import lit.util.Paging;
@@ -33,5 +34,11 @@ public interface MypageService {
 	public List<Pay> getPayList(Paging paging);
 
 	public void cancelPayment(Pay pay);
+
+	public Pay getPay(Pay pay);
+
+	public Lodge getLodge(Pay pay);
+
+	public Member getHost(Lodge lodge);
 
 }
