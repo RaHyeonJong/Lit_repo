@@ -62,9 +62,7 @@
 	
 	function button2_click()
 	{
-		alert("이전으로 이동합니다.");
-		history.go(-1);
-		
+		history.go(-1);	
 	}
 
 </script>
