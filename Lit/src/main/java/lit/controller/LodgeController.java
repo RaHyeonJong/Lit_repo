@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,36 +85,12 @@ public class LodgeController {
 	}
 	
 	
-	@RequestMapping(value ="/reservation", method =RequestMethod.GET)
-	public void LodgeReservation(Pay pay) {
-		// 예약 하기 클릭시 결제 정보를 보여준다.
-		// 로그인이 안되있는 상태에선 리턴으로 로그인모달창을 띄운다.
-		
-//		lodgeService.LodgeReservationView(pay);
-		
-		
-	}
-	
-	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
-	public void LodgeReservation2(Pay pay) {
-		// 예약 하기 클릭시 결제 정보를 보여준다.
-		// 로그인이 안되있는 상태에선 리턴으로 로그인모달창을 띄운다.
-		
-//		lodgeService.LodgeReservationView(pay);
-
-	}
-	
 	@RequestMapping(value ="/search", method =RequestMethod.POST)
-	public @ResponseBody ModelAndView re(Pay pay,Lodge lodge,
+	public String re(Lodge lodge,Model model,
 			@RequestParam(defaultValue="00/00/0000") String start,
           @RequestParam(defaultValue="00/00/0000") String end ) {
 		
-		ModelAndView mav = new ModelAndView();
-		
-		DecimalFormat formatter = new DecimalFormat("###,###");
-		
-		
-		mav.setViewName("jsonView");
+	
 		
 		Map resultMap = new HashMap();
 	
@@ -135,36 +112,45 @@ public class LodgeController {
 				c.add(Calendar.DAY_OF_MONTH, 1);
 				currentDate = c.getTime();
 			}
-			//요금 계산 
-			for(int i =1; i < dates.size(); i++) {
+				//요금 계산 
 				
-				int add = lodge.getStay_cost()*i;
+				int add = lodge.getStay_cost()*dates.size(); //숙박 일당 계산
 				
-				String cost =  formatter.format(add);
+				double service = add*0.1; //서비스 수수료
 				
-				String st  = lodge.getStay_cost() +"x"+ i+"박";
-				
-				double service = add*0.1;
-				
-				String ser = "서비스 수수료" +formatter.format(service)+"원";
-				
-				int sum = add + (int)service;
-				
-				String total = "합계"+formatter.format(sum)+"원";
-				
-				mav.addObject("add", cost);
-				mav.addObject("st", st);
-				mav.addObject("ser", ser);
-				mav.addObject("total",total);
-			}
+				int sum = add + (int)service; //총액
+
+				model.addAttribute("add", add);
+				model.addAttribute("ser", service);
+				model.addAttribute("total",sum);
+			
 
 		} catch (ParseException e) {
 
 			e.printStackTrace();
 		}
 		
-		return mav;
+		
+		return "/lodge/total";
 	}
+	
+	
+
+	@RequestMapping(value ="/reservation", method =RequestMethod.GET)
+	public void LodgeReservation(Lodge lodge) {}
+	
+	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
+	public void LodgeReservation2(Double service_fee,int pay_sum,Lodge lodge) {
+		
+		System.out.println(service_fee);
+		System.out.println(lodge.getStay_cost());
+		System.out.println(pay_sum);
+		
+//		lodgeService.LodgeReservationView(pay);
+
+	}
+	
+	
 	
 	
 	
@@ -268,10 +254,7 @@ public class LodgeController {
 		lodgeService.insertMessage(message);
 	}
 	
-	@RequestMapping(value ="/dd", method =RequestMethod.GET)
-	public void ReportLodge() {
-		
-	}
+
 	@RequestMapping(value ="/report", method =RequestMethod.POST)
 	public void ReportLodge(Lodge lodge) {
 		// 숙소번호를 파라미터로 받아와서 report테이블에 저장.

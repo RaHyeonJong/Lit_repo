@@ -8,6 +8,7 @@
 
 		SELECT
 	lodge_no, 
+	mem_no,
 	bc.building_case_no,
     bc.building_case,
 	l.lodge_case_no,
@@ -27,7 +28,7 @@
 	FROM lodge l , lodge_case lc, building_case bc
     WHERE l.lodge_case_no = lc.lodge_case_no
     AND l.lodge_case_no = bc.building_case_no
-    AND lodge_no = 123
+    AND lodge_no = 143
 
 </select>
 
@@ -42,13 +43,13 @@
 	board_no,
 	thumb_nail
 	FROM image
-	WHERE lodge_no = 123
+	WHERE lodge_no = 143
 
 </select>
 
 <select id = "selectConvenient" resultType ="lit.dto.Lodge">
 	SELECT convenient_facility FROM lodge
-	WHERE lodge_no = 123
+	WHERE lodge_no = 143
 
 </select>
 
@@ -57,7 +58,7 @@
 
 SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
 WHERE c.mem_no = m.mem_no
-AND lodge_no = 123
+AND lodge_no = 143
 ORDER BY comment_no desc
 
 </select>

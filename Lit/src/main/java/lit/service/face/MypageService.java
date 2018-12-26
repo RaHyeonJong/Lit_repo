@@ -32,4 +32,6 @@ public interface MypageService {
 
 	public List<Pay> getPayList(Paging paging);
 
+	public void cancelPayment(Pay pay);
+
 }

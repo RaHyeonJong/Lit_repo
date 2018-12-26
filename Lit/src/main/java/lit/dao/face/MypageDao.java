@@ -44,4 +44,7 @@ public interface MypageDao {
 	// mem_no으로 결제내역 목록 가져오기
 	public List<Pay> getPayList(Paging paging);
 
+	// pay_no으로 결제취소요청하기
+	public void cancelPayment(Pay pay);
+
 }

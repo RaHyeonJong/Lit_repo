@@ -14,12 +14,13 @@
        				 <br/>
        				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
 
-       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+       				<c:if test ="${ login && member.mem_no eq review.mem_no}">
        				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
        				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
+					</c:if>
+					<c:if test ="${login && member.mem_no eq view.mem_no}">
  					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
-						
-						</c:if>
+					</c:if>	
    			
    				 </div>
 				</c:if>
@@ -33,10 +34,9 @@
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
 	
-	       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+	       				<c:if test ="${login && review2.mem_no eq member.mem_no}">
 	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
 	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
-	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button>
 	 					 </c:if>
 					</div>
 					</c:if>

@@ -90,5 +90,11 @@
 		ORDER BY pay_no DESC) p)
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
+	
+	<update id="cancelPayment" parameterType="lit.dto.Pay">
+		UPDATE pay
+		SET pay_state_no = 2
+		WHERE pay_no = #{pay_no }
+	</update>
   
   </mapper>
