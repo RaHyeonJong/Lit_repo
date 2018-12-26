@@ -86,11 +86,10 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/search", method =RequestMethod.POST)
-	public String re(Pay pay,Lodge lodge,Model model,
+	public String re(Lodge lodge,Model model,
 			@RequestParam(defaultValue="00/00/0000") String start,
           @RequestParam(defaultValue="00/00/0000") String end ) {
 		
-		DecimalFormat formatter = new DecimalFormat("###,###");
 	
 		
 		Map resultMap = new HashMap();
@@ -113,10 +112,9 @@ public class LodgeController {
 				c.add(Calendar.DAY_OF_MONTH, 1);
 				currentDate = c.getTime();
 			}
-			//요금 계산 
-			for(int i =1; i < dates.size(); i++) {
+				//요금 계산 
 				
-				int add = lodge.getStay_cost()*i; //숙박 일당 계산
+				int add = lodge.getStay_cost()*dates.size(); //숙박 일당 계산
 				
 				double service = add*0.1; //서비스 수수료
 				
@@ -125,8 +123,6 @@ public class LodgeController {
 				model.addAttribute("add", add);
 				model.addAttribute("ser", service);
 				model.addAttribute("total",sum);
-			}
-			
 			
 
 		} catch (ParseException e) {
@@ -141,20 +137,14 @@ public class LodgeController {
 	
 
 	@RequestMapping(value ="/reservation", method =RequestMethod.GET)
-	public void LodgeReservation(Pay pay) {
-		
-			
-		
-		
-//		lodgeService.LodgeReservationView(pay);
-		
-		
-	}
+	public void LodgeReservation(Lodge lodge) {}
 	
 	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
-	public void LodgeReservation2(Pay pay, HttpServletRequest req) {
+	public void LodgeReservation2(Double service_fee,int pay_sum,Lodge lodge) {
 		
-		
+		System.out.println(service_fee);
+		System.out.println(lodge.getStay_cost());
+		System.out.println(pay_sum);
 		
 //		lodgeService.LodgeReservationView(pay);
 
