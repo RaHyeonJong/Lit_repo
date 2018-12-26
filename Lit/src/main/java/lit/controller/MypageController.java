@@ -141,7 +141,28 @@ public class MypageController {
 		model.addAttribute("paging", paging);
 	}
 	
-	
+	@RequestMapping(value="/mypage/cancelPayment", method=RequestMethod.POST)
+	public String cancelPayment(
+			Pay pay,
+			Model model,
+			HttpSession session,
+			@RequestParam(defaultValue="1") int curPage ) {
+		
+		mypageService.cancelPayment(pay);
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		int totalCount = mypageService.getTotalPayCnt(mem_no);
+		
+		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		paging.setMem_no(mem_no);
+		
+		List<Pay> payList = mypageService.getPayList(paging);
+		
+		model.addAttribute("payList", payList);
+		model.addAttribute("paging", paging);
+		
+		return "mypage/viewMyPayments";
+	}
 	
 	
 	

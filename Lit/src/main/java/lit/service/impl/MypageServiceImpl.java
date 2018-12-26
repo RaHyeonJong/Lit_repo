@@ -99,6 +99,11 @@ public class MypageServiceImpl implements MypageService{
 	public List<Pay> getPayList(Paging paging) {
 		return mypageDao.getPayList(paging);
 	}
+
+	@Override
+	public void cancelPayment(Pay pay) {
+		mypageDao.cancelPayment(pay);
+	}
 	
 	
 }
