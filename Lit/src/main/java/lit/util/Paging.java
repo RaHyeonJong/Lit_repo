@@ -17,7 +17,7 @@ public class Paging {
 	// 총 게시글 수만 입력하는 생성자
 	//	curPage == 1
 	//	pageCount == 10
-	//	listCount == 10
+	//	listCounat == 10
 	public Paging(int totalCount) {
 		this.setTotalCount(totalCount);
 		
