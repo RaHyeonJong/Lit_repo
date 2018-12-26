@@ -7,6 +7,7 @@
     <!-- 구글 맵 -->  
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXFWcGZfctodSrxJThdhJKa0XPSP2sVlk&callback=initMap"
     async defer></script>
+
 <style>
 
 #gallery {
@@ -216,6 +217,7 @@ max-width: 77px;
 .line{
    border-bottom-style: solid !important;
     border-bottom-color: #f5f5f5 !important;
+    width: 650px;
 }
 .user_img{
 	background-color: var(--color-accent-light-gray, #D8D8D8) !important;
@@ -267,6 +269,7 @@ border: 1px solid gray;
 }
 
 
+
 </style>
  
 
@@ -274,16 +277,11 @@ border: 1px solid gray;
 var map;
 var latVal = ${view.latitude};//숙소 위도
 var lngVal = ${view.longitude}; //숙소 경도
-var infoWindow;
-// function initMap() {
-// 	  var uluru = {lat: latVal, lng: lngVal};
-// 	  var map = new google.maps.Map(
-// 			document.getElementById('map'), {zoom: 15, center: uluru});
-   
-// 	  var marker = new google.maps.Marker({position: uluru, map: map});
-	
-	  
-//   };
+
+
+var cont = "${view.lodge_addr}";
+
+
    var marker;
 
       function initMap() {
@@ -292,6 +290,10 @@ var infoWindow;
           center: {lat: latVal, lng: lngVal}
         });
 
+        var infowindow = new google.maps.InfoWindow({
+        	content : String(cont)
+        })
+        
         marker = new google.maps.Marker({
           map: map,
           draggable: true,
@@ -299,6 +301,7 @@ var infoWindow;
           position: {lat: latVal, lng: lngVal}
         });
         marker.addListener('click', toggleBounce);
+		infowindow.open(map, marker);
       }
 
       function toggleBounce() {
@@ -309,8 +312,9 @@ var infoWindow;
         }
       };
       
+     
       
-      
+
  
 
 </script>
@@ -484,7 +488,14 @@ function fn_replyDelete(comment_no){ //후기 삭제
     }
 </script>
 
+<script type="text/javascript">
 
+$(function() {
+    $("#datepicker").datepicker();
+    $("#datepicker2").datepicker();
+});
+
+</script>
 
 <body>
 	<div id="wrapper">
@@ -493,8 +504,8 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			<c:import url="../layout/header.jsp" />
 		</div>
 
-
-		<div>
+<div >
+		
 			<!-- content시작 -->
     <div id="gallery">
       <div class="photo " id="photo1" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
@@ -508,7 +519,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
       <div class="photo " id="photo9" style =" overflow: hidden;"><img src=""/></div>
       </div>
       
-      
+      <div style = "margin-left: 21%;">
 			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!--  호스트 정보 -->
@@ -522,8 +533,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
-									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> <span class="dot">• </span> <span> <a href="#"
-										class="color-rausch light"> </a>
+									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> 
 									</span>
 								</p>
 							</th>
@@ -546,7 +556,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 
 			<div class="lodge_info">
 				<span>󰄂</span> 
-				<span>수용 인원${view.lodge_capacity }명</span>
+				<span>수용인원 ${view.lodge_capacity }명</span>
 				<c:if test = "${view.building_case_no  == 1}" >
 				<span>아파트</span>
 				</c:if>
@@ -574,7 +584,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 				 <span> ${item.get(3)}</span>
 				  <br> 
 				<svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="m5 3.5a1.5 1.5 0 1 0 -3 0 1.5 1.5 0 0 0 3 0zm-1.5.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm4 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0-2a .5.5 0 1 1 0 1 .5.5 0 0 1 0-1zm4.5 3c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 15c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm9.5-21h-19a2.51 2.51 0 0 0 -2.5 2.5v19c0 1.38 1.12 2.5 2.5 2.5h19c1.38 0 2.5-1.12 2.5-2.5v-19c0-1.38-1.12-2.5-2.5-2.5zm1.5 21.5c0 .83-.68 1.5-1.5 1.5h-19c-.83 0-1.5-.68-1.5-1.5v-19c0-.83.68-1.5 1.5-1.5h19c .83 0 1.5.68 1.5 1.5zm-6.17-6.12a.5.5 0 0 1 .04.71 2.49 2.49 0 0 1 -.63.48c-1.15.65-2.67.65-4.49-.38-1.52-.85-2.66-.85-3.51-.38a1.57 1.57 0 0 0 -.37.27.5.5 0 1 1 -.75-.66 2.49 2.49 0 0 1 .63-.48c1.15-.65 2.67-.65 4.49.38 1.52.85 2.66.85 3.51.38a1.57 1.57 0 0 0 .37-.27.5.5 0 0 1 .71-.04zm0-3.5a.5.5 0 0 1 .04.71 2.49 2.49 0 0 1 -.63.48c-1.15.65-2.67.65-4.49-.38-1.52-.85-2.66-.85-3.51-.38a1.57 1.57 0 0 0 -.37.27.5.5 0 1 1 -.75-.66 2.49 2.49 0 0 1 .63-.48c1.15-.65 2.67-.65 4.49.38 1.52.85 2.66.85 3.51.38a1.57 1.57 0 0 0 .37-.27.5.5 0 0 1 .71-.04z" fill-rule="evenodd"></path></svg>
-				 <span> ${item.get(8)}</span> 
+				 <span> ${item.get(4)}</span> 
 				  <br> 
 				</span>
 			</div>
@@ -594,15 +604,15 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			<!-- 편의시설 끝 -->
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
-			
-			<div>
-			<input id="start" name ="stay_start" type="text" data-language="en"class="datepicker-here" placeholder="체크인"/>
-      		 <input id="end" name ="stay_end" type="text"  data-language="en"class="datepicker-here" placeholder ="체크아웃"/>
+			<div style = "width: 900px;">
+			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
+			<p id="datepicker2" data-language='en'></p>
 			</div>
-			<!-- 달력 끝 -->
+			
+			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
-				
+				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
 				<!-- 후기 작성 -->
 				<div id = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
@@ -611,6 +621,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
       			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
        			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
+				</c:if>
 				
 					<div id="review"> <!-- 후기 리스트 -->
 				
@@ -643,7 +654,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
 	
-	       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+	       				<c:if test ="${login && view.mem_no eq sessionScope.mem_no }">
 	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
 	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
 	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button>
@@ -694,16 +705,15 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			
 			</div>
 
-
-
-
-
+</div>
 
 			<!-- content 끝 -->
 		</div>
 
 		<!-- wrapper 끝 -->
 	</div>
+
+<c:import url="../lodge/sidebar.jsp"/>
 
 
 </body>
