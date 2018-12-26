@@ -30,7 +30,7 @@ public class Lodge {
 	private int lodge_activation;	//숙소활성여부. 0=비활성화, 1=활성화
 	private double latitude; //위도
 	private double longitude; //경도
-	
+	private int mem_no;
 
 	@Override
 	public String toString() {
@@ -46,6 +46,16 @@ public class Lodge {
 	}
 
 	
+
+
+	public int getMem_no() {
+		return mem_no;
+	}
+
+
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
+	}
 
 
 	public double getLatitude() {

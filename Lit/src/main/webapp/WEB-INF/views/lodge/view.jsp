@@ -4,9 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <!-- 구글 맵 -->  
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXFWcGZfctodSrxJThdhJKa0XPSP2sVlk&callback=initMap"
-    async defer></script>
+ 
 
 <style>
 
@@ -361,7 +359,7 @@ function fn_formSubmit(){ //후기 입력
 //    		console.log(result);
 // 			$("#review").append(result);
     		$("#contents").val("");
-//     		document.getElementById("review").innerHTML = result;
+     		document.getElementById("review").innerHTML = result;
     	}
     	})
     	
@@ -635,15 +633,17 @@ $(function() {
        				 <br/>
        				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
 
-       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+       				<c:if test ="${login && member.mem_no eq review.mem_no }">
        				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
        				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
+					</c:if>
+					<c:if test ="${login && member.mem_no eq view.mem_no }">
  					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
-						
-						</c:if>
-   			
+   					</c:if>
+   					
    				 </div>
 				</c:if>
+				
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
 						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 10px;">    
@@ -654,10 +654,10 @@ $(function() {
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
 	
-	       				<c:if test ="${login && view.mem_no eq sessionScope.mem_no }">
+	       				<c:if test ="${login && review2.mem_no eq member.mem_no }">
 	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
 	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
-	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button>
+<%-- 	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button> --%>
 					</c:if>
 					</div>
 					</c:if>
@@ -714,7 +714,11 @@ $(function() {
 	</div>
 
 <c:import url="../lodge/sidebar.jsp"/>
-
+   <!-- 구글 맵 -->  
+ <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFaqOV0p_zrPFa70xwici5EGqDN9qq0fw&callback=initMap">
+    </script>
 
 </body>
+
 </html>
