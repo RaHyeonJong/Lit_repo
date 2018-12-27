@@ -41,4 +41,6 @@ public interface MypageService {
 
 	public Member getHost(Lodge lodge);
 
+	public void deleteMember(Member mem);
+
 }
