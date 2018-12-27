@@ -17,6 +17,7 @@ import lit.dao.face.MypageDao;
 import lit.dto.Comment;
 import lit.dto.Favorite;
 import lit.dto.Image;
+import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
 import lit.service.face.MypageService;
@@ -98,6 +99,26 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<Pay> getPayList(Paging paging) {
 		return mypageDao.getPayList(paging);
+	}
+
+	@Override
+	public void cancelPayment(Pay pay) {
+		mypageDao.cancelPayment(pay);
+	}
+
+	@Override
+	public Pay getPay(Pay pay) {
+		return mypageDao.getPay(pay);
+	}
+
+	@Override
+	public Lodge getLodge(Pay pay) {
+		return mypageDao.getLodge(pay);
+	}
+
+	@Override
+	public Member getHost(Lodge lodge) {
+		return mypageDao.getHost(lodge);
 	}
 	
 	

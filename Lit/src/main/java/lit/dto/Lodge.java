@@ -224,6 +224,7 @@ public class Lodge {
 	public void setLodge_activation(int lodge_activation) {
 		this.lodge_activation = lodge_activation;
 	}
+
 	
 	
 }

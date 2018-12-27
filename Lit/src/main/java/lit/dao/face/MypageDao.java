@@ -5,6 +5,7 @@ import java.util.List;
 import lit.dto.Comment;
 import lit.dto.Favorite;
 import lit.dto.Image;
+import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
 import lit.util.Paging;
@@ -43,5 +44,17 @@ public interface MypageDao {
 
 	// mem_no으로 결제내역 목록 가져오기
 	public List<Pay> getPayList(Paging paging);
+
+	// pay_no으로 결제취소요청하기
+	public void cancelPayment(Pay pay);
+
+	// pay_no으로 결제정보 가져오기
+	public Pay getPay(Pay pay);
+
+	// lodge_no으로 숙소정보 가져오기
+	public Lodge getLodge(Pay pay);
+
+	// mem_no으로 호스트 정보 가져오기
+	public Member getHost(Lodge lodge);
 
 }
