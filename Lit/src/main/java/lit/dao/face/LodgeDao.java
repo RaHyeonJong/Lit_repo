@@ -22,7 +22,7 @@ public interface LodgeDao {
 	public List<Image> SelectLodgeImage();
 	
 	//예약뷰 보여주기 
-	public Pay SelectLodgeReservation(Pay pay);
+	public Lodge SelectLodgeReservation(Lodge lodge);
 	
 	//결제하기
 	public void payment(Pay pay);

@@ -250,7 +250,34 @@ a{color:#000;}
 #modalLayer{display:none; position:relative;}
 #modalLayer .modalContent{width:300px; height:700px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer; 
-border: none; width: 40px; height: 40px;background: url("/resources/images/close.png") no-repeat;}
+border: none;}
+
+.close_btn{
+    display: inline-block;
+    position: relative;
+    margin: 6 20px 0 7px;
+    padding: 0;
+    width: 4px;
+    height: 20px;
+    background: #000;
+    transform: rotate(45deg);
+}
+.close_btn:before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 20px;
+    height: 4px;
+    margin-top: -2px;
+    background: #000;
+
+
+}
+
+
+
 
 .reply{
 border: 1px solid gray;
@@ -527,7 +554,17 @@ $(function() {
 						<tr>
 							<th class="small-10 large-10 columns first"style ="width :500px;">
 								<p class="body-text-lg heavy row-pad-bot-1"
-									style="font-size: smaller;">${view.building_case }</p>
+									style="font-size: smaller;">
+									<c:if test = "${view.building_case_no  == 1}" >
+									<span>펜션</span>
+									</c:if>
+									<c:if test = "${view.building_case_no == 2}" >
+									<span>모텔</span>
+									</c:if>
+									<c:if test = "${view.building_case_no == 3}" >
+									<span>게스트하우스</span>
+									</c:if>											
+									</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
