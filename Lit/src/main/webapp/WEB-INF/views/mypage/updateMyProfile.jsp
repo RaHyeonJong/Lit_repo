@@ -249,7 +249,7 @@ function pasteHTML(filepath){
 <td style="padding-bottom:15px;"><input id="pw-for-update" name="pw-for-update" type="password" style="width:40%; height:40px; font-size:16px; padding-left:10px;" value="${member.mem_pw }" />
 <span id="valid-pw-for-update"></span></td></tr>
 <tr><td style="width:20%; color:#565;"><h3>비밀번호 확인</h3></td>
-<td><input id="repw-for-update" type="password" style="width:40%; height:40px; font-size:16px; padding-left:10px;"  value="${member.mem_pw }" />
+<td><input id="repw-for-update" type="password" style="width:40%; height:40px; font-size:16px; padding-left:10px;" value="${member.mem_pw }" />
 <span id="valid-repw-for-update"></span></td></tr>
 <tr><td></td><td style="padding-bottom:30px; color:#565;">보안을 위해 6개월에 한번씩 비밀번호를 변경해주세요.<br>*** 비밀번호 설정규칙 : 숫자나 특수기호를 포함한 최소 8자리 이상</td></tr>
 <tr><td style="width:20%; color:#565;"><h3>전화번호</h3></td>

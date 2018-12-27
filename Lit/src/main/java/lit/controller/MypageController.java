@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import lit.dto.Board;
 import lit.dto.Comment;
 import lit.dto.Favorite;
+import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
 import lit.service.face.LoginService;
@@ -132,7 +132,7 @@ public class MypageController {
 		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
 		int totalCount = mypageService.getTotalPayCnt(mem_no);
 		
-		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		Paging paging = new Paging(totalCount, curPage, 5, 10);
 		paging.setMem_no(mem_no);
 		
 		List<Pay> payList = mypageService.getPayList(paging);
@@ -141,9 +141,39 @@ public class MypageController {
 		model.addAttribute("paging", paging);
 	}
 	
+	@RequestMapping(value="/mypage/cancelPayment", method=RequestMethod.POST)
+	public String cancelPayment(
+			Pay pay,
+			Model model,
+			HttpSession session,
+			@RequestParam(defaultValue="1") int curPage ) {
+		
+		mypageService.cancelPayment(pay);
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		int totalCount = mypageService.getTotalPayCnt(mem_no);
+		
+		Paging paging = new Paging(totalCount, curPage, 5, 10);
+		paging.setMem_no(mem_no);
+		
+		List<Pay> payList = mypageService.getPayList(paging);
+		
+		model.addAttribute("payList", payList);
+		model.addAttribute("paging", paging);
+		
+		return "mypage/viewMyPayments";
+	}
 	
-	
-	
+	@RequestMapping(value="/mypage/viewPayDetail")
+	public void viewPayDetail(Model model, Pay pay, Lodge lodge, Member host) {
+		pay = mypageService.getPay(pay);
+		lodge = mypageService.getLodge(pay);
+		host = mypageService.getHost(lodge);
+		
+		model.addAttribute("pay", pay);
+		model.addAttribute("lodge", lodge);
+		model.addAttribute("host", host);
+	}
 	
 	
 }
