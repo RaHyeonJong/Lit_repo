@@ -53,10 +53,9 @@ public class LodgeServiceImpl implements LodgeService {
 
 	
 	@Override
-	public boolean LodgeReservationView(Pay pay) {
+	public Lodge LodgeReservationView(Lodge lodge) {
 		
-				lodgedao.SelectLodgeReservation(pay);
-		return false;
+			return	lodgedao.SelectLodgeReservation(lodge);
 	}
 
 	@Override

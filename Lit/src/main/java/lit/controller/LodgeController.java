@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,9 +89,7 @@ public class LodgeController {
 	@RequestMapping(value ="/search", method =RequestMethod.POST)
 	public String re(Lodge lodge,Model model,
 			@RequestParam(defaultValue="00/00/0000") String start,
-          @RequestParam(defaultValue="00/00/0000") String end ) {
-		
-	
+          @RequestParam(defaultValue="00/00/0000") String end, int person ) {
 		
 		Map resultMap = new HashMap();
 	
@@ -101,7 +100,7 @@ public class LodgeController {
 		try {
 			Date startDate = simple.parse(start);
 			Date endDate = simple.parse(end);
-			
+	
 			ArrayList<String> dates = new ArrayList<String>();
 			
 			Date currentDate = startDate; //시작 날짜
@@ -118,13 +117,19 @@ public class LodgeController {
 				
 				double service = add*0.1; //서비스 수수료
 				
-				int sum = add + (int)service; //총액
-
+				int total = add + (int)service; //총액
+				
+				int stay_heads = person;
+				model.addAttribute("lodge_no",lodge.getLodge_no());
 				model.addAttribute("add", add);
 				model.addAttribute("ser", service);
-				model.addAttribute("total",sum);
-			
-
+				model.addAttribute("total",total);
+				model.addAttribute("person", stay_heads);
+				model.addAttribute("startDate",startDate);
+				model.addAttribute("endDate",endDate);
+				
+				
+				
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -140,13 +145,30 @@ public class LodgeController {
 	public void LodgeReservation(Lodge lodge) {}
 	
 	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
-	public void LodgeReservation2(Double service_fee,int pay_sum,Lodge lodge) {
+	public void LodgeReservation2(Double service_fee,int pay_sum,Lodge lodge, Model model,
+			String startDate,String endDate) {
 		
-		System.out.println(service_fee);
-		System.out.println(lodge.getStay_cost());
-		System.out.println(pay_sum);
+//		System.out.println(lodge.getLodge_no());
+//		System.out.println(service_fee);
+//		System.out.println(lodge.getStay_cost());
+//		System.out.println(pay_sum);
 		
-//		lodgeService.LodgeReservationView(pay);
+		SimpleDateFormat date = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy",Locale.ENGLISH);
+		try {
+			Date start = date.parse(startDate);
+			Date end = date.parse(endDate);
+			
+			model.addAttribute("startDate", start);
+			model.addAttribute("endDate", end);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		lodge = lodgeService.LodgeReservationView(lodge);//예약시 보여줄 view
+		
+		model.addAttribute("reservation", lodge);
+		
 
 	}
 	
@@ -157,12 +179,9 @@ public class LodgeController {
 	@RequestMapping(value ="/pay",method =RequestMethod.GET)
 	public void LodgePay(Pay pay, Model model) {
 		//결제하기 클릭시 결제정보를 보여주고 확인을 하면 결제가 완료되게 한다.
-		if(lodgeService.LodgeReservationView(pay)) {
 			
 			model.addAttribute("reser", pay);
-		}else {
 			
-		}
 			
 	}
 	

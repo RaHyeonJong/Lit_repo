@@ -27,19 +27,6 @@ $(document).ready(function(){
 	num =1;
 	}
 	$('#numberUpDown').text(num);
-		
-// 	$.ajax({
-		
-// 		url : "/lodge/reservation",
-// 		type : "get",
-// 		data : {"stay_cost": num },
-// 		dataType : "json",
-// 		success :function(data){
-// 			console.log(data);
-// 		}
-		
-// 	});
-	
 	
 	});
 	
@@ -60,6 +47,7 @@ $(document).ready(function(){
 	
 	
 	});
+	
 	
 	
 	var $start = $('#start'),
@@ -85,25 +73,25 @@ $(document).ready(function(){
 	})
 	
 	
-	
 	$("#search").click(function(){
 		var stay_start = $('#start').val(),
 			stay_end = $('#end').val(),
+			num = $('#numberUpDown').text(),
+			lodge_no = "${view.lodge_no}",
 			cost = ${view.stay_cost };
 			 // 숙박 가격	
 	
+			 console.log(num);
+			 
 			if(stay_start == "" || stay_end ==""){
 				alert("날짜를 선택해 주세요");
 				return;
 			} 
-			 
-		
-		
 		
 		$.ajax({
 		type : "post",
 		url : "search",
-			data :{ "stay_cost" : cost , "start" : stay_start, "end" : stay_end},
+			data :{ "stay_cost" : cost , "start" : stay_start, "end" : stay_end, "person" : num, "lodge_no" : lodge_no},
 		dataType:"html",
 		success: function(mav) {
 		
@@ -159,7 +147,7 @@ $(document).ready(function(){
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
 /* 	ul li { list-style: none; }  74오류나면 수정*/
-	.nav_side { position: absolute; top: 75%; left:60%; min-width:500px; heigth:800px;}
+	.nav_side { position: absolute; top: 75%; left:1100px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}
 	label{ vertical-align: middle; margin-left: -3px;}

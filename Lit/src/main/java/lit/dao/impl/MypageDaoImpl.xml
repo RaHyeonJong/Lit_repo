@@ -112,4 +112,10 @@
 		WHERE mem_no = #{mem_no }
 	</select>
 	
+	<delete id="deleteMember" parameterType="lit.dto.Member">
+		DELETE FROM member
+		WHERE mem_id = #{mem_id }
+	</delete>
+	
+	
   </mapper>

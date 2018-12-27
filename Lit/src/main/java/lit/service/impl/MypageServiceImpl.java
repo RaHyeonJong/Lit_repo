@@ -120,6 +120,11 @@ public class MypageServiceImpl implements MypageService{
 	public Member getHost(Lodge lodge) {
 		return mypageDao.getHost(lodge);
 	}
+
+	@Override
+	public void deleteMember(Member mem) {
+		mypageDao.deleteMember(mem);
+	}
 	
 	
 }
