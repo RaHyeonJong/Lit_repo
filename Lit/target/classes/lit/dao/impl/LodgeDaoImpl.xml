@@ -39,9 +39,7 @@
 	origin_name,
 	stored_name,
 	lodge_no,
-	mem_no,
-	board_no,
-	thumb_nail
+	mem_no
 	FROM image
 	WHERE lodge_no = 143
 
@@ -103,6 +101,22 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	VALUES(comment_seq.nextval,#{parent_comment_no},#{lodge_no},#{contents},#{mem_no})
 </insert>
 
+<select id="SelectLodgeReservation" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
+
+	SELECT 
+	lodge_no,
+	lodge_case_no,
+	lodge_name,
+	lodge_room,
+	lodge_addr,
+	convenient_facility,
+	convenient_area,
+	ready_time,
+	check_in_time,
+	stay_cost
+	FROM lodge
+	WHERE lodge_no = #{lodge_no}
+</select>
 
 
 
