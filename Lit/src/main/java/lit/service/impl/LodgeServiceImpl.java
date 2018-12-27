@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
@@ -107,12 +108,36 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 	
 	@Override
-	public void insertLike(Lodge lodge) {
+	public void insertLike(Favorite favorite) {
 	
-		lodgedao.inserlodgetLike(lodge);
+		 lodgedao.insertlodgetLike(favorite);
 		
 	}
+	
+	@Override
+	public void deleteLike(Favorite favorite) {
+		
+		lodgedao.deleteFavorite(favorite);
+	}
+	
+	@Override
+	public boolean selectLike(Favorite favorite) {
+		
+		if(lodgedao.selectFavorite(favorite) < 1){
+			
+			return  true;
+		}else{
+			
+			return false;
+		}
+			
+	
+	}
 
+	
+
+	
+	
 	@Override
 	public void insertReport(Lodge lodge) {
 		lodgedao.insertlodgeReport(lodge);
@@ -125,6 +150,7 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
+	
 
 
 
