@@ -8,6 +8,7 @@ import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.util.Paging;
 
 public interface MypageDao {
@@ -59,5 +60,9 @@ public interface MypageDao {
 
 	// 회원탈퇴 멤버 삭제하기
 	public void deleteMember(Member mem);
+
+	public int checkReport(Report report);
+
+	public void reportMember(Report report);
 
 }
