@@ -151,7 +151,7 @@ $(document).ready(function(){
 <button class="pay-cancel-btn" data-payNo="${pay.pay_no }" style="padding:5px 10px 10px 10px; margin-left:30px; text-decoration:none; border:none; border-radius:3px; cursor:pointer; background-color:#FF5A5F; color:white;">결제취소 요청</button>
 </c:if>
 </td></tr>
-<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #999; margin:0; padding:0;"></td></tr>
+<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #999; background-color:#999; margin:0; padding:0;"></td></tr>
 </c:forEach>
 
 
@@ -207,7 +207,7 @@ $(document).ready(function(){
 <div style="position:fixed; width:768px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
 <div style="text-align:right; padding-right:10px;"><span class="closePayDetail" style="cursor:pointer; font-size:30px;">&times;</span></div>
 <div id="pay-detail-div"></div>
-<div style="padding-top:40px;"><button class="closePayDetail" style="width:50px; height:30px; text-decoration:none; border:none; border-radius:3px; background-color:#FF5A5F; color:white;">닫기</button></div>
+<div style="padding-top:40px;"><button class="closePayDetail" style="width:50px; height:30px; text-decoration:none; border:none; border-radius:3px; background-color:#FF5A5F; color:white; cursor:pointer;">닫기</button></div>
 </div></div>
 <!-- -------- 결제상세보기 모달창 // --------------------------------------------------------------------------------------- -->
 

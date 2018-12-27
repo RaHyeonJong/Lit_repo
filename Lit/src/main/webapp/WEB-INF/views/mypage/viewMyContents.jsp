@@ -64,7 +64,7 @@ $(document).ready(function(){
 <td style="text-align:center; padding:0 10px 0 10px; white-space:nowrap;">
 <fmt:formatDate value="${comm.written_time }" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
 </tr>
-<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #ccc; margin:0; padding:0;"></td></tr>
+<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #ccc; background-color:#ccc; margin:0; padding:0;"></td></tr>
 </c:forEach>
 
 <tr><td colspan="4" style="padding-top:30px;">

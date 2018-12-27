@@ -1,8 +1,11 @@
 package lit.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import lit.dto.Favorite;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LoginService;
 import lit.service.face.MypageService;
 import lit.util.Paging;
@@ -175,5 +179,62 @@ public class MypageController {
 		model.addAttribute("host", host);
 	}
 	
+	@RequestMapping(value="/mypage/deleteMember", method=RequestMethod.GET)
+	public void deleteMember() {}
+	
+	@RequestMapping(value="/mypage/deleteMember", method=RequestMethod.POST)
+	public void deleteMemberProcess(Member mem, HttpServletResponse resp, HttpSession session) {
+		PrintWriter writer = null;
+			
+		try {
+			writer = resp.getWriter();
+			
+			boolean existAccount = loginService.checkMembership(mem);
+			
+			if(existAccount) {
+				mypageService.deleteMember(mem);
+				session.invalidate();
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
+	}
+	
+	@RequestMapping(value="/viewProfile")
+	public String viewOtherProfile(Model model, Member mem) {
+		Member other = mypageService.getMemberByNo(mem);
+		System.out.println(other);
+		
+		model.addAttribute("other", other);
+		
+		return "mypage/viewOtherProfile";
+	}
+	
+	@RequestMapping(value="/reportMember")
+	public void reportMember(Report report, HttpServletResponse resp) {
+		PrintWriter writer = null;
+			
+		try {
+			writer = resp.getWriter();
+			
+			boolean alreadyReport = mypageService.checkReport(report);
+			
+			if(!alreadyReport) {
+				mypageService.reportMember(report);
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
+	}
 	
 }
