@@ -9,9 +9,43 @@
 	position :absolute;
 	left: 1200px;
 	border: 1px solid black;
-
+}
+#check{
+	margin: 100px 550px;
 
 }
+#facility{
+	margin: 100px 550px;
+}
+#right{
+  width:9px;
+  height:9px;
+  position:relative;
+  text-indent:-9999px;
+
+}
+#right:before{
+  content:'';
+  width:9px;
+  height:9px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-left:2px solid #000;
+  border-top:2px solid #000;
+  transform:translate(-50%,-50%) rotate(135deg);
+}
+#right:after{
+  content:'';
+  width:9px;
+  height:2px;
+  position:absolute;
+  right:3px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#000
+}
+
 
 </style>
 <script type="text/javascript">
@@ -41,12 +75,21 @@
 </ul>
 </div>
 
+<div id = "check">
+<font size="5px;"><c:out value="${reservation.lodge_name }"/></font> 숙박일수<br><br>
+<span>체크인<fmt:formatDate type="DATE" pattern="yy년MM월dd" value="${startDate }"/></span>&nbsp;&nbsp;&nbsp;
+<span id = "right"></span>&nbsp;&nbsp;&nbsp;
+<span>체크아웃<fmt:formatDate type="DATE" pattern="yy년MM월dd" value="${endDate }"/></span>
+</div>
 
- 
+<div id= "facility">
+<font>편의 시설 및 공간</font>
+
+</div> 
 
 
 
-
+<button>동의 및 계속하기</button> <button>취소</button>
 
 
 

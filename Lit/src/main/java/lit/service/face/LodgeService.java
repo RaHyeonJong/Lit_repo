@@ -23,7 +23,7 @@ public interface LodgeService {
 	
 	
 	//예약 하고 자하는 숙소의 결제 정보 보여주기
-	public boolean LodgeReservationView(Pay pay);
+	public Lodge LodgeReservationView(Lodge lodge);
 
 	//결제하기
 	public void LodgePay(Pay pay);
