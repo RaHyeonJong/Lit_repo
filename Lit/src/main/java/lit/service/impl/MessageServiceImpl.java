@@ -1,5 +1,7 @@
 package lit.service.impl;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +17,17 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired MessageDao messageDao;
 
 	@Override
-	public List<Message> messagelist() {
+	public List<Message> sendlist(Message message) {
 
-		return messageDao.messagelist();
-		
+		return messageDao.sendlist(message);
 	}
 
 	@Override
-	public Message messageView(Message message) {
-
+	public List<Message> receivelist(Message message) {
 		
-		return messageDao.messageview(message);
-		
+		return messageDao.receivelist(message);
 	}
 
 
-	@Override
-	public void delete(Message message) {
-		
-		messageDao.delete(message);
-	}
-
-	@Override
-	public void write(Message message) {
-		
-		messageDao.write(message);
-	}
 	
 }

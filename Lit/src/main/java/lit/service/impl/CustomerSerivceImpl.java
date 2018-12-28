@@ -47,5 +47,10 @@ public class CustomerSerivceImpl implements CustomerService{
 		customerserviceDao.updatecomment(comment);
 		
 	}
+
+	@Override
+	public int answercount(Board board) {
+		return customerserviceDao.answercount(board);
+	}
 	
 }

@@ -16,6 +16,8 @@ public interface CustomerServiceDao {
 	//-리스트에서 버튼 누르면 나오는 것
 	public Board view(Board board);
 
+	public int answercount(Board board);
+	
 	//관리자 답변 써주기 
 	public void contentwriter(Comment comment);
 

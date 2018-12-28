@@ -2,12 +2,34 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="lit.dao.face.MessageDao">
+ <mapper namespace="lit.dao.face.MessageDao">
 
-	<select id="messagelist" resultType="lit.dto.Message"></select>
-	<delete id="delete" parameterType="lit.dto.Message"></delete>
-	<insert id="writer" parameterType="lit.dto.Message"></insert>
-	<select id="messageview" parameterType="lit.dto.Message" resultType="lit.dto.Message"></select>
-  
-  
-  </mapper>
+	<select id="receivelist" parameterType="lit.dto.Message" resultType="lit.dto.Message">
+		
+		SELECT c.message_no, 
+    	(SELECT m.mem_name FROM member m
+   	 	WHERE m.mem_no = c.sender_no) sender, 
+     	(SELECT m.mem_name FROM member m
+    	WHERE m.mem_no = c.receiver_no) receiver,
+    	c.contents, c.send_time, c.read 
+    	FROM message c
+		WHERE c.receiver_no = #{receiver_no}
+	
+	</select>
+
+	<select id="sendlist" parameterType="lit.dto.Message" resultType="lit.dto.Message">
+		
+		SELECT c.message_no, 
+		(SELECT m.mem_name FROM member m
+		WHERE m.mem_no = c.sender_no) sender,
+	    (SELECT m.mem_name FROM member m
+	    WHERE m.mem_no = c.receiver_no) receiver,
+	    c.contents, c.send_time, c.read 
+		FROM message c
+		WHERE c.sender_no = #{sender_no }
+
+	</select>
+
+
+
+ </mapper>

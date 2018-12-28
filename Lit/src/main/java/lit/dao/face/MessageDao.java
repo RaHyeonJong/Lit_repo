@@ -6,12 +6,9 @@ import lit.dto.Message;
 
 public interface MessageDao {
 
-	public List<Message> messagelist();
+	public List<Message> receivelist(Message message);
 	
-	public void delete(Message message);
+	public List<Message> sendlist(Message message);
 	
-	public void write(Message message);
-
-	public Message messageview(Message message);
 	
 }

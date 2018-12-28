@@ -11,15 +11,17 @@
 $(document).ready(function(){
 	
 	// 왼쪽 사이드 메뉴 버튼을 클릭했을 때 css처리
+	// 나의 쪽지함 추가했습니다.
 	$(window).click(function(e){
 		if(e.target.id == 'view-profile-btn' || e.target.id == 'update-profile-btn' || e.target.id == 'view-mycontents-btn'
-				|| e.target.id == 'view-myfavorites-btn' || e.target.id == 'view-mypayments-btn' || e.target.id == 'delete-membership-btn'){
+				|| e.target.id == 'view-myfavorites-btn' || e.target.id == 'view-mypayments-btn' || e.target.id == 'delete-membership-btn' || e.target.id =='message-btn'){
 			$('#view-profile-btn').css("color", "#666");
 			$('#update-profile-btn').css("color", "#666");
 			$('#view-mycontents-btn').css("color", "#666");
 			$('#view-myfavorites-btn').css("color", "#666");
 			$('#view-mypayments-btn').css("color", "#666");
 			$('#delete-membership-btn').css("color", "#666");
+			$('#message-btn').css("color","#666");
 			
 			$('#view-profile-btn').css("font-weight", "normal");
 			$('#update-profile-btn').css("font-weight", "normal");
@@ -27,28 +29,14 @@ $(document).ready(function(){
 			$('#view-myfavorites-btn').css("font-weight", "normal");
 			$('#view-mypayments-btn').css("font-weight", "normal");
 			$('#delete-membership-btn').css("font-weight", "normal");
+			$('#message-btn').css("font-weight","normal");
+			
 			
 			$('#'+e.target.id).css("color", "#333");
 			$('#'+e.target.id).css("font-weight", "bold");
 		}	
 	});
 		
-	// 프로필 보기를 클릭했을 때...
-	$('#view-profile-btn').click(function(){
-		$.ajax({
-			type: "GET",
-			url: "/mypage/viewMyProfile",
-			data: {}, 
-			dataType: "html",
-			success : function(res){
-				$('#contents-div').html(res);
-			},
-			error : function(){
-				alert("에러났어요!");
-			}
-		});
-	});
-	
 	// 회원정보 수정을 클릭했을 때...
 	$('#update-profile-btn').click(function(){
 		$.ajax({
@@ -62,6 +50,26 @@ $(document).ready(function(){
 			error : function(){
 				alert("에러났어요!");
 			}
+		});
+	});
+	
+	//나의 쪽지함을 클릭했을 떄...
+
+	$('#message-btn').click(function(){
+		$.ajax({
+			
+			type: "GET",
+			url: "/message/receive",
+			data: {},
+			dataType: "html",
+			success: function(res){
+				$("#contents-div").html(res);
+			},
+			error:function()
+			{
+				alert("에러났어요!");
+			}
+			
 		});
 	});
 	
@@ -128,6 +136,7 @@ $(document).ready(function(){
 <td style="width:20%; vertical-align:top;">
 <div id="view-profile-btn" style="text-align:left; margin-top:30px; font-size:16px; color:#333; white-space:nowrap; cursor:pointer; font-weight: bold;">프로필 보기</div>
 <div id="update-profile-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">회원정보 수정</div>
+<div id="message-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">나의 쪽지함</div>
 <div id="view-mycontents-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">내가 쓴 글 보기</div>
 <div id="view-myfavorites-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">내가 찜한 숙소 보기</div>
 <div id="view-mypayments-btn" style="text-align:left; margin-top:20px; font-size:16px; color:#666; white-space:nowrap; cursor:pointer;">결제내역 보기</div>
