@@ -65,7 +65,7 @@ $(document).ready(function(){
 			location.href="/main";
 		} else if(e.target == modal_joinResult[0]){
 			location.href="/main";
-		}
+		} 
 	});
 	
 // 	모달창의 X버튼을 클릭했을 때...

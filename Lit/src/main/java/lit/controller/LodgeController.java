@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Comment;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
@@ -50,7 +50,7 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/view")
-	public void LodgeView(Lodge lodge, Model model, Comment comment ) {
+	public void LodgeView(Lodge lodge, Model model, Comment comment, Favorite favorite ) {
 		//숙소 썸네일 클릭시 보여지는 상세 뷰
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
 		//결제한 사람의 정보를 가져온다.
@@ -82,16 +82,17 @@ public class LodgeController {
 		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
 	
+		//좋아요
+		boolean like =  lodgeService.selectLike(favorite);
+		model.addAttribute("lodge_like", like);
+		
 	}
 	
 	
 	@RequestMapping(value ="/search", method =RequestMethod.POST)
-	public String re(Pay pay,Lodge lodge,Model model,
+	public String re(Lodge lodge,Model model,
 			@RequestParam(defaultValue="00/00/0000") String start,
-          @RequestParam(defaultValue="00/00/0000") String end ) {
-		
-		DecimalFormat formatter = new DecimalFormat("###,###");
-	
+          @RequestParam(defaultValue="00/00/0000") String end, int person ) {
 		
 		Map resultMap = new HashMap();
 	
@@ -102,7 +103,7 @@ public class LodgeController {
 		try {
 			Date startDate = simple.parse(start);
 			Date endDate = simple.parse(end);
-			
+	
 			ArrayList<String> dates = new ArrayList<String>();
 			
 			Date currentDate = startDate; //시작 날짜
@@ -113,22 +114,26 @@ public class LodgeController {
 				c.add(Calendar.DAY_OF_MONTH, 1);
 				currentDate = c.getTime();
 			}
-			//요금 계산 
-			for(int i =1; i < dates.size(); i++) {
+				//요금 계산 
 				
-				int add = lodge.getStay_cost()*i; //숙박 일당 계산
+				int add = lodge.getStay_cost()*dates.size(); //숙박 일당 계산
 				
 				double service = add*0.1; //서비스 수수료
 				
-				int sum = add + (int)service; //총액
-
+				int total = add + (int)service; //총액
+				
+				int stay_heads = person;
+				System.out.println(stay_heads);
+				model.addAttribute("lodge_no",lodge.getLodge_no());
 				model.addAttribute("add", add);
 				model.addAttribute("ser", service);
-				model.addAttribute("total",sum);
-			}
-			
-			
-
+				model.addAttribute("total",total);
+				model.addAttribute("person", stay_heads);
+				model.addAttribute("startDate",startDate);
+				model.addAttribute("endDate",endDate);
+				
+				
+				
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -141,38 +146,45 @@ public class LodgeController {
 	
 
 	@RequestMapping(value ="/reservation", method =RequestMethod.GET)
-	public void LodgeReservation(Pay pay) {
-		
-			
-		
-		
-//		lodgeService.LodgeReservationView(pay);
-		
-		
-	}
+	public void LodgeReservation(Lodge lodge) {}
 	
 	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
-	public void LodgeReservation2(Pay pay, HttpServletRequest req) {
+	public void LodgeReservation2(Double service_fee,int pay_sum,int person,Lodge lodge, Model model,
+			String startDate,String endDate) {
 		
+//		System.out.println(lodge.getLodge_no());
+//		System.out.println(service_fee);
+//		System.out.println(lodge.getStay_cost());
+//		System.out.println(pay_sum);
 		
+		SimpleDateFormat date = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy",Locale.ENGLISH);
+		try {
+			Date start = date.parse(startDate);
+			Date end = date.parse(endDate);
+			
+			model.addAttribute("startDate", start);
+			model.addAttribute("endDate", end);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-//		lodgeService.LodgeReservationView(pay);
+		lodge = lodgeService.LodgeReservationView(lodge);//예약시 보여줄 view
+		
+		int stay_heads = person;
+		model.addAttribute("reservation", lodge);
+		model.addAttribute("person", stay_heads);
+		
 
 	}
-	
-	
-	
 	
 	
 	@RequestMapping(value ="/pay",method =RequestMethod.GET)
 	public void LodgePay(Pay pay, Model model) {
 		//결제하기 클릭시 결제정보를 보여주고 확인을 하면 결제가 완료되게 한다.
-		if(lodgeService.LodgeReservationView(pay)) {
 			
 			model.addAttribute("reser", pay);
-		}else {
 			
-		}
 			
 	}
 	
@@ -243,13 +255,28 @@ public class LodgeController {
 	
 	
 	
-	@RequestMapping(value ="/like", method =RequestMethod.GET)
-	public void LikeLodge(Lodge lodge) {
-		//숙소 페이지에서 저장을 클릭하면 숙소 번호를 받아와서 
-		// favarrite 테이블에 저장되게 한다.
-		lodgeService.insertLike(lodge);
+	@RequestMapping(value ="/like", method =RequestMethod.POST)
+	public ModelAndView LikeLodge(Favorite favorite, ModelAndView like) {
 		
+		like.setViewName("jsonView");
+		
+		boolean lodge_like = lodgeService.selectLike(favorite);
+		
+		if(lodge_like == true) {
+			lodgeService.insertLike(favorite);
+			like.addObject("like",lodge_like);
+		}else {
+			lodgeService.deleteLike(favorite);
+			like.addObject("unlike",lodge_like);
+		}
+		
+		
+		
+		return like;
 	}
+	
+	
+	
 	
 	@RequestMapping(value ="/message", method = RequestMethod.GET)
 	public void Message() {
