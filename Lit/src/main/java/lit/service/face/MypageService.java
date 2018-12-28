@@ -11,6 +11,7 @@ import lit.dto.Favorite;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.util.Paging;
 
 public interface MypageService {
@@ -42,5 +43,9 @@ public interface MypageService {
 	public Member getHost(Lodge lodge);
 
 	public void deleteMember(Member mem);
+
+	public boolean checkReport(Report report);
+
+	public void reportMember(Report report);
 
 }

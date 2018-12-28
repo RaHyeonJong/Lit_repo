@@ -292,6 +292,47 @@ border: 1px solid gray;
 
 
 }
+#lodge_like{
+	z-index: 999;
+    position: absolute;
+    right: 16px;
+    top: 90px;
+	  color:  #888;
+	  font-size: 18px;
+	  font-family: inherit;
+	  background : #efefef;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#lodge_like:hover {
+  color: indianred;
+}
+#lodge_like:active {
+  transform: scale(0.95);
+}
+#lodge_like.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#lodge_like .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
+
+
+
 
 
 
@@ -514,11 +555,56 @@ function fn_replyDelete(comment_no){ //후기 삭제
 </script>
 
 <script type="text/javascript">
-
 $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
 });
+</script>
+
+<script type="text/javascript"> //저장
+	$(document).ready(function(){
+
+		document.addEventListener('DOMContentLoaded', function() {
+			  var likeButton = document.getElementById('lodge_like');
+			   if("${like}" == 1){
+			  	window.lb = likeButton;
+			    likeButton.classList.toggle('selected');
+			   }
+			   
+			}, false);
+		
+		
+		$('#lodge_like').click(function(){
+			var lodge_no = '${view.lodge_no}',
+				mem_no = '${member.mem_no}';
+				var likeButton = document.getElementById('lodge_like');
+			$.ajax({
+				url: "like",
+				type : "post",
+				data :{"lodge_no" : lodge_no, "mem_no" : mem_no },
+				dataType : "json",
+				success : function(data){
+					if(data.like){
+					window.lb = likeButton;
+					likeButton.classList.toggle('selected');
+					}
+						
+				},
+				error : function(data){
+					
+				},
+				
+				
+				
+			});//ajax 끝
+		
+		
+		
+		});//클릭 버튼 끝
+		
+	});//도큐먼트 끝
+
+
 
 </script>
 
@@ -533,9 +619,12 @@ $(function() {
 		
 			<!-- content시작 -->
     <div id="gallery">
+    	
       <div class="photo " id="photo1" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo2" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[1].stored_name }"/></div>
-      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/></div>
+      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/>
+      <button id = "lodge_like"><svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>저장</button></div>
       <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
       <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo6" style =" overflow: hidden;"><img src=""/></div>

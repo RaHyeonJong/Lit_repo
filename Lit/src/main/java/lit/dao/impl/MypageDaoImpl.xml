@@ -117,5 +117,16 @@
 		WHERE mem_id = #{mem_id }
 	</delete>
 	
+	<select id="checkReport" parameterType="lit.dto.Report" resultType="int">
+		SELECT COUNT(*)
+		FROM report
+		WHERE reporter_no = #{reporter_no }
+			AND mem_no = #{mem_no }
+	</select>
+	
+	<insert id="reportMember" parameterType="lit.dto.Report">
+		INSERT INTO report(report_no, reporter_no, mem_no)
+		VALUES (report_seq.nextval, #{reporter_no }, #{mem_no })
+	</insert>
 	
   </mapper>

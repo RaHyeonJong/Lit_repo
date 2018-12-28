@@ -4,6 +4,7 @@ package lit.dao.face;
 import java.util.List;
 
 import lit.dto.Comment;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
@@ -45,8 +46,12 @@ public interface LodgeDao {
 	public List<Comment> lodgeReply(Comment comment);
 	
 	//좋아요(숙소 저장)
-	public void inserlodgetLike(Lodge lodge);
+	public void insertlodgetLike(Favorite favorite);
 
+	public void deleteFavorite(Favorite favorite);
+	public int selectFavorite(Favorite favorite);
+
+	
 	//호스트에게 메시지 보내기
 	public void insertContent(Message message);
 	

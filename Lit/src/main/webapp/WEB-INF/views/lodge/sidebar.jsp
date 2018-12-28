@@ -171,7 +171,7 @@ $(document).ready(function(){
 			
 		</div>
 		
-		<br><br>	
+		<br>	
 		<div id ="people" class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
 		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
 		

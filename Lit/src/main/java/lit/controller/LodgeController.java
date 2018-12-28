@@ -23,14 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Comment;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
@@ -51,7 +50,7 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/view")
-	public void LodgeView(Lodge lodge, Model model, Comment comment ) {
+	public void LodgeView(Lodge lodge, Model model, Comment comment, Favorite favorite ) {
 		//숙소 썸네일 클릭시 보여지는 상세 뷰
 		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
 		//결제한 사람의 정보를 가져온다.
@@ -83,6 +82,10 @@ public class LodgeController {
 		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
 	
+		//좋아요
+		boolean like =  lodgeService.selectLike(favorite);
+		model.addAttribute("lodge_like", like);
+		
 	}
 	
 	
@@ -120,6 +123,7 @@ public class LodgeController {
 				int total = add + (int)service; //총액
 				
 				int stay_heads = person;
+				System.out.println(stay_heads);
 				model.addAttribute("lodge_no",lodge.getLodge_no());
 				model.addAttribute("add", add);
 				model.addAttribute("ser", service);
@@ -145,7 +149,7 @@ public class LodgeController {
 	public void LodgeReservation(Lodge lodge) {}
 	
 	@RequestMapping(value ="/reservation", method =RequestMethod.POST)
-	public void LodgeReservation2(Double service_fee,int pay_sum,Lodge lodge, Model model,
+	public void LodgeReservation2(Double service_fee,int pay_sum,int person,Lodge lodge, Model model,
 			String startDate,String endDate) {
 		
 //		System.out.println(lodge.getLodge_no());
@@ -167,13 +171,12 @@ public class LodgeController {
 		
 		lodge = lodgeService.LodgeReservationView(lodge);//예약시 보여줄 view
 		
+		int stay_heads = person;
 		model.addAttribute("reservation", lodge);
+		model.addAttribute("person", stay_heads);
 		
 
 	}
-	
-	
-	
 	
 	
 	@RequestMapping(value ="/pay",method =RequestMethod.GET)
@@ -252,13 +255,28 @@ public class LodgeController {
 	
 	
 	
-	@RequestMapping(value ="/like", method =RequestMethod.GET)
-	public void LikeLodge(Lodge lodge) {
-		//숙소 페이지에서 저장을 클릭하면 숙소 번호를 받아와서 
-		// favarrite 테이블에 저장되게 한다.
-		lodgeService.insertLike(lodge);
+	@RequestMapping(value ="/like", method =RequestMethod.POST)
+	public ModelAndView LikeLodge(Favorite favorite, ModelAndView like) {
 		
+		like.setViewName("jsonView");
+		
+		boolean lodge_like = lodgeService.selectLike(favorite);
+		
+		if(lodge_like == true) {
+			lodgeService.insertLike(favorite);
+			like.addObject("like",lodge_like);
+		}else {
+			lodgeService.deleteLike(favorite);
+			like.addObject("unlike",lodge_like);
+		}
+		
+		
+		
+		return like;
 	}
+	
+	
+	
 	
 	@RequestMapping(value ="/message", method = RequestMethod.GET)
 	public void Message() {

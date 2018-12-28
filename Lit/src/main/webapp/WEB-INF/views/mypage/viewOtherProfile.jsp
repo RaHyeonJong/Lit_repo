@@ -6,6 +6,33 @@
 <head>
 <meta charset="UFT-8">
 <title>Life is Trip 인생은 여행이다</title>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#report-member-btn').click(function(){
+		var reporter_no = '${member.mem_no}';
+		var mem_no = '${other.mem_no }';
+		
+		$.ajax({
+			type: "GET",
+			url: "/reportMember",
+			data: {"reporter_no": reporter_no, "mem_no": mem_no }, 
+			dataType: "text",
+			success : function(res){
+				if(res == 1){
+					alert("회원신고가 접수되었습니다.");
+				} else {
+					alert("이미 신고한 회원입니다.");
+				}				
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
+		
+	});
+});
+</script>
 </head>
 <body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
@@ -18,7 +45,10 @@
 <c:if test="${other.stored_name eq null }">
 <img width="300px" height="300px" style="border:6px solid #999; border-radius:50%;" src="/resources/images/empty_profile_photo.jpg"/></c:if>
 </td></tr>
-<tr><td style="text-align:right;"><button>쪽지보내기</button><button>신고하기</button></td></tr>
+<tr><td style="text-align:right;">
+<button style="width:80px; height:40px; cursor:pointer; text-decoration:none; border:none; border-radius:3px; background-color:#FF5A5F; color:white;">쪽지보내기</button>&nbsp;
+<button id="report-member-btn" style="width:80px; height:40px; cursor:pointer; text-decoration:none; border:1px solid #FF5A5F; border-radius:3px; background-color:white; color:#FF5A5F;">신고하기</button>
+</td></tr>
 <tr><td><div style="border:3px solid #999; border-radius: 5px; min-height:300px; padding:10px; color:#555; font-size:18px;">${other.mem_intro }</div></td></tr>
 </table>
 </div>

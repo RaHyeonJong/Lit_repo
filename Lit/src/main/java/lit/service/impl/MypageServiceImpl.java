@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,7 @@ import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.MypageService;
 import lit.util.Paging;
 
@@ -122,8 +122,22 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public void deleteMember(Member mem) {
+	public void deleteMember(Member mem) {	
 		mypageDao.deleteMember(mem);
+	}
+
+	@Override
+	public boolean checkReport(Report report) {
+		int cnt = mypageDao.checkReport(report);
+		
+		if(cnt == 1)
+			return true;
+		return false;
+	}
+
+	@Override
+	public void reportMember(Report report) {
+		mypageDao.reportMember(report);
 	}
 	
 	

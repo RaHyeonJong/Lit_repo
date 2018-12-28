@@ -21,6 +21,7 @@ import lit.dto.Favorite;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LoginService;
 import lit.service.face.MypageService;
 import lit.util.Paging;
@@ -213,4 +214,27 @@ public class MypageController {
 		
 		return "mypage/viewOtherProfile";
 	}
+	
+	@RequestMapping(value="/reportMember")
+	public void reportMember(Report report, HttpServletResponse resp) {
+		PrintWriter writer = null;
+			
+		try {
+			writer = resp.getWriter();
+			
+			boolean alreadyReport = mypageService.checkReport(report);
+			
+			if(!alreadyReport) {
+				mypageService.reportMember(report);
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
+	}
+	
 }
