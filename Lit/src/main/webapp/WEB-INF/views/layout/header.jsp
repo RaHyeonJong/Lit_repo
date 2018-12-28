@@ -828,6 +828,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			</c:if>
 	
 			<c:if test="${login }">
+			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
 					<li><a href="#">호스트가 되어보세요</a></li>

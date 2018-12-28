@@ -24,7 +24,7 @@ public class SendSms {
 		params.put("from", "01086828830");
 		params.put("type", "SMS");
 		params.put("text", "[Life is Trip] 본인확인 인증번호 ["+ ukey +"]를 화면에 입력해주세요.");
-		params.put("app_version", "test app 1.2"); // application name and version
+//		params.put("app_version", "test app 1.2"); // application name and version
 
 		try {
 			JSONObject obj = (JSONObject) coolsms.send(params);
