@@ -23,18 +23,18 @@ public class SendSms {
 		params.put("to", phone);
 		params.put("from", "01086828830");
 		params.put("type", "SMS");
-		params.put("text", "[Life is Trip] ë³¸ì¸í™•ì¸ ì¸ì¦ë²ˆí˜¸ ["+ ukey +"]ë¥¼ í™”ë©´ì— ì…ë ¥í•´ì£¼ì„¸ìš”.");
+		params.put("text", "[Life is Trip] º»ÀÎÈ®ÀÎ ÀÎÁõ¹øÈ£ ["+ ukey +"]¸¦ È­¸é¿¡ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
 		params.put("app_version", "test app 1.2"); // application name and version
 
-//		try {
-//			JSONObject obj = (JSONObject) coolsms.send(params);
-//			System.out.println(obj.toString());
-//			return ukey;
-//		} catch (CoolsmsException e) {
-//			System.out.println(e.getMessage());
-//			System.out.println(e.getCode());
-//		}
+		try {
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.toString());
+			return ukey;
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
 		
-		return 851210;
+		return ukey;
 	}
 }
