@@ -66,8 +66,10 @@
 <div id = "infoview">
 <ul style ="list-style: none;">
 <li>숙소 이름, 사진</li>
-<li>게스트 인원수</li>
-<li>날짜</li>
+<li>${person }명</li>
+<li><span>체크인  <fmt:formatDate type="DATE" pattern="yy년MM월dd" value="${startDate }"/></span>&nbsp;&nbsp;&nbsp;
+<span id = "right"></span>&nbsp;&nbsp;&nbsp;
+<span>체크아웃  <fmt:formatDate type="DATE" pattern="yy년MM월dd" value="${endDate }"/></span></li>
 <li>숙소 비용</li>
 <li>청소비</li>
 <li>서비스 수수료</li>

@@ -233,7 +233,12 @@ function pasteHTML(filepath){
 <form id="update-form" action="/mypage/updateMyProfile" method="post" enctype="multipart/form-data" onsubmit="return false;">
 <table style="width:100%;">
 <tr><td style="width:20%; color:#565;"><h3>프로필 사진</h3></td></tr>
-<tr><td style="text-align:center;"><img id="profile-photo-for-update" width="200px" height="200px" style="border:5px solid #999; border-radius:50%;" src="/resources/images/${member.stored_name }"/></td></tr>
+<tr><td style="text-align:center;">
+<c:if test="${member.stored_name ne null }">
+<img id="profile-photo-for-update" width="200px" height="200px" style="border:5px solid #999; border-radius:50%;" src="/resources/images/${member.stored_name }"/></c:if>
+<c:if test="${member.stored_name eq null }">
+<img id="profile-photo-for-update" width="200px" height="200px" style="border:5px solid #999; border-radius:50%;" src="/resources/images/empty_profile_photo.jpg"/></c:if>
+</td></tr>
 <tr><td style="padding-bottom:30px;">
 <input type="file" id="input-photo-for-update" name="file" hidden="hidden" />
 <div style="display:table; margin:0 auto; width:50%; height:50px; text-align:center; background-color:#FF5A5F; border-radius:6px;">

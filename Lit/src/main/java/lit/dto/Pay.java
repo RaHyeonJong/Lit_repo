@@ -3,32 +3,32 @@ package lit.dto;
 import java.util.Date;
 
 public class Pay {
-	private final String CARD = "카드";			//결제수단: 카드 / pay_method_no: 1
-	private final String PHONE = "휴대폰";		//결제수단: 휴대폰 / pay_mehtod_no: 2
+	private final String CARD = "카드";			//寃곗젣�닔�떒: 移대뱶 / pay_method_no: 1
+	private final String PHONE = "휴대폰";		//寃곗젣�닔�떒: �쑕���룿 / pay_mehtod_no: 2
 	
 	private final String NOMAL = "정상결제";
 	private final String REFUND_WAITING = "결제 취소 요청";
-	private final String REFUND_COMPLETE = "결제 취소";
+	private final String REFUND_COMPLETE = "결제 취소 완료";
 	
-	private int pay_no;				// 결제번호
-	private int mem_no;				// 구매회원번호
-	private int lodge_no;				// 예약숙소번호
-	private String lodge_name;	// 숙소이름
-	private int room_no;				// 예약방번호(숙소유형이 motel에 해당되는 경우에만)
+	private int pay_no;				// 寃곗젣踰덊샇
+	private int mem_no;				// 援щℓ�쉶�썝踰덊샇
+	private int lodge_no;				// �삁�빟�닕�냼踰덊샇
+	private String lodge_name;	// �닕�냼�씠由�
+	private int room_no;				// �삁�빟諛⑸쾲�샇(�닕�냼�쑀�삎�씠 motel�뿉 �빐�떦�릺�뒗 寃쎌슦�뿉留�)
 	private int pay_method_no;	// 1=CARD, 2=PHONE
 	private String pay_method;	// card or phone
-	private int pay_sum;				// 결제총합
-	private int cleaning_cost;		// 청소비
-	private int service_fee;			// 서비스 수수료
-	private int stay_term;			// 숙박일수
-	private Date pay_time;			// 결제일시
-	private Date stay_start;		// 숙박시작날짜
-	private Date stay_end;			// 숙박종료날짜
-	private int stay_heads;			// 숙박인원
-	private int pay_state_no;			// 결제상태 / NOMAL: 정상, REFUND_WAITING: 환불대기, REFUND_COMPLETE: 환불완료
+	private int pay_sum;				// 寃곗젣珥앺빀
+	private int cleaning_cost;		// 泥��냼鍮�
+	private int service_fee;			// �꽌鍮꾩뒪 �닔�닔猷�
+	private int stay_term;			// �닕諛뺤씪�닔
+	private Date pay_time;			// 寃곗젣�씪�떆
+	private Date stay_start;		// �닕諛뺤떆�옉�궇吏�
+	private Date stay_end;			// �닕諛뺤쥌猷뚮궇吏�
+	private int stay_heads;			// �닕諛뺤씤�썝
+	private int pay_state_no;			// 寃곗젣�긽�깭 / NOMAL: �젙�긽, REFUND_WAITING: �솚遺덈�湲�, REFUND_COMPLETE: �솚遺덉셿猷�
 	private String pay_state;			// NOMAL or REFUND_WAITING or REFUND_COMPLETE
 	
-	private String stored_name;		// 숙소 썸네일 이미지
+	private String stored_name;		// �닕�냼 �뜽�꽕�씪 �씠誘몄�
 	
 	@Override
 	public String toString() {

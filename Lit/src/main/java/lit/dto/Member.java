@@ -3,9 +3,9 @@ package lit.dto;
 import java.util.Date;
 
 public class Member {
-	private final String ADMIN = "admin"; 	//회원유형: 관리자 / mem_case_no = 0
-	private final String USER = "user"; 	//회원유형: 일반유저 / mem_case_no = 1
-	private final String HOST = "host";		//회원유형: 호스트 / mem_case_no = 2
+	private final String ADMIN = "admin"; 	//�쉶�썝�쑀�삎: 愿�由ъ옄 / mem_case_no = 0
+	private final String USER = "user"; 	//�쉶�썝�쑀�삎: �씪諛섏쑀�� / mem_case_no = 1
+	private final String HOST = "host";		//�쉶�썝�쑀�삎: �샇�뒪�듃 / mem_case_no = 2
 	
 	private int mem_no;
 	private int mem_case_no;		// 0 = ADMIN, 1 = fUSER, 2 = HOST
@@ -15,10 +15,10 @@ public class Member {
 	private String mem_name;
 	private String mem_phone;
 	private Date mem_birth;
-	private String origin_name;		//프로필 사진 파일 원본이름
-	private String stored_name;		//프로필 사진 파일 저장이름
+	private String origin_name;		//�봽濡쒗븘 �궗吏� �뙆�씪 �썝蹂몄씠由�
+	private String stored_name;		//�봽濡쒗븘 �궗吏� �뙆�씪 ���옣�씠由�
 	private String mem_intro;
-	private int mem_activation;	// 0 = 비활성화, 1 = 활성화
+	private int mem_activation;	// 0 = 鍮꾪솢�꽦�솕, 1 = �솢�꽦�솕
 	private String uKey;
 	
 	@Override
