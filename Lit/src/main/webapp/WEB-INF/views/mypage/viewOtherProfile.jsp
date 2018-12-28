@@ -93,6 +93,7 @@ $(document).ready(function(){
 </head>
 <body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+
 <div style="margin-top:20px; padding:2% 20% 0 20%;">
 <table style="width:100%;">
 <tr><td style="text-align:center;"><h1 style="display:inline;">${other.mem_name }</h1> <h2 style="display:inline;">님의 프로필입니다.</h2></td></tr>
