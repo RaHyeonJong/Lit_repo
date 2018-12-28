@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UFT-8">
+<meta charset="UTF-8">
 <title>Life is Trip 인생은 여행이다</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
@@ -33,6 +33,63 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<style>
+
+.modal
+	{
+		display:none;
+		position:fixed;
+		z-index:1;
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+		overflow:auto;
+		background-color:rgba(0,0,0,0.55);	 
+	}
+
+	.modal-content
+	{
+		background-color:#fefefe;
+		margin:10% auto;
+		padding:15px;
+		border:5px solid #e0ecff;
+		width:320px; 
+	}
+	
+	.contents
+	{
+		width:320px;
+		height:150px;
+		resize:none;
+	}
+	
+	.close
+	{
+		color:#aaa;
+		float:right;
+		font-size:28px;
+		font-weight:bold;
+	}
+
+	.close:hover,
+	.close:focus
+	{
+		color:skyblue;
+		text-decoration:none;
+		cursor:pointer;
+	}
+	
+	.sendBtn
+	{
+		width:120px;
+		height:30px;
+	}
+
+
+</style>
+
 </head>
 <body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
@@ -46,12 +103,57 @@ $(document).ready(function(){
 <img width="300px" height="300px" style="border:6px solid #999; border-radius:50%;" src="/resources/images/empty_profile_photo.jpg"/></c:if>
 </td></tr>
 <tr><td style="text-align:right;">
-<button style="width:80px; height:40px; cursor:pointer; text-decoration:none; border:none; border-radius:3px; background-color:#FF5A5F; color:white;">쪽지보내기</button>&nbsp;
+<button id="myBtn" style="width:80px; height:40px; cursor:pointer; text-decoration:none; border:none; border-radius:3px; background-color:#FF5A5F; color:white;">쪽 지</button>&nbsp;
 <button id="report-member-btn" style="width:80px; height:40px; cursor:pointer; text-decoration:none; border:1px solid #FF5A5F; border-radius:3px; background-color:white; color:#FF5A5F;">신고하기</button>
 </td></tr>
 <tr><td><div style="border:3px solid #999; border-radius: 5px; min-height:300px; padding:10px; color:#555; font-size:18px;">${other.mem_intro }</div></td></tr>
 </table>
 </div>
 </div>
+
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<span id="close" class="close">&times;</span>
+		<h1>Message</h1>
+		<hr>
+		<p>보낸 사람 :  ${member.mem_name }</p>
+		<p>받는 사람 :  ${other.mem_name}</p>
+		<p><textarea class="contents" name="contents"></textarea></p>
+		<p style="text-align:right;"><button type="submit" class="sendBtn">쪽지 보내기</button>	
+	</div>
+</div>
+
+
 </body>
+
+<script>
+
+	var modal = document.getElementById("myModal");
+	var btn = document.getElementById("myBtn");
+	var span = document.getElementById("close");
+
+	btn.onclick = function()
+	{
+		modal.style.display = "block";
+		
+	}
+
+	span.onclick = function()
+	{
+		
+		modal.style.display="none";
+	}
+
+	window.onclick = function(event)
+	{
+		if(event.target == modal)
+		{
+			
+			modal.style.display = "none";	
+		}
+		
+	}
+
+</script>
 </html>
+
