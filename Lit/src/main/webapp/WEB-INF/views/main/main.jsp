@@ -1,22 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Life is trip 인생은 여행이다</title>
 
+
 <style>
 #map {
-	position: absolute;
+	position: fixed;
+	height: 776px;
+	right: 0px;
+/* 	float: right; */
+}
+#mapFixed {
+	position: fixed;
 	top: 145px;
 	height: 776px;
 	width: 50%;
 	right: 0px;
 /* 	float: right; */
 }
-
 #search_filter {
 	border-bottom: 1px solid #EBEBEB;
 	width: 100%;
@@ -46,7 +54,28 @@
 	text-decoration: none !important;
 	width: auto !important;
 }
+#lodgeList2 {
+	display: table; 
+	border: 1px solid gray; 
+	margin: 20px 0;
+	width: 48%;
+}
+#lodgeImage {
+	display: table-cell; 
+	width: 300px; 
+	height: 200px;
+	border: 1px solid gray;
+}
+#lodgeInfo {
+	display: table-cell; 
+	border: 1px solid gray;
+	width: 100%;
+	height: 200px !important; 
+	vertical-align: middle !important;
+}
 </style>
+
+
 
 </head>
 <body>
@@ -64,40 +93,147 @@
 
 		<div id="search_filter">
 			<button>날짜</button>
-			<button>인원</button>
+			<button id="peopleFilterBtn">인원</button>
 			<button>숙소 종류</button>
 			<button>가격</button>
 		</div>
 
 		<h1>main page</h1>
 		
-		<div id="lodgeList"></div>
+		
+		<div id="lodgeCount"></div>
+		
+		<div id="lodgeList" style="margin-left: 20px;"></div>
 	
 	
 </div>
-	<div id="map"></div>
 
-
-
+	<div id="mapFixed">
+		<div id="map">
+		</div>
+	</div>
 </body>
 
+<!-- <div id="modal-login" style="display:block; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(255,255,255,0.65); "> -->
+<!-- <div style="position:fixed; width:568px; height:568px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center; -->
+<!-- 		border: 1px solid black;"> -->
+<!-- </div></div> -->
 
 <script>
+var bounds, ne, sw, neLat, neLng, swLat, swLng;
+var map;
+var myLatlng;
+var marker;
+var peopleCnt;
+var cost;
+var infowindow;
+
+$(document).ready(function() {
+	
+	$('#peopleFilterBtn').click(function() {
+		$('.modal').css("display", "none");
+		$('#modal-people').css("display", "block");
+	});
+
+	$('#peopleFilter-send').click(function() {
+		
+		$('.modal').css("display", "none");
+		peopleCnt = $('#peopleFilter').val();
+		
+		if(peopleCnt == "")
+			peopleCnt = 0;
+		
+		
+         
+            $.ajax({
+			    type: "post",
+			    url: "/main/searchFilterAjax",
+			    data: {"peopleCnt" : peopleCnt , "neLat" : neLat, "neLng" : neLng, "swLat" : swLat, "swLng" : swLng},
+			    dataType: "json",
+			    success: function(list) {
+
+						map = new google.maps.Map(document.getElementById('map'), {
+							zoom : 15,
+							center : myLatlng
+						});
+						
+						marker = new google.maps.Marker({
+							position : myLatlng,
+							map : map,
+							title : 'Click to zoom'
+						});
+			    	
+			    	setMarkers(map);
+					
+					function setMarkers(map) {
+						for(var i=0; i<list.length; i++) {
+										
+							marker = new google.maps.Marker({
+								position: {lat: list[i].latitude, lng: list[i].longitude},
+								map: map,
+								title: list[i].lodge_name,
+								zIndex: i+1
+							});
+							
+							cost = '￦' + list[i].stay_cost;
+							
+							infowindow = new google.maps.InfoWindow({
+							    content: String(cost)
+							});
+							
+							infowindow.open(map, marker);
+						}
+					}
+					
+					$("#lodgeCount").html("");
+					$("#lodgeCount").append(list.length + "개의 숙소");
+					$("#lodgeCount").append("<br>");
+					
+					
+						////////// 숙소 리스트 ///////////
+					$.ajax({
+					    type: "post",
+					    url: "/main/lodgeListAjax",
+					    data: {"list" : JSON.stringify(list)},
+					    dataType: "html",
+					    success: function(list) {
+					    	
+					    	$("#lodgeList").html(list);
+					        
+					    },
+					    error: function() {
+					        console.log("실패");
+					    }
+					});
+					//////////////////////////////////
+					
+			    },
+			    error: function() {
+			        console.log("실패");
+			    }
+			});
+            
+        
+		
+	});
+});
+
+
 	function initMap() {
 				
-				var myLatlng = {
+				myLatlng = {
 					lat : ${cityLat},
 					lng : ${cityLng}
 				};
 
-				var map = new google.maps.Map(document.getElementById('map'), {
+				map = new google.maps.Map(document.getElementById('map'), {
 					zoom : 15,
 					center : myLatlng
 				});
 				
 				
 				
-				var marker = new google.maps.Marker({
+				marker = new google.maps.Marker({
 					position : myLatlng,
 					map : map,
 					title : 'Click to zoom'
@@ -112,22 +248,20 @@
 //	 			});
 
 
+
+
+				
+				
 					map.addListener('dragend', function() { // dragend 시작
+						alert('dragend');
+						bounds = map.getBounds();
+						ne = bounds.getNorthEast();
+						sw = bounds.getSouthWest();
 						
-						var bounds = map.getBounds();
-						var ne = bounds.getNorthEast();
-						var sw = bounds.getSouthWest();
-						
-		 				console.log('bounds_changed');
-						console.log(ne.lat());
-						console.log(ne.lng());
-						console.log(sw.lat());
-						console.log(sw.lng());
-						
-						var neLat = ne.lat();
-						var neLng = ne.lng();
-						var swLat = sw.lat();
-						var swLng = sw.lng();
+						neLat = ne.lat();
+						neLng = ne.lng();
+						swLat = sw.lat();
+						swLng = sw.lng();
 						
 						$.ajax({
 							type: "get",
@@ -144,30 +278,46 @@
 								
 								function setMarkers(map) {
 									for(var i=0; i<list.length; i++) {
-														
-										var marker = new google.maps.Marker({
+													
+										marker = new google.maps.Marker({
 											position: {lat: list[i].latitude, lng: list[i].longitude},
 											map: map,
 											title: list[i].lodge_name,
 											zIndex: i+1
 										});
+										
+										cost = '￦' + list[i].stay_cost;
+										
+										infowindow = new google.maps.InfoWindow({
+										    content: String(cost)
+										});
+										
+										infowindow.open(map, marker);
 									}
 								}
 								
-								$("#lodgeList").html("");
+								$("#lodgeCount").html("");
+								$("#lodgeCount").append(list.length + "개의 숙소");
+								$("#lodgeCount").append("<br>");
 								
-								for(var i=0; i<list.length; i++) {
-									
-									console.log(list[i]);
-									
-									$("#lodgeList").append(list[i].lodge_name);
-									$("#lodgeList").append("<br>");
-									
-									
-									
-									
-								}
-								$("#lodgeList").append("<hr>");
+
+								
+								////////// 숙소 리스트 ///////////
+								$.ajax({
+								    type: "post",
+								    url: "/main/lodgeListAjax",
+								    data: {"list" : JSON.stringify(list)},
+								    dataType: "html",
+								    success: function(list) {
+								    	
+								    	$("#lodgeList").html(list);
+								        
+								    },
+								    error: function() {
+								        console.log("실패");
+								    }
+								});
+								//////////////////////////////////
 							},
 							error: function() {
 								console.log("실패");
@@ -175,25 +325,17 @@
 						});
 					}); // dragend 끝
 
-				
-				// 동서남북 좌표
-				var bounds = map.getBounds();
-// 				var ne = bounds.getNorthEast();
-// 				var sw = bounds.getSouthWest();
-				
-				
-// 				console.log(neLat);
-				
-				
-				
-				
 			}
-	
-	
 	</script>
 <script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap">
-		
-	</script>
-
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
+<!-- 인원 필터 모달 -->
+<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<div>
+	<input type="text" id="peopleFilter" name="peopleFilter" />
+	<button id="peopleFilter-send">적용</button>
+</div>
+</div></div>
+<!--       -->
 </html>

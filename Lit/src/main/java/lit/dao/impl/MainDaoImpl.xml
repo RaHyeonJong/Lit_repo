@@ -13,5 +13,12 @@
 	WHERE latitude between #{swLat2} AND #{neLat2} AND
 	longitude BETWEEN #{swLng2} AND #{neLng2}
 	</select>
+	
+	<select id="selectLodgeSearch" parameterType="lit.dto.SearchFilter" resultType="lit.dto.Lodge">
+	SELECT * FROM lodge
+	WHERE latitude between #{swLat} AND #{neLat} AND
+	longitude BETWEEN #{swLng} AND #{neLng}
+	AND lodge_capacity >= #{peopleCnt}
+	</select>
 
 </mapper>
