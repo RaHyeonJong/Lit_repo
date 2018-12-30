@@ -61,6 +61,15 @@ ORDER BY comment_no desc
 
 </select>
 
+<select id="commentCount" parameterType="lit.dto.Lodge" resultType = "int">
+
+	SELECT COUNT(*) FROM comment_tb 
+	WHERE lodge_no = ${lodge_no}
+
+</select>
+
+
+
 <select id="lodgeReply" parameterType="lit.dto.Comment" resultType="lit.dto.Comment">
 	SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
 	WHERE c.mem_no = m.mem_no
@@ -140,7 +149,13 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	WHERE lodge_no = #{lodge_no}
 </select>
 
+<select id = "selectday_off"  resultType="lit.dto.Day_off">
 
+	SELECT * FROM day_off
+	WHERE lodge_no = 143 AND day_off_date = '2019-01-05'
+
+
+</select>
 
 
 

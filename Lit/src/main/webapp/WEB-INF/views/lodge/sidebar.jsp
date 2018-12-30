@@ -147,7 +147,7 @@ $(document).ready(function(){
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
 /* 	ul li { list-style: none; }  74오류나면 수정*/
-	.nav_side { position: absolute; top: 75%; left:1100px; min-width:500px; heigth:800px;}
+	.nav_side { position: absolute; top: 695px; left:1100px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}
 	label{ vertical-align: middle; margin-left: -3px;}
@@ -167,13 +167,17 @@ $(document).ready(function(){
 			<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">
       		 <input id="start" name ="stay_start" type="text"  data-language="en" placeholder ="체크인"/>
       		 <input id="end" class = "form-control" name ="stay_end" type="text"  data-language="en"placeholder ="체크아웃"/>
-      		 <button id = "search">검색</button>
-			
-		</div>
+      		
+		
 		
 		<br>	
 		<div id ="people" class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
 		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
+		<button id = "search">검색</button>
+		
+		</div>
+		
+		
 		
 		<div id ="total">
 		<p id = "cost"></p>
@@ -183,6 +187,8 @@ $(document).ready(function(){
 		
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->
+		<i class="far fa-flag"></i>
+		<i class="fas fa-flag"></i>
 		</div>
 
 
