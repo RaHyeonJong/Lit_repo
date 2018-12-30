@@ -6,19 +6,21 @@
 
 <select id="SelectLodgeView" resultType="lit.dto.Lodge">
 
-	SELECT
+		SELECT
 	lodge_no, 
+	mem_no,
 	bc.building_case_no,
-    building_case,
+    bc.building_case,
 	l.lodge_case_no,
 	lodge_case,
     lodge_name, 
 	lodge_capacity, 
 	lodge_room, 
 	lodge_addr,
-	convenient_facility,
+    convenient_facility,
 	convenient_area,
-	ready_time, 
+	ready_time,
+    stay_cost,
 	check_in_time, 
 	regit_date,
 	latitude, 
@@ -26,7 +28,7 @@
 	FROM lodge l , lodge_case lc, building_case bc
     WHERE l.lodge_case_no = lc.lodge_case_no
     AND l.lodge_case_no = bc.building_case_no
-    AND lodge_no = 21
+    AND lodge_no = 143
 
 </select>
 
@@ -37,17 +39,15 @@
 	origin_name,
 	stored_name,
 	lodge_no,
-	mem_no,
-	board_no,
-	thumb_nail
+	mem_no
 	FROM image
-	WHERE lodge_no = 1
+	WHERE lodge_no = 143
 
 </select>
 
 <select id = "selectConvenient" resultType ="lit.dto.Lodge">
 	SELECT convenient_facility FROM lodge
-	WHERE lodge_no = 21
+	WHERE lodge_no = 143
 
 </select>
 
@@ -56,10 +56,19 @@
 
 SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
 WHERE c.mem_no = m.mem_no
-AND lodge_no = 21
+AND lodge_no = 143
 ORDER BY comment_no desc
 
 </select>
+
+<select id="commentCount" parameterType="lit.dto.Lodge" resultType = "int">
+
+	SELECT COUNT(*) FROM comment_tb 
+	WHERE lodge_no = ${lodge_no}
+
+</select>
+
+
 
 <select id="lodgeReply" parameterType="lit.dto.Comment" resultType="lit.dto.Comment">
 	SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
@@ -100,6 +109,53 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	INSERT INTO comment_tb(comment_no,parent_comment_no,lodge_no,contents,mem_no)
 	VALUES(comment_seq.nextval,#{parent_comment_no},#{lodge_no},#{contents},#{mem_no})
 </insert>
+
+
+<insert id="insertlodgetLike" parameterType="lit.dto.Favorite">
+	INSERT INTO favorite(favorite_no, mem_no, lodge_no)
+	VALUES(favorite_seq.nextval, #{mem_no}, #{lodge_no})
+
+
+</insert>
+<delete id="deleteFavorite" parameterType="lit.dto.Favorite" >
+	DELETE favorite
+	WHERE mem_no = #{mem_no} AND
+			lodge_no = #{lodge_no}
+
+</delete>
+
+<select id="selectFavorite" parameterType="lit.dto.Favorite" resultType="int">
+	SELECT COUNT(*) FROM favorite
+	WHERE mem_no = #{mem_no}
+
+</select>
+
+
+
+<select id="SelectLodgeReservation" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
+
+	SELECT 
+	lodge_no,
+	lodge_case_no,
+	lodge_name,
+	lodge_room,
+	lodge_addr,
+	convenient_facility,
+	convenient_area,
+	ready_time,
+	check_in_time,
+	stay_cost
+	FROM lodge
+	WHERE lodge_no = #{lodge_no}
+</select>
+
+<select id = "selectday_off"  resultType="lit.dto.Day_off">
+
+	SELECT * FROM day_off
+	WHERE lodge_no = 143 AND day_off_date = '2019-01-05'
+
+
+</select>
 
 
 

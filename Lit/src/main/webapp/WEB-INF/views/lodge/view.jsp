@@ -4,9 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <!-- 구글 맵 -->  
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXFWcGZfctodSrxJThdhJKa0XPSP2sVlk&callback=initMap"
-    async defer></script>
+ 
+
 <style>
 
 #gallery {
@@ -216,6 +215,7 @@ max-width: 77px;
 .line{
    border-bottom-style: solid !important;
     border-bottom-color: #f5f5f5 !important;
+    width: 650px;
 }
 .user_img{
 	background-color: var(--color-accent-light-gray, #D8D8D8) !important;
@@ -250,7 +250,34 @@ a{color:#000;}
 #modalLayer{display:none; position:relative;}
 #modalLayer .modalContent{width:300px; height:700px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer; 
-border: none; width: 40px; height: 40px;background: url("/resources/images/close.png") no-repeat;}
+border: none;}
+
+.close_btn{
+    display: inline-block;
+    position: relative;
+    margin: 6 20px 0 7px;
+    padding: 0;
+    width: 4px;
+    height: 20px;
+    background: #000;
+    transform: rotate(45deg);
+}
+.close_btn:before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 20px;
+    height: 4px;
+    margin-top: -2px;
+    background: #000;
+
+
+}
+
+
+
 
 .reply{
 border: 1px solid gray;
@@ -265,6 +292,48 @@ border: 1px solid gray;
 
 
 }
+#lodge_like{
+	z-index: 999;
+    position: absolute;
+    right: 16px;
+    top: 90px;
+	  color:  #888;
+	  font-size: 18px;
+	  font-family: inherit;
+	  background : #efefef;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#lodge_like:hover {
+  color: indianred;
+}
+#lodge_like:active {
+  transform: scale(0.95);
+}
+#lodge_like.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#lodge_like .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
+
+
+
+
 
 
 </style>
@@ -274,16 +343,11 @@ border: 1px solid gray;
 var map;
 var latVal = ${view.latitude};//숙소 위도
 var lngVal = ${view.longitude}; //숙소 경도
-var infoWindow;
-// function initMap() {
-// 	  var uluru = {lat: latVal, lng: lngVal};
-// 	  var map = new google.maps.Map(
-// 			document.getElementById('map'), {zoom: 15, center: uluru});
-   
-// 	  var marker = new google.maps.Marker({position: uluru, map: map});
-	
-	  
-//   };
+
+
+var cont = "${view.lodge_addr}";
+
+
    var marker;
 
       function initMap() {
@@ -292,6 +356,10 @@ var infoWindow;
           center: {lat: latVal, lng: lngVal}
         });
 
+        var infowindow = new google.maps.InfoWindow({
+        	content : String(cont)
+        })
+        
         marker = new google.maps.Marker({
           map: map,
           draggable: true,
@@ -299,6 +367,7 @@ var infoWindow;
           position: {lat: latVal, lng: lngVal}
         });
         marker.addListener('click', toggleBounce);
+		infowindow.open(map, marker);
       }
 
       function toggleBounce() {
@@ -309,8 +378,9 @@ var infoWindow;
         }
       };
       
+     
       
-      
+
  
 
 </script>
@@ -357,7 +427,7 @@ function fn_formSubmit(){ //후기 입력
 //    		console.log(result);
 // 			$("#review").append(result);
     		$("#contents").val("");
-//     		document.getElementById("review").innerHTML = result;
+     		document.getElementById("review").innerHTML = result;
     	}
     	})
     	
@@ -484,7 +554,92 @@ function fn_replyDelete(comment_no){ //후기 삭제
     }
 </script>
 
+<script type="text/javascript">
+$(function() {
+    $("#datepicker").datepicker();
+    $("#datepicker2").datepicker();
+    
+    var $start = $("#datepicker"),
+    	day_off = "${off}";
+    
+    	// What dates should be disabled - year.month.date
+    	var disabledDates = ['${off}','2019.1.4', '2019.1.17', '2019.1.20', '2019.1.23']
 
+    	$start.datepicker({
+    		language: 'en',
+    	  onRenderCell: function(d, type) {
+    	    if (type == 'day') {
+    				var disabled = false,
+    	      		formatted = getFormattedDate(d);
+    	          
+    	          disabled = disabledDates.filter(function(date){
+    	          	return date == formatted;
+    	          }).length
+    	      
+    						return {
+    	          	disabled: disabled
+    	          }
+    	    }
+    	  }
+    	})
+
+    	function getFormattedDate(date) {
+    	  var year = date.getFullYear(),
+    	    month = date.getMonth() + 1,
+    	    date = date.getDate();
+    	    
+    	    return year + '.' + month + '.' + date;
+    	}
+});
+</script>
+
+<script type="text/javascript"> //저장(좋아요)
+	$(document).ready(function(){
+
+		document.addEventListener('DOMContentLoaded', function() {
+			  var likeButton = document.getElementById('lodge_like');
+			   if("${like}" == 1){
+			  	window.lb = likeButton;
+			    likeButton.classList.toggle('selected');
+			   }
+			   
+			}, false);
+		
+		
+		$('#lodge_like').click(function(){
+			var lodge_no = '${view.lodge_no}',
+				mem_no = '${member.mem_no}';
+				var likeButton = document.getElementById('lodge_like');
+				
+			$.ajax({
+				url: "like",
+				type : "post",
+				data :{"lodge_no" : lodge_no, "mem_no" : mem_no },
+				dataType : "json",
+				success : function(data){
+					if(data.like){
+					window.lb = likeButton;
+					likeButton.classList.toggle('selected');
+					}
+						
+				},
+				error : function(data){
+					
+				},
+				
+				
+				
+			});//ajax 끝
+		
+		
+		
+		});//클릭 버튼 끝
+		
+	});//도큐먼트 끝
+
+
+
+</script>
 
 <body>
 	<div id="wrapper">
@@ -493,13 +648,16 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			<c:import url="../layout/header.jsp" />
 		</div>
 
-
-		<div>
+<div >
+		
 			<!-- content시작 -->
     <div id="gallery">
+    	
       <div class="photo " id="photo1" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo2" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[1].stored_name }"/></div>
-      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/></div>
+      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/>
+      <button id = "lodge_like"><svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>저장</button></div>
       <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
       <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo6" style =" overflow: hidden;"><img src=""/></div>
@@ -508,7 +666,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
       <div class="photo " id="photo9" style =" overflow: hidden;"><img src=""/></div>
       </div>
       
-      
+      <div style = "margin-left: 21%;">
 			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!--  호스트 정보 -->
@@ -518,12 +676,21 @@ function fn_replyDelete(comment_no){ //후기 삭제
 						<tr>
 							<th class="small-10 large-10 columns first"style ="width :500px;">
 								<p class="body-text-lg heavy row-pad-bot-1"
-									style="font-size: smaller;">${view.building_case }</p>
+									style="font-size: smaller;">
+									<c:if test = "${view.building_case_no  == 1}" >
+									<span>펜션</span>
+									</c:if>
+									<c:if test = "${view.building_case_no == 2}" >
+									<span>모텔</span>
+									</c:if>
+									<c:if test = "${view.building_case_no == 3}" >
+									<span>게스트하우스</span>
+									</c:if>											
+									</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
-									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> <span class="dot">• </span> <span> <a href="#"
-										class="color-rausch light"> </a>
+									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> 
 									</span>
 								</p>
 							</th>
@@ -546,7 +713,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 
 			<div class="lodge_info">
 				<span>󰄂</span> 
-				<span>수용 인원${view.lodge_capacity }명</span>
+				<span>수용인원 ${view.lodge_capacity }명</span>
 				<c:if test = "${view.building_case_no  == 1}" >
 				<span>아파트</span>
 				</c:if>
@@ -574,7 +741,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 				 <span> ${item.get(3)}</span>
 				  <br> 
 				<svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="m5 3.5a1.5 1.5 0 1 0 -3 0 1.5 1.5 0 0 0 3 0zm-1.5.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm4 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0-2a .5.5 0 1 1 0 1 .5.5 0 0 1 0-1zm4.5 3c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 15c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm9.5-21h-19a2.51 2.51 0 0 0 -2.5 2.5v19c0 1.38 1.12 2.5 2.5 2.5h19c1.38 0 2.5-1.12 2.5-2.5v-19c0-1.38-1.12-2.5-2.5-2.5zm1.5 21.5c0 .83-.68 1.5-1.5 1.5h-19c-.83 0-1.5-.68-1.5-1.5v-19c0-.83.68-1.5 1.5-1.5h19c .83 0 1.5.68 1.5 1.5zm-6.17-6.12a.5.5 0 0 1 .04.71 2.49 2.49 0 0 1 -.63.48c-1.15.65-2.67.65-4.49-.38-1.52-.85-2.66-.85-3.51-.38a1.57 1.57 0 0 0 -.37.27.5.5 0 1 1 -.75-.66 2.49 2.49 0 0 1 .63-.48c1.15-.65 2.67-.65 4.49.38 1.52.85 2.66.85 3.51.38a1.57 1.57 0 0 0 .37-.27.5.5 0 0 1 .71-.04zm0-3.5a.5.5 0 0 1 .04.71 2.49 2.49 0 0 1 -.63.48c-1.15.65-2.67.65-4.49-.38-1.52-.85-2.66-.85-3.51-.38a1.57 1.57 0 0 0 -.37.27.5.5 0 1 1 -.75-.66 2.49 2.49 0 0 1 .63-.48c1.15-.65 2.67-.65 4.49.38 1.52.85 2.66.85 3.51.38a1.57 1.57 0 0 0 .37-.27.5.5 0 0 1 .71-.04z" fill-rule="evenodd"></path></svg>
-				 <span> ${item.get(8)}</span> 
+				 <span> ${item.get(4)}</span> 
 				  <br> 
 				</span>
 			</div>
@@ -594,15 +761,15 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			<!-- 편의시설 끝 -->
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
-			
-			<div>
-			<input id="start" name ="stay_start" type="text" data-language="en"class="datepicker-here" placeholder="체크인"/>
-      		 <input id="end" name ="stay_end" type="text"  data-language="en"class="datepicker-here" placeholder ="체크아웃"/>
+			<div style = "width: 900px;">
+			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
+			<p id="datepicker2" data-language='en'></p>
 			</div>
-			<!-- 달력 끝 -->
+			
+			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
-				
+				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
 				<!-- 후기 작성 -->
 				<div id = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
@@ -611,6 +778,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
       			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
        			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
+				</c:if>
 				
 					<div id="review"> <!-- 후기 리스트 -->
 				
@@ -624,15 +792,17 @@ function fn_replyDelete(comment_no){ //후기 삭제
        				 <br/>
        				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
 
-       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+       				<c:if test ="${login && member.mem_no eq review.mem_no }">
        				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
        				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
+					</c:if>
+					<c:if test ="${login && member.mem_no eq view.mem_no }">
  					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
-						
-						</c:if>
-   			
+   					</c:if>
+   					
    				 </div>
 				</c:if>
+				
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
 						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 10px;">    
@@ -643,10 +813,10 @@ function fn_replyDelete(comment_no){ //후기 삭제
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
 	
-	       				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+	       				<c:if test ="${login && review2.mem_no eq member.mem_no }">
 	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
 	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
-	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button>
+<%-- 	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button> --%>
 					</c:if>
 					</div>
 					</c:if>
@@ -694,10 +864,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 			
 			</div>
 
-
-
-
-
+</div>
 
 			<!-- content 끝 -->
 		</div>
@@ -705,6 +872,11 @@ function fn_replyDelete(comment_no){ //후기 삭제
 		<!-- wrapper 끝 -->
 	</div>
 
+<c:import url="../lodge/sidebar.jsp"/>
+   <!-- 구글 맵 -->  
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
+    async defer></script>
 
 </body>
+
 </html>

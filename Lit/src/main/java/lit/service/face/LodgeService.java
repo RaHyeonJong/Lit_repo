@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import lit.dto.Comment;
+import lit.dto.Day_off;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
@@ -23,13 +25,17 @@ public interface LodgeService {
 	
 	
 	//예약 하고 자하는 숙소의 결제 정보 보여주기
-	public boolean LodgeReservationView(Pay pay);
+	public Lodge LodgeReservationView(Lodge lodge);
 
 	//결제하기
 	public void LodgePay(Pay pay);
 
 	//후기 리스트
 	public List<Comment> commentList();
+	
+	//후기 개수
+	public int lodgeCountcomment(Lodge lodge);
+	
 	
 	//후기입력
 	public void insertComment(Comment comment);
@@ -46,11 +52,18 @@ public interface LodgeService {
 	public List<Comment> replyList(Comment comment);
 	
 	//숙소 저장(좋아요)
-	public void insertLike(Lodge lodge);
-
+	public void insertLike(Favorite favorite);
+	public void deleteLike(Favorite favorite);
+	public boolean selectLike(Favorite favorite);
+	
+	
 	//호스트에게 메시지 보내기
 	public void insertMessage(Message message);
 	// 신고
 	public void insertReport(Lodge lodge);
+	
+	//휴무일
+	public Day_off selectDay(Day_off day_off);
+	
 	
 }

@@ -3,18 +3,130 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="lit.dao.face.MypageDao">
-	<insert id="updateProfile"></insert>
-	
-	<select id="getFavoriteList"></select>
-	
-	<delete id="deleteFavorite"></delete>
-	
-	<select id="getMyboardList"></select>
-	
-	<select id="getMycommentList"></select>
-	
-	<select id="getPayList"></select>
-	
-	<update id="updatePay"></update>
   
+	<update id="updateMyPhoto" parameterType="lit.dto.Image">
+		UPDATE image
+		SET origin_name = #{origin_name },
+			Stored_name = #{stored_name }
+		WHERE mem_no = #{mem_no }
+	</update>
+	
+	<select id="checkMyPhoto" parameterType="lit.dto.Image" resultType="int">
+		SELECT COUNT(*)
+		FROM image
+		WHERE mem_no = #{mem_no }
+	</select>
+  
+	<update id="updateProfile" parameterType="lit.dto.Member">
+		UPDATE member
+		SET mem_name = #{mem_name },
+			mem_pw = #{mem_pw },
+			mem_phone = #{mem_phone },
+			mem_intro = #{mem_intro }
+		WHERE mem_no = #{mem_no }
+	</update>
+	
+	<select id="getMemberByNo" parameterType="lit.dto.Member" resultType="lit.dto.Member">
+		SELECT m.*, i.origin_name, i.stored_name
+		FROM member m, image i
+		WHERE m.mem_no = #{mem_no }
+		    AND m.mem_no = i.mem_no(+)
+	</select>
+	
+	<select id="getCommentList" parameterType="lit.util.Paging" resultType="lit.dto.Comment">
+		SELECT *
+		FROM (
+		SELECT rownum rnum, c.* 
+		FROM(SELECT c.*, l.lodge_name 
+		FROM comment_tb c, lodge l 
+		WHERE c.lodge_no = l.lodge_no  AND c.mem_no = #{mem_no }
+		ORDER BY comment_no DESC) c)
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<select id="getTotalCommCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM comment_tb
+		WHERE mem_no = #{mem_no }
+	</select>
+	
+	<select id="getTotalFavorCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM favorite
+		WHERE mem_no = #{mem_no }
+	</select>
+	
+	<select id="getFavorList" parameterType="lit.util.Paging" resultType="lit.dto.Favorite">
+		SELECT *
+		FROM (
+		SELECT rownum rnum, f.* 
+		FROM(
+		SELECT f.*, l.lodge_name, l.lodge_addr
+		FROM favorite f, lodge l 
+		WHERE f.lodge_no = l.lodge_no  AND f.mem_no = #{mem_no }
+		ORDER BY favorite_no DESC) f)
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<delete id="deleteMyFavor" parameterType="lit.dto.Favorite">
+		DELETE FROM favorite
+		WHERE favorite_no = #{favorite_no }
+	</delete>
+	
+	<select id="getTotalPayCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM pay
+		WHERE mem_no = #{mem_no }
+	</select>
+	
+	<select id="getPayList" parameterType="lit.util.Paging" resultType="lit.dto.Pay">
+		SELECT *
+		FROM (
+		SELECT rownum rnum, p.* 
+		FROM(
+		SELECT p.*, l.lodge_name, i.stored_name
+		FROM pay p, lodge l, image i
+		WHERE p.lodge_no = l.lodge_no  
+        AND p.lodge_no = i.lodge_no (+)
+        AND i.thumb_nail(+) = 1
+        AND p.mem_no = #{mem_no }
+		ORDER BY pay_no DESC) p)
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<update id="cancelPayment" parameterType="lit.dto.Pay">
+		UPDATE pay
+		SET pay_state_no = 2
+		WHERE pay_no = #{pay_no }
+	</update>
+	
+	<select id="getPay" parameterType="lit.dto.Pay" resultType="lit.dto.Pay">
+		SELECT * FROM pay
+		WHERE pay_no = #{pay_no }
+	</select>
+  
+	<select id="getLodge" parameterType="lit.dto.Pay" resultType="lit.dto.Lodge">
+		SELECT * FROM lodge
+		WHERE lodge_no = #{lodge_no }
+	</select>
+	
+	<select id="getHost" parameterType="lit.dto.Lodge" resultType="lit.dto.Member">
+		SELECT * FROM Member
+		WHERE mem_no = #{mem_no }
+	</select>
+	
+	<delete id="deleteMember" parameterType="lit.dto.Member">
+		DELETE FROM member
+		WHERE mem_id = #{mem_id }
+	</delete>
+	
+	<select id="checkReport" parameterType="lit.dto.Report" resultType="int">
+		SELECT COUNT(*)
+		FROM report
+		WHERE reporter_no = #{reporter_no }
+			AND mem_no = #{mem_no }
+	</select>
+	
+	<insert id="reportMember" parameterType="lit.dto.Report">
+		INSERT INTO report(report_no, reporter_no, mem_no)
+		VALUES (report_seq.nextval, #{reporter_no }, #{mem_no })
+	</insert>
+	
   </mapper>

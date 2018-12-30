@@ -1,17 +1,18 @@
 package lit.service.impl;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
+import lit.dto.Day_off;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
@@ -52,10 +53,9 @@ public class LodgeServiceImpl implements LodgeService {
 
 	
 	@Override
-	public boolean LodgeReservationView(Pay pay) {
+	public Lodge LodgeReservationView(Lodge lodge) {
 		
-				lodgedao.SelectLodgeReservation(pay);
-		return false;
+			return	lodgedao.SelectLodgeReservation(lodge);
 	}
 
 	@Override
@@ -106,13 +106,43 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.lodgeReply(comment);
 	}
 	
-	@Override
-	public void insertLike(Lodge lodge) {
 	
-		lodgedao.inserlodgetLike(lodge);
+	@Override
+	public int lodgeCountcomment(Lodge lodge) {
 		
+		return lodgedao.commentCount(lodge);
 	}
 
+	
+	
+	
+	@Override
+	public void insertLike(Favorite favorite) {
+	
+		 lodgedao.insertlodgetLike(favorite);
+		
+	}
+	
+	@Override
+	public void deleteLike(Favorite favorite) {
+		
+		lodgedao.deleteFavorite(favorite);
+	}
+	
+	@Override
+	public boolean selectLike(Favorite favorite) {
+		
+		if(lodgedao.selectFavorite(favorite) < 1){
+			
+			return  true;
+		}else{
+			
+			return false;
+		}
+			
+	
+	}
+	
 	@Override
 	public void insertReport(Lodge lodge) {
 		lodgedao.insertlodgeReport(lodge);
@@ -124,6 +154,13 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.insertContent(message);
 		
 	}
+
+	@Override
+	public Day_off selectDay(Day_off day_off) {
+		
+		return lodgedao.selectday_off(day_off);
+	}
+
 
 
 

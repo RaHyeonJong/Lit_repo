@@ -4,6 +4,8 @@ package lit.dao.face;
 import java.util.List;
 
 import lit.dto.Comment;
+import lit.dto.Day_off;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
@@ -22,13 +24,18 @@ public interface LodgeDao {
 	public List<Image> SelectLodgeImage();
 	
 	//예약뷰 보여주기 
-	public Pay SelectLodgeReservation(Pay pay);
+	public Lodge SelectLodgeReservation(Lodge lodge);
 	
 	//결제하기
 	public void payment(Pay pay);
 	
 	//후기 리스트
 	public List<Comment> lodgeComment();
+	
+	//댓글 개수 
+	public int commentCount(Lodge lodge);
+	
+	
 	
 	//후기 입력
 	public void insertReview(Comment comment);
@@ -45,11 +52,19 @@ public interface LodgeDao {
 	public List<Comment> lodgeReply(Comment comment);
 	
 	//좋아요(숙소 저장)
-	public void inserlodgetLike(Lodge lodge);
+	public void insertlodgetLike(Favorite favorite);
+	public void deleteFavorite(Favorite favorite);
+	public int selectFavorite(Favorite favorite);
 
+	
 	//호스트에게 메시지 보내기
 	public void insertContent(Message message);
 	
 	//숙소 신고하기
 	public void insertlodgeReport(Lodge lodge);
+	
+	
+	public Day_off selectday_off(Day_off day_off);
+	
+	
 }
