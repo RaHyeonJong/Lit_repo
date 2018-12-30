@@ -127,6 +127,7 @@ var marker;
 var peopleCnt;
 var cost;
 var infowindow;
+var markerArray = [];
 
 $(document).ready(function() {
 	
@@ -151,18 +152,20 @@ $(document).ready(function() {
 			    data: {"peopleCnt" : peopleCnt , "neLat" : neLat, "neLng" : neLng, "swLat" : swLat, "swLng" : swLng},
 			    dataType: "json",
 			    success: function(list) {
-
-						map = new google.maps.Map(document.getElementById('map'), {
-							zoom : 15,
-							center : myLatlng
-						});
+						alert(list.length);
+						
 						
 						marker = new google.maps.Marker({
 							position : myLatlng,
 							map : map,
 							title : 'Click to zoom'
 						});
-			    	
+						
+						
+					for( i in markerArray)
+						markerArray[i].setMap(null);
+					markerArray = [];
+						
 			    	setMarkers(map);
 					
 					function setMarkers(map) {
@@ -182,6 +185,7 @@ $(document).ready(function() {
 							});
 							
 							infowindow.open(map, marker);
+							markerArray.push(marker);
 						}
 					}
 					
@@ -233,11 +237,11 @@ $(document).ready(function() {
 				
 				
 				
-				marker = new google.maps.Marker({
+				/* marker = new google.maps.Marker({
 					position : myLatlng,
 					map : map,
 					title : 'Click to zoom'
-				});
+				}); */
 				
 //	 			map.addListener('center_changed', function() {
 //	 				// 3 seconds after the center of the map has changed, pan back to the
@@ -293,6 +297,8 @@ $(document).ready(function() {
 										});
 										
 										infowindow.open(map, marker);
+										
+										markerArray.push(marker);
 									}
 								}
 								
