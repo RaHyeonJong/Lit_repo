@@ -95,7 +95,6 @@ $(document).ready(function(){
 		dataType:"html",
 		success: function(mav) {
 		
-			console.log(mav);
 			document.getElementById("total").innerHTML = mav;
 // 			$("#stay_cost").html(mav.add);
 // 			$("#cost").html(mav.st);
@@ -128,22 +127,31 @@ $(document).ready(function(){
 
 
 </script>
-<script type="text/javascript">
 
-$(document).ready(function(){
+<script>
 	
+	$(document).ready(function(){
 	
+		$("#reserBtn").click(function(){
+			//비로그인 버튼 누르면 벌어지는 일
+			
+			//header의 <div id="modal-login">을 불러온다
+			var modal = document.getElementById("modal-login");
+			
+			var btn = document.getElementById("reserBtn");
 
+			
+			{
+				modal.style.display="block";
+			}
+			
+			
+		});
+		
+	});
 	
-	
-	
-	
-});
-
 
 </script>
-
-
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
 /* 	ul li { list-style: none; }  74오류나면 수정*/
@@ -183,8 +191,9 @@ $(document).ready(function(){
 		<p id = "cost"></p>
 		<p id = "service"></p>
 		<p id="sum"></p>
+		<c:if test="${not login }">
 		<button id = "reserBtn">예약 요청</button>
-		
+		</c:if>
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->
 		<i class="far fa-flag"></i>

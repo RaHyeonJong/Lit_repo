@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script> 
-    
+
    
 		<form action="/lodge/reservation" method="post">
 		<div id = "total">
@@ -16,6 +16,7 @@
 		<input type = "hidden" name = "startDate" value = "<c:out value ="${startDate }"/>">		
 		<input type = "hidden" name = "endDate" value = "<c:out value ="${endDate}"/>">		
 		<br>
+		
 		<button id = "reserBtn">예약 요청</button>
 		</div>
 		</form>

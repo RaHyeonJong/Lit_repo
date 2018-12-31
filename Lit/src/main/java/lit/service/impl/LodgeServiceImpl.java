@@ -61,6 +61,7 @@ public class LodgeServiceImpl implements LodgeService {
 	@Override
 	public void LodgePay(Pay pay) {
 
+		
 		lodgedao.payment(pay);
 	}
 
