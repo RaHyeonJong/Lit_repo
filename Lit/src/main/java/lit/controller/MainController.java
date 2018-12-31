@@ -1,6 +1,8 @@
 package lit.controller;
 
-import java.util.Date;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,14 +10,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+
 import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.dto.MapBounds;
+import lit.dto.SearchFilter;
 import lit.service.face.MainService;
 
 @Controller
@@ -170,6 +179,45 @@ public class MainController {
 		
 		
 		
+		
+		return lodgeList;
+	}
+	
+	@RequestMapping(value="/lodgeListAjax", method = RequestMethod.POST)
+	public void lodgeListAjax(String list, Model model) {
+		System.out.println("ajax post");
+		
+		List<Lodge> lodgeList = new ArrayList<Lodge>();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		TypeFactory typeFactory = objectMapper.getTypeFactory();
+		
+		try {
+			lodgeList = objectMapper.readValue(list, typeFactory.constructCollectionType(List.class, Lodge.class));
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info(lodgeList.toString());
+		
+		model.addAttribute("list", lodgeList);
+	}
+	
+	@RequestMapping(value="/searchFilterAjax", method = RequestMethod.POST)
+	public @ResponseBody List searchFilterAjax(
+			SearchFilter searchFilter, double neLat, double neLng, double swLat, double swLng
+			) { 
+		System.out.println("search ajax");
+		System.out.println(searchFilter);
+		
+		List<Lodge> lodgeList = mainService.getSearchList(searchFilter);
 		
 		return lodgeList;
 	}
