@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
 <!DOCTYPE html>
@@ -160,7 +161,99 @@ $(document).ready(function(){
 	a{text-decoration : none; color:#000;}
 	label{ vertical-align: middle; margin-left: -3px;}
 
+#reportBtn{
+	  font-size: 14px;
+	  font-family: inherit;
+	  background : #ffffff;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#reportBtn:hover {
+  color: indianred;
+}
+#reportBtn:active {
+  transform: scale(0.95);
+}
+#reportBtn.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#reportBtn .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
 
+
+#search{ 
+  margin-left : 5px;
+  padding: 14px 0;
+  border: 2px #4eab75 solid;
+  background-color: #4da973;
+  cursor: pointer;
+  font-family: "Montserrat", "helvetica neue", helvetica, arial, sans-serif;
+  font-size: .9em;
+  text-transform: uppercase;
+  transition: color 0.4s, background-color 0.4s;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 210px;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  color: white;
+  }
+#reserBtn{ 
+  margin-left : 5px;
+  padding: 14px 0;
+  border: 2px #4eab75 solid;
+  background-color: #4da973;
+  cursor: pointer;
+  font-family: "Montserrat", "helvetica neue", helvetica, arial, sans-serif;
+  font-size: .9em;
+  text-transform: uppercase;
+  transition: color 0.4s, background-color 0.4s;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 210px;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  color: white;
+  }
 
 </style>
 </head>
@@ -191,18 +284,17 @@ $(document).ready(function(){
 		<p id = "cost"></p>
 		<p id = "service"></p>
 		<p id="sum"></p>
-		<c:if test="${not login }">
+	
 		<button id = "reserBtn">예약 요청</button>
-		</c:if>
+	
+		<div style = "margin-top: 10px;">
+		<button id = "reportBtn"><i class="far fa-flag"></i> 숙소 신고하기</button> 
+		</div>
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->
-		<i class="far fa-flag"></i>
-		<i class="fas fa-flag"></i>
 		</div>
 
-
 </div>
-  			
   			
 <div>
 
