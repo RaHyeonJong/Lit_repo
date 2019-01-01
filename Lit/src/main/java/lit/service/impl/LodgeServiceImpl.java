@@ -17,6 +17,7 @@ import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LodgeService;
 
 @Service
@@ -130,6 +131,8 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.deleteFavorite(favorite);
 	}
 	
+	
+	
 	@Override
 	public boolean selectLike(Favorite favorite) {
 		
@@ -145,12 +148,6 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 	
 	@Override
-	public void insertReport(Lodge lodge) {
-		lodgedao.insertlodgeReport(lodge);
-		
-	}
-
-	@Override
 	public void insertMessage(Message message) {
 		lodgedao.insertContent(message);
 		
@@ -160,6 +157,30 @@ public class LodgeServiceImpl implements LodgeService {
 	public Day_off selectDay(Day_off day_off) {
 		
 		return lodgedao.selectday_off(day_off);
+	}
+
+	@Override
+	public void insertReport(Report report) {
+		
+	    lodgedao.insertLodgeReport(report);		
+	}
+
+	@Override
+	public void deleteReport(Report report) {
+		
+		lodgedao.deleteLodgeReport(report);		
+	}
+
+	@Override
+	public boolean selectReport(Report report) {
+		
+		if(lodgedao.selectReport(report) < 1){
+			
+			return  true;
+		}else{
+			
+			return false;
+		}
 	}
 
 

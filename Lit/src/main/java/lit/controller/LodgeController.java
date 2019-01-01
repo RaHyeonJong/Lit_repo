@@ -30,6 +30,7 @@ import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LodgeService;
 import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
@@ -327,19 +328,22 @@ public class LodgeController {
 	
 
 	@RequestMapping(value ="/report", method =RequestMethod.POST)
-	public void ReportLodge(Lodge lodge) {
-		// 숙소번호를 파라미터로 받아와서 report테이블에 저장.
+	public ModelAndView ReportLodge(Report report, ModelAndView lodgeReport) {
 		
-		lodgeService.insertReport(lodge);
+	    lodgeReport.setViewName("jsonView");
+	    boolean lodge_report = lodgeService.selectReport(report);
+	    
+	    if(lodge_report) {
+	    	lodgeService.insertReport(report);
+	    	lodgeReport.addObject("report",lodge_report);
+	    }else {
+	    	lodgeService.deleteReport(report);
+	    	lodgeReport.addObject("reportCancel",lodge_report);
+	    }
+		
+	    return lodgeReport;	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 	@RequestMapping(value ="/sidebar", method =RequestMethod.GET)
 	public void sidebar() {}

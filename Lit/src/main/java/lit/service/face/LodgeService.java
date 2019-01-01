@@ -12,6 +12,7 @@ import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 
 public interface LodgeService {
 
@@ -56,11 +57,13 @@ public interface LodgeService {
 	public void deleteLike(Favorite favorite);
 	public boolean selectLike(Favorite favorite);
 	
-	
 	//호스트에게 메시지 보내기
 	public void insertMessage(Message message);
+	
 	// 신고
-	public void insertReport(Lodge lodge);
+	public void insertReport(Report report);
+	public void deleteReport(Report report);
+	public boolean selectReport(Report report);
 	
 	//휴무일
 	public Day_off selectDay(Day_off day_off);

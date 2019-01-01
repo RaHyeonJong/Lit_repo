@@ -114,9 +114,9 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 <insert id="insertlodgetLike" parameterType="lit.dto.Favorite">
 	INSERT INTO favorite(favorite_no, mem_no, lodge_no)
 	VALUES(favorite_seq.nextval, #{mem_no}, #{lodge_no})
-
-
 </insert>
+
+
 <delete id="deleteFavorite" parameterType="lit.dto.Favorite" >
 	DELETE favorite
 	WHERE mem_no = #{mem_no} AND
@@ -176,6 +176,22 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 
 </insert>
 
+<insert id="insertLodgeReport" parameterType="lit.dto.Report">
+    INSERT INTO report (report_no, reporter_no, lodge_no )
+    VALUES (report_seq.nextVal, #{mem_no }, #{lodge_no })
+</insert>
+
+
+<delete id="deleteLodgeReport" parameterType="lit.dto.Report">
+    DELETE report 
+    WHERE reporter_no = #{mem_no } AND
+          lodge_no = #{lodge_no }
+</delete>
+
+<select id="selectReport" parameterType="lit.dto.Report" resultType="int">
+   	SELECT COUNT(*) FROM report
+	WHERE mem_no = #{mem_no}
+</select>
 
 
 
