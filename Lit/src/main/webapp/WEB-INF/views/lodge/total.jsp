@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
+
 		<c:if test ="${not login }">
 		<div id = "total">
 		<p id = "cost"><fmt:formatNumber type ="number" pattern="###,###" value="${add}"/>원<input type = "hidden" name ="stay_cost" value = "<c:out value= "${add}"/>"></p>
@@ -18,11 +19,11 @@
 		<input type = "hidden" name = "endDate" value = "<c:out value ="${endDate}"/>">		
 		<br>
 		
-		<button id = "reserBtn">예약 요청</button>
+		<button id = "reserBtn" onclick="reservation()">예약 요청</button>
 		
 		</div>
 			<div style = "margin-top: 157px;">
-		<button id = "reportBtn"><i class="far fa-flag"></i> 숙소 신고하기</button> 
+		<button id = "reportBtn"><i class="far fa-flag">  숙소 신고하기</i></button>
 		</div>
 		</c:if>
 		
@@ -44,7 +45,7 @@
 		</div>
 		</form>
 			<div style = "margin-top: 157px;">
-		<button id = "reportBtn"><i class="far fa-flag"></i> 숙소 신고하기</button> 
+		<button id = "reportBtn"><i class="far fa-flag">  숙소 신고하기</i></button>
 		</div>
-		</c:if>
+	</c:if>
 		

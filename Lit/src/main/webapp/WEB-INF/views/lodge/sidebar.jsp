@@ -74,7 +74,7 @@ $(document).ready(function(){
 	})
 	
 	
-	$("#search").click(function(){
+	$("#searchBtn").click(function(){
 		var stay_start = $('#start').val(),
 			stay_end = $('#end').val(),
 			num = $('#numberUpDown').text(),
@@ -129,34 +129,36 @@ $(document).ready(function(){
 
 </script>
 
-<script>
+<script type="text/javascript"> //신고
+	function report(){
+		
+		
+	}
 	
-	$(document).ready(function(){
-	
-		$("#reserBtn").click(function(){
-			//비로그인 버튼 누르면 벌어지는 일
-			
-			//header의 <div id="modal-login">을 불러온다
-			var modal = document.getElementById("modal-login");
-			
-			var btn = document.getElementById("reserBtn");
 
-			
+
+</script>
+<script type="text/javascript">
+	
+	function reservation(){ //비로그인시 예약요청 클릭시 
+		
+			var modal = document.getElementById("modal-login");
+		
+			var btn = document.getElementById("reserBtn1");
+		
 			{
 				modal.style.display="block";
 			}
-			
-			
-		});
+	}
 		
-	});
-	
+
 
 </script>
+
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
 /* 	ul li { list-style: none; }  74오류나면 수정*/
-	.nav_side { position: absolute; top: 695px; left:1100px; min-width:500px; heigth:800px;}
+	.nav_side { position: absolute; top: 739px; left:1100px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}
 	label{ vertical-align: middle; margin-left: -3px;}
@@ -196,7 +198,7 @@ $(document).ready(function(){
 }
 
 
-#search{ 
+#searchBtn{ 
   margin-left : 5px;
   padding: 14px 0;
   border: 2px #4eab75 solid;
@@ -226,7 +228,7 @@ $(document).ready(function(){
   color: white;
   }
 #reserBtn{ 
-  margin-left : 5px;
+  margin-left : 10px;
   padding: 14px 0;
   border: 2px #4eab75 solid;
   background-color: #4da973;
@@ -255,6 +257,7 @@ $(document).ready(function(){
   color: white;
   }
 
+
 </style>
 </head>
 <body>
@@ -262,8 +265,8 @@ $(document).ready(function(){
 
 <div class="nav_side">
 		
-		<div><span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
-		<div id ="date">날짜<br>
+		<div>&nbsp;<span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
+		<div id ="date"><font size="4px">&nbsp;&nbsp;날짜</font><br>
       		 <div  id = "picker">
 			<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">
       		 <input id="start" name ="stay_start" type="text"  data-language="en" placeholder ="체크인"/>
@@ -272,9 +275,10 @@ $(document).ready(function(){
 		
 		
 		<br>	
-		<div id ="people" class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
+		<div id ="people" class="number"><font size="4px">성인</font> &nbsp; <a href="#" id="decreaseQuantity"><i class="fas fa-minus"></i></a>
+		<span id="numberUpDown"style="font-size: 24px;margin: 0 5px 0 0;">1</span><a href="#" id="increaseQuantity"><i class="fas fa-plus"></i></a>
 		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
-		<button id = "search">검색</button>
+		<button id = "searchBtn">검색</button>
 		
 		</div>
 		
@@ -284,11 +288,16 @@ $(document).ready(function(){
 		<p id = "cost"></p>
 		<p id = "service"></p>
 		<p id="sum"></p>
-	
+		<c:if test="${not login }">
+		<button id = "reserBtn" onclick="reservation()">예약 요청</button>
+		</c:if>
+		
+		<c:if test="${login }">
 		<button id = "reserBtn">예약 요청</button>
-	
+		</c:if>
+		
 		<div style = "margin-top: 10px;">
-		<button id = "reportBtn"><i class="far fa-flag"></i> 숙소 신고하기</button> 
+		<button id = "reportBtn" onclick="report()"><i class="far fa-flag"></i> 숙소 신고하기</button> 
 		</div>
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->
