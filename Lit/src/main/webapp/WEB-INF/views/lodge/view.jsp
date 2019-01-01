@@ -558,10 +558,42 @@ function fn_replyDelete(comment_no){ //후기 삭제
 $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
+    
+    var $start = $("#datepicker"),
+    	day_off = "${off}";
+    
+    	// What dates should be disabled - year.month.date
+    	var disabledDates = ['${off}','2019.1.4', '2019.1.17', '2019.1.20', '2019.1.23']
+
+    	$start.datepicker({
+    		language: 'en',
+    	  onRenderCell: function(d, type) {
+    	    if (type == 'day') {
+    				var disabled = false,
+    	      		formatted = getFormattedDate(d);
+    	          
+    	          disabled = disabledDates.filter(function(date){
+    	          	return date == formatted;
+    	          }).length
+    	      
+    						return {
+    	          	disabled: disabled
+    	          }
+    	    }
+    	  }
+    	})
+
+    	function getFormattedDate(date) {
+    	  var year = date.getFullYear(),
+    	    month = date.getMonth() + 1,
+    	    date = date.getDate();
+    	    
+    	    return year + '.' + month + '.' + date;
+    	}
 });
 </script>
 
-<script type="text/javascript"> //저장
+<script type="text/javascript"> //저장(좋아요)
 	$(document).ready(function(){
 
 		document.addEventListener('DOMContentLoaded', function() {
@@ -578,6 +610,7 @@ $(function() {
 			var lodge_no = '${view.lodge_no}',
 				mem_no = '${member.mem_no}';
 				var likeButton = document.getElementById('lodge_like');
+				
 			$.ajax({
 				url: "like",
 				type : "post",
@@ -841,9 +874,8 @@ $(function() {
 
 <c:import url="../lodge/sidebar.jsp"/>
    <!-- 구글 맵 -->  
- <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFaqOV0p_zrPFa70xwici5EGqDN9qq0fw&callback=initMap">
-    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
+    async defer></script>
 
 </body>
 

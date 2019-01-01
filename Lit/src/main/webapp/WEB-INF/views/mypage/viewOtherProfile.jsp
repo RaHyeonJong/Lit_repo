@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UFT-8">
+<meta charset="UTF-8">
 <title>Life is Trip 인생은 여행이다</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
@@ -36,6 +36,7 @@ $(document).ready(function(){
 </head>
 <body><div id="wrapper">
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
+
 <div style="margin-top:20px; padding:2% 20% 0 20%;">
 <table style="width:100%;">
 <tr><td style="text-align:center;"><h1 style="display:inline;">${other.mem_name }</h1> <h2 style="display:inline;">님의 프로필입니다.</h2></td></tr>

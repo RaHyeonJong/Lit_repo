@@ -6,6 +6,7 @@ import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.dto.MapBounds;
+import lit.dto.SearchFilter;
 
 public interface MainService {
 
@@ -28,5 +29,8 @@ public interface MainService {
 	List<Lodge> getLodgeList(); // 모든 숙소 가져오기
 
 	List<Lodge> getLodgeListByBounds(MapBounds bounds); // bounds 숙소 리스트
+
+	List<Lodge> getSearchList(SearchFilter searchFilter);
+
 
 }

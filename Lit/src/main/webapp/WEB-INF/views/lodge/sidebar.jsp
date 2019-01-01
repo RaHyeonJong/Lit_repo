@@ -95,7 +95,6 @@ $(document).ready(function(){
 		dataType:"html",
 		success: function(mav) {
 		
-			console.log(mav);
 			document.getElementById("total").innerHTML = mav;
 // 			$("#stay_cost").html(mav.add);
 // 			$("#cost").html(mav.st);
@@ -128,26 +127,35 @@ $(document).ready(function(){
 
 
 </script>
-<script type="text/javascript">
 
-$(document).ready(function(){
+<script>
 	
+	$(document).ready(function(){
 	
+		$("#reserBtn").click(function(){
+			//비로그인 버튼 누르면 벌어지는 일
+			
+			//header의 <div id="modal-login">을 불러온다
+			var modal = document.getElementById("modal-login");
+			
+			var btn = document.getElementById("reserBtn");
 
+			
+			{
+				modal.style.display="block";
+			}
+			
+			
+		});
+		
+	});
 	
-	
-	
-	
-});
-
 
 </script>
-
-
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
 /* 	ul li { list-style: none; }  74오류나면 수정*/
-	.nav_side { position: absolute; top: 75%; left:1100px; min-width:500px; heigth:800px;}
+	.nav_side { position: absolute; top: 695px; left:1100px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}
 	label{ vertical-align: middle; margin-left: -3px;}
@@ -167,22 +175,29 @@ $(document).ready(function(){
 			<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">
       		 <input id="start" name ="stay_start" type="text"  data-language="en" placeholder ="체크인"/>
       		 <input id="end" class = "form-control" name ="stay_end" type="text"  data-language="en"placeholder ="체크아웃"/>
-      		 <button id = "search">검색</button>
-			
-		</div>
+      		
+		
 		
 		<br>	
 		<div id ="people" class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
 		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
+		<button id = "search">검색</button>
+		
+		</div>
+		
+		
 		
 		<div id ="total">
 		<p id = "cost"></p>
 		<p id = "service"></p>
 		<p id="sum"></p>
+		<c:if test="${not login }">
 		<button id = "reserBtn">예약 요청</button>
-		
+		</c:if>
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->
+		<i class="far fa-flag"></i>
+		<i class="fas fa-flag"></i>
 		</div>
 
 

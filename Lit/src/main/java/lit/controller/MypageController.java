@@ -206,8 +206,11 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/viewProfile")
-	public String viewOtherProfile(Model model, Member mem) {
-		Member other = mypageService.getMemberByNo(mem);
+	public String viewOtherProfile(Model model, int mem_no) {
+		Member other = new Member();
+		other.setMem_no(mem_no);
+		
+		other = mypageService.getMemberByNo(other);
 		System.out.println(other);
 		
 		model.addAttribute("other", other);

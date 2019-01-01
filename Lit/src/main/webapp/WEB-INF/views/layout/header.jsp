@@ -422,7 +422,11 @@ body {
 }
 
 #wrapper {
+<<<<<<< HEAD
+	min-width:978px; 
+=======
 	min-width:1200px; 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	width: 100%;
 	margin:0 auto;"
 }
@@ -443,8 +447,14 @@ body {
    top: 75px;
 }
 #header {
+<<<<<<< HEAD
+/*    position: relative; */
+
+   z-index: 102;
+=======
 /*    position: relative; */
    z-index: 100;
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
    left: 0;
    top: 0;
    margin: 0 auto;
@@ -454,8 +464,13 @@ body {
    transition: 0.6s;
    display: block;
    position: -webkit-sticky;
+<<<<<<< HEAD
+     position: sticky;
+     will-change: transform;
+=======
    position: sticky;
    will-change: transform;
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
    
@@ -465,7 +480,12 @@ body {
    background: #fffc;
    transition: 0.6s;
 }
+<<<<<<< HEAD
 #header .inner {
+
+=======
+#header .inner {
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	position: relative;
    	z-index: 1;
    	margin: 0 auto;
@@ -828,6 +848,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			</c:if>
 	
 			<c:if test="${login }">
+			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
 					<li><a href="#">호스트가 되어보세요</a></li>
