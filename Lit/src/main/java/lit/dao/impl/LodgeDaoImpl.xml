@@ -178,19 +178,20 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 
 <insert id="insertLodgeReport" parameterType="lit.dto.Report">
     INSERT INTO report (report_no, reporter_no, lodge_no )
-    VALUES (report_seq.nextVal, #{mem_no }, #{lodge_no })
+    VALUES (report_seq.nextVal, #{reporter_no }, #{lodge_no })
 </insert>
 
 
 <delete id="deleteLodgeReport" parameterType="lit.dto.Report">
     DELETE report 
-    WHERE reporter_no = #{mem_no } AND
+    WHERE reporter_no = #{reporter_no } AND
           lodge_no = #{lodge_no }
 </delete>
 
 <select id="selectReport" parameterType="lit.dto.Report" resultType="int">
    	SELECT COUNT(*) FROM report
-	WHERE mem_no = #{mem_no}
+	WHERE reporter_no = #{reporter_no } AND
+	      lodge_no = #{lodge_no }
 </select>
 
 

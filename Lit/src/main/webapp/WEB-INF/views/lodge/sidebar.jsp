@@ -130,14 +130,35 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript"> //신고
-	function report(){
-		
-		
-	}
-	
 
+$(document).ready(function(){
+	$('#reportBtn').click(function(){
+		var reporter_no = '${member.mem_no}';
+		var lodge_no = '${view.lodge_no }';
+		
+		$.ajax({
+			type: "GET",
+			url: "report",
+			data: {"reporter_no": reporter_no, "lodge_no": lodge_no }, 
+			dataType: "text",
+			success : function(res){
+				if(res == 1){
+					alert("숙소 신고가 접수 되었습니다.");
+				} else {
+					
+				}				
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
+		
+	});
+});
 
 </script>
+
+
 <script type="text/javascript">
 	
 	function reservation(){ //비로그인시 예약요청 클릭시 
@@ -297,7 +318,7 @@ $(document).ready(function(){
 		</c:if>
 		
 		<div style = "margin-top: 10px;">
-		<button id = "reportBtn" onclick="report()"><i class="far fa-flag"></i> 숙소 신고하기</button> 
+		<button id = "reportBtn" ><i class="far fa-flag"></i> 숙소 신고하기</button> 
 		</div>
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->

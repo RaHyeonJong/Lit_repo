@@ -159,11 +159,6 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.selectday_off(day_off);
 	}
 
-	@Override
-	public void insertReport(Report report) {
-		
-	    lodgedao.insertLodgeReport(report);		
-	}
 
 	@Override
 	public void deleteReport(Report report) {
@@ -172,16 +167,21 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
-	public boolean selectReport(Report report) {
+	public boolean checkLodgeReport(Report report) {
 		
-		if(lodgedao.selectReport(report) < 1){
-			
-			return  true;
-		}else{
-			
-			return false;
-		}
+		int cnt = lodgedao.selectReport(report);
+		if(cnt == 1)
+			return true;
+		return false;
 	}
+
+	@Override
+	public void reportLodge(Report report) {
+		lodgedao.insertLodgeReport(report);
+		
+	}
+
+
 
 
 

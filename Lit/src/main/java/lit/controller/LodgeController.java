@@ -1,6 +1,8 @@
 package lit.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -327,22 +330,30 @@ public class LodgeController {
 	}
 	
 
-	@RequestMapping(value ="/report", method =RequestMethod.POST)
-	public ModelAndView ReportLodge(Report report, ModelAndView lodgeReport) {
+	@RequestMapping(value ="/report", method =RequestMethod.GET)
+	public void ReportLodge(Report report, HttpServletResponse resp) {
 		
-	    lodgeReport.setViewName("jsonView");
-	    boolean lodge_report = lodgeService.selectReport(report);
-	    
-	    if(lodge_report) {
-	    	lodgeService.insertReport(report);
-	    	lodgeReport.addObject("report",lodge_report);
-	    }else {
-	    	lodgeService.deleteReport(report);
-	    	lodgeReport.addObject("reportCancel",lodge_report);
-	    }
+		PrintWriter writer = null;
 		
-	    return lodgeReport;	
+		try {
+			writer = resp.getWriter();
+			
+			boolean alreadyReport = lodgeService.checkLodgeReport(report);
+			
+			if(!alreadyReport) {
+				lodgeService.reportLodge(report);
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
 	}
+	
+
 		
 	
 	@RequestMapping(value ="/sidebar", method =RequestMethod.GET)
