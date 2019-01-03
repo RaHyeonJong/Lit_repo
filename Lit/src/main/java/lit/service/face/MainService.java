@@ -32,5 +32,7 @@ public interface MainService {
 
 	List<Lodge> getSearchList(SearchFilter searchFilter);
 
+	String[] getLodgeImageName(int lodge_no);
+
 
 }

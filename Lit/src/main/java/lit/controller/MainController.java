@@ -173,11 +173,13 @@ public class MainController {
 //		List<Lodge> lodgeList = mainService.getLodgeList(); // 전체 숙소 리스트
 		List<Lodge> lodgeList = mainService.getLodgeListByBounds(bounds); // bounds 숙소 리스트
 		
-		
-		
+		for(int i=0;i<lodgeList.size();i++) {
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
+		}
 		///////////////////////////////////
 		
-		
+		System.out.println(lodgeList.get(0).toString());
 		
 		
 		return lodgeList;

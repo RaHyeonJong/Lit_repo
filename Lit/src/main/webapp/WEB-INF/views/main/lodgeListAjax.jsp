@@ -9,7 +9,7 @@
 
 	<div id="lodgeImage">
 		<div id="lodgeImage2" style="width: 300px; height: 200px;">
-			<img src="http://file2.instiz.net/data/cached_img/upload/2015/12/04/0/b550bb847aef49fbbd545088331f9244.jpg" width="100%" height="100%">
+			<img src="/resources/images/lodge_image/${list.stored_name[0] }" width="100%" height="100%">
 		</div>
 	</div>
 

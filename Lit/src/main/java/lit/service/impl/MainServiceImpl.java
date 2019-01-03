@@ -83,4 +83,10 @@ public class MainServiceImpl implements MainService{
 		return mainDao.selectLodgeSearch(searchFilter);
 	}
 
+	@Override
+	public String[] getLodgeImageName(int lodge_no) {
+		// TODO Auto-generated method stub
+		return mainDao.selectLodgeName(lodge_no);
+	}
+
 }

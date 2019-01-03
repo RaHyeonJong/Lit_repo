@@ -32,4 +32,6 @@ public interface MainDao {
 
 	List<Lodge> selectLodgeSearch(SearchFilter searchFilter);
 
+	String[] selectLodgeName(int lodge_no);
+
 }

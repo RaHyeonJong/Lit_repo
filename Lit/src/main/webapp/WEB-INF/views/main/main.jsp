@@ -26,6 +26,7 @@
 /* 	float: right; */
 }
 #search_filter {
+	z-index: 102;
 	border-bottom: 1px solid #EBEBEB;
 	width: 100%;
 	margin-top: 24px;
@@ -90,8 +91,8 @@
 			<c:import url="../layout/header.jsp" />
 		</div>
 		<!-- header 끝 -->
-
-		<div id="search_filter">
+		
+		<div id="search_filter" style="z-index: 102;">
 			<button>날짜</button>
 			<button id="peopleFilterBtn">인원</button>
 			<button>숙소 종류</button>
@@ -130,10 +131,24 @@ var infowindow;
 var markerArray = [];
 
 $(document).ready(function() {
+	$('#header').css('z-index', 102); // 모달 띄울 때
+	
+	var peopleDiv = $("#peopleFilterBtn");
+	var peopleDivX = peopleDiv.offset().left;
+	var peopleDivY = peopleDiv.offset().top + peopleDiv.height() + 30;
 	
 	$('#peopleFilterBtn').click(function() {
+		
+		
+		
+		
 		$('.modal').css("display", "none");
+		$('#modal-people2').css('left', peopleDivX);
+		$('#modal-people2').css('top', peopleDivY);
 		$('#modal-people').css("display", "block");
+		
+		console.log($('#modal-people2').attr('top'));
+		console.log($('#modal-people2').attr('left'));
 	});
 
 	$('#peopleFilter-send').click(function() {
@@ -276,13 +291,15 @@ $(document).ready(function() {
 							success: function(list) {
 	
 								console.log("성공");
-								console.log(list[0]);
 								
 								setMarkers(map);
 								
 								function setMarkers(map) {
 									for(var i=0; i<list.length; i++) {
-													
+										
+										//////// test /////////
+										console.log(list[i].stored_name);
+										
 										marker = new google.maps.Marker({
 											position: {lat: list[i].latitude, lng: list[i].longitude},
 											map: map,
@@ -337,8 +354,8 @@ $(document).ready(function() {
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
 <!-- 인원 필터 모달 -->
 <div id="modal-people" class="modal" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
-<div>
+<div id="modal-people2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
+<div id="modal-people3">
 	<input type="text" id="peopleFilter" name="peopleFilter" />
 	<button id="peopleFilter-send">적용</button>
 </div>
