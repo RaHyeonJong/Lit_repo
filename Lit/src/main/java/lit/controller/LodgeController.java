@@ -1,6 +1,8 @@
 package lit.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,8 +14,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+<<<<<<< HEAD
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
+=======
+import javax.servlet.http.HttpServletResponse;
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +40,7 @@ import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LodgeService;
 import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
@@ -358,20 +365,31 @@ public class LodgeController {
 	}
 	
 
-	@RequestMapping(value ="/report", method =RequestMethod.POST)
-	public void ReportLodge(Lodge lodge) {
-		// 숙소번호를 파라미터로 받아와서 report테이블에 저장.
+	@RequestMapping(value ="/report", method =RequestMethod.GET)
+	public void ReportLodge(Report report, HttpServletResponse resp) {
 		
-		lodgeService.insertReport(lodge);
+		PrintWriter writer = null;
+		
+		try {
+			writer = resp.getWriter();
+			
+			boolean alreadyReport = lodgeService.checkLodgeReport(report);
+			
+			if(!alreadyReport) {
+				lodgeService.reportLodge(report);
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+
+		
 	
 	@RequestMapping(value ="/sidebar", method =RequestMethod.GET)
 	public void sidebar() {}

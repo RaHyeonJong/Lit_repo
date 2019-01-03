@@ -18,6 +18,7 @@ import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LodgeService;
 
 @Service
@@ -144,6 +145,8 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.deleteFavorite(favorite);
 	}
 	
+	
+	
 	@Override
 	public boolean selectLike(Favorite favorite) {
 		
@@ -159,12 +162,6 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 	
 	@Override
-	public void insertReport(Lodge lodge) {
-		lodgedao.insertlodgeReport(lodge);
-		
-	}
-
-	@Override
 	public void insertMessage(Message message) {
 		lodgedao.insertContent(message);
 		
@@ -178,6 +175,30 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	
+
+	@Override
+	public void deleteReport(Report report) {
+		
+		lodgedao.deleteLodgeReport(report);		
+	}
+
+	@Override
+	public boolean checkLodgeReport(Report report) {
+		
+		int cnt = lodgedao.selectReport(report);
+		if(cnt == 1)
+			return true;
+		return false;
+	}
+
+	@Override
+	public void reportLodge(Report report) {
+		lodgedao.insertLodgeReport(report);
+		
+	}
+
+
+
 
 
 
