@@ -102,15 +102,15 @@ $(document).ready(function(){
 		
 		
 		
-		console.log(pay_method);
-		console.log(pay_method_no);
-		console.log(mem_no);
-		console.log(amount);
-		console.log(lodge_no);
-		console.log(stay_start);
-		console.log(stay_end);
-		console.log(stay_heads);
-		console.log(stay_term);
+// 		console.log(pay_method);
+// 		console.log(pay_method_no);
+// 		console.log(mem_no);
+// 		console.log(amount);
+// 		console.log(lodge_no);
+// 		console.log(stay_start);
+// 		console.log(stay_end);
+// 		console.log(stay_heads);
+// 		console.log(stay_term);
 		
 		
 	
@@ -217,9 +217,15 @@ $(document).ready(function(){
 <!-- <i class="fas fa-arrow-right"></i>&nbsp;&nbsp;&nbsp; -->
 <%-- <span>체크아웃  <fmt:formatDate type="DATE" pattern="yy년MM월dd일" value="${endDate }"/></span></li><br> --%>
 <li>요금 <fmt:formatNumber type="number" pattern="###,###" value="${pay_sum }"/>원</li><br>
-<li>청소비</li><br>
+<c:if test = "${pay_sum <100000 }">
+<li>청소비 : 5000원</li><br>
+</c:if>
+<c:if test = "${pay_sum >100000 }">
+<li>청소비 : 10000원</li><br>
+</c:if>
+
 <li>서비스 수수료 <fmt:formatNumber type ="number" pattern="###,###" value="${service_fee }"/>원</li><br>
-<hr style="border-color: rgb(255, 255, 255);">
+<hr style="border-color: rgb(255, 255, 255)">
 <li>합계  <fmt:formatNumber type ="number" pattern="###,###" value="${pay_sum }"/>원</li>
 </ul>
 <label style ="margin-left: 5px;"><input type="radio" name="selectMeans" value="card" checked="checked"/>체크/신용카드 결제</label>

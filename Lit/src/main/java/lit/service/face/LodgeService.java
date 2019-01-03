@@ -10,6 +10,7 @@ import lit.dto.Day_off;
 import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
 
@@ -30,6 +31,9 @@ public interface LodgeService {
 	//결제하기
 	public void LodgePay(Pay pay);
 
+	//결제인원 
+	public boolean SelectLodgePay(Pay pay);
+	
 	//후기 리스트
 	public List<Comment> commentList();
 	
@@ -63,7 +67,7 @@ public interface LodgeService {
 	public void insertReport(Lodge lodge);
 	
 	//휴무일
-	public Day_off selectDay(Day_off day_off);
+	public List<Day_off> selectDay(Lodge lodge);
 	
 	
 }

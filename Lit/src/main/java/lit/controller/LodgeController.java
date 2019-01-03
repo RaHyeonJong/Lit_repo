@@ -10,7 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import lit.dto.Comment;
 import lit.dto.Day_off;
 import lit.dto.Favorite;
@@ -45,18 +49,11 @@ public class LodgeController {
 	
 	
 	
-	@RequestMapping(value ="/view")
-	public void LodgeView(Lodge lodge, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
-		//숙소 썸네일 클릭시 보여지는 상세 뷰
-		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
-		//결제한 사람의 정보를 가져온다.
-		//상세 뷰에 숙소에 결제한 사람만 후기 작성 버튼 보이게 한다.
-
-		// 숙소와 회원 결제를 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
+	
+	@RequestMapping(value ="/view", method = RequestMethod.GET)
+	public void LodgeView(Lodge lodge,HttpSession session, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
 		
-		// 숙소와, 회원, 결제, 이미지 테이블 을 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
-		// 댓글 정보와 추천 정보도 같이 포함하여 뷰에 보여준다.
-		// 댓글은 페이징 처리를 함
+		logger.info(session.toString());
 		
 		
 		//기본 리스트
@@ -82,16 +79,42 @@ public class LodgeController {
 		boolean like =  lodgeService.selectLike(favorite);
 		model.addAttribute("lodge_like", like);
 		
+		//결제한 회원
+		if((Member)session.getAttribute("member") != null) {
+		
+		Pay pay = new Pay();
+		pay.setMem_no( ((Member)session.getAttribute("member") ).getMem_no()   );
+		pay.setLodge_no(lodge.getLodge_no());
+		boolean LodgePay = lodgeService.SelectLodgePay(pay);
+		model.addAttribute("payd", LodgePay);
+		}
 		
 		//휴무일
-		day_off = lodgeService.selectDay(day_off);
+		List<Day_off> dd = lodgeService.selectDay(lodge);
 		
 		SimpleDateFormat d = new SimpleDateFormat("yyyy.M.d");
+		List<String> date = new ArrayList<>();
 		
-		String date = d.format(day_off.getDay_off_date());
-	//	System.out.println(date);
 		
-		model.addAttribute("off",date);
+		for(Day_off off : dd ) {
+//			date.add(d.format(off.getDay_off_date()));
+			
+			String[] list = new String[] {d.format(off.getDay_off_date())};
+			
+			List<String> datelist = Arrays.asList(list);
+			
+			
+			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
+			
+			date.add(d2);
+			
+			 System.out.println(date);
+			
+			model.addAttribute("off",date);
+		}
+		
+		
+	
 		
 	}
 	
@@ -125,12 +148,21 @@ public class LodgeController {
 				
 				int add = lodge.getStay_cost()*dates.size(); //숙박 일당 계산
 				
-				double service = add*0.1; //서비스 수수료
+				Integer service = (int)(add*0.1); //서비스 수수료
 				
 				int total = add + (int)service; //총액
 				
 				int stay_heads = person;
-//				System.out.println(stay_heads);
+
+//				Pay p = new Pay();
+//				p.setLodge_no(lodge.getLodge_no()); //숙소번호
+//				p.setService_fee(service); //
+//				p.setPay_sum(total);
+//				p.setStay_heads(person);
+//				p.setStay_start(startDate);
+//				p.setStay_end(endDate);
+	
+//				model.addAttribute("payment",p);
 				model.addAttribute("lodge_no",lodge.getLodge_no());
 				model.addAttribute("add", add);
 				model.addAttribute("ser", service);

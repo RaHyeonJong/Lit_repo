@@ -12,7 +12,9 @@
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
-       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
+       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/>
+       				   </div>
+       				   <button id = "reportBtn" onclick="report()" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
 
        				<c:if test ="${ login && member.mem_no eq review.mem_no}">
        				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
@@ -32,7 +34,9 @@
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>
-	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
+	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/>
+	       				   </div>
+	       				   <button id = "reportBtn" onclick="report()" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
 	
 	       				<c:if test ="${login && review2.mem_no eq member.mem_no}">
 	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>

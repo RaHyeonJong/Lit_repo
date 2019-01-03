@@ -560,11 +560,11 @@ $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
     
-    var $start = $("#datepicker"),
-    	day_off = "${off}";
-    
-    	// What dates should be disabled - year.month.date
-    	var disabledDates = ['${off}','2019.1.4', '2019.1.17', '2019.1.20', '2019.1.23']
+    var $start = $("#datepicker");
+ 	
+    		// What dates should be disabled - year.month.date
+	 	var disabledDates = ${off};
+        	
 
     	$start.datepicker({
     		language: 'en',
@@ -575,6 +575,7 @@ $(function() {
     	          
     	          disabled = disabledDates.filter(function(date){
     	          	return date == formatted;
+    	          	
     	          }).length
     	      
     						return {
@@ -591,6 +592,10 @@ $(function() {
     	    
     	    return year + '.' + month + '.' + date;
     	}
+    		
+  
+    		
+    		
 });
 </script>
 
@@ -767,12 +772,14 @@ $(function() {
 			<p id="datepicker2" data-language='en'></p>
 			</div>
 			
-			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
-				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+			
+			
+			
+				<c:if test ="${login && payd}">
 				<!-- 후기 작성 -->
-				<div id = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
+				<div id = "replyform" style="border: 1px solid; width: 493px; padding: 5px">
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
         		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
         		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
@@ -786,13 +793,15 @@ $(function() {
 				    <c:forEach items = "${lodgeReview}" var = "review">
     	<c:if test = "${review.parent_comment_no == 0 }">
 					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
-       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+       				<a href="/resources/" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
  					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
-       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
-
+       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/>
+       				   
+       				   </div>
+       				   <button id = "reportBtn" onclick="report()" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
        				<c:if test ="${login && member.mem_no eq review.mem_no }">
        				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
        				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
@@ -815,9 +824,8 @@ $(function() {
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
 	
 	       				<c:if test ="${login && review2.mem_no eq member.mem_no }">
-	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
+	       				<button  onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
 	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
-<%-- 	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button> --%>
 					</c:if>
 					</div>
 					</c:if>

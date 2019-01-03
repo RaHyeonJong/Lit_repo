@@ -149,10 +149,10 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	WHERE lodge_no = #{lodge_no}
 </select>
 
-<select id = "selectday_off"  resultType="lit.dto.Day_off">
+<select id = "selectday_off" parameterType="lit.dto.Lodge" resultType="lit.dto.Day_off">
 
 	SELECT * FROM day_off
-	WHERE lodge_no = 143 AND day_off_date = '2019-01-05'
+	WHERE lodge_no = #{lodge_no}
 
 
 </select>
@@ -175,6 +175,17 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	
 
 </insert>
+
+<select id ="SelectPayment" parameterType="lit.dto.Pay" resultType="int">
+
+    SELECT COUNT(*) FROM pay
+    WHERE mem_no =#{mem_no}
+    AND lodge_no = #{lodge_no}
+
+
+	
+
+</select>
 
 
 

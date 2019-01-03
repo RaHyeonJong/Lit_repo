@@ -8,6 +8,7 @@ import lit.dto.Day_off;
 import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
 
@@ -28,6 +29,8 @@ public interface LodgeDao {
 	
 	//결제하기
 	public void payment(Pay pay);
+	
+	public int SelectPayment(Pay pay);
 	
 	//후기 리스트
 	public List<Comment> lodgeComment();
@@ -64,7 +67,7 @@ public interface LodgeDao {
 	public void insertlodgeReport(Lodge lodge);
 	
 	
-	public Day_off selectday_off(Day_off day_off);
+	public List<Day_off> selectday_off(Lodge lodge);
 	
 	
 }

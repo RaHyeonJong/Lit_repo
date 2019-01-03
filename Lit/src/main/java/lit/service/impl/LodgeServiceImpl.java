@@ -15,6 +15,7 @@ import lit.dto.Day_off;
 import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
 import lit.service.face.LodgeService;
@@ -65,6 +66,19 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.payment(pay);
 	}
 
+	@Override
+	public boolean SelectLodgePay(Pay pay) {
+	
+		int cnt = lodgedao.SelectPayment(pay);
+		if(cnt <1) {
+			
+			return false;
+		}
+			return true;
+		
+		
+	}
+	
 	
 	@Override
 	public List<Comment> commentList() {
@@ -157,11 +171,13 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
-	public Day_off selectDay(Day_off day_off) {
+	public List<Day_off> selectDay(Lodge lodge) {
 		
-		return lodgedao.selectday_off(day_off);
+		
+		return lodgedao.selectday_off(lodge);
 	}
 
+	
 
 
 
