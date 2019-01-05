@@ -10,36 +10,41 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$(window).click(function(e){
-		$('#termsDiv').css("display", "none");
-		$('#discriminationDiv').css("display", "none");
-		$('#paymentDiv').css("display", "none");
-		$('#privateDiv').css("display", "none");
-		$('#hostDiv').css("display", "none");
-		$('#refundDiv').css("display", "none");
-		$('#knowledgeDiv').css("display", "none");
+		if(e.target.id == 'termsBtn' || e.target.id == 'discriminationBtn' || e.target.id == 'paymentBtn'
+				|| e.target.id == 'privateBtn' || e.target.id == 'hostBtn' || e.target.id == 'refundBtn'
+				|| e.target.id == 'knowledgeBtn'){
 		
-		$('#termsBtn').css("color", "#666");
-		$('#discriminationBtn').css("color", "#666");
-		$('#paymentBtn').css("color", "#666");
-		$('#privateBtn').css("color", "#666");
-		$('#hostBtn').css("color", "#666");
-		$('#refundBtn').css("color", "#666");
-		$('#knowledgeBtn').css("color", "#666");
-		
-		$('#termsBtn').css("font-weight", "normal");
-		$('#discriminationBtn').css("font-weight", "normal");
-		$('#paymentBtn').css("font-weight", "normal");
-		$('#privateBtn').css("font-weight", "normal");
-		$('#hostBtn').css("font-weight", "normal");
-		$('#refundBtn').css("font-weight", "normal");
-		$('#knowledgeBtn').css("font-weight", "normal");
-		
-		var btn = $('#'+e.target.id+'');
-		var div = btn.attr("data-mappingDiv");
-		
-		btn.css("color", "#333");
-		btn.css("font-weight", "bold");
-		$('#'+div+'').css("display", "block");
+			$('#termsDiv').css("display", "none");
+			$('#discriminationDiv').css("display", "none");
+			$('#paymentDiv').css("display", "none");
+			$('#privateDiv').css("display", "none");
+			$('#hostDiv').css("display", "none");
+			$('#refundDiv').css("display", "none");
+			$('#knowledgeDiv').css("display", "none");
+			
+			$('#termsBtn').css("color", "#666");
+			$('#discriminationBtn').css("color", "#666");
+			$('#paymentBtn').css("color", "#666");
+			$('#privateBtn').css("color", "#666");
+			$('#hostBtn').css("color", "#666");
+			$('#refundBtn').css("color", "#666");
+			$('#knowledgeBtn').css("color", "#666");
+			
+			$('#termsBtn').css("font-weight", "normal");
+			$('#discriminationBtn').css("font-weight", "normal");
+			$('#paymentBtn').css("font-weight", "normal");
+			$('#privateBtn').css("font-weight", "normal");
+			$('#hostBtn').css("font-weight", "normal");
+			$('#refundBtn').css("font-weight", "normal");
+			$('#knowledgeBtn').css("font-weight", "normal");
+			
+			var btn = $('#'+e.target.id);
+			var div = btn.attr("data-mappingDiv");
+			
+			btn.css("color", "#333");
+			btn.css("font-weight", "bold");
+			$('#'+div+'').css("display", "block");
+		}
 	});
 });
 </script>

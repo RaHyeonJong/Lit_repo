@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import lit.dao.face.MainDao;
 import lit.dto.Festival;
 import lit.dto.Lodge;
+import lit.dto.MapBounds;
+import lit.dto.SearchFilter;
 import lit.service.face.MainService;
 
 @Service
@@ -61,6 +63,24 @@ public class MainServiceImpl implements MainService{
 	public List<Festival> getThemeFestivalList(String theme) {
 		
 		return mainDao.selectThemeFestival(theme);
+	}
+
+	@Override
+	public List<Lodge> getLodgeList() {
+		// TODO Auto-generated method stub
+		return mainDao.selectLodge();
+	}
+
+	@Override
+	public List<Lodge> getLodgeListByBounds(MapBounds bounds) {
+		// TODO Auto-generated method stub
+		return mainDao.selectLodgeByBounds(bounds);
+	}
+
+	@Override
+	public List<Lodge> getSearchList(SearchFilter searchFilter) {
+		// TODO Auto-generated method stub
+		return mainDao.selectLodgeSearch(searchFilter);
 	}
 
 }

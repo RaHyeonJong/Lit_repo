@@ -21,35 +21,40 @@
 		padding:40px;
 	}
 
-	/* /cs/cs 테스트 */
+	/* /cs/cs에 질문 항목들을 dl dt dd로 구성하였음 */
 	dl, dt, dd {
 	    margin: 0;
 	    padding: 0;
-	    
 	}
+	
 	.faq-list {
 	    border-top: 2px solid #b2b2b2;
 	    border-bottom: 1px solid #ddd;	
+	    text-align:left;
 	}
+	
 	.faq-list dt, .faq-list dd {
-    border-top: 1px solid #ddd;
-    padding: 20px;
-    position: relative;
+	    border-top: 1px solid #ddd;
+	    padding: 20px;
+	    position: relative;
 	}
 	
 	.faq-list dt:first-child {
 	    border-top: 0;
 	}
+	
 	.faq-list dt {
 	    cursor: pointer;
 	    padding-right: 50px;
 	}
+	
 	.faq-list dt:before {
 	    width: 35px;
 	    content: "Q.";
 	    display: inline-block;
 	    padding-right: 20px;
 	}
+	
 	.faq-list dt:after {
 	    content: "+";
 	    display: inline-block;
@@ -59,25 +64,31 @@
 	    right: 30px;
 	    top: 23px;
 	}
+	
 	.faq-list dd {
 	    display: none;
 	    color: #777
 	}
+	
 	.faq-list dt.selected {
 	    color: #148a75;
 	}
+	
 	.faq-list dt.selected:before {
 	    color: #148a75;
 	}
+	
 	.faq-list dt.selected:after {
 	    content: "-";
 	}
+	
 	.faq-list dd:before {
 	    width: 35px;
 	    content: "A.";
 	    display: inline-block;
 	    padding-right: 20px;
 	}
+	
 	.faq-list dd {
 	    background: #f8f7f2;
 	    text-align:left;
@@ -97,9 +108,9 @@
 	  transition-duration: 0.4s;
 	  cursor: pointer;
 	}
+	
 	/* /cs/select 첫번째 버튼 */
-	.button1
-	{
+	.button1 {
 		background-color:#ff0300;
 		color: white;
 		border:2px solid #cc2e2c;
@@ -161,7 +172,7 @@
 
 
 	/* enroll.jsp 설정 */
-	/*아까의 오류는 .table_list 엿다 */
+	/*아까의 오류는  table_list 엿다  */
 	
 	.table_list
 	{
@@ -170,40 +181,39 @@
 		margin-right:15%;
 	}
 	
+	table
+	{
+		width:100%;
+		border:1px solid #757575;
+	}
+	
+	th
+	{
+		background-color:black;
+		text-align:center;
+		font-size:18px;
+		color:white;
+		width:200px;
+		height:50px;
+	}	
+
+	textarea
+	{
+		height:170px; 
+		width:772px; 
+	}
+	
 	.btnList
 	{
 		text-align:right;
 		padding-top:40px;
-		padding-right:150px;
+		padding-right:170px;
 		
 	}
-
-	th
-	{
-		background-color:#d8d8d8;
-		text-align:center;
-		font-size:18px;
-		width:150px;
-		height:50px;
-	}	
-
-	.td
-	{
-		padding-left:10px;	
-	}
 	
-	textarea
-	{
-		height:170px; 
-		width:865px; 
-		resize:none; 
-		font-size:18px;
-	}
 </style>
 
 <div class="center">
-
 		<span style="font-size:20px; padding:20px;"><a href="/cs/cs">자주찾는 질문</a></span>
 		<span style="font-size:20px; padding:20px;"><a href="/cs/select">1:1 문의</a></span>
 </div>
-

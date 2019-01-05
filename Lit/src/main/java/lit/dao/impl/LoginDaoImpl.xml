@@ -6,17 +6,19 @@
   	<select id="checkMembership" parameterType="lit.dto.Member" resultType="int">
   		SELECT COUNT(*) FROM member
   		WHERE mem_id=#{mem_id } 
-  			AND mem_pw=#{mem_pw }
+  			AND mem_pw = #{mem_pw }
   	</select>
   	
   	<select id="getMember" parameterType="lit.dto.Member" resultType="lit.dto.Member">
-  		SELECT * FROM member
-  		WHERE mem_id=#{mem_id }
+  		SELECT m.*, i.origin_name, i.stored_name
+		FROM member m, image i
+		WHERE m.mem_id = #{mem_id }
+		    AND m.mem_no = i.mem_no(+)
   	</select>
   	
   	<select id="checkEmail" parameterType="lit.dto.Member" resultType="int">
   		SELECT COUNT(*) FROM member
-  		WHERE mem_id=#{mem_id }
+  		WHERE mem_id = #{mem_id }
   	</select>
   	
   	<update id="updateUkey" parameterType="lit.dto.Member">

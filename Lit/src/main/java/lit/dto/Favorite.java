@@ -5,6 +5,7 @@ public class Favorite {
 	private int mem_no;
 	private int lodge_no;
 	private String lodge_name;
+	private String lodge_addr;
 	
 	public int getFavorite_no() {
 		return favorite_no;
@@ -34,6 +35,22 @@ public class Favorite {
 	public String toString() {
 		return "Favorite [favorite_no=" + favorite_no + ", mem_no=" + mem_no + ", lodge_no=" + lodge_no
 				+ ", lodge_name=" + lodge_name + "]";
+	}
+
+	public String getLodge_name() {
+		return lodge_name;
+	}
+
+	public void setLodge_name(String lodge_name) {
+		this.lodge_name = lodge_name;
+	}
+
+	public String getLodge_addr() {
+		return lodge_addr;
+	}
+
+	public void setLodge_addr(String lodge_addr) {
+		this.lodge_addr = lodge_addr;
 	}
 	
 	

@@ -5,6 +5,8 @@ import java.util.List;
 import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Lodge;
+import lit.dto.MapBounds;
+import lit.dto.SearchFilter;
 
 public interface MainService {
 
@@ -23,5 +25,12 @@ public interface MainService {
 	List<Lodge> getThemeLodgeList(String string); // 테마별 숙소 리스트
 
 	List<Festival> getThemeFestivalList(String string); // 테마별 행사 리스트
+	
+	List<Lodge> getLodgeList(); // 모든 숙소 가져오기
+
+	List<Lodge> getLodgeListByBounds(MapBounds bounds); // bounds 숙소 리스트
+
+	List<Lodge> getSearchList(SearchFilter searchFilter);
+
 
 }
