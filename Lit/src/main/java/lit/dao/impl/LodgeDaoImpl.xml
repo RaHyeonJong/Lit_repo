@@ -176,7 +176,7 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 
 </insert>
 
-<<<<<<< HEAD
+
 <select id ="SelectPayment" parameterType="lit.dto.Pay" resultType="int">
 
     SELECT COUNT(*) FROM pay
