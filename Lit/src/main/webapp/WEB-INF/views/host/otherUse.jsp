@@ -8,6 +8,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$("#backButton").click(function(){
+			
+			location.href="/host/firstConveniences";
+			
+		});
+		$("#nextButton").click(function(){
+			
+			location.href="/host/manageLodge";
+			
+		});
+		
+		
+	});
+
+</script>
 <style type="text/css">
 
 #wrapper{
