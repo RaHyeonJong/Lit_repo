@@ -165,18 +165,19 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	pay_method_no,
 	pay_sum,
 	service_fee,
+	cleaning_cost,
 	stay_term,
 	stay_start,
 	stay_end,
 	stay_heads,
 	pay_state_no
-	) VALUES(PAY_SEQ.nextval,#{mem_no},#{lodge_no},#{pay_method_no},#{pay_sum},#{service_fee},#{stay_term},#{stay_start},#{stay_end}
+	) VALUES(PAY_SEQ.nextval,#{mem_no},#{lodge_no},#{pay_method_no},#{pay_sum},#{service_fee},#{cleaning_cost},#{stay_term},#{stay_start},#{stay_end}
 	,#{stay_heads},1)
 	
 
 </insert>
 
-<<<<<<< HEAD
+
 <select id ="SelectPayment" parameterType="lit.dto.Pay" resultType="int">
 
     SELECT COUNT(*) FROM pay
@@ -188,7 +189,6 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 
 </select>
 
-=======
 <insert id="insertLodgeReport" parameterType="lit.dto.Report">
     INSERT INTO report (report_no, reporter_no, lodge_no )
     VALUES (report_seq.nextVal, #{reporter_no }, #{lodge_no })
@@ -206,9 +206,26 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 	WHERE reporter_no = #{reporter_no } AND
 	      lodge_no = #{lodge_no }
 </select>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 
+<insert id="insertCommentReport" parameterType="lit.dto.Report">
+	INSERT INTO report(report_no, reporter_no,comment_no)
+	VALUES(report_seq.nextval, #{reporter_no},#{comment_no})
+</insert>
+
+<select id="reportComment" parameterType = "lit.dto.Report" resultType ="int">
+	SELECT COUNT(*) FROM report
+	WHERE reporter_no = #{reporter_no} AND comment_no = #{comment_no}
+
+</select>
+
+<delete id="deleteReportComment" parameterType = "lit.dto.Report">
+
+	DELETE report
+	WHERE reporter_no = #{reporter_no} AND 
+		comment_no = #{comment_no}
+
+</delete>
 
 </mapper>
 

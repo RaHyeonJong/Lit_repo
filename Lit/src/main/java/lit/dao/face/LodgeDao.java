@@ -65,6 +65,9 @@ public interface LodgeDao {
 	public void insertLodgeReport(Report report);
 	public void deleteLodgeReport(Report report);
 	public int selectReport(Report report);
+	public void insertCommentReport(Report report);
+	public int reportComment(Report report);
+	public void deleteReportComment(Report report);
 	
 	public List<Day_off> selectday_off(Lodge lodge);
 	

@@ -68,6 +68,10 @@ public interface LodgeService {
 	public void deleteReport(Report report);
 	public boolean checkLodgeReport(Report report);
 	public void reportLodge(Report report);
+	public void insertReport(Report report);
+	public boolean commentReport(Report report);
+	public void deleteCommentReport(Report report);
+	
 	
 	//휴무일
 	public List<Day_off> selectDay(Lodge lodge);

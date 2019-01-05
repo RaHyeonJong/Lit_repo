@@ -192,10 +192,37 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
+	public boolean commentReport(Report report) {
+		
+		int reportCnt = lodgedao.reportComment(report);
+		
+		if(reportCnt == 1) {
+			return true;
+		}else
+		
+		return false;
+	}
+
+	
+	
+	@Override
 	public void reportLodge(Report report) {
 		lodgedao.insertLodgeReport(report);
 		
 	}
+
+	@Override
+	public void insertReport(Report report) {
+		lodgedao.insertCommentReport(report);
+		
+	}
+
+	@Override
+	public void deleteCommentReport(Report report) {
+		lodgedao.deleteReportComment(report);
+		
+	}
+
 
 
 
