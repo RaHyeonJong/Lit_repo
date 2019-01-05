@@ -1,13 +1,21 @@
 package lit.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Lodge;
 import lit.service.face.HostService;
@@ -72,13 +80,12 @@ public class HostController {
 	@RequestMapping(value="/host/firstLocation", method=RequestMethod.GET)
 	public void firstLocation() {
 		
-		
-		
+	
 	}
 	
 	//1단계 주소등록페이지
 	@RequestMapping(value="/host/firstLocation", method=RequestMethod.POST)
-	public void firstLocationElement(Lodge lodge) {
+	public void firstLocationElement() {
 	
 	
 	}
@@ -87,16 +94,25 @@ public class HostController {
 	
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.GET)
-	public void checkLocation() {
+	public void checkLocation(Model model, String addr, String cityLat, String cityLng) {
 		
+		logger.info(addr);
+		System.out.println(cityLat);
+		model.addAttribute("addr", addr);
+		model.addAttribute("lng", cityLng);
+		model.addAttribute("lat", cityLat);
 		
-		
+
 	}
 	
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
 	public void checkLocationElement(Lodge lodge) {
-	
+		
+		
+		
+
+		
 	
 	}
 	
@@ -130,17 +146,74 @@ public class HostController {
 	
 	//1단계 숙소관리
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.GET)
-		public void manageLodge() {
-					
-					
+		public void manageLodge(Model model) {
+			
+
+			
+			  Date today = new Date();
+			  SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			  model.addAttribute("today", date.format(today));
+			  
+			  
+
+		
+
+		
 				}
 				
 		//1단계 숙소관리
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.POST)
-		public void manageLodgeProc(Lodge lodge) {
+		public ModelAndView manageLodgeProc(@RequestParam(defaultValue="1") int selectShowMonth, 
+											ModelAndView mav,
+											String selectDisableDay )
+		{
+			  
+			 mav.setViewName("jsonView");
+			 Date today = new Date();
+			 SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			 mav.addObject("today", date.format(today));
+			
+			 
+		
+			  
+			 Calendar cal = Calendar.getInstance ( );//오늘 날짜를 기준으루..
+			 cal.add ( cal.MONTH, selectShowMonth ); //2개월 전....
+			  
+			 mav.addObject("testDate", date.format(cal.getTime()));
+			 
+			 logger.info(selectDisableDay);
 				
+			 return mav;
 				
 				}
+		
+		//1단계 요금설정
+		@RequestMapping(value="/host/lodgeCharge", method=RequestMethod.GET)
+		public void lodgeCharge() {
+					
+					
+				}
+				
+		//1단계 요금설정
+		@RequestMapping(value="/host/lodgeCharge", method=RequestMethod.POST)
+		public @ResponseBody int  lodgeChargeProc(@RequestParam(defaultValue = "0")int inputCharge, Model model) {
+				
+	
+			int checkCharge = 0;
+			System.out.println(inputCharge);
+			if(inputCharge < 10000) {
+				
+				checkCharge = 1;
+
+				
+			}
+			
+			
+				
+			
+			return checkCharge;
+				}
+		
 		
 	
 	

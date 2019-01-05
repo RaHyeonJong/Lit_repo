@@ -33,7 +33,10 @@ $(document).ready(function(){
 	});
 	
 	$("#nextButton").click(function(){
-		location.href="/host/checkLocation";
+
+		  location.href="/host/checkLocation";
+			$('#sendLocation').submit();
+	
 		
 	});
 	
@@ -50,13 +53,19 @@ max-width:1200px;
 margin:0 auto;
 }
 
-.left { width: 50%; float: left; }
-.right {.width: 50%; float: right; height:500px; }
+.left { 
+width: 50%; 
+float: left; 
+}
+.innerleft{
+padding-left:30%;
+}
+.right {width: 49%; float: right;}
 
 .category select{
 width:190px;
 height:40px;
-font-size:13px;
+font-size:15px;
 
 }
 
@@ -67,14 +76,88 @@ padding: 10px;
 
 .input_location > input {
 width:300px;
-height:30px;	
-font-size:13px;
+height:40px;	
+font-size:15px;
 }
+
+.content1-4 > input{
+width:185px;
+height:40px;
+font-size:15px;
+
+}
+
+.content1-5 > input{
+width:185px;
+height:40px;
+font-size:15px;
+
+}
+
+
 .continue{
 float:right;
 }
 .back{
 float:left;
+}
+
+.move-button{
+padding:10px;
+
+}
+
+#nextButton{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+  
+
+}
+#nextButton:hover{
+
+background-color: #d68e88;
+color: white;
+
+
+}
+
+#backButton{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+  
+}
+
+#backButton:hover{
+background-color: #d68e88; /* Green */
+color: white;
+}
+
+.cut{
+    height: 1px;
+    -webkit-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
+    -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
+    position: relative;
+
+
 }
 
 </style>
@@ -83,11 +166,13 @@ float:left;
 
 <div id="wrapper">
 	<div class="left" style="border:1px solid red;">
-		<div class="category">
+	 <div class="innerleft">
+	  <form action="/host/checkLocation" method="GET" id="sendLocation">
+		<div class="category content1-1">
 			<h2>숙소의 위치를 알려주세요</h2>
 		</div>
 		
-		<div class="category">
+		<div class="category content1-2">
 			<h4>지역을 선택해주세요</h4>
 			<select>
 				<option>서울</option>
@@ -98,25 +183,27 @@ float:left;
 				<option>경기도</option>
 			</select>
 		</div>
-		<div class="category input_location">
+		<div class="category input_location content1-3">
 			<h4>주소를 입력해주세요</h4>
-        	<input id="locationTextField" type="text" placeholder="주소를 입력해주세요" autocomplete="on">
-        	<input id="city2" name="city2" />
-    		<input id="cityLat" name="cityLat" />
-   			<input id="cityLng" name="cityLng" />
+        	<input id="locationTextField" name="addr" type="text" placeholder="ex)광진구 능동로 25길 36" autocomplete="on">
+        	<input type="hidden" id="city2" name="city2" />
+    		<input type="hidden" id="cityLat" name="cityLat" />
+   			<input type="hidden" id="cityLng" name="cityLng" />
 		</div>
-		<div class="category">
+		<div class="category content content1-4">
 			<h4>나머지 주소를 입력해주세요(선택사항)</h4>
-			<input type="text"/>
+			<input type="text" placeholder="ex)1동1호"/>
 		</div>
-		<div class="category">
-			<h4>우편번호</h4>
-			<input/>
+
+		</form> <!-- form end -->
+		<div class="cut"></div>
+		<div class="move-button content1-5">
+			<button id="backButton" class="back">뒤로</button>
+			<button id="nextButton" class="continue">다음</button>
 		</div>
-		
-		<button id="backButton" class="back">뒤로</button>
-		<button id="nextButton" class="continue">다음</button>
-	</div>
+	 
+	 </div><!-- inner end -->
+	</div><!-- left end -->
 	<div class="right" style="border:1px solid blue;">
 	</div>
 
