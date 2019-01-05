@@ -102,22 +102,22 @@ public class LodgeController {
 		List<String> date = new ArrayList<>();
 		
 		
-//		for(Day_off off : dd ) {
-////			date.add(d.format(off.getDay_off_date()));
-//			
-//			String[] list = new String[] {d.format(off.getDay_off_date())};
-//			
-//			List<String> datelist = Arrays.asList(list);
-//			
-//			
-//			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
-//			
-//			date.add(d2);
-//			
-//			 System.out.println(date);
-//			
-//			model.addAttribute("off",date);
-//		}
+		for(Day_off off : dd ) {
+
+			
+			String[] list = new String[] {d.format(off.getDay_off_date())};
+			
+			List<String> datelist = Arrays.asList(list);
+			
+			
+			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
+			
+			date.add(d2);
+			
+			 System.out.println(date);
+			
+			model.addAttribute("off",date);
+		}
 		
 		
 	
