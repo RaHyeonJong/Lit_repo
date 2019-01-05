@@ -332,6 +332,39 @@ border: 1px solid gray;
   margin-right: 0.2em;
 }
 
+#comment_Report{
+	  font-size: 14px;
+	  font-family: inherit;
+	  background : #ffffff;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#comment_Report:hover {
+  color: indianred;
+}
+#comment_Report:active {
+  transform: scale(0.95);
+}
+#comment_Report.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#comment_Report .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
 
 
 
@@ -474,6 +507,10 @@ function fn_replyDelete(comment_no){ //후기 삭제
 		$("#reply"+comment_no).text("");
 		$("#replyDiv").appendTo($("#reply"+comment_no));
 		$("#replyDiv").show();
+		$("#replyup").hide();
+		$("#replyup2").hide();
+		$("#replydel").hide();
+		$("#replydel2").hide();
 		$("#contents2").focus();
     }
     
@@ -501,7 +538,8 @@ function fn_replyDelete(comment_no){ //후기 삭제
     
     function fn_replyUpdateCancel(){
     	hideDiv("#replyDiv");
-    	
+    	$("#replyup").show();
+    	$("#replydel").show();
     	$("#reply"+updateComm).html(updateContents);
     	updateComm = updateContents = null;
     	
@@ -528,6 +566,8 @@ function fn_replyDelete(comment_no){ //후기 삭제
     
     function fn_replyReplyCencle(){
     	hideDiv("#replyDialog");
+    	$("#replyup2").show();
+    	$("#replydel2").show();
     }
     
     function fn_replyReplySave(){
@@ -560,7 +600,8 @@ $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
     
-    var $start = $("#datepicker");
+    var $start = $("#datepicker"),
+    	$end = $("#datepicker2");
  	
     		// What dates should be disabled - year.month.date
 	 	var disabledDates = ${off};
@@ -584,6 +625,25 @@ $(function() {
     	    }
     	  }
     	})
+    	$end.datepicker({
+    		language: 'en',
+    	  onRenderCell: function(d, type) {
+    	    if (type == 'day') {
+    				var disabled = false,
+    	      		formatted = getFormattedDate(d);
+    	          
+    	          disabled = disabledDates.filter(function(date){
+    	          	return date == formatted;
+    	          	
+    	          }).length
+    	      
+    						return {
+    	          	disabled: disabled
+    	          }
+    	    }
+    	  }
+    	})
+    
 
     	function getFormattedDate(date) {
     	  var year = date.getFullYear(),
@@ -643,9 +703,47 @@ $(function() {
 		
 	});//도큐먼트 끝
 
+</script>
+
+<script type="text/javascript">
+
+	function comment_Report(comment_no){
+		
+		var mem_no = "${member.mem_no}";
+			console.log(comment_no);
+			if(mem_no == ""){
+				alert("로그인 후 이용해 주세요");
+				return;
+			}
+			
+		$.ajax({
+			
+			url : "Commentreport",
+			type : "GET", 
+			data :{"reporter_no":mem_no, "comment_no" : comment_no },
+			dataType : "text",
+			success : function(data){
+				console.log("성공");
+				
+				if(data == 1){
+					alert("댓글이 신고 되었습니다.");
+				}else{
+					alert("신고가 취소 되었습니다.");
+				}
+			}
+			
+			
+			
+			
+		});//ajax 끝
+		
+	
+};//document 끝
 
 
 </script>
+
+
 
 <body>
 	<div id="wrapper">
@@ -768,6 +866,7 @@ $(function() {
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
 			<div style = "width: 900px;">
+			<p style ="font-size: 20px; font-weight: bold;">예약 가능 날짜<p>
 			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
 			<p id="datepicker2" data-language='en'></p>
 			</div>
@@ -801,10 +900,14 @@ $(function() {
        				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/>
        				   
        				   </div>
-       				   <button id = "reportBtn" onclick="report()" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
+       				   
+       				   <c:if test ="${member.mem_no ne review.mem_no }">
+       				   <button id = "comment_Report" onclick="comment_Report('<c:out value="${review.comment_no}"/>')" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
+       				</c:if>
+       				
        				<c:if test ="${login && member.mem_no eq review.mem_no }">
-       				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
-       				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
+       				<button id= "replyup" onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
+       				 <button id= "replydel" onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
 					</c:if>
 					<c:if test ="${login && member.mem_no eq view.mem_no }">
  					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
@@ -815,17 +918,21 @@ $(function() {
 				
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
-						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 10px;">    
+						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 20px;">    
 	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
 	 					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
-	
+					
+					<c:if test ="${ review2.mem_no ne member.mem_no}">
+       				   <button id = "comment_Report" onclick="comment_Report('<c:out value="${review.comment_no}"/>')" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
+					</c:if>
+					
 	       				<c:if test ="${login && review2.mem_no eq member.mem_no }">
-	       				<button  onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
-	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
+	       				<button id = "replyup2" onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
+	       				 <button id = "replydel2" onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
 					</c:if>
 					</div>
 					</c:if>

@@ -14,12 +14,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-<<<<<<< HEAD
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
-=======
+
 import javax.servlet.http.HttpServletResponse;
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -262,13 +261,30 @@ public class LodgeController {
 			//숙박 비용
 			model.addAttribute("lodge_pay",lodge.getStay_cost());
 			
+			
 			//서비스 수수료
 			Integer fee =  service_fee.intValue();
 			
 			model.addAttribute("service_fee", fee);
 			System.out.println(fee);
+			
+			
+			
+			int cleaning_cost;
+			if(pay_sum <10000) {
+				 cleaning_cost = 5000;
+				 pay_sum += cleaning_cost;
+			model.addAttribute("clean",cleaning_cost);
 			//총 합계
 			model.addAttribute("pay_sum", pay_sum);
+			}else {
+				 cleaning_cost = 10000;
+				 pay_sum += cleaning_cost;
+				 model.addAttribute("clean",cleaning_cost);
+				//총 합계
+				model.addAttribute("pay_sum", pay_sum);
+			
+			}
 			
 			//편의 시설
 			List<String> convenient = lodgeService.LodgeConvenient(lodge);
@@ -370,6 +386,7 @@ public class LodgeController {
 		
 		PrintWriter writer = null;
 		
+		
 		try {
 			writer = resp.getWriter();
 			
@@ -386,10 +403,35 @@ public class LodgeController {
 		} finally {
 			if(writer != null) writer.close();
 		}		
-	}
 	
-
+	
+	
+	}
+	@RequestMapping(value ="/Commentreport", method =RequestMethod.GET)
+	public void ReportComment(Report report, HttpServletResponse resp) {
 		
+		PrintWriter writer = null;
+		
+		
+			try {
+				writer = resp.getWriter();
+				boolean commentReport = lodgeService.commentReport(report);
+				
+				if(!commentReport) {
+					lodgeService.insertReport(report);
+					writer.write("1");
+				}else {
+					lodgeService.deleteCommentReport(report);
+					writer.write("-1");
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				if(writer != null) writer.close();
+			}		
+	
+	}
 	
 	@RequestMapping(value ="/sidebar", method =RequestMethod.GET)
 	public void sidebar() {}
@@ -427,7 +469,6 @@ public class LodgeController {
 		
 		
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 				
@@ -435,15 +476,6 @@ public class LodgeController {
 		return mav ;
 
 	}
-	
-	@RequestMapping(value="/payResult")
-	public void LodgePayResult() {
-		
-	}
-	
-	
-	
-	
 	
 	
 }
