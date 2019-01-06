@@ -34,7 +34,6 @@ $(document).ready(function(){
 	
 	$("#nextButton").click(function(){
 
-		  location.href="/host/checkLocation";
 			$('#sendLocation').submit();
 	
 		
@@ -167,7 +166,7 @@ color: white;
 <div id="wrapper">
 	<div class="left" style="border:1px solid red;">
 	 <div class="innerleft">
-	  <form action="/host/checkLocation" method="GET" id="sendLocation">
+	  <form action="/host/firstLocation" method="post" id="sendLocation">
 		<div class="category content1-1">
 			<h2>숙소의 위치를 알려주세요</h2>
 		</div>
@@ -185,7 +184,7 @@ color: white;
 		</div>
 		<div class="category input_location content1-3">
 			<h4>주소를 입력해주세요</h4>
-        	<input id="locationTextField" name="addr" type="text" placeholder="ex)광진구 능동로 25길 36" autocomplete="on">
+        	<input id="locationTextField" name="lodge_addr" type="text" placeholder="ex)광진구 능동로 25길 36" autocomplete="on">
         	<input type="hidden" id="city2" name="city2" />
     		<input type="hidden" id="cityLat" name="cityLat" />
    			<input type="hidden" id="cityLng" name="cityLng" />

@@ -2,22 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 <script type="text/javascript">
+
+
 $(document).ready(function(){
 	$("#backButton").click(function(){
 		location.href="/host/hostFirst";
 	});
 	
-	$("#nextButton").click(function(){
-		location.href="/host/firstLocation";
-		
-	});
 
 	$('.minus').click(function () {
 		var $input = $(this).parent().find('.inputNumber');
@@ -35,9 +37,19 @@ $(document).ready(function(){
 	});
 	
 	
+	$("#nextButton").click(function(){
+		
+		$("#room").submit();
+		
+	});
+
+	
+	
 });
 	
 </script>
+
+
 <style type="text/css">
 
 #wrapper{
@@ -204,60 +216,58 @@ margin:100px 10px 10px 10px;
 <div id="wrapper">
 	<div class="left" >
 	 <div class="innerleft">
+	  
 		<div class="category content2_1">
 			<h2>호스트의 숙소 정보를 입력해주세요</h2>
 		</div>
+		<form id = "room" action = "/host/firstRoom" method="post">
 		<div class="category content2_2">
 			<h3>건물 유형을 선택해주세요</h3>
-			<select>
+			<select id ="building_no" name = "building_case_no">
 				<option>건물유형</option>
-				<option>아파트</option>
-				<option>주택</option>
-				<option>별채</option>
-				<option>독특한 숙소</option>
-				<option>부띠크 호텔</option>
+				<option  value="1">아파트</option>
+				<option	 value="2">단독주택</option>
+				<option  value="3">연립주택</option>
 			</select>
 		</div>
 		<div class="category content2_3">
 			<h3>숙소 유형을 선택해주세요</h3>
-			<select>
+			<select id= "lodge_case" name = "lodge_case_no">
 				<option>숙소유형</option>
-				<option>집전체</option>
-				<option>개인실</option>
-				<option>다인실</option>
-				<option>게스트하우스</option>
+				<option value="1">팬션</option>
+				<option value="2">모텔</option>
+				<option value="3">게스트하우스</option>
 			</select>
 		</div>
 		
 		<div class="lodge-name category" >
 			<h3>숙소 이름을 입력해주세요</h3>
-			<input class="inputName" type="text" style="width:185px;height:30px;font-size:13px;"/>
+			<input class="inputName" name= "lodge_name" type="text" style="width:185px;height:30px;font-size:13px;"/>
 		
 		</div>
 		<div class="category content2_5">
 			<h3>숙소의 방개수를 선택해주세요</h3>
 				<div class="number">
 					<span class="minus">-</span>
-					<input id="inputRoomNum" class="inputNumber" type="text" value="1"/>
+					<input id="inputRoomNum" name = "lodge_room" class="inputNumber" type="text" value="1"/>
 					<span class="plus">+</span>
 				</div>
 		</div>
 		<div class="category content2-4">
 			<h3>가능 인원을 선택해주세요</h3>
-			  <form action="" method="post">
 				<div class="number">
 					<span class="minus">-</span>
-					<input id="inputCapacity" class="inputNumber" type="text" value="1"/>
+					<input id="inputCapacity" name= "Lodge_capacity" class="inputNumber" type="text" value="1"/>
 					<span class="plus">+</span>
 				</div>
-			   </form>
 		</div>
-	
+	</form>
 		<div class="cut"></div>
 		<div class="move-button content2_6">
 			<button id="backButton" class="back">뒤로</button>
 			<button id="nextButton" class="continue">다음</button>
 		</div>
+		
 	 </div><!-- inner end -->
 	</div><!-- left end -->
 	<div class="right" >
@@ -266,7 +276,6 @@ margin:100px 10px 10px 10px;
 			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>
 			<p>숙소이름은 편하게 적어주시고 가능인원이 확실하지 않으시면 평당 인원수로 선택해주세요</p>
 			
-		
 		</div>
 	</div>
 

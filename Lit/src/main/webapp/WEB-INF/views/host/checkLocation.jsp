@@ -27,7 +27,7 @@
 	  
       function initMap() {	    
     	  locationLat= ${lat};
-  	  locationLng= ${lng};
+  	  		locationLng= ${lng};
 
     	  
         map = new google.maps.Map(document.getElementById('map'), {
@@ -113,7 +113,7 @@ $(document).ready(function(){
 	
 	$("#nextButton").click(function(){
 		
-		location.href="/host/firstConveniences";
+		$("#addr").submit();
 	});
 	
 
@@ -226,11 +226,13 @@ color: white;
 			<div class="category">
 				<h3>주소를 확인해주세요</h3>
 			</div>
+			<form id = "addr" action="/host/checkLocation" method="post">
 			<div>
-				<input type="hidden" id="markerX" value="${lat}"/>
-				<input type="hidden" id="markerY" value="${lng}"/>
-				<input id="txtAddress" value="${addr}"/> <br>
+				<input type="hidden" id="markerX" name ="latitude" value="${lat}"/>
+				<input type="hidden" id="markerY" name="longitude" value="${lng}"/>
+				<input id="txtAddress" name ="lodge_addr" value="${lodge_addr}"/> <br>
 			</div>
+			</form>
 			<br>
 			<div id="map"></div>
 			<br>
