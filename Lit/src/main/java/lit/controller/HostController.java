@@ -1,9 +1,12 @@
 package lit.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +55,7 @@ public class HostController {
 		
 				
 		//1단계 숙소등록정보를 INSERT
-		hostService.insertFirst(lodge);
+	
 		
 	}
 	
@@ -96,36 +99,44 @@ public class HostController {
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.GET)
 	public void checkLocation(Model model, String addr, String cityLat, String cityLng) {
 		
-		logger.info(addr);
-		System.out.println(cityLat);
+		//승국
 		model.addAttribute("addr", addr);
 		model.addAttribute("lng", cityLng);
 		model.addAttribute("lat", cityLat);
-		
+		//끝
 
 	}
 	
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
-	public void checkLocationElement(Lodge lodge) {
+	public String checkLocationElement(Lodge lodge,HttpSession session) {
 		
 		
+		//승국
+		session.setAttribute("latitude", lodge.getLatitude());
+		session.setAttribute("longitube", lodge.getLongitude());
+		session.setAttribute("lodge_addr", lodge.getLodge_addr());
+		//끝
 		
 
-		
+		return "redirect:/host/firstConveniences";
 	
 	}
 	
 	//1단계 편의시설
 	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.GET)
-	public void firstCon() {
-			
+	public void firstCon(Lodge lodge) {
+
+
 			
 				}
 		
 	//1단계 편의시설
 	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.POST)
 	public void firstConproc(Lodge lodge) {
+		
+
+		
 		
 		
 		}
@@ -165,7 +176,7 @@ public class HostController {
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.POST)
 		public ModelAndView manageLodgeProc(@RequestParam(defaultValue="1") int selectShowMonth, 
 											ModelAndView mav,
-											String selectDisableDay )
+											String selectDisableDay, HttpSession session )
 		{
 			  
 			 mav.setViewName("jsonView");
@@ -178,11 +189,11 @@ public class HostController {
 			  
 			 Calendar cal = Calendar.getInstance ( );//오늘 날짜를 기준으루..
 			 cal.add ( cal.MONTH, selectShowMonth ); //2개월 전....
-			  
+
 			 mav.addObject("testDate", date.format(cal.getTime()));
-			 
-			 logger.info(selectDisableDay);
-				
+		
+			System.out.println(selectDisableDay);
+ 
 			 return mav;
 				
 				}
@@ -196,7 +207,12 @@ public class HostController {
 				
 		//1단계 요금설정
 		@RequestMapping(value="/host/lodgeCharge", method=RequestMethod.POST)
-		public @ResponseBody int  lodgeChargeProc(@RequestParam(defaultValue = "0")int inputCharge, Model model) {
+		public @ResponseBody int  lodgeChargeProc(
+												@RequestParam(defaultValue = "0")int inputCharge, 
+												Model model,
+												HttpSession session,
+												String hour, String min
+												) {
 				
 	
 			int checkCharge = 0;
@@ -208,10 +224,14 @@ public class HostController {
 				
 			}
 			
-			
-				
-			
+			session.setAttribute("stay_cost", inputCharge);
+			System.out.println("시간 :"+hour);
+			System.out.println("분 : "+min);	
+			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
 			return checkCharge;
+			
+			
+			
 				}
 		
 		

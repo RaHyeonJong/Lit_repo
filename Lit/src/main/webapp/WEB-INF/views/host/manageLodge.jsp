@@ -21,6 +21,14 @@
 
 .selectShow{
 	margin: 0 auto;
+	
+
+
+}
+
+.content{
+width:50%;
+margin:0 auto;
 
 }
 </style>
@@ -39,8 +47,8 @@
 
     $(document).ready(function() {
     	var countNum = 0;
-    	
-    	
+    	var test = new Array();
+ 
     	
     	
         $("#calendar").fullCalendar({
@@ -58,7 +66,7 @@
 			, buttonText : { today: "오늘"} //오른쪽상단 버튼이름 
 			, dayClick :  function(date, jsEvent, view){
 //클릭했을때 컨트롤러로 해당클릭날짜 전송
-					console.log("0");
+
 					++countNum;
 					if(countNum == 1){
 						$(this).css('background-color', 'white');
@@ -67,8 +75,38 @@
 						
 						
 					}else if(countNum == 2){
+						
+						
+						test.push(date.format());
+						var unique=test.filter(function(itm,i,a){
+							return i==test.indexOf(itm);
+							
+						});
+						console.log("중복제거날짜"+unique);
+						console.log("날짜는"+date.format());
+
 						$(this).css('background-color', '#ff9f89');
 						console.log("2");
+						var jsonInfo = JSON.stringify(unique);
+						$.ajax({
+							 type: 'POST',	
+				             url: '/host/manageLodge',
+				             dataType: "json",
+				             data: {
+				                 "selectDisableDay" : jsonInfo 
+				             },
+				             success: function(data){	
+				           	 console.log("성공");
+				             console.log(data);
+				             
+				   
+								             },
+				             error : function(data){
+				            	 console.log("실패");
+				         	 
+				             }
+					
+							});
 						countNum = 0;
 					}
 			}
@@ -92,7 +130,7 @@
     	
       	
       
-		$("#selectShowMonth").click(function(){
+		$("#sendMonth").click(function(){
 			var option = $('#selectShowMonth').val();
 			console.log(option);
 			console.log("${today}");
@@ -139,6 +177,7 @@
 </script>
 <body>
 	<div id="wrapper">
+	 <div class="content">
 		<div class="selectShow" >
 			<h4>몇개월동안 숙소를 활성화 시키시겠습니까?</h4>
 			<select  id="selectShowMonth" name="selectShowMonth">
@@ -149,15 +188,18 @@
 				<option value="5">5개월</option>
 				<option value="6">6개월</option>
 			</select>
-			<button id="test">확인</button>
+			<button id="sendMonth">확인</button>
 		</div>
+		<br>
+
     	<!-- 캘린더부분 -->
     	<div id="calendar"></div>
-    	<div>
+    	<div class="move-button">
     		<button id="backButton" class="back">뒤로</button>
 			<button id="nextButton" class="continue">다음</button>
     	
     	</div>
+     </div>
     </div>
 </body>
 </html>
