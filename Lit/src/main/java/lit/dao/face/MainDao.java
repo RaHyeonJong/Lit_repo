@@ -6,6 +6,7 @@ import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.dto.MapBounds;
+import lit.dto.SearchFilter;
 
 public interface MainDao {
 
@@ -27,6 +28,10 @@ public interface MainDao {
 
 	List<Lodge> selectLodge(); // 모든 숙소 리스트
 
-	List<Lodge> selectLodgeByBounds(MapBounds bounds);
+	List<Lodge> selectLodgeByBounds(SearchFilter searchFilter);
+
+	List<Lodge> selectLodgeSearch(SearchFilter searchFilter);
+
+	String[] selectLodgeName(int lodge_no);
 
 }

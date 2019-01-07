@@ -21,17 +21,27 @@
       var marker;
 	  var map;
 	  var geocoder;
-      function initMap() {
+	  var locationLat;
+	  var locationLng;
+	console.log(locationLat);
+	  
+      function initMap() {	    
+    	  locationLat= ${lat};
+  	  		locationLng= ${lng};
+
+    	  
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: {lat: 37.49899300000001, lng: 127.03290900000002}
+        
+          zoom: 18,
+          center: {lat: locationLat , lng: locationLng }
         });
 		geocoder = new google.maps.Geocoder();
         marker = new google.maps.Marker({
           map: map,
           draggable: true,
           animation: google.maps.Animation.DROP,
-          position: {lat: 37.49899300000001, lng: 127.03290900000002}
+          position: {lat: locationLat, lng: locationLng}
+        
         });
         marker.addListener('click', toggleBounce);
         marker.addListener('dragend',function(){
@@ -48,6 +58,8 @@
 
     	    document.getElementById("markerX").value = pos.lat();
     	    document.getElementById("markerY").value = pos.lng();
+
+    	    
     	}
       
    // 드래그할 때 맵 중앙 좌표의 주소
@@ -101,9 +113,16 @@ $(document).ready(function(){
 	
 	$("#nextButton").click(function(){
 		
-		location.href="/host/firstConveniences";
+		$("#addr").submit();
+
+		
 	});
 	
+	
+	
+	
+	
+
 
 	
 });
@@ -117,19 +136,91 @@ max-width:1200px;
 margin:0 auto;
 }
 
-.left { width: 50%; float: left; }
-.right {.width: 50%; 
-		float: right; }
-      #map {
-      	float:right;
-        height: 500px;
-        width: 580px;
-      }
-#txtAddress{
-width:348px;
+.left { 
+width: 50%; 
+float: left; 
+}
+.innerleft{
+padding-left:30%;
 
 }
+.right {
+width: 49%; 
+float: right; 
+}
+
+
+#map {
+
+height: 300px;
+width: 400px;
+margin-left:10px;
+      }
+#txtAddress{
+width:395px;
+height:40px;
+margin-left:10px;
+}
       /* Optional: Makes the sample page fill the window. */
+
+
+.move-button{
+padding:10px;
+
+}
+
+#nextButton{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+float:right;
+  
+
+}
+#nextButton:hover{
+
+background-color: #d68e88;
+color: white;
+
+
+}
+
+#backButton{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+float:left;
+}
+
+#backButton:hover{
+background-color: #d68e88; /* Green */
+color: white;
+}
+.cut{
+    height: 1px;
+    -webkit-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
+    -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
+    position: relative;
+
+
+}
     
 </style>
 </head>
@@ -137,47 +228,46 @@ width:348px;
 
 <div id="wrapper">
 	<div class="left" style="border:1px solid red;">
-	<div class="category">
-		<h3>주소를 확인해주세요</h3>
-	</div>
-	<div>
-		<input id="markerX"/>
-		<input id="markerY"/> <br>
-		<input id="txtAddress"/> <br>
-	</div>
-	<div>
+		<div class="innerleft">
+			<div class="category">
+				<h3>주소를 확인해주세요</h3>
+			</div>
+			<form id = "addr" action="/host/checkLocation" method="post">
+			<div>
+				<input type="hidden" id="markerX" name ="latitude" value="${lat}"/>
+				<input type="hidden" id="markerY" name="longitude" value="${lng}"/>
+				<input id="txtAddress" name ="lodge_addr" value="${lodge_addr}"/> <br>
+			</div>
+			</form>
+			<br>
+			<div id="map"></div>
+			<br>
+			  <div class="cut"></div>
+            <div class="move-button">
+               <button id="backButton">뒤로</button>
+               <button id="nextButton">다음</button>
+            </div>   
+       </div><!-- inner end -->
+   </div><!-- left end -->
+   <div class="right" style="border:1px solid blue;">
+      <div>
+         <h3>위치가 정확한지 확인하시고 <br>
+         숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
+      </div>
+      
+   </div><!-- right end -->
+
 	
-		<button id="backButton">뒤로</button>
-		<button id="nextButton">다음</button>
-	</div>	
-	</div>
 	<div class="right" style="border:1px solid blue;">
 		<div>
 			<h3>위치가 정확한지 확인하시고 <br>
 			숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
 		</div>
-		<div id="map"></div>
-	</div>
+		
+	</div><!-- right end -->
 
 
-</div>
+</div><!-- wrapper end -->
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

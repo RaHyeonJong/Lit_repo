@@ -5,5 +5,73 @@
 <mapper namespace="lit.dao.face.HostDao">
 
 
+<insert id="insertOne" parameterType="lit.dto.Lodge">
+
+<selectKey resultType="int" keyProperty="lodge_no" order="BEFORE">
+
+SELECT lodge_seq.nextval from dual
+
+</selectKey>
+
+
+
+
+INSERT INTO Lodge(
+LODGE_NO,
+BUILDING_CASE_NO,
+LODGE_CASE_NO,
+LODGE_NAME,
+LODGE_CAPACITY,
+LODGE_ROOM,
+LODGE_ADDR,
+CONVENIENT_FACILITY,
+CONVENIENT_AREA,
+READY_TIME,
+CHECK_IN_TIME,
+AVAILABLE_TERM,
+STAY_COST,
+REGIT_DATE,
+LODGE_ACTIVATION,
+LATITUDE,
+LONGITUDE,
+MEM_NO
+)
+VALUES(
+#{lodge_no},
+#{building_case_no},
+#{lodge_case_no},
+#{lodge_name},
+#{lodge_capacity},
+#{lodge_room},
+#{lodge_addr},
+#{convenient_facility},
+#{convenient_area},
+0,
+#{check_in_time},
+0,
+#{stay_cost},
+sysdate,
+0,
+#{latitude},
+#{longitude},
+#{mem_no}
+
+
+)
+
+
+
+</insert>
+
+
+
+<insert id="insertTwo" parameterType="lit.dto.Day_off">
+ INSERT INTO Day_off(DAY_OFF_NO,LODGE_NO,DAY_OFF_DATE) 
+ VALUES(DAY_OFF_SEQ.nextval,1000,#{day_off_date})
+
+
+</insert>
+
+
 </mapper>
 

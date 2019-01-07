@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.HostDao;
+import lit.dto.Day_off;
 import lit.dto.Lodge;
 import lit.service.face.HostService;
 
@@ -20,17 +21,16 @@ public class HostServiceImpl implements HostService{
 	//1단계숙소정보등록
 	@Override
 	public void insertFirst(Lodge lodge) {
-		
 		hostDao.insertOne(lodge);
+		
 		
 	}
 	
 	
 	//2단계숙소정보등록
 	@Override
-	public void insertSecond(Lodge lodge) {
-		hostDao.insertTwo(lodge);
-		
+	public void insertSecond(Day_off day_off) {
+		hostDao.insertTwo(day_off);
 	}
 	
 	//3단계숙소정보등록

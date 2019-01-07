@@ -1,6 +1,8 @@
 package lit.controller;
 
-import java.util.Date;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,14 +10,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+
 import lit.dto.Festival;
 import lit.dto.Lodge;
 import lit.dto.MapBounds;
+import lit.dto.SearchFilter;
 import lit.service.face.MainService;
 
 @Controller
@@ -149,27 +158,105 @@ public class MainController {
 	}
 
 	@RequestMapping(value="/lodgeListAjax")
-	public @ResponseBody List lodgeAjax(MapBounds bounds
+	public @ResponseBody List lodgeAjax(String searchFilterJson
 			) {
 		
-		System.out.println(bounds);
+		System.out.println("test11");
+		System.out.println(searchFilterJson); // searchFilter String 출력
 		
-		bounds.setNeLat2( Double.parseDouble( bounds.getNeLat()));
-		bounds.setNeLng2( Double.parseDouble( bounds.getNeLng()));
-		bounds.setSwLat2( Double.parseDouble( bounds.getSwLat()));
-		bounds.setSwLng2( Double.parseDouble( bounds.getSwLng()));
-		System.out.println(bounds);
+		ObjectMapper mapper = new ObjectMapper();
+		SearchFilter searchFilter = new SearchFilter();
+		
+		try {
+			searchFilter = mapper.readValue(searchFilterJson, SearchFilter.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(searchFilter); // json String to Object(MapBounds)
 		////////marker test //////////////
 		
 //		List<Lodge> lodgeList = mainService.getLodgeList(); // 전체 숙소 리스트
-		List<Lodge> lodgeList = mainService.getLodgeListByBounds(bounds); // bounds 숙소 리스트
+		List<Lodge> lodgeList = mainService.getLodgeListByBounds(searchFilter); // bounds 숙소 리스트(항상 필터 적용)
 		
-		
-		
+		for(int i=0;i<lodgeList.size();i++) { // ImageName 넣기
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
+		}
 		///////////////////////////////////
 		
+		System.out.println(lodgeList.get(0).toString());
 		
 		
+		return lodgeList;
+	}
+	
+	@RequestMapping(value="/lodgeListAjax", method = RequestMethod.POST)
+	public void lodgeListAjax(String list, Model model) {
+		System.out.println("ajax post");
+		
+		List<Lodge> lodgeList = new ArrayList<Lodge>();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		TypeFactory typeFactory = objectMapper.getTypeFactory();
+		
+		try {
+			lodgeList = objectMapper.readValue(list, typeFactory.constructCollectionType(List.class, Lodge.class));
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info(lodgeList.toString());
+		
+		model.addAttribute("list", lodgeList);
+	}
+	
+	@RequestMapping(value="/searchFilterAjax", method = RequestMethod.POST)
+	public @ResponseBody List searchFilterAjax(
+			String searchFilterJson
+			) { 
+		System.out.println("search ajax");
+		System.out.println(searchFilterJson);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		SearchFilter searchFilter = new SearchFilter();
+		
+		try {
+			searchFilter = mapper.readValue(searchFilterJson, SearchFilter.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(searchFilter);
+		
+		List<Lodge> lodgeList = mainService.getLodgeListByBounds(searchFilter); // 필터 적용 리스트 가져오기
+		
+		for(int i=0;i<lodgeList.size();i++) {
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
+		}
 		
 		return lodgeList;
 	}
