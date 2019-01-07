@@ -82,6 +82,7 @@ public class LodgeController {
 	
 		//좋아요
 		boolean like =  lodgeService.selectLike(favorite);
+//		System.out.println(like);
 		model.addAttribute("lodge_like", like);
 		
 		//결제한 회원
@@ -132,7 +133,6 @@ public class LodgeController {
 			@RequestParam(defaultValue="00/00/0000") String start,
           @RequestParam(defaultValue="00/00/0000") String end, int person ) {
 		
-		Map resultMap = new HashMap();
 	
 		final String DATE_PATTERN = "MM/dd/yyyy"; 
 
