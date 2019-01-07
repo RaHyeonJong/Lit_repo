@@ -3,6 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lit.dao.face.HostDao">
+<insert id="insertOne" parameterType="lit.dto.Day_off">
+ INSERT INTO Day_off(DAY_OFF_NO,LODGE_NO,DAY_OFF_DATE) 
+ VALUES(DAY_OFF_SEQ.nextval,1000,#{day_off_date})
+
+
+</insert>
 
 
 </mapper>

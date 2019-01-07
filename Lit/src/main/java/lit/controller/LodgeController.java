@@ -1,15 +1,25 @@
 package lit.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 import org.slf4j.Logger;
@@ -22,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import lit.dto.Comment;
 import lit.dto.Day_off;
 import lit.dto.Favorite;
@@ -30,7 +41,9 @@ import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LodgeService;
+
 
 @Controller
 @RequestMapping("/lodge")
@@ -44,19 +57,9 @@ public class LodgeController {
 	
 	
 	
-	@RequestMapping(value ="/view")
-	public void LodgeView(Lodge lodge, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
-		//숙소 썸네일 클릭시 보여지는 상세 뷰
-		// 숙소 번호를 파라미터로 받아와서 상세 뷰를 보여준다.
-		//결제한 사람의 정보를 가져온다.
-		//상세 뷰에 숙소에 결제한 사람만 후기 작성 버튼 보이게 한다.
-
-		// 숙소와 회원 결제를 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
-		
-		// 숙소와, 회원, 결제, 이미지 테이블 을 3개의 테이블을 조인해야한다. (결제한 사람의 정보를 가져올 수 있다)
-		// 댓글 정보와 추천 정보도 같이 포함하여 뷰에 보여준다.
-		// 댓글은 페이징 처리를 함
-		
+	
+	@RequestMapping(value ="/view", method = RequestMethod.GET)
+	public void LodgeView(Lodge lodge,HttpSession session, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
 		
 		//기본 리스트
 		lodge = lodgeService.LodgeView(lodge);
@@ -81,17 +84,46 @@ public class LodgeController {
 		boolean like =  lodgeService.selectLike(favorite);
 		model.addAttribute("lodge_like", like);
 		
+		//결제한 회원
+		if((Member)session.getAttribute("member") != null) {
+		
+		Pay pay = new Pay();
+		pay.setMem_no( ((Member)session.getAttribute("member") ).getMem_no()   );
+		pay.setLodge_no(lodge.getLodge_no());
+		boolean LodgePay = lodgeService.SelectLodgePay(pay);
+		model.addAttribute("payd", LodgePay);
+		}
 		
 		//휴무일
-		day_off = lodgeService.selectDay(day_off);
+		List<Day_off> dd = lodgeService.selectDay(lodge);
 		
 		SimpleDateFormat d = new SimpleDateFormat("yyyy.M.d");
+		List<String> date = new ArrayList<>();
 		
-		String date = d.format(day_off.getDay_off_date());
+		//예약된 날짜
+		Set<String> reDate = lodgeService.reservationDay(lodge);
+		
+		
+		for(Day_off off : dd ) {
+
+			
+			String[] list = new String[] {d.format(off.getDay_off_date())};
+			
+			List<String> datelist = Arrays.asList(list);
+			
+			
+			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
+			
+			date.add(d2);
+			reDate.addAll(date);
+			
+			
+			model.addAttribute("off",date);
+			model.addAttribute("d_off", reDate);
+			
+		}
 		System.out.println(date);
-		
-		model.addAttribute("off",date);
-		
+		System.out.println(reDate);
 	}
 	
 	
@@ -124,12 +156,21 @@ public class LodgeController {
 				
 				int add = lodge.getStay_cost()*dates.size(); //숙박 일당 계산
 				
-				double service = add*0.1; //서비스 수수료
+				Integer service = (int)(add*0.1); //서비스 수수료
 				
 				int total = add + (int)service; //총액
 				
 				int stay_heads = person;
-				System.out.println(stay_heads);
+
+//				Pay p = new Pay();
+//				p.setLodge_no(lodge.getLodge_no()); //숙소번호
+//				p.setService_fee(service); //
+//				p.setPay_sum(total);
+//				p.setStay_heads(person);
+//				p.setStay_start(startDate);
+//				p.setStay_end(endDate);
+	
+//				model.addAttribute("payment",p);
 				model.addAttribute("lodge_no",lodge.getLodge_no());
 				model.addAttribute("add", add);
 				model.addAttribute("ser", service);
@@ -165,44 +206,95 @@ public class LodgeController {
 		
 		SimpleDateFormat date = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy",Locale.ENGLISH);
 		try {
-			Date start = date.parse(startDate);
-			Date end = date.parse(endDate);
+			Date st = date.parse(startDate);
+			Date e = date.parse(endDate);
 			
-			model.addAttribute("startDate", start);
-			model.addAttribute("endDate", end);
-		} catch (ParseException e) {
+			
+			SimpleDateFormat date2 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			String st2 = date2.format(st);
+			String e2 = date2.format(e);
+			
+			java.sql.Date start_date = java.sql.Date.valueOf(st2); 
+			java.sql.Date end_date = java.sql.Date.valueOf(e2);
+			
+			model.addAttribute("startDate", start_date);
+			model.addAttribute("endDate", end_date);
+			
+			Calendar c1 = Calendar.getInstance();
+			Calendar c2 = Calendar.getInstance();
+			
+			c1.setTime(start_date);
+			c2.setTime(end_date);
+			
+			long d1, d2;
+			
+			//밀리초로 변환
+			d1 = c1.getTime().getTime();
+			d2 = c2.getTime().getTime();
+				
+			
+			
+			
+			//계산
+			int days = (int)(d2-d1)/(1000*60*60*24);
+			model.addAttribute("stay_term",days);
+//				System.out.println(days);
+			
+			lodge = lodgeService.LodgeReservationView(lodge);//예약시 보여줄 view
+			
+			int stay_heads = person;
+			model.addAttribute("reservation", lodge);
+			
+			//숙소 이미지
+			List<Image> lodgeimage = lodgeService.LodgeImage();
+			model.addAttribute("lodgeimg", lodgeimage);
+			
+			//댓글 수
+			
+			int lodge_count = lodgeService.lodgeCountcomment(lodge);
+			model.addAttribute("comment", lodge_count);
+			
+			//게스트 수
+			model.addAttribute("person", stay_heads);
+			
+			//숙박 비용
+			model.addAttribute("lodge_pay",lodge.getStay_cost());
+			
+			
+			//서비스 수수료
+			Integer fee =  service_fee.intValue();
+			
+			model.addAttribute("service_fee", fee);
+			
+			
+			
+			int cleaning_cost;
+			if(pay_sum <10000) {
+				 cleaning_cost = 5000;
+				 pay_sum += cleaning_cost;
+			model.addAttribute("clean",cleaning_cost);
+			//총 합계
+			model.addAttribute("pay_sum", pay_sum);
+			}else {
+				 cleaning_cost = 10000;
+				 pay_sum += cleaning_cost;
+				 model.addAttribute("clean",cleaning_cost);
+				//총 합계
+				model.addAttribute("pay_sum", pay_sum);
+			
+			}
+			
+			//편의 시설
+			List<String> convenient = lodgeService.LodgeConvenient(lodge);
+			model.addAttribute("item", convenient);
+			
+			
+			
+		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-		
-		lodge = lodgeService.LodgeReservationView(lodge);//예약시 보여줄 view
-		
-		int stay_heads = person;
-		model.addAttribute("reservation", lodge);
-		
-		//숙소 이미지
-		List<Image> lodgeimage = lodgeService.LodgeImage();
-		model.addAttribute("lodgeimg", lodgeimage);
-		
-		//댓글 수
-		
-		int lodge_count = lodgeService.lodgeCountcomment(lodge);
-		model.addAttribute("comment", lodge_count);
-		
-		//게스트 수
-		model.addAttribute("person", stay_heads);
-		
-		//숙박 비용
-		model.addAttribute("lodge_pay",lodge.getStay_cost());
-		
-		//서비스 수수료
-		model.addAttribute("service_fee", service_fee);
-		//총 합계
-		model.addAttribute("pay_sum", pay_sum);
-		
-		//편의 시설
-		List<String> convenient = lodgeService.LodgeConvenient(lodge);
-		model.addAttribute("item", convenient);
 
 	}
 
@@ -288,11 +380,56 @@ public class LodgeController {
 	}
 	
 
-	@RequestMapping(value ="/report", method =RequestMethod.POST)
-	public void ReportLodge(Lodge lodge) {
-		// 숙소번호를 파라미터로 받아와서 report테이블에 저장.
+	@RequestMapping(value ="/report", method =RequestMethod.GET)
+	public void ReportLodge(Report report, HttpServletResponse resp) {
 		
-		lodgeService.insertReport(lodge);
+		PrintWriter writer = null;
+		
+		
+		try {
+			writer = resp.getWriter();
+			
+			boolean alreadyReport = lodgeService.checkLodgeReport(report);
+			
+			if(!alreadyReport) {
+				lodgeService.reportLodge(report);
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
+	
+	
+	
+	}
+	@RequestMapping(value ="/Commentreport", method =RequestMethod.GET)
+	public void ReportComment(Report report, HttpServletResponse resp) {
+		
+		PrintWriter writer = null;
+		
+		
+			try {
+				writer = resp.getWriter();
+				boolean commentReport = lodgeService.commentReport(report);
+				
+				if(!commentReport) {
+					lodgeService.insertReport(report);
+					writer.write("1");
+				}else {
+					lodgeService.deleteCommentReport(report);
+					writer.write("-1");
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				if(writer != null) writer.close();
+			}		
+	
 	}
 	
 	@RequestMapping(value ="/sidebar", method =RequestMethod.GET)
@@ -313,20 +450,30 @@ public class LodgeController {
 	
 	
 	
-	@RequestMapping(value ="/pay",method =RequestMethod.GET)
-	public void LodgePay() {
-		//결제하기 클릭시 결제정보를 보여주고 확인을 하면 결제가 완료되게 한다.
-			
-//			model.addAttribute("reser", pay);
-			
-			
+	@RequestMapping(value ="/pay", method=RequestMethod.POST)
+	public ModelAndView LodgePay(Pay pay,String start, String end,  ModelAndView mav) {
+		mav.setViewName("jsonView");
+		
+
+		SimpleDateFormat d3 = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			Date start4 = d3.parse(start);
+			Date end4 = d3.parse(end);
+
+			pay.setStay_start(start4);
+			pay.setStay_end(end4);
+			lodgeService.LodgePay(pay);
+		
+		
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+				
+		
+		return mav ;
+
 	}
 	
-	@RequestMapping(value ="/pay", method=RequestMethod.POST)
-	public void LodgePay(Pay pay) {
-		//결제하기 클릭시 결제수단,정보를 세션으로받아와서 DB에 저장
-		lodgeService.LodgePay(pay);
-		
-	}
 	
 }
