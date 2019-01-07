@@ -2,6 +2,7 @@ package lit.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -49,7 +50,7 @@ public class MypageController {
 			@RequestParam(value="name-for-update") String mem_name,
 			@RequestParam(value="pw-for-update") String mem_pw,
 			@RequestParam(value="mem-phone-for-update") String mem_phone,
-			@RequestParam(value="intro-for-update") String mem_intro	) {
+			@RequestParam(value="intro-for-update") String mem_intro ) {
 				
 		Member mem = new Member();
 		mem.setMem_no(((Member)session.getAttribute("member")).getMem_no());

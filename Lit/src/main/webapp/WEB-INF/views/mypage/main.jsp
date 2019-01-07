@@ -35,6 +35,7 @@ $(document).ready(function(){
 		
 	// 프로필 보기를 클릭했을 때...
 	$('#view-profile-btn').click(function(){
+		
 		$.ajax({
 			type: "GET",
 			url: "/mypage/viewMyProfile",
