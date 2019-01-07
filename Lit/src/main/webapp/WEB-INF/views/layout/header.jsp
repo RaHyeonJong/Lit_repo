@@ -406,6 +406,8 @@ $(document).ready(function(){
 		$("#form").submit();
 	});
 	
+	
+
 });
 </script>      
 
@@ -834,7 +836,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
-					<li><a href="/mypage/main" id="message_box">쪽지 0개</a>
+					<li><a href="/mypage/main?go=message">쪽지 ${counter }개</a>
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
@@ -849,7 +851,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
-					<li><a href="/mypage/main" id="message_box">쪽지 0개</a>
+					<li><a href="/mypage/main?go=message">쪽지 <b>${counter }</b>개</a>
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
