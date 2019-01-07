@@ -94,6 +94,7 @@ $(document).ready(function(){
 		stay_heads = "${person}",	//인원수
 		service_fee = "${service_fee}", //서비스 비용
 		stay_term = "${stay_term}"; //숙박일수 
+		cleaning_cost = "${clean}"; //청소비
 
 	var pay_method_no = "1";
 	if(pay_method == "phone"){
@@ -102,15 +103,15 @@ $(document).ready(function(){
 		
 		
 		
-		console.log(pay_method);
-		console.log(pay_method_no);
-		console.log(mem_no);
-		console.log(amount);
-		console.log(lodge_no);
-		console.log(stay_start);
-		console.log(stay_end);
-		console.log(stay_heads);
-		console.log(stay_term);
+// 		console.log(pay_method);
+// 		console.log(pay_method_no);
+// 		console.log(mem_no);
+// 		console.log(amount);
+// 		console.log(lodge_no);
+// 		console.log(stay_start);
+// 		console.log(stay_end);
+// 		console.log(stay_heads);
+// 		console.log(stay_term);
 		
 		
 	
@@ -134,7 +135,8 @@ $(document).ready(function(){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        
+		        location.href = "/main";
+		       
 		        jQuery.ajax({
 		        	
 		        	url: "pay",
@@ -149,6 +151,7 @@ $(document).ready(function(){
 		        		"start" : stay_start,
 		        		"end" : stay_end,
 		        		"service_fee" : service_fee,
+		        		"cleaning_cost" : cleaning_cost,
 		        		"stay_heads" : stay_heads
 		        	},
 		        }).done(function(data){
@@ -160,7 +163,7 @@ $(document).ready(function(){
 		        			msg += '\결제 금액 : ' + rsp.paid.amount;
 		        			msg += '카드 승인번호 : ' +rsp.apply_num;
 		        		
-		        		//	location.href = "/lodge/payResult";
+		        			
 		        	}else{
 		        		//[3] 아직 제대로 결제가 되지 않았습니다.
 		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
@@ -172,29 +175,31 @@ $(document).ready(function(){
 		        msg += '에러내용 : ' + rsp.error_msg;
 		    }
 		    alert(msg);
+			
 		});
 			
 		
 	}); //결제하기
 	
-// 	$("input:radio[name:selectMeans]").change(function(){
+	$("input:radio[name:selectMeans]").change(function(){
 		
-// 		var means =$(":input:radio[name=selectMeans]:checked").val();
-// 		var selectCard_div = $("#selectCard_div");
-// 		var selectTelecom_div = $("#selectTelecom_div");
+		var means =$(":input:radio[name=selectMeans]:checked").val();
+		var selectCard_div = $("#selectCard_div");
+		var selectTelecom_div = $("#selectTelecom_div");
 		
-// 		if(means=='card'){
-// 			selectCard_div.css("display","block");
-// 			selectTelecom_div.css("display","none");
-// 		}
-// 		if(means=="phone"){
-// 			selectCard_div.css("display","none");
-// 			selectTelecom_div.css("display","block");
-// 		}
+		if(means=='card'){
+			selectCard_div.css("display","block");
+			selectTelecom_div.css("display","none");
+		}
+		if(means=="phone"){
+			selectCard_div.css("display","none");
+			selectTelecom_div.css("display","block");
+		}
 		
 		
-// 	}); // 카드, 휴대폰 결제
-	
+	}); // 카드, 휴대폰 결제
+
+
 	
 });	
 
@@ -217,14 +222,16 @@ $(document).ready(function(){
 <!-- <i class="fas fa-arrow-right"></i>&nbsp;&nbsp;&nbsp; -->
 <%-- <span>체크아웃  <fmt:formatDate type="DATE" pattern="yy년MM월dd일" value="${endDate }"/></span></li><br> --%>
 <li>요금 <fmt:formatNumber type="number" pattern="###,###" value="${pay_sum }"/>원</li><br>
-<li>청소비</li><br>
+
+<li>청소비 <fmt:formatNumber type = "number" pattern="###,###" value = "${clean }"/></li><br>
+
 <li>서비스 수수료 <fmt:formatNumber type ="number" pattern="###,###" value="${service_fee }"/>원</li><br>
-<hr style="border-color: rgb(255, 255, 255);">
+<hr style="border-color: rgb(255, 255, 255)">
 <li>합계  <fmt:formatNumber type ="number" pattern="###,###" value="${pay_sum }"/>원</li>
 </ul>
 <label style ="margin-left: 5px;"><input type="radio" name="selectMeans" value="card" checked="checked"/>체크/신용카드 결제</label>
 <label><input type="radio" name="selectMeans" value="phone"/>휴대폰 결제</label><br><br>
-<button id ="agreeBtn">결제하기</button> <button id ="cencelBtn">취소</button>
+<button id ="agreeBtn">결제하기</button> <button id ="cencelBtn" onclick="location.href='/lodge/view?=${reservation.lodge_no}'">취소</button>
 </div>
 
 

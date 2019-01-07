@@ -37,7 +37,7 @@ public interface AdminDao {
 		// 숙소 활성화 ( 승인 및 숙소 일시정지(거절) )
 		public void updateLodgeActivate(int activation);
 		
-		// -------------------- 숙소관리 --------------------
+		// -------------------- 결제 관리 --------------------
 		
 		// 결제 내역 리스트 보이기
 		public List<Pay> adminPaySelectAll(Paging payPaging);

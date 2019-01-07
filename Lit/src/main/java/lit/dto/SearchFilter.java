@@ -1,16 +1,31 @@
 package lit.dto;
 
 public class SearchFilter {
-	private int peopleCnt;
-	private double neLat;
+	private int peopleCnt; 	// 인원 필터
+	private int minPrice;
+	private int maxPrice;
+	private double neLat;	
 	private double neLng;
 	private double swLat;
 	private double swLng;
+	
 	public int getPeopleCnt() {
 		return peopleCnt;
 	}
 	public void setPeopleCnt(int peopleCnt) {
 		this.peopleCnt = peopleCnt;
+	}
+	public int getMinPrice() {
+		return minPrice;
+	}
+	public void setMinPrice(int minPrice) {
+		this.minPrice = minPrice;
+	}
+	public int getMaxPrice() {
+		return maxPrice;
+	}
+	public void setMaxPrice(int maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 	public double getNeLat() {
 		return neLat;
@@ -39,10 +54,10 @@ public class SearchFilter {
 	
 	@Override
 	public String toString() {
-		return "SearchFilter [peopleCnt=" + peopleCnt + ", neLat=" + neLat + ", neLng=" + neLng + ", swLat=" + swLat
-				+ ", swLng=" + swLng + "]";
+		return "SearchFilter [peopleCnt=" + peopleCnt + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", neLat="
+				+ neLat + ", neLng=" + neLng + ", swLat=" + swLat + ", swLng=" + swLng + "]";
 	}
-
 	
+		
 	
 }

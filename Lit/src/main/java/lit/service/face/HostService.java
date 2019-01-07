@@ -2,6 +2,7 @@ package lit.service.face;
 
 import java.util.List;
 
+import lit.dto.Day_off;
 import lit.dto.Lodge;
 
 public interface HostService {
@@ -9,7 +10,7 @@ public interface HostService {
 	
 	//-----------단계별 정보등록
 	//1단계숙소정보등록
-	public void insertFirst(Lodge lodge);
+	public void insertFirst(Day_off day_off);
 
 	//2단계숙소정보등록
 	public void insertSecond(Lodge lodge);

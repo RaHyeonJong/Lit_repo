@@ -28,8 +28,10 @@ public interface MainDao {
 
 	List<Lodge> selectLodge(); // 모든 숙소 리스트
 
-	List<Lodge> selectLodgeByBounds(MapBounds bounds);
+	List<Lodge> selectLodgeByBounds(SearchFilter searchFilter);
 
 	List<Lodge> selectLodgeSearch(SearchFilter searchFilter);
+
+	String[] selectLodgeName(int lodge_no);
 
 }
