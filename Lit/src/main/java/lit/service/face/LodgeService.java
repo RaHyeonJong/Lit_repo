@@ -76,5 +76,7 @@ public interface LodgeService {
 	//휴무일
 	public List<Day_off> selectDay(Lodge lodge);
 	
+	//예약 날짜 비활성
+	public List<String> reservationDay(Lodge lodge);
 	
 }

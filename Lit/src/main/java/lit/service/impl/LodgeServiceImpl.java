@@ -4,6 +4,8 @@ package lit.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,7 +176,26 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.selectday_off(lodge);
 	}
 
-	
+	@Override
+	public List<String> reservationDay(Lodge lodge) {
+		
+//		List<Pay> pa = lodgedao.reservationDay_off(lodge);
+//		
+		List<String> pay_date = new ArrayList<>();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.dd");
+//		
+//		
+//		for(Pay pay : pa) {
+//			Date stay_st = pay.getStay_start();
+//			Date stay_e = pay.getStay_end();
+//			Date curDay = stay_st;//시작날짜
+//		}
+//			
+		return pay_date;
+		
+		
+	}
+
 
 	@Override
 	public void deleteReport(Report report) {
@@ -223,6 +244,7 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
+	
 
 
 

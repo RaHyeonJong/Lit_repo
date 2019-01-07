@@ -35,6 +35,8 @@ public class Day_off {
 	public void setDay_off_date(Date day_off_date) {
 		this.day_off_date = day_off_date;
 	}
-	
+
+
+
 	
 }

@@ -2,6 +2,7 @@ package lit.dao.face;
 
 import java.util.List;
 
+import lit.dto.Day_off;
 import lit.dto.Lodge;
 
 public interface HostDao {
@@ -9,7 +10,7 @@ public interface HostDao {
 	//-------------단계별 정보등록
 
 	//1단계 숙소등록
-	public void insertOne(Lodge lodge);
+	public void insertOne(Day_off day_off);
 
 	//2단계 숙소등록
 	public void insertTwo(Lodge lodge);

@@ -112,15 +112,11 @@ $(document).ready(function(){
 	});
 	
 	$("#nextButton").click(function(){
-<<<<<<< HEAD
+
 		
 		$("#addr").submit();
-=======
-		$("#checkLocation").submit();
-		location.href="/host/firstConveniences";
-		
-		
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
+
 	});
 	
 	
@@ -237,7 +233,6 @@ color: white;
 			<div class="category">
 				<h3>주소를 확인해주세요</h3>
 			</div>
-<<<<<<< HEAD
 			<form id = "addr" action="/host/checkLocation" method="post">
 			<div>
 				<input type="hidden" id="markerX" name ="latitude" value="${lat}"/>
@@ -248,38 +243,20 @@ color: white;
 			<br>
 			<div id="map"></div>
 			<br>
-			<div class="cut"></div>
-			<div class="move-button">
-				<button id="backButton">뒤로</button>
-				<button id="nextButton">다음</button>
-			</div>	
-=======
-			<form id="checkLoction" action="/host/checkLocation" method="POST">
-				<div>
-					<input name="latitude" type="hidden" id="markerX" value="${lat}"/>
-					<input name="longitude" type="hidden" id="markerY" value="${lng}"/>
-					<input name="lodge_addr" id="txtAddress" value="${addr}"/> <br>
-				</div>
-			
-				<br>
-				<div id="map"></div>
-				<br>
-				<div class="cut"></div>
-				<div class="move-button">
-					<button id="backButton">뒤로</button>
-					<button id="nextButton">다음</button>
-				</div>	
-			</form>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-	 	</div><!-- inner end -->
-	</div><!-- left end -->
-	<div class="right" style="border:1px solid blue;">
-		<div>
-			<h3>위치가 정확한지 확인하시고 <br>
-			숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
-		</div>
-		
-	</div><!-- right end -->
+			  <div class="cut"></div>
+            <div class="move-button">
+               <button id="backButton">뒤로</button>
+               <button id="nextButton">다음</button>
+            </div>   
+       </div><!-- inner end -->
+   </div><!-- left end -->
+   <div class="right" style="border:1px solid blue;">
+      <div>
+         <h3>위치가 정확한지 확인하시고 <br>
+         숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
+      </div>
+      
+   </div><!-- right end -->
 
 
 </div><!-- wrapper end -->
