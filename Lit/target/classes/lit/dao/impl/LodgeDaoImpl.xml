@@ -39,9 +39,7 @@
 	origin_name,
 	stored_name,
 	lodge_no,
-	mem_no,
-	board_no,
-	thumb_nail
+	mem_no
 	FROM image
 	WHERE lodge_no = 143
 
@@ -62,6 +60,15 @@ AND lodge_no = 143
 ORDER BY comment_no desc
 
 </select>
+
+<select id="commentCount" parameterType="lit.dto.Lodge" resultType = "int">
+
+	SELECT COUNT(*) FROM comment_tb 
+	WHERE lodge_no = ${lodge_no}
+
+</select>
+
+
 
 <select id="lodgeReply" parameterType="lit.dto.Comment" resultType="lit.dto.Comment">
 	SELECT c.comment_no,c.parent_comment_no,c.lodge_no,c.contents,m.mem_no,m.mem_name,written_time FROM comment_tb c,member m
@@ -104,7 +111,121 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 </insert>
 
 
+<insert id="insertlodgetLike" parameterType="lit.dto.Favorite">
+	INSERT INTO favorite(favorite_no, mem_no, lodge_no)
+	VALUES(favorite_seq.nextval, #{mem_no}, #{lodge_no})
+</insert>
 
+
+<delete id="deleteFavorite" parameterType="lit.dto.Favorite" >
+	DELETE favorite
+	WHERE mem_no = #{mem_no} AND
+			lodge_no = #{lodge_no}
+
+</delete>
+
+<select id="selectFavorite" parameterType="lit.dto.Favorite" resultType="int">
+	SELECT COUNT(*) FROM favorite
+	WHERE mem_no = #{mem_no}
+
+</select>
+
+
+
+<select id="SelectLodgeReservation" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
+
+	SELECT 
+	lodge_no,
+	lodge_case_no,
+	lodge_name,
+	lodge_room,
+	lodge_addr,
+	convenient_facility,
+	convenient_area,
+	ready_time,
+	check_in_time,
+	stay_cost
+	FROM lodge
+	WHERE lodge_no = #{lodge_no}
+</select>
+
+<select id = "selectday_off" parameterType="lit.dto.Lodge" resultType="lit.dto.Day_off">
+
+	SELECT * FROM day_off
+	WHERE lodge_no = #{lodge_no}
+
+
+</select>
+
+<insert id="payment" parameterType="lit.dto.Pay">
+	INSERT INTO pay(
+	pay_no,
+	mem_no,
+	lodge_no,
+	pay_method_no,
+	pay_sum,
+	service_fee,
+	cleaning_cost,
+	stay_term,
+	stay_start,
+	stay_end,
+	stay_heads,
+	pay_state_no
+	) VALUES(PAY_SEQ.nextval,#{mem_no},#{lodge_no},#{pay_method_no},#{pay_sum},#{service_fee},#{cleaning_cost},#{stay_term},#{stay_start},#{stay_end}
+	,#{stay_heads},1)
+	
+
+</insert>
+
+
+<select id ="SelectPayment" parameterType="lit.dto.Pay" resultType="int">
+
+    SELECT COUNT(*) FROM pay
+    WHERE mem_no =#{mem_no}
+    AND lodge_no = #{lodge_no}
+
+
+	
+
+</select>
+
+<insert id="insertLodgeReport" parameterType="lit.dto.Report">
+    INSERT INTO report (report_no, reporter_no, lodge_no )
+    VALUES (report_seq.nextVal, #{reporter_no }, #{lodge_no })
+</insert>
+
+
+<delete id="deleteLodgeReport" parameterType="lit.dto.Report">
+    DELETE report 
+    WHERE reporter_no = #{reporter_no } AND
+          lodge_no = #{lodge_no }
+</delete>
+
+<select id="selectReport" parameterType="lit.dto.Report" resultType="int">
+   	SELECT COUNT(*) FROM report
+	WHERE reporter_no = #{reporter_no } AND
+	      lodge_no = #{lodge_no }
+</select>
+
+
+<insert id="insertCommentReport" parameterType="lit.dto.Report">
+	INSERT INTO report(report_no, reporter_no,comment_no)
+	VALUES(report_seq.nextval, #{reporter_no},#{comment_no})
+</insert>
+
+<select id="reportComment" parameterType = "lit.dto.Report" resultType ="int">
+	SELECT COUNT(*) FROM report
+	WHERE reporter_no = #{reporter_no} AND comment_no = #{comment_no}
+
+</select>
+
+<delete id="deleteReportComment" parameterType = "lit.dto.Report">
+
+	DELETE report
+	WHERE reporter_no = #{reporter_no} AND 
+		comment_no = #{comment_no}
+
+</delete>
 
 </mapper>
 

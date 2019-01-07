@@ -422,6 +422,7 @@ body {
 }
 
 #wrapper {
+
 	min-width:1200px; 
 	width: 100%;
 	margin:0 auto;"
@@ -443,6 +444,7 @@ body {
    top: 75px;
 }
 #header {
+
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -456,6 +458,10 @@ body {
    position: -webkit-sticky;
    position: sticky;
    will-change: transform;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
    
@@ -465,6 +471,7 @@ body {
    background: #fffc;
    transition: 0.6s;
 }
+
 #header .inner {
 	position: relative;
    	z-index: 1;
@@ -828,6 +835,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			</c:if>
 	
 			<c:if test="${login }">
+			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
 					<li><a href="#">호스트가 되어보세요</a></li>

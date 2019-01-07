@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,10 @@ import lit.dao.face.MypageDao;
 import lit.dto.Comment;
 import lit.dto.Favorite;
 import lit.dto.Image;
+import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.MypageService;
 import lit.util.Paging;
 
@@ -103,6 +104,40 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public void cancelPayment(Pay pay) {
 		mypageDao.cancelPayment(pay);
+	}
+
+	@Override
+	public Pay getPay(Pay pay) {
+		return mypageDao.getPay(pay);
+	}
+
+	@Override
+	public Lodge getLodge(Pay pay) {
+		return mypageDao.getLodge(pay);
+	}
+
+	@Override
+	public Member getHost(Lodge lodge) {
+		return mypageDao.getHost(lodge);
+	}
+
+	@Override
+	public void deleteMember(Member mem) {	
+		mypageDao.deleteMember(mem);
+	}
+
+	@Override
+	public boolean checkReport(Report report) {
+		int cnt = mypageDao.checkReport(report);
+		
+		if(cnt == 1)
+			return true;
+		return false;
+	}
+
+	@Override
+	public void reportMember(Report report) {
+		mypageDao.reportMember(report);
 	}
 	
 	

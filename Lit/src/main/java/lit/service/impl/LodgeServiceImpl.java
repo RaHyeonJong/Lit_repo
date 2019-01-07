@@ -1,22 +1,24 @@
 package lit.service.impl;
 
 
-import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
+import lit.dto.Day_off;
+import lit.dto.Favorite;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
 import lit.dto.Message;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LodgeService;
 
 @Service
@@ -53,18 +55,31 @@ public class LodgeServiceImpl implements LodgeService {
 
 	
 	@Override
-	public boolean LodgeReservationView(Pay pay) {
+	public Lodge LodgeReservationView(Lodge lodge) {
 		
-				lodgedao.SelectLodgeReservation(pay);
-		return false;
+			return	lodgedao.SelectLodgeReservation(lodge);
 	}
 
 	@Override
 	public void LodgePay(Pay pay) {
 
+		
 		lodgedao.payment(pay);
 	}
 
+	@Override
+	public boolean SelectLodgePay(Pay pay) {
+	
+		int cnt = lodgedao.SelectPayment(pay);
+		if(cnt <1) {
+			
+			return false;
+		}
+			return true;
+		
+		
+	}
+	
 	
 	@Override
 	public List<Comment> commentList() {
@@ -107,24 +122,110 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.lodgeReply(comment);
 	}
 	
-	@Override
-	public void insertLike(Lodge lodge) {
 	
-		lodgedao.inserlodgetLike(lodge);
-		
-	}
-
 	@Override
-	public void insertReport(Lodge lodge) {
-		lodgedao.insertlodgeReport(lodge);
+	public int lodgeCountcomment(Lodge lodge) {
 		
+		return lodgedao.commentCount(lodge);
 	}
 
+	
+	
+	
+	@Override
+	public void insertLike(Favorite favorite) {
+	
+		 lodgedao.insertlodgetLike(favorite);
+		
+	}
+	
+	@Override
+	public void deleteLike(Favorite favorite) {
+		
+		lodgedao.deleteFavorite(favorite);
+	}
+	
+	
+	
+	@Override
+	public boolean selectLike(Favorite favorite) {
+		
+		if(lodgedao.selectFavorite(favorite) < 1){
+			
+			return  true;
+		}else{
+			
+			return false;
+		}
+			
+	
+	}
+	
 	@Override
 	public void insertMessage(Message message) {
 		lodgedao.insertContent(message);
 		
 	}
+
+	@Override
+	public List<Day_off> selectDay(Lodge lodge) {
+		
+		
+		return lodgedao.selectday_off(lodge);
+	}
+
+	
+
+	@Override
+	public void deleteReport(Report report) {
+		
+		lodgedao.deleteLodgeReport(report);		
+	}
+
+	@Override
+	public boolean checkLodgeReport(Report report) {
+		
+		int cnt = lodgedao.selectReport(report);
+		if(cnt == 1)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean commentReport(Report report) {
+		
+		int reportCnt = lodgedao.reportComment(report);
+		
+		if(reportCnt == 1) {
+			return true;
+		}else
+		
+		return false;
+	}
+
+	
+	
+	@Override
+	public void reportLodge(Report report) {
+		lodgedao.insertLodgeReport(report);
+		
+	}
+
+	@Override
+	public void insertReport(Report report) {
+		lodgedao.insertCommentReport(report);
+		
+	}
+
+	@Override
+	public void deleteCommentReport(Report report) {
+		lodgedao.deleteReportComment(report);
+		
+	}
+
+
+
+
 
 
 

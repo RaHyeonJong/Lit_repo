@@ -84,7 +84,7 @@ $(document).ready(function(){
 <td style="text-align:center; padding:0 10px 0 10px;">
 <button class="delete-favor-btn" style="width:60px; height:30px; cursor:pointer; border:none; border-radius:3px; background-color:#FF5A5F; color:white; font-size:15px;" data-favorNo="${favor.favorite_no }">삭 제</button></td>
 </tr>
-<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #ccc; margin:0; padding:0;"></td></tr>
+<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #ccc; background-color:#ccc; margin:0; padding:0;"></td></tr>
 </c:forEach>
 
 <tr><td colspan="4" style="padding-top:30px;">

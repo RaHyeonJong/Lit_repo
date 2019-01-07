@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
  
 
 <style>
@@ -250,7 +251,34 @@ a{color:#000;}
 #modalLayer{display:none; position:relative;}
 #modalLayer .modalContent{width:300px; height:700px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer; 
-border: none; width: 40px; height: 40px;background: url("/resources/images/close.png") no-repeat;}
+border: none;}
+
+.close_btn{
+    display: inline-block;
+    position: relative;
+    margin: 6 20px 0 7px;
+    padding: 0;
+    width: 4px;
+    height: 20px;
+    background: #000;
+    transform: rotate(45deg);
+}
+.close_btn:before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 20px;
+    height: 4px;
+    margin-top: -2px;
+    background: #000;
+
+
+}
+
+
+
 
 .reply{
 border: 1px solid gray;
@@ -265,6 +293,80 @@ border: 1px solid gray;
 
 
 }
+#lodge_like{
+	z-index: 999;
+    position: absolute;
+    right: 16px;
+    top: 90px;
+	  color:  #888;
+	  font-size: 18px;
+	  font-family: inherit;
+	  background : #efefef;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#lodge_like:hover {
+  color: indianred;
+}
+#lodge_like:active {
+  transform: scale(0.95);
+}
+#lodge_like.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#lodge_like .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
+
+#comment_Report{
+	  font-size: 14px;
+	  font-family: inherit;
+	  background : #ffffff;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#comment_Report:hover {
+  color: indianred;
+}
+#comment_Report:active {
+  transform: scale(0.95);
+}
+#comment_Report.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#comment_Report .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
+
+
 
 
 
@@ -405,6 +507,10 @@ function fn_replyDelete(comment_no){ //후기 삭제
 		$("#reply"+comment_no).text("");
 		$("#replyDiv").appendTo($("#reply"+comment_no));
 		$("#replyDiv").show();
+		$("#replyup").hide();
+		$("#replyup2").hide();
+		$("#replydel").hide();
+		$("#replydel2").hide();
 		$("#contents2").focus();
     }
     
@@ -432,7 +538,8 @@ function fn_replyDelete(comment_no){ //후기 삭제
     
     function fn_replyUpdateCancel(){
     	hideDiv("#replyDiv");
-    	
+    	$("#replyup").show();
+    	$("#replydel").show();
     	$("#reply"+updateComm).html(updateContents);
     	updateComm = updateContents = null;
     	
@@ -459,6 +566,8 @@ function fn_replyDelete(comment_no){ //후기 삭제
     
     function fn_replyReplyCencle(){
     	hideDiv("#replyDialog");
+    	$("#replyup2").show();
+    	$("#replydel2").show();
     }
     
     function fn_replyReplySave(){
@@ -487,13 +596,154 @@ function fn_replyDelete(comment_no){ //후기 삭제
 </script>
 
 <script type="text/javascript">
-
 $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
+    
+    var $start = $("#datepicker"),
+    	$end = $("#datepicker2");
+ 	
+    		// What dates should be disabled - year.month.date
+	 	var disabledDates = ${off};
+        	
+
+    	$start.datepicker({
+    		language: 'en',
+    	  onRenderCell: function(d, type) {
+    	    if (type == 'day') {
+    				var disabled = false,
+    	      		formatted = getFormattedDate(d);
+    	          
+    	          disabled = disabledDates.filter(function(date){
+    	          	return date == formatted;
+    	          	
+    	          }).length
+    	      
+    						return {
+    	          	disabled: disabled
+    	          }
+    	    }
+    	  }
+    	})
+    	$end.datepicker({
+    		language: 'en',
+    	  onRenderCell: function(d, type) {
+    	    if (type == 'day') {
+    				var disabled = false,
+    	      		formatted = getFormattedDate(d);
+    	          
+    	          disabled = disabledDates.filter(function(date){
+    	          	return date == formatted;
+    	          	
+    	          }).length
+    	      
+    						return {
+    	          	disabled: disabled
+    	          }
+    	    }
+    	  }
+    	})
+    
+
+    	function getFormattedDate(date) {
+    	  var year = date.getFullYear(),
+    	    month = date.getMonth() + 1,
+    	    date = date.getDate();
+    	    
+    	    return year + '.' + month + '.' + date;
+    	}
+    		
+  
+    		
+    		
 });
+</script>
+
+<script type="text/javascript"> //저장(좋아요)
+	$(document).ready(function(){
+
+		document.addEventListener('DOMContentLoaded', function() {
+			  var likeButton = document.getElementById('lodge_like');
+			   if("${like}" == 1){
+			  	window.lb = likeButton;
+			    likeButton.classList.toggle('selected');
+			   }
+			   
+			}, false);
+		
+		
+		$('#lodge_like').click(function(){
+			var lodge_no = '${view.lodge_no}',
+				mem_no = '${member.mem_no}';
+				var likeButton = document.getElementById('lodge_like');
+				
+			$.ajax({
+				url: "like",
+				type : "post",
+				data :{"lodge_no" : lodge_no, "mem_no" : mem_no },
+				dataType : "json",
+				success : function(data){
+					if(data.like){
+					window.lb = likeButton;
+					likeButton.classList.toggle('selected');
+					}
+						
+				},
+				error : function(data){
+					
+				},
+				
+				
+				
+			});//ajax 끝
+		
+		
+		
+		});//클릭 버튼 끝
+		
+	});//도큐먼트 끝
 
 </script>
+
+<script type="text/javascript">
+
+	function comment_Report(comment_no){
+		
+		var mem_no = "${member.mem_no}";
+			console.log(comment_no);
+			if(mem_no == ""){
+				alert("로그인 후 이용해 주세요");
+				return;
+			}
+			
+		$.ajax({
+			
+			url : "Commentreport",
+			type : "GET", 
+			data :{"reporter_no":mem_no, "comment_no" : comment_no },
+			dataType : "text",
+			success : function(data){
+				console.log("성공");
+				
+				if(data == 1){
+					alert("댓글이 신고 되었습니다.");
+				}else{
+					alert("신고가 취소 되었습니다.");
+				}
+			}
+			
+			
+			
+			
+		});//ajax 끝
+		
+	
+};//document 끝
+
+
+</script>
+
+
 
 <body>
 	<div id="wrapper">
@@ -506,9 +756,12 @@ $(function() {
 		
 			<!-- content시작 -->
     <div id="gallery">
+    	
       <div class="photo " id="photo1" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo2" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[1].stored_name }"/></div>
-      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/></div>
+      <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/>
+      <button id = "lodge_like"><svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>저장</button></div>
       <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
       <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo6" style =" overflow: hidden;"><img src=""/></div>
@@ -527,7 +780,17 @@ $(function() {
 						<tr>
 							<th class="small-10 large-10 columns first"style ="width :500px;">
 								<p class="body-text-lg heavy row-pad-bot-1"
-									style="font-size: smaller;">${view.building_case }</p>
+									style="font-size: smaller;">
+									<c:if test = "${view.building_case_no  == 1}" >
+									<span>펜션</span>
+									</c:if>
+									<c:if test = "${view.building_case_no == 2}" >
+									<span>모텔</span>
+									</c:if>
+									<c:if test = "${view.building_case_no == 3}" >
+									<span>게스트하우스</span>
+									</c:if>											
+									</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
@@ -603,16 +866,19 @@ $(function() {
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
 			<div style = "width: 900px;">
+			<p style ="font-size: 20px; font-weight: bold;">예약 가능 날짜<p>
 			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
 			<p id="datepicker2" data-language='en'></p>
 			</div>
 			
-			
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
-				<c:if test ="${login && mem_no eq sessionScope.mem_no }">
+			
+			
+			
+				<c:if test ="${login && payd}">
 				<!-- 후기 작성 -->
-				<div id = "replyform" style="border: 1px solid; width: 600px; padding: 5px">
+				<div id = "replyform" style="border: 1px solid; width: 493px; padding: 5px">
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
         		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
         		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
@@ -626,16 +892,22 @@ $(function() {
 				    <c:forEach items = "${lodgeReview}" var = "review">
     	<c:if test = "${review.parent_comment_no == 0 }">
 					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
-       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+       				<a href="/resources/" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
  					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
-       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/></div>
-
+       				   <div id="reply<c:out value="${review.comment_no}"/>"><c:out value="${review.contents}"/>
+       				   
+       				   </div>
+       				   
+       				   <c:if test ="${member.mem_no ne review.mem_no }">
+       				   <button id = "comment_Report" onclick="comment_Report('<c:out value="${review.comment_no}"/>')" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
+       				</c:if>
+       				
        				<c:if test ="${login && member.mem_no eq review.mem_no }">
-       				<button onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
-       				 <button  onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
+       				<button id= "replyup" onclick="fn_replyUpdate('<c:out value="${review.comment_no}"/>')">수정</button>
+       				 <button id= "replydel" onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
 					</c:if>
 					<c:if test ="${login && member.mem_no eq view.mem_no }">
  					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
@@ -646,18 +918,21 @@ $(function() {
 				
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
-						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 10px;">    
+						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 20px;">    
 	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
 	 					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>
 	       				   <div id="reply<c:out value="${review2.comment_no}"/>"><c:out value="${review2.contents}"/></div>
-	
+					
+					<c:if test ="${ review2.mem_no ne member.mem_no}">
+       				   <button id = "comment_Report" onclick="comment_Report('<c:out value="${review.comment_no}"/>')" style="left: 850px; position: absolute; "><i class="far fa-flag"></i></button> 
+					</c:if>
+					
 	       				<c:if test ="${login && review2.mem_no eq member.mem_no }">
-	       				<button onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
-	       				 <button  onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
-<%-- 	 					 <button  onclick="fn_replyReply('<c:out value ="${review2.comment_no}"/>')">댓글</button> --%>
+	       				<button id = "replyup2" onclick="fn_replyUpdate('<c:out value="${review2.comment_no}"/>')">수정</button>
+	       				 <button id = "replydel2" onclick="fn_replyDelete('<c:out value="${review2.comment_no}"/>')">삭제</button>
 					</c:if>
 					</div>
 					</c:if>
@@ -715,9 +990,8 @@ $(function() {
 
 <c:import url="../lodge/sidebar.jsp"/>
    <!-- 구글 맵 -->  
- <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFaqOV0p_zrPFa70xwici5EGqDN9qq0fw&callback=initMap">
-    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
+    async defer></script>
 
 </body>
 

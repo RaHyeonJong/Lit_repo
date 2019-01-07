@@ -27,7 +27,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#closePayDetail').click(function(){
+	$('.closePayDetail').click(function(){
 		$('#modal-viewPayDetail').css('display', 'none');
 	});
 		
@@ -89,8 +89,22 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('.pay-detail-btn').click(function(){
-		$('#modal-viewPayDetail').css("display", "block");
+	$('.pay-detail-btn').click(function(e){
+		var pay_no = $(e.target).attr("data-payNo");
+		
+		$.ajax({
+			type: "GET",
+			url: "/mypage/viewPayDetail",
+			data: {"pay_no": pay_no}, 
+			dataType: "html",
+			success : function(res){
+				$('#pay-detail-div').html(res);
+				$('#modal-viewPayDetail').css("display", "block");
+			},
+			error : function(){
+				alert("에러났어요!");
+			}
+		});
 	});
 
 });
@@ -137,23 +151,7 @@ $(document).ready(function(){
 <button class="pay-cancel-btn" data-payNo="${pay.pay_no }" style="padding:5px 10px 10px 10px; margin-left:30px; text-decoration:none; border:none; border-radius:3px; cursor:pointer; background-color:#FF5A5F; color:white;">결제취소 요청</button>
 </c:if>
 </td></tr>
-<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #999; margin:0; padding:0;">
-<!-- -------- // 결제상세보기 모달창 --------------------------------------------------------------------------------------- -->
-<div id="modal-viewPayDetail" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div style="position:fixed; width:568px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
-<div style="text-align:right; padding-right:10px;"><span id="closePayDetail" style="cursor:pointer; font-size:30px;">&times;</span></div>
-<div id="pay-detail-div">
-<table>
-<tr><td style="padding-left:20px;"><h1 style="margin:0;">결제상세정보</h1></td>
-<td style="vertical-align:bottom; padding-bottom:2px;">&nbsp; ▶ 결제번호 : <span style="font-weight:bold;">${pay.pay_no }</span></td>
-<td style="vertical-align:bottom; padding-bottom:2px;">&nbsp; | &nbsp;결제일자 : <span style="font-weight:bold;"><fmt:formatDate value="${pay.pay_time }" pattern="yyyy월 MM월 dd일"/></span></td></tr>
-
-</table>
-</div>
-</div></div>
-<!-- -------- 결제상세보기 모달창 // --------------------------------------------------------------------------------------- -->
-</td></tr>
-
+<tr><td colspan="4" style="padding:0;"><hr style="border:1px solid #999; background-color:#999; margin:0; padding:0;"></td></tr>
 </c:forEach>
 
 
@@ -204,6 +202,13 @@ $(document).ready(function(){
 </div>
 </div>
 
-
+<!-- -------- // 결제상세보기 모달창 --------------------------------------------------------------------------------------- -->
+<div id="modal-viewPayDetail" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div style="position:fixed; width:768px; padding-bottom:20px; top:50%; left:50%; transform:translate(-50%, -50%); background-color:#fefefe; text-align: center;">
+<div style="text-align:right; padding-right:10px;"><span class="closePayDetail" style="cursor:pointer; font-size:30px;">&times;</span></div>
+<div id="pay-detail-div"></div>
+<div style="padding-top:40px;"><button class="closePayDetail" style="width:50px; height:30px; text-decoration:none; border:none; border-radius:3px; background-color:#FF5A5F; color:white; cursor:pointer;">닫기</button></div>
+</div></div>
+<!-- -------- 결제상세보기 모달창 // --------------------------------------------------------------------------------------- -->
 
 

@@ -1,8 +1,11 @@
 package lit.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import lit.dto.Board;
 import lit.dto.Comment;
 import lit.dto.Favorite;
+import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.dto.Pay;
+import lit.dto.Report;
 import lit.service.face.LoginService;
 import lit.service.face.MypageService;
 import lit.util.Paging;
@@ -132,7 +136,7 @@ public class MypageController {
 		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
 		int totalCount = mypageService.getTotalPayCnt(mem_no);
 		
-		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		Paging paging = new Paging(totalCount, curPage, 5, 10);
 		paging.setMem_no(mem_no);
 		
 		List<Pay> payList = mypageService.getPayList(paging);
@@ -153,7 +157,7 @@ public class MypageController {
 		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
 		int totalCount = mypageService.getTotalPayCnt(mem_no);
 		
-		Paging paging = new Paging(totalCount, curPage, 10, 10);
+		Paging paging = new Paging(totalCount, curPage, 5, 10);
 		paging.setMem_no(mem_no);
 		
 		List<Pay> payList = mypageService.getPayList(paging);
@@ -164,7 +168,76 @@ public class MypageController {
 		return "mypage/viewMyPayments";
 	}
 	
+	@RequestMapping(value="/mypage/viewPayDetail")
+	public void viewPayDetail(Model model, Pay pay, Lodge lodge, Member host) {
+		pay = mypageService.getPay(pay);
+		lodge = mypageService.getLodge(pay);
+		host = mypageService.getHost(lodge);
+		
+		model.addAttribute("pay", pay);
+		model.addAttribute("lodge", lodge);
+		model.addAttribute("host", host);
+	}
 	
+	@RequestMapping(value="/mypage/deleteMember", method=RequestMethod.GET)
+	public void deleteMember() {}
 	
+	@RequestMapping(value="/mypage/deleteMember", method=RequestMethod.POST)
+	public void deleteMemberProcess(Member mem, HttpServletResponse resp, HttpSession session) {
+		PrintWriter writer = null;
+			
+		try {
+			writer = resp.getWriter();
+			
+			boolean existAccount = loginService.checkMembership(mem);
+			
+			if(existAccount) {
+				mypageService.deleteMember(mem);
+				session.invalidate();
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
+	}
+	
+	@RequestMapping(value="/viewProfile")
+	public String viewOtherProfile(Model model, int mem_no) {
+		Member other = new Member();
+		other.setMem_no(mem_no);
+		
+		other = mypageService.getMemberByNo(other);
+		System.out.println(other);
+		
+		model.addAttribute("other", other);
+		
+		return "mypage/viewOtherProfile";
+	}
+	
+	@RequestMapping(value="/reportMember")
+	public void reportMember(Report report, HttpServletResponse resp) {
+		PrintWriter writer = null;
+			
+		try {
+			writer = resp.getWriter();
+			
+			boolean alreadyReport = mypageService.checkReport(report);
+			
+			if(!alreadyReport) {
+				mypageService.reportMember(report);
+				writer.write("1");
+			} else {
+				writer.write("-1");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(writer != null) writer.close();
+		}		
+	}
 	
 }

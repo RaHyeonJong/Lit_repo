@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
 <!DOCTYPE html>
@@ -27,19 +28,6 @@ $(document).ready(function(){
 	num =1;
 	}
 	$('#numberUpDown').text(num);
-		
-// 	$.ajax({
-		
-// 		url : "/lodge/reservation",
-// 		type : "get",
-// 		data : {"stay_cost": num },
-// 		dataType : "json",
-// 		success :function(data){
-// 			console.log(data);
-// 		}
-		
-// 	});
-	
 	
 	});
 	
@@ -60,6 +48,7 @@ $(document).ready(function(){
 	
 	
 	});
+	
 	
 	
 	var $start = $('#start'),
@@ -85,29 +74,28 @@ $(document).ready(function(){
 	})
 	
 	
-	
-	$("#search").click(function(){
+	$("#searchBtn").click(function(){
 		var stay_start = $('#start').val(),
 			stay_end = $('#end').val(),
+			num = $('#numberUpDown').text(),
+			lodge_no = "${view.lodge_no}",
 			cost = ${view.stay_cost };
 			 // 숙박 가격	
 	
+			 console.log(num);
+			 
 			if(stay_start == "" || stay_end ==""){
 				alert("날짜를 선택해 주세요");
 				return;
 			} 
-			 
-		
-		
 		
 		$.ajax({
 		type : "post",
 		url : "search",
-			data :{ "stay_cost" : cost , "start" : stay_start, "end" : stay_end},
+			data :{ "stay_cost" : cost , "start" : stay_start, "end" : stay_end, "person" : num, "lodge_no" : lodge_no},
 		dataType:"html",
 		success: function(mav) {
 		
-			console.log(mav);
 			document.getElementById("total").innerHTML = mav;
 // 			$("#stay_cost").html(mav.add);
 // 			$("#cost").html(mav.st);
@@ -133,37 +121,191 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var myDatepicker = $('#start').datepicker().data('datepicker');
-	var myDatepicker = $('#end').datepicker().data('datepicker');
+	$(function() {
+	    $("#start").datepicker();
+	    $("#end").datepicker();
+	    
+	    var $start = $("#start");
+	 	var $end = $("#end");
+	    		// What dates should be disabled - year.month.date
+		 	var disabledDates = ${off};
+
+	    	$start.datepicker({
+	    		language: 'en',
+	    	  onRenderCell: function(d, type) {
+	    	    if (type == 'day') {
+	    				var disabled = false,
+	    	      		formatted = getFormattedDate(d);
+	    	          
+	    	          disabled = disabledDates.filter(function(date){
+	    	          	return date == formatted;
+	    	          	
+	    	          }).length
+	    	      
+	    						return {
+	    	          	disabled: disabled
+	    	          }
+	    	    }
+	    	  }
+	    	})
+	    	$end.datepicker({
+	    		language: 'en',
+	    	  onRenderCell: function(d, type) {
+	    	    if (type == 'day') {
+	    				var disabled = false,
+	    	      		formatted = getFormattedDate(d);
+	    	          
+	    	          disabled = disabledDates.filter(function(date){
+	    	          	return date == formatted;
+	    	          	
+	    	          }).length
+	    	      
+	    						return {
+	    	          	disabled: disabled
+	    	          }
+	    	    }
+	    	  }
+	    	})
+	    	
+
+	    	function getFormattedDate(date) {
+	    	  var year = date.getFullYear(),
+	    	    month = date.getMonth() + 1,
+	    	    date = date.getDate();
+	    	    
+	    	    return year + '.' + month + '.' + date;
+	    	}
+	    		
+	  
+	    		
+	    		
+	});
 	
 });
+</script>
+
+<script type="text/javascript"> //신고
 
 
 </script>
 <script type="text/javascript">
-
-$(document).ready(function(){
 	
-	
-
-	
-	
-	
-	
-});
+	function reservation(){ //비로그인시 예약요청 클릭시 
+		
+			var modal = document.getElementById("modal-login");
+		
+			var btn = document.getElementById("reserBtn1");
+		
+			{
+				modal.style.display="block";
+			}
+	}
+		
 
 
 </script>
 
-
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
 /* 	ul li { list-style: none; }  74오류나면 수정*/
-	.nav_side { position: absolute; top: 75%; left:60%; min-width:500px; heigth:800px;}
+	.nav_side { position: absolute; top: 694px; left:1050px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}
 	label{ vertical-align: middle; margin-left: -3px;}
 
+#reportBtn{
+	  font-size: 14px;
+	  font-family: inherit;
+	  background : #ffffff;
+/* 	  background : inherit; */
+	  border: 0.1em; 
+	  border-radius: 4px;
+/* 	  padding: 0.333em 1em 0.25em; */
+	  line-height: 1.2em;
+/* 	  box-shadow: 0 0.25em 1em -0.25em; */
+	  cursor: pointer;
+	  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+	  outline: 0;
+/* 	  margin: 5em 0; */
+}
+#reportBtn:hover {
+  color: indianred;
+}
+#reportBtn:active {
+  transform: scale(0.95);
+}
+#reportBtn.selected {
+  color: #FFF;
+  background-color: indianred;
+  border-color: indianred;
+}
+#reportBtn .heart-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+}
+
+
+#searchBtn{ 
+  margin-left : 5px;
+  padding: 14px 0;
+  border: 2px #4eab75 solid;
+  background-color: #4da973;
+  cursor: pointer;
+  font-family: "Montserrat", "helvetica neue", helvetica, arial, sans-serif;
+  font-size: .9em;
+  text-transform: uppercase;
+  transition: color 0.4s, background-color 0.4s;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 210px;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  color: white;
+  }
+#reserBtn{ 
+  margin-left : 10px;
+  padding: 14px 0;
+  border: 2px #4eab75 solid;
+  background-color: #4da973;
+  cursor: pointer;
+  font-family: "Montserrat", "helvetica neue", helvetica, arial, sans-serif;
+  font-size: .9em;
+  text-transform: uppercase;
+  transition: color 0.4s, background-color 0.4s;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 210px;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  color: white;
+  }
 
 
 </style>
@@ -173,33 +315,45 @@ $(document).ready(function(){
 
 <div class="nav_side">
 		
-		<div><span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
-		<div id ="date">날짜<br>
+		<div>&nbsp;<span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
+		<div id ="date"><font size="4px">&nbsp;&nbsp;날짜</font><br>
       		 <div  id = "picker">
 			<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">
       		 <input id="start" name ="stay_start" type="text"  data-language="en" placeholder ="체크인"/>
       		 <input id="end" class = "form-control" name ="stay_end" type="text"  data-language="en"placeholder ="체크아웃"/>
-      		 <button id = "search">검색</button>
-			
+      		
+		
+		
+		<br>	
+		<div id ="people" class="number"><font size="4px">성인</font> &nbsp; <a href="#" id="decreaseQuantity"><i class="fas fa-minus"></i></a>
+		<span id="numberUpDown"style="font-size: 24px;margin: 0 5px 0 0;">1</span><a href="#" id="increaseQuantity"><i class="fas fa-plus"></i></a>
+		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
+		<button id = "searchBtn">검색</button>
+		
 		</div>
 		
-		<br><br>	
-		<div id ="people" class="number">성인<a href="#" id="decreaseQuantity">-</a><span id="numberUpDown">1</span><a href="#" id="increaseQuantity">+</a>
-		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
+		
 		
 		<div id ="total">
 		<p id = "cost"></p>
 		<p id = "service"></p>
 		<p id="sum"></p>
-		<button id = "reserBtn">예약 요청</button>
+		<c:if test="${not login }">
+		<button id = "reserBtn" onclick="reservation()">예약 요청</button>
+		</c:if>
 		
+		<c:if test="${login }">
+		<button id = "reserBtn">예약 요청</button>
+		</c:if>
+		
+		<div style = "margin-top: 10px;">
+		<button id = "reportBtn" onclick="report()"><i class="far fa-flag"></i> 숙소 신고하기</button> 
+		</div>
 		</div><!-- 토탈 -->
 		</div><!-- 사람수 -->
 		</div>
 
-
 </div>
-  			
   			
 <div>
 
