@@ -89,7 +89,7 @@
 		
 		<!-- header 끝 -->
 		
-		<div id="search_filter" style="z-index: 101; top: 0;">
+		<div id="search_filter" style="z-index: 90; top: 0;">
 			<button>날짜</button>
 			<button id="peopleFilterBtn">인원</button>
 			<button>숙소 종류</button>
@@ -139,7 +139,7 @@ var infowindow;
 var markerArray = [];
 
 $(document).ready(function() {
-	$('#header').css('z-index', 102); // 모달 띄울 때
+	$('#header').css('z-index', 91); // 모달 띄울 때
 	$('#header').css('position', 'fixed');
 	$('#search-filter').css('position', '0');
 	
@@ -288,7 +288,11 @@ $(document).ready(function() {
 					center : myLatlng
 				});
 				
+				map.addListener('dragend', function() { // dragend 시작
+					alert('dragend');
 				
+					map2();
+				}); // dragend 끝
 				
 				/* marker = new google.maps.Marker({
 					position : myLatlng,
@@ -296,21 +300,14 @@ $(document).ready(function() {
 					title : 'Click to zoom'
 				}); */
 				
-//	 			map.addListener('center_changed', function() {
-//	 				// 3 seconds after the center of the map has changed, pan back to the
-//	 				// marker.
-//	 				window.setTimeout(function() {
-//	 					map.panTo(marker.getPosition());
-//	 				}, 3000);
-//	 			});
-
-
-
-
+// 	 			map.addListener('tilesloaded', function() { // map 로드 될 때
+// 	 				alert('tilesloaded');
+// 	 				map2();
+// 	 			});
 				
-				
-					map.addListener('dragend', function() { // dragend 시작
-						alert('dragend');
+				google.maps.event.addDomListener(window, 'load', map2);
+					
+					function map2() {
 						bounds = map.getBounds();
 						ne = bounds.getNorthEast();
 						sw = bounds.getSouthWest();
@@ -385,15 +382,16 @@ $(document).ready(function() {
 								console.log("실패");
 							}
 						});
-					}); // dragend 끝
-
+						
+					} // function map() end
+					
 			}
 	</script>
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
 	
 <!-- 가격 필터 모달 -->
-<div id="modal-price" class="modal" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div id="modal-price" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div id="modal-price2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
 <div id="modal-price3">
 	<!-- price min, max filter 추가 -->
@@ -408,7 +406,7 @@ $(document).ready(function() {
 <!-- 가격 필터 모달 끝 -->
 
 <!-- 인원 필터 모달 -->
-<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div id="modal-people2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
 <div id="modal-people3">
 	

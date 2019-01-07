@@ -24,7 +24,7 @@ public interface LodgeService {
 	public List LodgeConvenient(Lodge lodge);
 	
 	//상세뷰 이미지
-	public List<Image> LodgeImage();
+	public List<Image> LodgeImage(Lodge lodge);
 	
 	
 	//예약 하고 자하는 숙소의 결제 정보 보여주기
@@ -37,7 +37,7 @@ public interface LodgeService {
 	public boolean SelectLodgePay(Pay pay);
 	
 	//후기 리스트
-	public List<Comment> commentList();
+	public List<Comment> commentList(Lodge lodge);
 	
 	//후기 개수
 	public int lodgeCountcomment(Lodge lodge);
