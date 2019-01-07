@@ -85,6 +85,12 @@ public class HostServiceImpl implements HostService{
 		return hostDao.selectByHostMemno();
 		
 	}
+
+
+	@Override
+	public void deleteDayoff(Day_off day_off) {
+		hostDao.deleteDayoff(day_off);
+	}
 	
 	
 	

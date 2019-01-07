@@ -112,15 +112,9 @@ $(document).ready(function(){
 	});
 	
 	$("#nextButton").click(function(){
-<<<<<<< HEAD
-	
-		$("#addr").submit();	
-=======
 		
 		$("#addr").submit();
 
-		
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	});
 	
 });

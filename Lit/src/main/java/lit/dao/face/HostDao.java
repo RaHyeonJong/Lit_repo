@@ -40,6 +40,8 @@ public interface HostDao {
 	//호스트 mem_no로 select하기
 	public List selectByHostMemno();
 
+	public void deleteDayoff(Day_off day_off);
+
 	
 
 }

@@ -185,14 +185,14 @@ public class HostController {
 	
 	//1단계 숙소관리
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.GET)
-		public void manageLodge(Model model) {
+		public void manageLodge(Model model, int lodge_no) {
 			
 
 			
 			  Date today = new Date();
 			  SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 			  model.addAttribute("today", date.format(today));
-			  
+			  model.addAttribute("lodge_no", lodge_no);
 			  
 
 		
@@ -209,48 +209,70 @@ public class HostController {
 			  
 			 mav.setViewName("jsonView");
 			 Date today = new Date();
-			 SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-			 mav.addObject("today", date.format(today));
+			 
+			 SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");//날짜형태
+			 
+			 
+			 mav.addObject("today", date.format(today));//오늘날짜
 			
-			  
+			 
+			 //시작
 			 Calendar cal = Calendar.getInstance ( );//오늘 날짜를 기준으루..
 			 cal.add ( cal.MONTH, selectShowMonth ); //2개월 전....
 
-			 mav.addObject("testDate", date.format(cal.getTime()));
+			 mav.addObject("testDate", date.format(cal.getTime())); //끝나는날짜
+			 
+			 //끝
 
 			 session.setAttribute("available_term", selectShowMonth);
 			 
 			 
 			
 			 
-			 Gson gson = new Gson();
-			 Type type = new TypeToken<ArrayList<String>>(){}.getType();
-	
-			 
-			 List<String> off_list = gson.fromJson(selectDisableDay,type);
-			 
-			 System.out.println(off_list);
-			 
-				 session.setAttribute("day_off_date", off_list);
-				 
-					//day_off
-					List<String> d1 = (ArrayList<String>)session.getAttribute("day_off_date");
-						
-					System.out.println("d1"+d1);
-					
-					
-						for(String d2 : d1 ) {
-						java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
-						System.out.println("d2"+off_date3);
-						day_off.setDay_off_date(off_date3);						
-//						hostService.insertFirst(day_off);
-						}
+//			 Gson gson = new Gson();
+//			 Type type = new TypeToken<ArrayList<String>>(){}.getType();
+//	
+//			 
+//			 List<String> off_list = gson.fromJson(selectDisableDay,type);
+//			 
+//			 System.out.println(off_list);
+//			 
+//				 session.setAttribute("day_off_date", off_list);
+//				 
+//					//day_off
+//					List<String> d1 = (ArrayList<String>)session.getAttribute("day_off_date");
+//						
+//					System.out.println("d1"+d1);
+//					
+//					
+//						for(String d2 : d1 ) {
+//						java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
+//						System.out.println("d2"+off_date3);
+//						day_off.setDay_off_date(off_date3);						
+////						hostService.insertFirst(day_off);
+//						}
 						
 							 
 		
 			 return mav;
 				
 				}
+		
+		@RequestMapping(value="/host/selectDayoff")
+		public ModelAndView selectDayoffProc(Day_off day_off, String act, ModelAndView mav) {
+			
+			System.out.println(day_off);
+			
+			if("insert".equals(act))
+				hostService.insertSecond(day_off);
+			else if("delete".equals(act))
+				hostService.deleteDayoff(day_off);
+			
+			mav.setViewName("jsonView");
+			
+			return mav;
+		}
+		
 		
 		//1단계 요금설정
 		@RequestMapping(value="/host/lodgeCharge", method=RequestMethod.GET)
@@ -274,11 +296,7 @@ public class HostController {
 				
 			System.out.println("체크인시간 :" +check_in_hour);
 		
-			
 
-				
-		
-			
 
 //			System.out.println("시간 :"+hour);
 //			System.out.println("분 : "+min);	
@@ -305,11 +323,6 @@ public class HostController {
 //			int member_no = ((Member) session.getAttribute("member")).getMem_no();
 			
 			lodge.setMem_no(5);
-
-		
-		
-
-			
 
 			logger.info(lodge.toString());
 

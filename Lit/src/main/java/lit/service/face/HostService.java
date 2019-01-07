@@ -40,6 +40,8 @@ public interface HostService {
 	//본인이 등록한 숙소리스트
 	public List hostMyLodgeList();
 
+	public void deleteDayoff(Day_off day_off);
+
 	
 
 }
