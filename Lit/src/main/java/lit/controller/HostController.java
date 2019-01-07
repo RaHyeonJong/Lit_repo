@@ -113,7 +113,6 @@ public class HostController {
 	
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.GET)
-
 	public void checkLocation(Model model, String addr, String cityLat, String cityLng) {
 		
 		model.addAttribute("addr", addr);
@@ -124,20 +123,11 @@ public class HostController {
 
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
-
 	public String checkLocationElement(Lodge lodge,HttpSession session) {
-
+		
 		session.setAttribute("lodge_addr", lodge.getLodge_addr());
 		session.setAttribute("longitude", lodge.getLongitude());
 		session.setAttribute("latitude", lodge.getLatitude());
-
-			
-		//승국
-		session.setAttribute("latitude", lodge.getLatitude());
-		session.setAttribute("longitube", lodge.getLongitude());
-		session.setAttribute("lodge_addr", lodge.getLodge_addr());
-		//끝
-
 		
 		return "redirect:/host/firstConveniences";
 	}
@@ -274,10 +264,10 @@ public class HostController {
 												@RequestParam(defaultValue = "0")int inputCharge, 
 												Model model,
 												HttpSession session,
-												int check_in_hour, 
-												int check_in_min,
-												int check_out_hour,
-												int check_out_min,
+												@RequestParam(defaultValue = "0") int check_in_hour, 
+												@RequestParam(defaultValue = "0")int check_in_min,
+												@RequestParam(defaultValue = "0")int check_out_hour,
+												@RequestParam(defaultValue = "0")int check_out_min,
 												Lodge lodge,
 												Day_off day_off
 												) {
@@ -316,7 +306,8 @@ public class HostController {
 			lodge.setStay_cost(inputCharge);
 			
 			//day_off
-		List<String> d1 = (ArrayList<String>)session.getAttribute("day_off_date");
+		@SuppressWarnings("unchecked")
+		List<String> d1 = (ArrayList<String>) session.getAttribute("day_off_date");
 			
 		System.out.println("d1"+d1);
 		
