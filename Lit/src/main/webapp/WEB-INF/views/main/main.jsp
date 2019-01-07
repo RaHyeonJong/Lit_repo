@@ -300,10 +300,12 @@ $(document).ready(function() {
 					title : 'Click to zoom'
 				}); */
 				
-	 			map.addListener('tilesloaded', function() { // map 로드 될 때
-	 				map2();
-	 			});
-
+// 	 			map.addListener('tilesloaded', function() { // map 로드 될 때
+// 	 				alert('tilesloaded');
+// 	 				map2();
+// 	 			});
+				
+				google.maps.event.addDomListener(window, 'load', map2);
 					
 					function map2() {
 						bounds = map.getBounds();
