@@ -288,7 +288,11 @@ $(document).ready(function() {
 					center : myLatlng
 				});
 				
+				map.addListener('dragend', function() { // dragend 시작
+					alert('dragend');
 				
+					map2();
+				}); // dragend 끝
 				
 				/* marker = new google.maps.Marker({
 					position : myLatlng,
@@ -296,21 +300,14 @@ $(document).ready(function() {
 					title : 'Click to zoom'
 				}); */
 				
-//	 			map.addListener('center_changed', function() {
-//	 				// 3 seconds after the center of the map has changed, pan back to the
-//	 				// marker.
-//	 				window.setTimeout(function() {
-//	 					map.panTo(marker.getPosition());
-//	 				}, 3000);
-//	 			});
-
-
-
-
+// 	 			map.addListener('tilesloaded', function() { // map 로드 될 때
+// 	 				alert('tilesloaded');
+// 	 				map2();
+// 	 			});
 				
-				
-					map.addListener('dragend', function() { // dragend 시작
-						alert('dragend');
+				google.maps.event.addDomListener(window, 'load', map2);
+					
+					function map2() {
 						bounds = map.getBounds();
 						ne = bounds.getNorthEast();
 						sw = bounds.getSouthWest();
@@ -385,8 +382,9 @@ $(document).ready(function() {
 								console.log("실패");
 							}
 						});
-					}); // dragend 끝
-
+						
+					} // function map() end
+					
 			}
 	</script>
 <script async defer

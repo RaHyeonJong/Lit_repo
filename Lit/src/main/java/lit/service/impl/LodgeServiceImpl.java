@@ -42,9 +42,9 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
-	public List<Image> LodgeImage() {
+	public List<Image> LodgeImage(Lodge lodge) {
 		
-		return lodgedao.SelectLodgeImage();
+		return lodgedao.SelectLodgeImage(lodge);
 	}
 
 	@Override
@@ -88,9 +88,9 @@ public class LodgeServiceImpl implements LodgeService {
 	
 	
 	@Override
-	public List<Comment> commentList() {
+	public List<Comment> commentList(Lodge lodge) {
 		// TODO Auto-generated method stub
-		return lodgedao.lodgeComment();
+		return lodgedao.lodgeComment(lodge);
 	}
 
 	
@@ -156,11 +156,11 @@ public class LodgeServiceImpl implements LodgeService {
 	@Override
 	public boolean selectLike(Favorite favorite) {
 		
-		if(lodgedao.selectFavorite(favorite) < 1){
-			
+		int fav =lodgedao.selectFavorite(favorite); 
+		
+		if( fav< 1){
 			return  true;
 		}else{
-			
 			return false;
 		}
 			
