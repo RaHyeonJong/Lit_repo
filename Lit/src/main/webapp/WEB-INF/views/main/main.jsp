@@ -311,6 +311,8 @@ $(document).ready(function() {
 				
 					map.addListener('dragend', function() { // dragend 시작
 						alert('dragend');
+					
+					
 						bounds = map.getBounds();
 						ne = bounds.getNorthEast();
 						sw = bounds.getSouthWest();
@@ -386,6 +388,11 @@ $(document).ready(function() {
 							}
 						});
 					}); // dragend 끝
+					
+					function map() {
+						
+						
+					}
 
 			}
 	</script>
