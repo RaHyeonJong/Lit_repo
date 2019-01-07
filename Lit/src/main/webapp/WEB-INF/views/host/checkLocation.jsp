@@ -112,15 +112,10 @@ $(document).ready(function(){
 	});
 	
 	$("#nextButton").click(function(){
-<<<<<<< HEAD
-		
-		$("#addr").submit();
-=======
+
 		$("#checkLocation").submit();
 		location.href="/host/firstConveniences";
 		
-		
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	});
 	
 	
@@ -237,23 +232,7 @@ color: white;
 			<div class="category">
 				<h3>주소를 확인해주세요</h3>
 			</div>
-<<<<<<< HEAD
-			<form id = "addr" action="/host/checkLocation" method="post">
-			<div>
-				<input type="hidden" id="markerX" name ="latitude" value="${lat}"/>
-				<input type="hidden" id="markerY" name="longitude" value="${lng}"/>
-				<input id="txtAddress" name ="lodge_addr" value="${lodge_addr}"/> <br>
-			</div>
-			</form>
-			<br>
-			<div id="map"></div>
-			<br>
-			<div class="cut"></div>
-			<div class="move-button">
-				<button id="backButton">뒤로</button>
-				<button id="nextButton">다음</button>
-			</div>	
-=======
+
 			<form id="checkLoction" action="/host/checkLocation" method="POST">
 				<div>
 					<input name="latitude" type="hidden" id="markerX" value="${lat}"/>
@@ -270,7 +249,7 @@ color: white;
 					<button id="nextButton">다음</button>
 				</div>	
 			</form>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
 	 	</div><!-- inner end -->
 	</div><!-- left end -->
 	<div class="right" style="border:1px solid blue;">
