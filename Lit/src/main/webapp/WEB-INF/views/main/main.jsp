@@ -89,7 +89,7 @@
 		
 		<!-- header 끝 -->
 		
-		<div id="search_filter" style="z-index: 101; top: 0;">
+		<div id="search_filter" style="z-index: 90; top: 0;">
 			<button>날짜</button>
 			<button id="peopleFilterBtn">인원</button>
 			<button>숙소 종류</button>
@@ -139,7 +139,7 @@ var infowindow;
 var markerArray = [];
 
 $(document).ready(function() {
-	$('#header').css('z-index', 102); // 모달 띄울 때
+	$('#header').css('z-index', 91); // 모달 띄울 때
 	$('#header').css('position', 'fixed');
 	$('#search-filter').css('position', '0');
 	
@@ -391,7 +391,7 @@ $(document).ready(function() {
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
 	
 <!-- 가격 필터 모달 -->
-<div id="modal-price" class="modal" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div id="modal-price" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div id="modal-price2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
 <div id="modal-price3">
 	<!-- price min, max filter 추가 -->
@@ -406,7 +406,7 @@ $(document).ready(function() {
 <!-- 가격 필터 모달 끝 -->
 
 <!-- 인원 필터 모달 -->
-<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
+<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
 <div id="modal-people2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
 <div id="modal-people3">
 	

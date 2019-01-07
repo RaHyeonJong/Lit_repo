@@ -8,12 +8,14 @@ import lit.dto.Lodge;
 public interface HostDao {
 	
 	//-------------단계별 정보등록
-
+	
 	//1단계 숙소등록
-	public void insertOne(Day_off day_off);
+	public void insertOne(Lodge lodge);
 
 	//2단계 숙소등록
-	public void insertTwo(Lodge lodge);
+	public void insertTwo(Day_off day_off);
+
+
 	
 	//3단계 숙소등록
 	public void insertThree(Lodge lodge);

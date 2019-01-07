@@ -10,10 +10,10 @@ public interface HostService {
 	
 	//-----------단계별 정보등록
 	//1단계숙소정보등록
-	public void insertFirst(Day_off day_off);
+	public void insertFirst(Lodge lodge);
 
 	//2단계숙소정보등록
-	public void insertSecond(Lodge lodge);
+	public void insertSecond(Day_off day_off);
 
 	//3단계숙소정보등록
 	public void insertThird(Lodge lodge);

@@ -31,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 
 import lit.dto.Day_off;
 import lit.dto.Lodge;
+import lit.dto.Member;
 import lit.service.face.HostService;
 
 @Controller
@@ -53,7 +54,10 @@ public class HostController {
 	//--------------------------1단계
 	//1단계 숙소기본정보등록페이지
 	@RequestMapping(value="/host/hostFirst", method=RequestMethod.GET)
-	public void hostFirst() {
+	public void hostFirst(Model model, int lodge_no) {
+		
+		
+		model.addAttribute("lodge_no", lodge_no);
 		
 		
 		
@@ -79,6 +83,7 @@ public class HostController {
 	public String firstRoomElement(Lodge lodge, HttpSession session) {
 		
 		
+		logger.info(lodge.toString());
 		session.setAttribute("building_case_no",lodge.getBuilding_case_no());
 		session.setAttribute("lodge_case_no",lodge.getLodge_case_no());
 		session.setAttribute("lodge_name",lodge.getLodge_name());
@@ -123,12 +128,14 @@ public class HostController {
 
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
-	public String checkLocationElement(Lodge lodge,HttpSession session) {
+	public String checkLocationElement(Lodge lodge,HttpSession session) {		
 		
+		logger.info(lodge.toString());
+
 		session.setAttribute("lodge_addr", lodge.getLodge_addr());
 		session.setAttribute("longitude", lodge.getLongitude());
 		session.setAttribute("latitude", lodge.getLatitude());
-		
+
 		return "redirect:/host/firstConveniences";
 	}
 	
@@ -174,28 +181,7 @@ public class HostController {
 		return "redirect:/host/lodgeCharge";
 		}
 	
-	//1단계 기타시설
-	@RequestMapping(value="/host/otherUse", method=RequestMethod.GET)
-	public void otherUse() {}
-			
-	//1단계 기타시설
-	@RequestMapping(value="/host/otherUse", method=RequestMethod.POST)
-	public String otherUseproc(HttpSession session,Lodge lodge) {
-			
-		lodge.setBuilding_case_no((int)session.getAttribute("building_case_no"));
-		lodge.setLodge_case_no((int)session.getAttribute("lodge_case_no"));
-		lodge.setLodge_name((String)session.getAttribute("lodge_name"));
-		lodge.setLodge_room((int)session.getAttribute("lodge_room"));
-		lodge.setLodge_capacity((int)session.getAttribute("lodge_capatity"));
-		lodge.setConvenient_facility((String)session.getAttribute("convenient_facility"));
-		lodge.setLodge_addr((String)session.getAttribute("lodge_addr"));
-		lodge.setLatitude((double)session.getAttribute("latitude"));
-		lodge.setLongitude((double)session.getAttribute("longitude"));
-
-		logger.info(lodge.toString());
-			
-		return "redirect:/host/manageLodge";
-			}
+	
 	
 	//1단계 숙소관리
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.GET)
@@ -218,7 +204,7 @@ public class HostController {
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.POST)
 		public ModelAndView manageLodgeProc(@RequestParam(defaultValue="1") int selectShowMonth, 
 											ModelAndView mav,
-											String selectDisableDay, HttpSession session )
+											String selectDisableDay, HttpSession session,Day_off day_off )
 		{
 			  
 			 mav.setViewName("jsonView");
@@ -246,6 +232,21 @@ public class HostController {
 			 System.out.println(off_list);
 			 
 				 session.setAttribute("day_off_date", off_list);
+				 
+					//day_off
+					List<String> d1 = (ArrayList<String>)session.getAttribute("day_off_date");
+						
+					System.out.println("d1"+d1);
+					
+					
+						for(String d2 : d1 ) {
+						java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
+						System.out.println("d2"+off_date3);
+						day_off.setDay_off_date(off_date3);						
+//						hostService.insertFirst(day_off);
+						}
+						
+							 
 		
 			 return mav;
 				
@@ -260,29 +261,25 @@ public class HostController {
 				
 		//1단계 요금설정
 		@RequestMapping(value="/host/lodgeCharge", method=RequestMethod.POST)
-		public @ResponseBody int  lodgeChargeProc(
-												@RequestParam(defaultValue = "0")int inputCharge, 
+		public ModelAndView lodgeChargeProc(
 												Model model,
 												HttpSession session,
-												@RequestParam(defaultValue = "0") int check_in_hour, 
+												@RequestParam(defaultValue = "0")int check_in_hour, 
 												@RequestParam(defaultValue = "0")int check_in_min,
-												@RequestParam(defaultValue = "0")int check_out_hour,
-												@RequestParam(defaultValue = "0")int check_out_min,
 												Lodge lodge,
-												Day_off day_off
+												Day_off day_off, ModelAndView mav
 												) {
+			
+			mav.setViewName("jsonView");
 				
-	
-			int checkCharge = 0;
-			System.out.println(inputCharge);
-			if(inputCharge < 10000) {
-				
-				checkCharge = 1;
+			System.out.println("체크인시간 :" +check_in_hour);
+		
+			
 
 				
-			}
+		
 			
-			session.setAttribute("stay_cost", inputCharge);
+
 //			System.out.println("시간 :"+hour);
 //			System.out.println("분 : "+min);	
 //			session.setAttribute("check_in_time", hour+"시"+min+"분");
@@ -291,13 +288,7 @@ public class HostController {
 			session.setAttribute("check_in_time", check_in_hour+"시"+check_in_min+"분");
 			System.out.println(session.getAttribute("check_in_time"));
 			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
-			
-			int transin=check_in_hour*60+check_in_min;
-			int transout=check_out_hour*60+check_out_min;
-			
-			System.out.println(transin);
-			System.out.println(transout);
-			
+
 			
 			lodge.setBuilding_case_no((int)session.getAttribute("building_case_no"));
 			lodge.setLodge_case_no((int)session.getAttribute("lodge_case_no"));
@@ -305,31 +296,28 @@ public class HostController {
 			lodge.setLodge_room((int)session.getAttribute("lodge_room"));
 			lodge.setLodge_capacity((int)session.getAttribute("lodge_capatity"));
 			lodge.setConvenient_facility((String)session.getAttribute("convenient_facility"));
+			lodge.setConvenient_area((String)session.getAttribute("convenient_area"));
 			lodge.setLodge_addr((String)session.getAttribute("lodge_addr"));
 			lodge.setLatitude((double)session.getAttribute("latitude"));
 			lodge.setLongitude((double)session.getAttribute("longitude"));
-			lodge.setStay_cost(inputCharge);
+			lodge.setCheck_in_time(check_in_hour+"시"+check_in_min+"분");
 			
-			//day_off
-		@SuppressWarnings("unchecked")
-		List<String> d1 = (ArrayList<String>) session.getAttribute("day_off_date");
+//			int member_no = ((Member) session.getAttribute("member")).getMem_no();
 			
-		System.out.println("d1"+d1);
+			lodge.setMem_no(5);
+
 		
 		
-			for(String d2 : d1 ) {
-			java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
-			day_off.setDay_off_date(off_date3);						
-//			hostService.insertFirst(day_off);
-			}
+
 			
-			
+
 			logger.info(lodge.toString());
-			logger.info(day_off.toString());
+
+			hostService.insertFirst(lodge);
+			System.out.println(lodge.getLodge_no());
+			model.addAttribute("lodge_no", lodge.getLodge_no());
 			
-			return checkCharge;
-			
-			
+			return mav;
 			
 				}
 		
@@ -349,7 +337,7 @@ public class HostController {
 	public void hostSecondElement(Lodge lodge) {
 			
 		//2단계 숙소등록정보를 INSERT
-		hostService.insertSecond(lodge);
+
 			
 		}
 
