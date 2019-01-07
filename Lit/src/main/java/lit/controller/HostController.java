@@ -4,10 +4,7 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -114,10 +111,6 @@ public class HostController {
 	
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.GET)
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	public void checkLocation(Model model, String addr, String cityLat, String cityLng) {
 		
 		model.addAttribute("addr", addr);
@@ -125,23 +118,13 @@ public class HostController {
 		model.addAttribute("lat", cityLat);
 
 	}
-<<<<<<< HEAD
-=======
-
-	
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	public String checkLocationElement(Lodge lodge,HttpSession session) {
-<<<<<<< HEAD
 		session.setAttribute("lodge_addr", lodge.getLodge_addr());
 		session.setAttribute("longitude", lodge.getLongitude());
 		session.setAttribute("latitude", lodge.getLatitude());
-=======
 
 			
 		//승국
@@ -149,31 +132,14 @@ public class HostController {
 		session.setAttribute("longitube", lodge.getLongitude());
 		session.setAttribute("lodge_addr", lodge.getLodge_addr());
 		//끝
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-		
-
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 		
 		return "redirect:/host/firstConveniences";
 	}
 	
 	//1단계 편의시설
 	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.GET)
-<<<<<<< HEAD
 	public void firstCon(Lodge lodge) {}
-=======
 
-	public void firstCon(Lodge lodge) {
-
-
-			
-				}
-
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-		
 	//1단계 편의시설
 	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.POST)
 	public String firstConproc(Lodge lodge,HttpSession session) {

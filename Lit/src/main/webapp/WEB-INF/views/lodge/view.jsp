@@ -604,7 +604,7 @@ $(function() {
     	$end = $("#datepicker2");
  	
     		// What dates should be disabled - year.month.date
-	 	var disabledDates = ${off};
+	 	var disabledDates = ${d_off};
         	
 
     	$start.datepicker({
@@ -653,7 +653,23 @@ $(function() {
     	    return year + '.' + month + '.' + date;
     	}
     		
-  
+   	 $start.datepicker({
+ 		language : 'en',
+ 		minDate : new Date(),
+ 		onSelect : function(fd, date){
+ 			$end.data('datepicker')
+ 			.update('minDate',date)
+ 		}
+ 	})
+ 	 $end.datepicker({
+ 		language : 'en',
+ 		minDate : new Date(),
+ 	onSelect : function(fd,date){
+ 		$start.data('datepicker')
+ 		.update('maxDate',date)
+ 	}
+ 	})
+ 	
     		
     		
 });

@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.mail.Session;
@@ -98,6 +100,9 @@ public class LodgeController {
 		SimpleDateFormat d = new SimpleDateFormat("yyyy.M.d");
 		List<String> date = new ArrayList<>();
 		
+		//예약된 날짜
+		Set<String> reDate = lodgeService.reservationDay(lodge);
+		
 		
 		for(Day_off off : dd ) {
 
@@ -110,15 +115,15 @@ public class LodgeController {
 			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
 			
 			date.add(d2);
+			reDate.addAll(date);
 			
 			
 			model.addAttribute("off",date);
+			model.addAttribute("d_off", reDate);
+			
 		}
-		
-		List<String> reDate = lodgeService.reservationDay(lodge);
-//		System.out.println(reDate);
-//		model.addAttribute("d_off", reDate);
-		
+		System.out.println(date);
+		System.out.println(reDate);
 	}
 	
 	

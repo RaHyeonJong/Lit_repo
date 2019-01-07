@@ -128,7 +128,7 @@ $(document).ready(function(){
 	    var $start = $("#start");
 	 	var $end = $("#end");
 	    		// What dates should be disabled - year.month.date
-		 	var disabledDates = ${off};
+		 	var disabledDates = ${d_off};
 
 	    	$start.datepicker({
 	    		language: 'en',

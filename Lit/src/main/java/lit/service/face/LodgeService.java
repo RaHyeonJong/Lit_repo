@@ -2,6 +2,7 @@ package lit.service.face;
 
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -77,6 +78,6 @@ public interface LodgeService {
 	public List<Day_off> selectDay(Lodge lodge);
 	
 	//예약 날짜 비활성
-	public List<String> reservationDay(Lodge lodge);
+	public Set<String> reservationDay(Lodge lodge);
 	
 }
