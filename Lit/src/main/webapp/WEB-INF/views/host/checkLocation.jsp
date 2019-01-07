@@ -112,13 +112,9 @@ $(document).ready(function(){
 	});
 	
 	$("#nextButton").click(function(){
-
 		
 		$("#addr").submit();
 
-
-		$("#checkLocation").submit();
-		location.href="/host/firstConveniences";
 		
 	});
 	

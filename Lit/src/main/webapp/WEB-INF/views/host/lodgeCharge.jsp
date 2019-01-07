@@ -13,39 +13,24 @@
 $(document).ready(function(){
 	
 //		기본요금부분	
-$("#inputCharge").keypress(function(event){
+$("#inputCharge").focusout(function(){
 	
 	
-	 if ( event.which == 13 ) {
 
-		$.ajax({
-			 type: 'POST',
-             url: '/host/lodgeCharge',
-             data: {
-                 "inputCharge" : $('#inputCharge').val()
-             },
-             success: function(data){
-             console.log("성공");
-             console.log(data);
-            
-             if(data == 1){
-                
-            	 console.log(data);
-                 $('#checkCharge').html('<p style="color:red">다시 입력해주세요</p>');
-             }else{
-            	 console.log(data);
-            	 $('#checkCharge').html('<p style="color:blue">정상적으로 입력하셨습니다</p>');
-           
-             }
-              
-             },
-             error : function(data){
-            	 console.log("실패");
-         	 
-             }
+		 if(document.getElementById("inputCharge").value <10000 ){
+			 
+		     $('#checkCharge').html('<p style="color:red">다시 입력해주세요</p>');
+			 
+			 
+		 }else{
+			 
+			 $('#checkCharge').html('<p style="color:blue">정상적으로 입력하셨습니다</p>');
+			 
+		 }
+		 
+
 	
-			});
-	 }
+
 		});
 //기본요금 끝		
 
@@ -53,8 +38,9 @@ $("#inputCharge").keypress(function(event){
 	$("#nextButton").click(function(){
 			var option1=$("#check_in_hour").val();
 			var option2=$("#check_in_min").val();
-			var option3=$("#check_out_hour").val();
-			var option4=$("#check_out_min").val();
+			var option3=$("#inputCharge").val();
+			var option4;
+
 		
 			$.ajax({
 			 type: 'POST',
@@ -63,12 +49,13 @@ $("#inputCharge").keypress(function(event){
             data: {
                 "check_in_hour" : option1, 
                 "check_in_min":option2,
-                "check_out_hour":option3,
-                "check_out_min" : option4
+                "stay_cost" : option3
+
             },
             success: function(data){	
             console.log("성공");
-            
+            option4 = data.lodge_no;
+            window.location.href="/host/hostFirst?lodge_no="+option4;
          
             
            
@@ -79,6 +66,9 @@ $("#inputCharge").keypress(function(event){
             }
 	
 			});
+			
+	
+			
 	});
 
 		
@@ -112,7 +102,7 @@ margin:0 auto;
 		</div>
 		<div class="content2">
 			<div>기본요금을 입력해주세요</div>
-			<input type="text" id="inputCharge" name="inputCharge" />
+			<input type="text" id="inputCharge" name="stay_cost" />
 			<div id="checkCharge"></div>
 			<button>권장요금 : 45000원</button>
 		</div>
@@ -181,7 +171,7 @@ margin:0 auto;
 					
 					<div class="move-button">
 						<button id="backButton" class="back">뒤로</button>
-						<button id="nextButton" class="continue">다음</button>
+						<button id="nextButton" class="continue">1단계완료</button>
 					</div>
 				
 			</div>

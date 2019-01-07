@@ -20,18 +20,17 @@ public class HostServiceImpl implements HostService{
 	//----------단계별 정보등록
 	//1단계숙소정보등록
 	@Override
-	public void insertFirst(Day_off day_off) {
+	public void insertFirst(Lodge lodge) {
+		hostDao.insertOne(lodge);
 		
-		hostDao.insertOne(day_off);
 		
 	}
 	
 	
 	//2단계숙소정보등록
 	@Override
-	public void insertSecond(Lodge lodge) {
-		hostDao.insertTwo(lodge);
-		
+	public void insertSecond(Day_off day_off) {
+		hostDao.insertTwo(day_off);
 	}
 	
 	//3단계숙소정보등록
