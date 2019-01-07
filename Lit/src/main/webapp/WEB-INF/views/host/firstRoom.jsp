@@ -23,7 +23,6 @@ $(document).ready(function(){
 		location.href="/host/hostFirst";
 	});
 	
-<<<<<<< HEAD
 	$("#nextButton").click(function(){
 		
 		
@@ -35,8 +34,6 @@ $(document).ready(function(){
 		location.href="/host/firstLocation";
 		}
 	});
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 	$('.minus').click(function () {
 		var $input = $(this).parent().find('.inputNumber');
@@ -240,7 +237,6 @@ margin:100px 10px 10px 10px;
 		<form id = "room" action = "/host/firstRoom" method="post">
 		<div class="category content2_2">
 			<h3>건물 유형을 선택해주세요</h3>
-<<<<<<< HEAD
 			<select id="select1">
 				<option value="none">건물유형</option>
 				<option value="1">아파트</option>
@@ -248,41 +244,35 @@ margin:100px 10px 10px 10px;
 				<option>별채</option>
 				<option>독특한 숙소</option>
 				<option>부띠크 호텔</option>
-=======
+			</select>
 			<select id ="building_no" name = "building_case_no">
 				<option>건물유형</option>
 				<option  value="1">아파트</option>
 				<option	 value="2">단독주택</option>
 				<option  value="3">연립주택</option>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 			</select>
 		</div>
 		<div class="category content2_3">
 			<h3>숙소 유형을 선택해주세요</h3>
-<<<<<<< HEAD
 			<select id="select2">
 				<option value="none">숙소유형</option>
 				<option value="1">집전체</option>
 				<option>개인실</option>
 				<option>다인실</option>
 				<option>게스트하우스</option>
-=======
+			</select>
 			<select id= "lodge_case" name = "lodge_case_no">
 				<option>숙소유형</option>
 				<option value="1">팬션</option>
 				<option value="2">모텔</option>
 				<option value="3">게스트하우스</option>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 			</select>
 		</div>
 		
 		<div class="lodge-name category" >
 			<h3>숙소 이름을 입력해주세요</h3>
-<<<<<<< HEAD
 			<input class="inputName" id="inputName" type="text" style="width:185px;height:30px;font-size:13px;"/>
-=======
 			<input class="inputName" name= "lodge_name" type="text" style="width:185px;height:30px;font-size:13px;"/>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 		
 		</div>
 		<div class="category content2_5">
