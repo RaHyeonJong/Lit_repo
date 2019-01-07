@@ -8,10 +8,12 @@
 	SELECT * FROM lodge
 	</select>
 	
-	<select id="selectLodgeByBounds" parameterType="lit.dto.MapBounds" resultType="lit.dto.Lodge">
+	<select id="selectLodgeByBounds" parameterType="lit.dto.SearchFilter" resultType="lit.dto.Lodge">
 	SELECT * FROM lodge
-	WHERE latitude BETWEEN #{swLat2} AND #{neLat2}
-	AND	longitude BETWEEN #{swLng2} AND #{neLng2}
+	WHERE latitude BETWEEN #{swLat} AND #{neLat}
+	AND	longitude BETWEEN #{swLng} AND #{neLng}
+	AND lodge_capacity >= #{peopleCnt}
+	AND stay_cost BETWEEN #{minPrice} AND #{maxPrice}
 	</select>
 	
 	<select id="selectLodgeSearch" parameterType="lit.dto.SearchFilter" resultType="lit.dto.Lodge">
