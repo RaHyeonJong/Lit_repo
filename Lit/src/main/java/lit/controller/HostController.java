@@ -293,6 +293,11 @@ public class HostController {
 			}
 			
 			session.setAttribute("stay_cost", inputCharge);
+//			System.out.println("시간 :"+hour);
+//			System.out.println("분 : "+min);	
+//			session.setAttribute("check_in_time", hour+"시"+min+"분");
+//			System.out.println(session.getAttribute("check_in_time"));
+//			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
 			session.setAttribute("check_in_time", check_in_hour+"시"+check_in_min+"분");
 			System.out.println(session.getAttribute("check_in_time"));
 			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
@@ -323,7 +328,6 @@ public class HostController {
 		
 			for(String d2 : d1 ) {
 			java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
-			System.out.println("d2"+off_date3);
 			day_off.setDay_off_date(off_date3);						
 //			hostService.insertFirst(day_off);
 			}
@@ -339,11 +343,6 @@ public class HostController {
 				}
 		
 		
-	
-	
-	
-
-	
 	
 	//---------------------------1단계 끝
 	

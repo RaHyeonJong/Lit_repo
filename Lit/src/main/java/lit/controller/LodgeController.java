@@ -66,7 +66,7 @@ public class LodgeController {
 		model.addAttribute("view",lodge);
 
 		//이미지
-		List<Image> lodgeimage = lodgeService.LodgeImage();
+		List<Image> lodgeimage = lodgeService.LodgeImage(lodge);
 		model.addAttribute("lodgeimg", lodgeimage);
 		
 		//편의시설
@@ -74,7 +74,7 @@ public class LodgeController {
 		model.addAttribute("item", convenient);
 		
 		// 댓글
-		List<Comment> lodgereview = lodgeService.commentList();
+		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
 				
 		List<Comment> replyList = lodgeService.replyList(comment);
@@ -82,6 +82,7 @@ public class LodgeController {
 	
 		//좋아요
 		boolean like =  lodgeService.selectLike(favorite);
+//		System.out.println(like);
 		model.addAttribute("lodge_like", like);
 		
 		//결제한 회원
@@ -132,7 +133,6 @@ public class LodgeController {
 			@RequestParam(defaultValue="00/00/0000") String start,
           @RequestParam(defaultValue="00/00/0000") String end, int person ) {
 		
-		Map resultMap = new HashMap();
 	
 		final String DATE_PATTERN = "MM/dd/yyyy"; 
 
@@ -247,7 +247,7 @@ public class LodgeController {
 			model.addAttribute("reservation", lodge);
 			
 			//숙소 이미지
-			List<Image> lodgeimage = lodgeService.LodgeImage();
+			List<Image> lodgeimage = lodgeService.LodgeImage(lodge);
 			model.addAttribute("lodgeimg", lodgeimage);
 			
 			//댓글 수
@@ -300,11 +300,11 @@ public class LodgeController {
 
 	
 	@RequestMapping(value ="/insertReview",method =RequestMethod.POST)
-	public String LodgeReview(Comment comment,Model model) {
+	public String LodgeReview(Lodge lodge,Comment comment,Model model) {
 		
 			lodgeService.insertComment(comment);
 			
-			List<Comment> lodgereview = lodgeService.commentList();
+			List<Comment> lodgereview = lodgeService.commentList(lodge);
 			model.addAttribute("lodgeReview",lodgereview);
 			
 		
@@ -312,10 +312,10 @@ public class LodgeController {
 	}
 	
 	@RequestMapping(value ="/updateReview",method =RequestMethod.POST)
-	public String LodgeupdateReview(Comment comment,Model model) {
+	public String LodgeupdateReview(Lodge lodge,Comment comment,Model model) {
 		
 		lodgeService.updateComment(comment);
-		List<Comment> lodgereview = lodgeService.commentList();
+		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
 		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
@@ -338,14 +338,14 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/lodgeReview", method=RequestMethod.POST)
-	public String InsertLodgeReply(Comment comment,Model model) {
+	public String InsertLodgeReply(Lodge lodge,Comment comment,Model model) {
 
 		
 		
 		lodgeService.insertLodgeComment(comment);
 
 		//댓글
-		List<Comment> lodgereview = lodgeService.commentList();
+		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
 		
 		//대댓글
