@@ -59,9 +59,6 @@ public class LodgeController {
 	@RequestMapping(value ="/view", method = RequestMethod.GET)
 	public void LodgeView(Lodge lodge,HttpSession session, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
 		
-		logger.info(session.toString());
-		
-		
 		//기본 리스트
 		lodge = lodgeService.LodgeView(lodge);
 		model.addAttribute("view",lodge);
@@ -114,13 +111,13 @@ public class LodgeController {
 			
 			date.add(d2);
 			
-			 System.out.println(date);
 			
 			model.addAttribute("off",date);
 		}
 		
-		
-	
+		List<String> reDate = lodgeService.reservationDay(lodge);
+//		System.out.println(reDate);
+//		model.addAttribute("d_off", reDate);
 		
 	}
 	
@@ -212,8 +209,6 @@ public class LodgeController {
 			
 			String st2 = date2.format(st);
 			String e2 = date2.format(e);
-			System.out.println(st2);
-			System.out.println(e2);
 			
 			java.sql.Date start_date = java.sql.Date.valueOf(st2); 
 			java.sql.Date end_date = java.sql.Date.valueOf(e2);
@@ -266,7 +261,6 @@ public class LodgeController {
 			Integer fee =  service_fee.intValue();
 			
 			model.addAttribute("service_fee", fee);
-			System.out.println(fee);
 			
 			
 			
@@ -464,7 +458,6 @@ public class LodgeController {
 
 			pay.setStay_start(start4);
 			pay.setStay_end(end4);
-			System.out.println(pay.toString());
 			lodgeService.LodgePay(pay);
 		
 		

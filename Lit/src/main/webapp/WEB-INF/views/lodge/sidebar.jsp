@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
 <!DOCTYPE html>
@@ -11,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<!-- 데이트 피커 -->
 <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="/resources/dist/js/datepicker.min.js"></script>
@@ -307,7 +307,28 @@ $(document).ready(function(){
   color: white;
   }
 
+#numberUpDown{
+height:34px;
+width: 50px;
+text-align: center;
+font-size: 26px;
+border:1px solid #ddd;
+border-radius:4px;
+display: inline-block;
+vertical-align: middle;
+}
 
+#decreaseQuantity, #increaseQuantity{
+width:20px;
+height:20px;
+background:#f2f2f2;
+border-radius:4px;
+padding:8px 5px 8px 5px;
+border:1px solid #ddd;
+display: inline-block;
+vertical-align: middle;
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -322,11 +343,9 @@ $(document).ready(function(){
       		 <input id="start" name ="stay_start" type="text"  data-language="en" placeholder ="체크인"/>
       		 <input id="end" class = "form-control" name ="stay_end" type="text"  data-language="en"placeholder ="체크아웃"/>
       		
-		
-		
 		<br>	
-		<div id ="people" class="number"><font size="4px">성인</font> &nbsp; <a href="#" id="decreaseQuantity"><i class="fas fa-minus"></i></a>
-		<span id="numberUpDown"style="font-size: 24px;margin: 0 5px 0 0;">1</span><a href="#" id="increaseQuantity"><i class="fas fa-plus"></i></a>
+		<div id ="people" class="number"><font size="4px">성인</font> &nbsp; <a href="#" id="decreaseQuantity">-</a>
+		<span id="numberUpDown"style="font-size: 24px;margin: 0 5px 0 0;">1</span><a href="#" id="increaseQuantity">+</a>
 		<input type = "hidden" id ="stay_cost2" name = "stay_cost" value = "<c:out value = "${view.stay_cost }"/>">	
 		<button id = "searchBtn">검색</button>
 		

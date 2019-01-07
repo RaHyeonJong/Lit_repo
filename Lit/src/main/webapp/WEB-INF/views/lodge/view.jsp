@@ -794,7 +794,7 @@ $(function() {
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
-									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> 
+									<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light">호스트 에게 연락하기</a></span> 
 									</span>
 								</p>
 							</th>

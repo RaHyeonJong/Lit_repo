@@ -69,8 +69,11 @@ public interface LodgeDao {
 	public int reportComment(Report report);
 	public void deleteReportComment(Report report);
 	
+	//휴무일
 	public List<Day_off> selectday_off(Lodge lodge);
 	
+	//예약날짜
+	public List<Pay> reservationDay_off(Lodge lodge);
 	
 	
 }
