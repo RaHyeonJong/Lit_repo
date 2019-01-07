@@ -66,7 +66,11 @@ margin:0 auto;
 			, buttonText : { today: "오늘"} //오른쪽상단 버튼이름 
 			, dayClick :  function(date, jsEvent, view){
 //클릭했을때 컨트롤러로 해당클릭날짜 전송
-
+					
+					console.log(date);
+					console.log(jsEvent);
+					console.log(view);
+					
 					++countNum;
 					if(countNum == 1){
 						$(this).css('background-color', 'white');
