@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lit.dao.face.LodgeDao">
 
-<select id="SelectLodgeView" resultType="lit.dto.Lodge">
+<select id="SelectLodgeView" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
 
 		SELECT
 	lodge_no, 
@@ -28,7 +28,7 @@
 	FROM lodge l , lodge_case lc, building_case bc
     WHERE l.lodge_case_no = lc.lodge_case_no
     AND l.lodge_case_no = bc.building_case_no
-    AND lodge_no = 143
+    AND lodge_no = #{lodge_no}
 
 </select>
 
