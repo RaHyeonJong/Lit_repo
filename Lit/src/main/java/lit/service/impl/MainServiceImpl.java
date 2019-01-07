@@ -72,15 +72,21 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Lodge> getLodgeListByBounds(MapBounds bounds) {
+	public List<Lodge> getLodgeListByBounds(SearchFilter searchFilter) {
 		// TODO Auto-generated method stub
-		return mainDao.selectLodgeByBounds(bounds);
+		return mainDao.selectLodgeByBounds(searchFilter);
 	}
 
 	@Override
 	public List<Lodge> getSearchList(SearchFilter searchFilter) {
 		// TODO Auto-generated method stub
 		return mainDao.selectLodgeSearch(searchFilter);
+	}
+
+	@Override
+	public String[] getLodgeImageName(int lodge_no) {
+		// TODO Auto-generated method stub
+		return mainDao.selectLodgeName(lodge_no);
 	}
 
 }

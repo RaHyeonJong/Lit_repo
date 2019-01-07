@@ -51,15 +51,20 @@ $("#inputCharge").keypress(function(event){
 
 
 	$("#nextButton").click(function(){
-			option1=$("#check_time_min").val();
-			option2=$("#check_time_hour").val();
-		$.ajax({
+			var option1=$("#check_in_hour").val();
+			var option2=$("#check_in_min").val();
+			var option3=$("#check_out_hour").val();
+			var option4=$("#check_out_min").val();
+		
+			$.ajax({
 			 type: 'POST',
             url: '/host/lodgeCharge',
             dataType: "json",
             data: {
-                "hour" : option2, 
-                "min":option1 
+                "check_in_hour" : option1, 
+                "check_in_min":option2,
+                "check_out_hour":option3,
+                "check_out_min" : option4
             },
             success: function(data){	
             console.log("성공");
@@ -115,8 +120,8 @@ margin:0 auto;
 			<div>
 				<h4>체크인 시간과 체크아웃 시간을 설정해주세요</h4>
 				
-					<label>시간</label>
-					<select id="check_time_hour" name="hour">
+					<label>체크인시간</label><br>
+					<select id="check_in_hour" name="check_in_hour">
 						<option value="6">6</option>
 						<option value="7">7</option>
 						<option value="8">8</option>
@@ -138,10 +143,42 @@ margin:0 auto;
 						<option value="24">24</option>
 					</select>
 					<label>분</label>
-					<select id="check_time_min" name="min">
+					<select id="check_in_min" name="check_in_min">
 						<option value="00">00</option>
 						<option value="30">30</option>
 					</select>
+					<br>
+					<br>
+					<label>체크아웃시간</label>
+					<br>
+					<select id="check_out_hour" name="check_out_hour">
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+					</select>
+					<label>분</label>
+					<select id="check_out_min" name="check_out_min">
+						<option value="00">00</option>
+						<option value="30">30</option>
+					</select>
+					
+					
 					<div class="move-button">
 						<button id="backButton" class="back">뒤로</button>
 						<button id="nextButton" class="continue">다음</button>

@@ -422,7 +422,6 @@ body {
 }
 
 #wrapper {
-
 	min-width:1200px; 
 	width: 100%;
 	margin:0 auto;"
@@ -458,10 +457,6 @@ body {
    position: -webkit-sticky;
    position: sticky;
    will-change: transform;
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
    
