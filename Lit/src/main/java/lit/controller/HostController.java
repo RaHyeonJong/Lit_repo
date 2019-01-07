@@ -237,10 +237,14 @@ public class HostController {
 			 
 				 session.setAttribute("day_off_date", off_list);
 		
+<<<<<<< HEAD
+		
+=======
 			 
 			 
 			
 			
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 			
 			 return mav;
 				
@@ -275,6 +279,8 @@ public class HostController {
 			session.setAttribute("stay_cost", inputCharge);
 			System.out.println("시간 :"+hour);
 			System.out.println("분 : "+min);	
+			session.setAttribute("check_in_time", hour+"시"+min+"분");
+			System.out.println(session.getAttribute("check_in_time"));
 			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
 			
 			
