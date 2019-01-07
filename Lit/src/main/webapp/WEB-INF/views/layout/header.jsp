@@ -422,7 +422,10 @@ body {
 }
 
 #wrapper {
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	min-width:1200px; 
 	width: 100%;
 	margin:0 auto;"
@@ -443,8 +446,12 @@ body {
    left: 0;
    top: 75px;
 }
+<<<<<<< HEAD
+#header {
+=======
 #header {
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -460,7 +467,10 @@ body {
    will-change: transform;
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 >>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
@@ -470,8 +480,12 @@ body {
    position: fixed;
    background: #fffc;
    transition: 0.6s;
+<<<<<<< HEAD
+}
+=======
 }
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #header .inner {
 	position: relative;
    	z-index: 1;

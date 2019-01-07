@@ -257,7 +257,6 @@ public class HostController {
 			 
 				 session.setAttribute("day_off_date", off_list);
 		
-			
 			 return mav;
 				
 				}

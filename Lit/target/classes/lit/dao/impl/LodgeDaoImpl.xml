@@ -158,9 +158,10 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 </select>
 
 <select id="reservationDay_off" parameterType="lit.dto.Lodge" resultType ="lit.dto.Pay">
-	 SELECT  pay_state_no,lodge_no,stay_start,stay_end FROM pay
-			 WHERE pay_state_no !=3
-			 AND lodge_no = #{lodge_no}
+	 SELECT DISTINCT  pay_state_no,lodge_no,stay_start,stay_end FROM pay
+ 		WHERE pay_state_no !=3
+ 		AND lodge_no = #{lodge_no}
+ 		ORDER by pay_state_no desc
 
 </select>
 
