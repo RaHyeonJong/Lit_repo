@@ -192,8 +192,8 @@ public class HostController {
 
 			 mav.addObject("testDate", date.format(cal.getTime()));
 		
-			System.out.println(selectDisableDay);
- 
+		
+			
 			 return mav;
 				
 				}
@@ -227,6 +227,8 @@ public class HostController {
 			session.setAttribute("stay_cost", inputCharge);
 			System.out.println("시간 :"+hour);
 			System.out.println("분 : "+min);	
+			session.setAttribute("check_in_time", hour+"시"+min+"분");
+			System.out.println(session.getAttribute("check_in_time"));
 			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
 			return checkCharge;
 			

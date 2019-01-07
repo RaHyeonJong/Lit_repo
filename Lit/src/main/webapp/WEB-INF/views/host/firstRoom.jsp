@@ -10,13 +10,23 @@
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+		
+	
+	
 	$("#backButton").click(function(){
 		location.href="/host/hostFirst";
 	});
 	
 	$("#nextButton").click(function(){
-		location.href="/host/firstLocation";
 		
+		
+		if(document.getElementById('inputName').value == ""){
+			
+			alert("이름을 입력해주세요");
+			
+		}else{
+		location.href="/host/firstLocation";
+		}
 	});
 
 	$('.minus').click(function () {
@@ -209,9 +219,9 @@ margin:100px 10px 10px 10px;
 		</div>
 		<div class="category content2_2">
 			<h3>건물 유형을 선택해주세요</h3>
-			<select>
-				<option>건물유형</option>
-				<option>아파트</option>
+			<select id="select1">
+				<option value="none">건물유형</option>
+				<option value="1">아파트</option>
 				<option>주택</option>
 				<option>별채</option>
 				<option>독특한 숙소</option>
@@ -220,9 +230,9 @@ margin:100px 10px 10px 10px;
 		</div>
 		<div class="category content2_3">
 			<h3>숙소 유형을 선택해주세요</h3>
-			<select>
-				<option>숙소유형</option>
-				<option>집전체</option>
+			<select id="select2">
+				<option value="none">숙소유형</option>
+				<option value="1">집전체</option>
 				<option>개인실</option>
 				<option>다인실</option>
 				<option>게스트하우스</option>
@@ -231,7 +241,7 @@ margin:100px 10px 10px 10px;
 		
 		<div class="lodge-name category" >
 			<h3>숙소 이름을 입력해주세요</h3>
-			<input class="inputName" type="text" style="width:185px;height:30px;font-size:13px;"/>
+			<input class="inputName" id="inputName" type="text" style="width:185px;height:30px;font-size:13px;"/>
 		
 		</div>
 		<div class="category content2_5">

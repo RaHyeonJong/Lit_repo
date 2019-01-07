@@ -13,7 +13,10 @@
 $(document).ready(function(){
 	
 //		기본요금부분	
-$("#inputCharge").click(function(){
+$("#inputCharge").keypress(function(event){
+	
+	
+	 if ( event.which == 13 ) {
 
 		$.ajax({
 			 type: 'POST',
@@ -42,14 +45,35 @@ $("#inputCharge").click(function(){
              }
 	
 			});
-		
+	 }
 		});
 //기본요금 끝		
 
 
 	$("#nextButton").click(function(){
-		
-		$("#check_in_time").submit();
+			option1=$("#check_time_min").val();
+			option2=$("#check_time_hour").val();
+		$.ajax({
+			 type: 'POST',
+            url: '/host/lodgeCharge',
+            dataType: "json",
+            data: {
+                "hour" : option2, 
+                "min":option1 
+            },
+            success: function(data){	
+            console.log("성공");
+            
+         
+            
+           
+            },
+            error : function(data){
+           	 console.log("실패");
+        	 
+            }
+	
+			});
 	});
 
 		
@@ -90,9 +114,9 @@ margin:0 auto;
 		<div class="content3">
 			<div>
 				<h4>체크인 시간과 체크아웃 시간을 설정해주세요</h4>
-				<form action="/host/lodgeCharge" id="check_in_time">
+				
 					<label>시간</label>
-					<select name="hour">
+					<select id="check_time_hour" name="hour">
 						<option value="6">6</option>
 						<option value="7">7</option>
 						<option value="8">8</option>
@@ -114,7 +138,7 @@ margin:0 auto;
 						<option value="24">24</option>
 					</select>
 					<label>분</label>
-					<select name="min">
+					<select id="check_time_min" name="min">
 						<option value="00">00</option>
 						<option value="30">30</option>
 					</select>
@@ -122,7 +146,7 @@ margin:0 auto;
 						<button id="backButton" class="back">뒤로</button>
 						<button id="nextButton" class="continue">다음</button>
 					</div>
-				</form>
+				
 			</div>
 		</div>
 		
