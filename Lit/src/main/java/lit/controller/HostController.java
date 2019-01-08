@@ -244,14 +244,14 @@ public class HostController {
 					System.out.println("d1"+d1);
 					
 					
-						for(String d2 : d1 ) {
-						java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
-						System.out.println("d2"+off_date3);
-						day_off.setDay_off_date(off_date3);						
-//						hostService.insertFirst(day_off);
-						}
-						
-							 
+//						for(String d2 : d1 ) {
+//						java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
+//						System.out.println("d2"+off_date3);
+//						day_off.setDay_off_date(off_date3);						
+////						hostService.insertFirst(day_off);
+//						}
+//						
+//							 
 		
 			 return mav;
 				

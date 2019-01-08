@@ -64,52 +64,53 @@ margin:0 auto;
         	, dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"]
 			, titleFormat : "YYYY MMM" //왼쪽상단 년월로 표시
 			, buttonText : { today: "오늘"} //오른쪽상단 버튼이름 
-			, dayClick :  function(date, jsEvent, view){
+			, dayClick : false
+// 				function(date, jsEvent, view){
 //클릭했을때 컨트롤러로 해당클릭날짜 전송
 
-					++countNum;
-					if(countNum == 1){
-						$(this).css('background-color', 'white');
-						console.log("1");
+// 					++countNum;
+// 					if(countNum == 1){
+// 						$(this).css('background-color', 'white');
+// 						console.log("1");
 				
 						
 						
-					}else if(countNum == 2){
+// 					}else if(countNum == 2){
 						
 						
-						test.push(date.format());
-						var unique=test.filter(function(itm,i,a){
-							return i==test.indexOf(itm);
+// 						test.push(date.format());
+// 						var unique=test.filter(function(itm,i,a){
+// 							return i==test.indexOf(itm);
 							
-						});
-						console.log("중복제거날짜"+unique);
-						console.log("날짜는"+date.format());
+// 						});
+// 						console.log("중복제거날짜"+unique);
+// 						console.log("날짜는"+date.format());
 
-						$(this).css('background-color', '#ff9f89');
-						console.log("2");
-						var jsonInfo = JSON.stringify(unique);
-						$.ajax({
-							 type: 'POST',	
-				             url: '/host/manageLodge',
-				             dataType: "json",
-				             data: {
-				                 "selectDisableDay" : jsonInfo 
-				             },
-				             success: function(data){	
-				           	 console.log("성공");
-				             console.log(data);
+// 						$(this).css('background-color', '#ff9f89');
+// 						console.log("2");
+// 						var jsonInfo = JSON.stringify(unique);
+// 						$.ajax({
+// 							 type: 'POST',	
+// 				             url: '/host/manageLodge',
+// 				             dataType: "json",
+// 				             data: {
+// 				                 "selectDisableDay" : jsonInfo 
+// 				             },
+// 				             success: function(data){	
+// 				           	 console.log("성공");
+// 				             console.log(data);
 				             
 				   
-								             },
-				             error : function(data){
-				            	 console.log("실패");
+// 								             },
+// 				             error : function(data){
+// 				            	 console.log("실패");
 				         	 
-				             }
+// 				             }
 					
-							});
-						countNum = 0;
-					}
-			}
+// 							});
+// 						countNum = 0;
+// 					}
+// 			}
 			
 		      
 			
