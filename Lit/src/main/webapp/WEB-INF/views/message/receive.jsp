@@ -46,22 +46,35 @@ $(document).ready(function(){
 				alert("에러났어요!");
 			}
 		});
+		
 	});
 	
 });
 
 </script>
 <script>
+
+	//td를 누르면 벌어지는 일
 	var msg_no;
 	
 	$(".category").click(function(e){
 		
 		msg_no = $(e.target).closest('tr').children('td').first().html();
 		
-		$(this).next('tr.sub_category').toggle();
+		$.ajax({
+	         type: "POST",
+	         url: "/message/receive",
+	         data: {"message_no": msg_no}, 
+	         dataType: "json",
+	         success : function(e){
+	     		$(this).next('tr.sub_category').toggle();
+	     		alert(msg_no);
+	         },
+	         error : function(){
+	            alert("에러났어요!");
+	         }
+	      });
 		
-		alert(msg_no);
-			
 	});
 </script>
 <style>
@@ -156,26 +169,26 @@ $(document).ready(function(){
 		
 		<tbody>
 		<c:forEach items="${receivelist }" var="r">
-			<tr class="category">
-				<td class="number1">${r.message_no }</td>
-				<td>${r.contents }</td>
-				<td>${r.receiver }</td>
-				<td><span style="font-weight: bold"><a href="/viewProfile?mem_no=${r.sender_no}">${r.sender}</a></span></td>
-				<td>${r.send_time }</td>
+			<tr class="category" id="category">
+				<td id="message_no">${r.message_no }</td>
+				<td id="contents">${r.contents }</td>
+				<td id="receiver">${r.receiver }</td>
+				<td id="sender"><span style="font-weight: bold"><a href="/viewProfile?mem_no=${r.sender_no}">${r.sender}</a></span></td>
+				<td id="send_time">${r.send_time }</td>
 				<c:choose>
 				<c:when test="${r.read eq 0 }">
-					<td class="td2" style="color:blue; font-weight:bold;">읽지 않음 </td>
+					<td id="read" style="color:blue; font-weight:bold;">읽지 않음 </td>
 				</c:when>
 				<c:when test="${r.read ne 0 }">
-					<td class="td2" style="color:red; font-weight:bold">읽음</td>
+					<td id="read" style="color:red; font-weight:bold">읽음</td>
 				</c:when>
 				</c:choose>
 				
 			</tr>
-			<tr class="sub_category">
-				<td colspan="6">
+			<tr class="sub_category" id="sub_category">
+				<td id="sub_contents" colspan="6">
 				<div>
-				${r.contents }
+					${r.contents }
 				</div>
 				</td>
 			</tr>
