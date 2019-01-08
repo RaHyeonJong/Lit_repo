@@ -12,10 +12,6 @@
 <body>
 
 <div id="wrapper"> 
-
-	<div><!-- header 시작 -->
-	<c:import url="../layout/header.jsp"/>
-	</div><!-- header 끝 -->
 	
 	<h1>로고 페이지</h1>
 
