@@ -4,11 +4,17 @@ package lit.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import lit.dao.face.LodgeDao;
 import lit.dto.Comment;
 import lit.dto.Day_off;
@@ -36,9 +42,9 @@ public class LodgeServiceImpl implements LodgeService {
 	}
 
 	@Override
-	public List<Image> LodgeImage() {
+	public List<Image> LodgeImage(Lodge lodge) {
 		
-		return lodgedao.SelectLodgeImage();
+		return lodgedao.SelectLodgeImage(lodge);
 	}
 
 	@Override
@@ -82,9 +88,9 @@ public class LodgeServiceImpl implements LodgeService {
 	
 	
 	@Override
-	public List<Comment> commentList() {
+	public List<Comment> commentList(Lodge lodge) {
 		// TODO Auto-generated method stub
-		return lodgedao.lodgeComment();
+		return lodgedao.lodgeComment(lodge);
 	}
 
 	
@@ -150,11 +156,11 @@ public class LodgeServiceImpl implements LodgeService {
 	@Override
 	public boolean selectLike(Favorite favorite) {
 		
-		if(lodgedao.selectFavorite(favorite) < 1){
-			
+		int fav =lodgedao.selectFavorite(favorite); 
+		
+		if( fav< 1){
 			return  true;
 		}else{
-			
 			return false;
 		}
 			
@@ -174,7 +180,39 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.selectday_off(lodge);
 	}
 
+	@Override
+	public Set<String> reservationDay(Lodge lodge) {
+		
+		List<Pay> pa = lodgedao.reservationDay_off(lodge);
+		List<Day_off> dd = lodgedao.selectday_off(lodge);
+		Set<String> pay_date = new LinkedHashSet<String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 	
+		
+		for(Pay pay : pa) {
+			Date stay_st = pay.getStay_start();
+			Date stay_e = pay.getStay_end();
+			Date curDay = stay_st;//시작날짜
+			while(curDay.compareTo(stay_e)<=0) {
+	//			pay_date.add(sdf.format(curDay));
+				Calendar c1 = Calendar.getInstance();
+				c1.setTime(curDay);
+				c1.add(Calendar.DAY_OF_MONTH, 1);
+				curDay = c1.getTime();
+				String[] list2 = new String[] {sdf.format(curDay)};
+				List<String> pos = Arrays.asList(list2);
+				String off_off = pos.stream().map(d->"'"+d+"'")
+						.collect(Collectors.joining(","));
+				
+				pay_date.add(off_off);
+			}
+			
+		}
+		return pay_date;
+		
+		
+	}
+
 
 	@Override
 	public void deleteReport(Report report) {
@@ -223,6 +261,7 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
+	
 
 
 

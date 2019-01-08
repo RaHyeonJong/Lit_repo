@@ -604,7 +604,7 @@ $(function() {
     	$end = $("#datepicker2");
  	
     		// What dates should be disabled - year.month.date
-	 	var disabledDates = ${off};
+	 	var disabledDates = ${d_off};
         	
 
     	$start.datepicker({
@@ -653,7 +653,23 @@ $(function() {
     	    return year + '.' + month + '.' + date;
     	}
     		
-  
+   	 $start.datepicker({
+ 		language : 'en',
+ 		minDate : new Date(),
+ 		onSelect : function(fd, date){
+ 			$end.data('datepicker')
+ 			.update('minDate',date)
+ 		}
+ 	})
+ 	 $end.datepicker({
+ 		language : 'en',
+ 		minDate : new Date(),
+ 	onSelect : function(fd,date){
+ 		$start.data('datepicker')
+ 		.update('maxDate',date)
+ 	}
+ 	})
+ 	
     		
     		
 });
@@ -662,16 +678,6 @@ $(function() {
 <script type="text/javascript"> //저장(좋아요)
 	$(document).ready(function(){
 
-		document.addEventListener('DOMContentLoaded', function() {
-			  var likeButton = document.getElementById('lodge_like');
-			   if("${like}" == 1){
-			  	window.lb = likeButton;
-			    likeButton.classList.toggle('selected');
-			   }
-			   
-			}, false);
-		
-		
 		$('#lodge_like').click(function(){
 			var lodge_no = '${view.lodge_no}',
 				mem_no = '${member.mem_no}';
@@ -704,7 +710,9 @@ $(function() {
 	});//도큐먼트 끝
 
 </script>
+<script type="text/javascript">
 
+</script>
 <script type="text/javascript">
 
 	function comment_Report(comment_no){
@@ -794,8 +802,7 @@ $(function() {
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
 									<span> 
-									<a href="#" class="color-rausch light">호스트 에게 연락하기</a></span> 
-									</span>
+									<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light">호스트 에게 연락하기</a></span> 
 								</p>
 							</th>
 							<th class="small-2 large-2 columns last"><a href="#"
@@ -939,9 +946,11 @@ $(function() {
 				</c:forEach>
 			
 					</c:forEach>
+		
+				<!-- 후기 리스트 끝 -->
 				</div>
 				
-				<!-- 후기 리스트 끝 -->
+		
 				
 				
 					<!-- 댓글 수정 -->

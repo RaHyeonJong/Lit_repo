@@ -334,14 +334,8 @@ text-align: center;
 <body>
 
 
-
-
 <div class="nav_side">
-
-<c:choose>	
-
-<c:when test="${member.mem_no ne view.mem_no }">
-	
+		
 		<div>&nbsp;<span  id = "stay_cost"><fmt:formatNumber type ="number" pattern="###,###" value = "${view.stay_cost }"/></span>원/박</div>
 		<div id ="date"><font size="4px">&nbsp;&nbsp;날짜</font><br>
       		 <div  id = "picker">
@@ -378,17 +372,12 @@ text-align: center;
 		</div><!-- 사람수 -->
 		</div>
 
-</c:when>
-<c:otherwise>
-	
-<button>숙소 정보 변경하기</button>
-
-</c:otherwise>
-</c:choose>
-
-
-</div><!-- nav_side -->
+</div>
   			
+<div>
+
+</div>
+
 
 
 

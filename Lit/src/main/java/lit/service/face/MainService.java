@@ -28,9 +28,11 @@ public interface MainService {
 	
 	List<Lodge> getLodgeList(); // 모든 숙소 가져오기
 
-	List<Lodge> getLodgeListByBounds(MapBounds bounds); // bounds 숙소 리스트
+	List<Lodge> getLodgeListByBounds(SearchFilter searchFilter); // bounds 숙소 리스트
 
 	List<Lodge> getSearchList(SearchFilter searchFilter);
+
+	String[] getLodgeImageName(int lodge_no);
 
 
 }

@@ -30,7 +30,7 @@
 	
 		<div class="table_list">
 		
-			<table style="text-align:left;">
+			<table class="table2">
 				<tr>
 					<th>문의 제목 </th>
 					<td> 

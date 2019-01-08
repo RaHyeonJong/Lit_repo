@@ -21,6 +21,8 @@ $(document).ready(function(){
 	var modal_certification = $('#modal-certification');
 	var modal_joinResult = $('#modal-joinResult');
 	
+	
+	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
 		modal_findpw.css("display", "none");
@@ -404,6 +406,8 @@ $(document).ready(function(){
 		$("#form").submit();
 	});
 	
+	
+
 });
 </script>      
 
@@ -422,7 +426,6 @@ body {
 }
 
 #wrapper {
-
 	min-width:1200px; 
 	width: 100%;
 	margin:0 auto;"
@@ -443,8 +446,12 @@ body {
    left: 0;
    top: 75px;
 }
+<<<<<<< HEAD
+#header {
+=======
 #header {
 
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -458,10 +465,6 @@ body {
    position: -webkit-sticky;
    position: sticky;
    will-change: transform;
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 }
 #header:hover {
    
@@ -838,6 +841,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
+					<li><a href="/mypage/main?go=message">쪽지 ${counter }개</a>
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
@@ -852,6 +856,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
+					<li><a href="/mypage/main?go=message">쪽지 <b>${counter }</b>개</a>
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>

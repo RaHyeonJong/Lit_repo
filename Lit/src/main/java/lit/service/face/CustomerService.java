@@ -3,6 +3,7 @@ package lit.service.face;
 import java.util.List;
 
 import lit.dto.Board;
+import lit.dto.Comment;
 
 public interface CustomerService {
 
@@ -14,5 +15,16 @@ public interface CustomerService {
 	
 	//문의내역 상세페이지
 	public Board boardview(Board board);
+
+	public int answercount(Board board);
+	
+	//답변 글쓰기
+	public void contentwriter(Comment comment);
+	
+	//답변을 쓰면 answer는 0에서 1로 바꿔준다
+	public void updateanswer(Board board);
+	
+	//기존에 달려있던 답변을 수정하면 나타나는 현상
+	public void updatecomment(Comment comment);
 	
 }

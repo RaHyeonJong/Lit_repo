@@ -16,10 +16,25 @@
 
 
 $(document).ready(function(){
+		
+	
+	
 	$("#backButton").click(function(){
 		location.href="/host/hostFirst";
 	});
 	
+	$("#nextButton").click(function(){
+		
+		
+		if(document.getElementById('lodge_name').value == ""){
+			
+			alert("이름을 입력해주세요");
+			
+		}else{
+			$("#room").submit();
+	
+		}
+	});
 
 	$('.minus').click(function () {
 		var $input = $(this).parent().find('.inputNumber');
@@ -36,12 +51,6 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	
-	$("#nextButton").click(function(){
-		
-		$("#room").submit();
-		
-	});
 
 	
 	
@@ -223,6 +232,7 @@ margin:100px 10px 10px 10px;
 		<form id = "room" action = "/host/firstRoom" method="post">
 		<div class="category content2_2">
 			<h3>건물 유형을 선택해주세요</h3>
+
 			<select id ="building_no" name = "building_case_no">
 				<option>건물유형</option>
 				<option  value="1">아파트</option>
@@ -232,6 +242,7 @@ margin:100px 10px 10px 10px;
 		</div>
 		<div class="category content2_3">
 			<h3>숙소 유형을 선택해주세요</h3>
+
 			<select id= "lodge_case" name = "lodge_case_no">
 				<option>숙소유형</option>
 				<option value="1">팬션</option>
@@ -242,7 +253,7 @@ margin:100px 10px 10px 10px;
 		
 		<div class="lodge-name category" >
 			<h3>숙소 이름을 입력해주세요</h3>
-			<input class="inputName" name= "lodge_name" type="text" style="width:185px;height:30px;font-size:13px;"/>
+			<input class="inputName" id="lodge_name" name= "lodge_name" type="text" style="width:185px;height:30px;font-size:13px;"/>
 		
 		</div>
 		<div class="category content2_5">

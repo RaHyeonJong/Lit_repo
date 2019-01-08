@@ -1,22 +1,35 @@
 package lit.service.face;
 
 import java.util.List;
-
 import lit.dto.Message;
+import lit.util.Paging;
 
 public interface MessageService {
 
-	//메시지 리스트 뿌려주기
-	public List<Message> messagelist();
+	//받는 리스트
+	public List<Message> receivelist(Paging paging);
+		
+	//보낸 리스트
+	public List<Message> sendlist(Paging paging);
 	
-	//해당 번호 누르면 그 번호의 값 나옴
-	public Message messageView(Message message);
-	
-	
-	//메시지 삭제
-	public void delete(Message message);
-	
-	//메시지 쓰기
-	public void write(Message message);
+	//전송
+	public void sendwrite(Message message);
 
+	//Header부분 쪽지 갯수
+	public int messagecount(Message message);
+	
+	//0에서 1로 변경
+	public void countupdate(Message message);
+	
+	//0에서 1로 변경의 조건
+	public Message countList(Message message);
+	
+	//마이페이지의 받은쪽지함의 카운트
+	public int receivecount(int mem_no);
+	
+	//보낸쪽지함의 카운트
+	public int sendcount(int mem_no);
+	
+	
+	
 }

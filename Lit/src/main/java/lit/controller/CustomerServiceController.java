@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import lit.dto.Board;
+import lit.dto.Comment;
 import lit.service.face.CustomerService;
 
 @Controller
@@ -75,5 +76,33 @@ public class CustomerServiceController {
 		board = customerService.boardview(board);
 	
 		model.addAttribute("boardlist",board);
+	}
+	
+	//관리자 입장에서 문의 답변 하기
+	@RequestMapping(value="/view", method=RequestMethod.POST)
+	public String viewProc(Model model, Board board, Comment comment)
+	{
+		logger.info("관리자 문의 답변 처리하기");
+		logger.info("전 : " + comment.toString());
+				
+		//관리자가 이용자의 문의 질문을 답변해줌
+		//만약 answercount가 0이면 카운트 달아주고 기존에 board의 값을 0에서 1로 바꾸어준다
+		if(customerService.answercount(board) == 0)
+		{
+			//답변 달아주기
+			customerService.contentwriter(comment);
+		
+			//board 테이블에 answer 컬럼을 0에서 1로 바뀌기
+			customerService.updateanswer(board);
+		}
+		//count가 1(답변 완료 중 상태에서 수정일 경우)
+		else
+		{
+			//답변 수정 (의문, update 쿼리문을 짯는데 왜 추가가 되는 걸까?)
+			customerService.updatecomment(comment);
+		}
+		
+		logger.info("후 : " + comment.toString());
+		return "redirect:/cs/cs";
 	}
 }

@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
+import lit.dto.Message;
 import lit.service.face.LoginService;
+import lit.service.face.MessageService;
 
 @Controller
 public class LoginController {
@@ -28,21 +30,29 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired LoginService loginService;
+	@Autowired MessageService messageService;
 	
 	@RequestMapping(value="/test")
 	public void test() { }
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ModelAndView loginProcess(Member member, HttpSession session) {
+	public ModelAndView loginProcess(Member member, Message message, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> resultMap = new HashMap<>();
+		
 		
 		boolean existAccount = loginService.checkMembership(member);
 		
 		if(existAccount) {
 			member = loginService.getMember(member);
+			message.setReceiver_no(member.getMem_no());
+			int counter = messageService.messagecount(message);
+			
 			session.setAttribute("login", true);
 			session.setAttribute("member", member);
+			session.setAttribute("counter", counter);
+			
+			System.out.println("카운팅값:"+counter);
 			
 			resultMap.put("login", true);
 		} else {

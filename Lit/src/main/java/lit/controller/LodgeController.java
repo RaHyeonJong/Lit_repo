@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.mail.Session;
@@ -59,15 +61,12 @@ public class LodgeController {
 	@RequestMapping(value ="/view", method = RequestMethod.GET)
 	public void LodgeView(Lodge lodge,HttpSession session, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
 		
-		logger.info(session.toString());
-		
-		
 		//기본 리스트
 		lodge = lodgeService.LodgeView(lodge);
 		model.addAttribute("view",lodge);
 
 		//이미지
-		List<Image> lodgeimage = lodgeService.LodgeImage();
+		List<Image> lodgeimage = lodgeService.LodgeImage(lodge);
 		model.addAttribute("lodgeimg", lodgeimage);
 		
 		//편의시설
@@ -75,7 +74,7 @@ public class LodgeController {
 		model.addAttribute("item", convenient);
 		
 		// 댓글
-		List<Comment> lodgereview = lodgeService.commentList();
+		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
 				
 		List<Comment> replyList = lodgeService.replyList(comment);
@@ -83,6 +82,7 @@ public class LodgeController {
 	
 		//좋아요
 		boolean like =  lodgeService.selectLike(favorite);
+//		System.out.println(like);
 		model.addAttribute("lodge_like", like);
 		
 		//결제한 회원
@@ -101,6 +101,9 @@ public class LodgeController {
 		SimpleDateFormat d = new SimpleDateFormat("yyyy.M.d");
 		List<String> date = new ArrayList<>();
 		
+		//예약된 날짜
+		Set<String> reDate = lodgeService.reservationDay(lodge);
+		
 		
 		for(Day_off off : dd ) {
 
@@ -113,15 +116,15 @@ public class LodgeController {
 			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
 			
 			date.add(d2);
+			reDate.addAll(date);
 			
-			 System.out.println(date);
 			
 			model.addAttribute("off",date);
+			model.addAttribute("d_off", reDate);
+			
 		}
-		
-		
-	
-		
+		System.out.println(date);
+		System.out.println(reDate);
 	}
 	
 	
@@ -130,7 +133,6 @@ public class LodgeController {
 			@RequestParam(defaultValue="00/00/0000") String start,
           @RequestParam(defaultValue="00/00/0000") String end, int person ) {
 		
-		Map resultMap = new HashMap();
 	
 		final String DATE_PATTERN = "MM/dd/yyyy"; 
 
@@ -212,8 +214,6 @@ public class LodgeController {
 			
 			String st2 = date2.format(st);
 			String e2 = date2.format(e);
-			System.out.println(st2);
-			System.out.println(e2);
 			
 			java.sql.Date start_date = java.sql.Date.valueOf(st2); 
 			java.sql.Date end_date = java.sql.Date.valueOf(e2);
@@ -247,7 +247,7 @@ public class LodgeController {
 			model.addAttribute("reservation", lodge);
 			
 			//숙소 이미지
-			List<Image> lodgeimage = lodgeService.LodgeImage();
+			List<Image> lodgeimage = lodgeService.LodgeImage(lodge);
 			model.addAttribute("lodgeimg", lodgeimage);
 			
 			//댓글 수
@@ -266,7 +266,6 @@ public class LodgeController {
 			Integer fee =  service_fee.intValue();
 			
 			model.addAttribute("service_fee", fee);
-			System.out.println(fee);
 			
 			
 			
@@ -301,11 +300,11 @@ public class LodgeController {
 
 	
 	@RequestMapping(value ="/insertReview",method =RequestMethod.POST)
-	public String LodgeReview(Comment comment,Model model) {
+	public String LodgeReview(Lodge lodge,Comment comment,Model model) {
 		
 			lodgeService.insertComment(comment);
 			
-			List<Comment> lodgereview = lodgeService.commentList();
+			List<Comment> lodgereview = lodgeService.commentList(lodge);
 			model.addAttribute("lodgeReview",lodgereview);
 			
 		
@@ -313,10 +312,10 @@ public class LodgeController {
 	}
 	
 	@RequestMapping(value ="/updateReview",method =RequestMethod.POST)
-	public String LodgeupdateReview(Comment comment,Model model) {
+	public String LodgeupdateReview(Lodge lodge,Comment comment,Model model) {
 		
 		lodgeService.updateComment(comment);
-		List<Comment> lodgereview = lodgeService.commentList();
+		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
 		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
@@ -339,14 +338,14 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/lodgeReview", method=RequestMethod.POST)
-	public String InsertLodgeReply(Comment comment,Model model) {
+	public String InsertLodgeReply(Lodge lodge,Comment comment,Model model) {
 
 		
 		
 		lodgeService.insertLodgeComment(comment);
 
 		//댓글
-		List<Comment> lodgereview = lodgeService.commentList();
+		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
 		
 		//대댓글
@@ -464,7 +463,6 @@ public class LodgeController {
 
 			pay.setStay_start(start4);
 			pay.setStay_end(end4);
-			System.out.println(pay.toString());
 			lodgeService.LodgePay(pay);
 		
 		

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
 <body>
-<jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
 
 <div id="wrapper" style="max-width:978px; margin:0 auto;">
@@ -16,6 +16,19 @@
 		<!-- 질문 답변 종합 -->
 		<div class="faq-list">
 			<dl>
+				<dt>Life Is Trip를 만든 사람들과 역할분담은 무엇인가요? </dt>
+				<dd>
+					<p>
+						<ul type="disc">
+							<li> 나현종</li>
+							<li> 김동현</li>
+							<li> 한승국 </li>
+							<li> 현종환 </li>
+							<li> 위보미 </li>
+							<li> 이성훈</li>
+						</ul>
+				</dd>
+			
 				<dt>Life Is Trip에 신분증 제출은 어떻게 하나요?</dt>
 				<dd>
 					<p>아래의 설명대로 본인 인증 절차를 완료하면 Life Is Trip 커뮤니티를 더욱 안전하게 보호하고 사기를 방지할 수 있습니다. <br> 
