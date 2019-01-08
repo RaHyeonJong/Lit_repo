@@ -161,13 +161,6 @@ public class Paging {
 		this.endNo = endNo;
 	}
 
-	@Override
-	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
-	}
-
 	public int getMem_no() {
 		return mem_no;
 	}
@@ -176,4 +169,11 @@ public class Paging {
 		this.mem_no = mem_no;
 	}
 
+	@Override
+	public String toString() {
+		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
+				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", mem_no=" + mem_no + "]";
+	}
+	
 }

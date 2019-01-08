@@ -2,7 +2,6 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <jsp:include page="../layout/header.jsp" />
-
 <style>
 	
 	/* 	자주하는질문, 1:1문의하기   가운데*/
@@ -95,6 +94,8 @@
 	    font-size:15px;
 	}
 
+	/*Button CSS 및 Hover CSS*/
+
 	/* 버튼 설정 */
 	.button {
 	  border: none;
@@ -138,41 +139,8 @@
 		background-color:#ffb638;
 		color: white;
 	}
-	
-	/* /cs/enroll 찾아보기 버튼 */
-	.button3
-	{
-		background-color:#77a7f4;
-		color:white;
-		border:2px solid #2676f2;
-		height:40px;
-		width:80px;
-	}
-	
-	.button3:hover
-	{
-		background-color:#a5c5f7;
-		color:white;
-	}
 
-	/* /cs/enroll 버튼 */
-	.button4
-	{
-		background-color:#a8a8a6;
-		color:white;
-		padding:10px 15px;
-	}
-	
-	.button4:hover
-	{
-		background-color:#8e8e8e;
-		color:white;
-	}
-	
-
-
-	/* enroll.jsp 설정 */
-	/*아까의 오류는  table_list 엿다  */
+	/*table_list(모든 테이블의 공통 사항) */
 	
 	.table_list
 	{
@@ -181,21 +149,79 @@
 		margin-right:15%;
 	}
 	
-	table
+	/* list.jsp의 table class 설정 */
+	table.table1 
 	{
-		width:100%;
-		border:1px solid #757575;
+		border-collapse: collapse;
+		text-align: left;
+		line-height: 1.5;
+		border-left: 1px solid #ccc;
+		margin: 20px 10px;
+	}
+
+	table.table1 thead th 
+	{
+		padding: 10px;
+		font-weight: bold;
+		text-align:center;
+		border-top: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+		border-bottom: 2px solid #fc8080;
+		background: #e2e2e0;
 	}
 	
-	th
+	table.table1 tbody th 
 	{
-		background-color:black;
+		width: 70px;
+		padding: 10px;
+		font-weight: bold;
+		text-align:center;
+		vertical-align: top;
+		border-right: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+		background: #ececec;
+	}
+
+	table.table1 td.td1 
+	{
+		width: 300px;
+		padding: 10px;
+		vertical-align: top;
+		text-align:left;
+		border-right: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	}
+
+	table.table1 td.td2 
+	{
+		width: 150px;
+		padding: 10px;
+		vertical-align: top;
+		text-align:center;
+		border-right: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	}
+
+	/* 그 외 테이블 꾸미기 */
+	
+	table.table2
+	{
+		width:100%;
+		border:1px solid #e0e0e0;
+	}
+	
+	table.table2 th
+	{
+		background-color:#fce0d1;
 		text-align:center;
 		font-size:18px;
-		color:white;
+		color:black;
 		width:200px;
 		height:50px;
-	}	
+	}
+	
+
+	/* enroll의 textarea */
 
 	textarea
 	{

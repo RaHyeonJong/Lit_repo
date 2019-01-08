@@ -2,7 +2,12 @@ package lit.service.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import lit.dto.Day_off;
+import lit.dto.Image;
 import lit.dto.Lodge;
 
 public interface HostService {
@@ -45,5 +50,7 @@ public interface HostService {
 	public void deleteAllDayoff(int lodge_no);
 
 	
+	//숙소 이미지 등록
+	public void hostaddViewList(MultipartHttpServletRequest msr,HttpServletRequest req,Image image);
 
 }
