@@ -15,21 +15,58 @@
 
 
 
+var sel_files =[];
+
+$(document).ready(function(){
+
+	$("#input_imgs").on("change",handleImgsFilesSelect);
+	
+});
+	function handleImgsFilesSelect(e){
+		var files =e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+			sel_files.push(f);
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var img_html = "<img src=\""+e.target.result+"\"/>";
+				$(".imgs_wrap").append(img_html);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+
 
 
 
 </script>
+<style>
+.imgs_wrap{
+ 	width : 600px;
+ 	margin-top: 50px;
+}
+.imgs_wrap img{
+	max-width: 200px;
+}
 
+</style>
 
 <body>
 
 
 <div>
+<div class= "imgs_wrap">
 
 </div>
 
+</div>
 <form name="fileForm" action="/host/addview" method="post" enctype="multipart/form-data">
-<input id="imgInput" multiple="multiple" accept="image|gif,image/jpeg,image/png" type="file" name="file">
+<input id = "input_imgs" multiple="multiple" accept="image|*" type="file" name="file">
 <input type ="hidden" name ="lodge_no" value="<c:out value="${lodge_no }"/>">
 <input type ="submit" value="전송">
 </form>
