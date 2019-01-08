@@ -56,7 +56,7 @@ public interface LodgeDao {
 	//좋아요(숙소 저장)
 	public void insertlodgetLike(Favorite favorite);
 	public void deleteFavorite(Favorite favorite);
-	public int selectFavorite(Favorite favorite);
+	public int selectFavorite(Member member);
 	
 	//호스트에게 메시지 보내기
 	public void insertContent(Message message);
