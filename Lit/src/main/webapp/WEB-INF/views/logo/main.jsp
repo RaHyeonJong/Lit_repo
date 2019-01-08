@@ -15,7 +15,7 @@
 	
 	<h1>로고 페이지</h1>
 
-	<form action="/main" method="POST">
+	<form action="/main/searchMain" method="POST">
 
 		<input type="text" id="cityLat" name="cityLat"/>
 		<input type="text" id="cityLng" name="cityLng"/>

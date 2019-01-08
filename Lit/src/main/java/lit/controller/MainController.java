@@ -63,7 +63,7 @@ public class MainController {
 	}
 	
 	// 메인 페이지
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchMain", method = RequestMethod.POST)
 	public String main(Model model,
 			@RequestParam(required=false, defaultValue="") String location, 
 			@RequestParam(required=false, defaultValue="") String checkin, 
@@ -105,8 +105,7 @@ public class MainController {
 		model.addAttribute("cityLat", cityLat);
 		model.addAttribute("cityLng", cityLng);
 		
-		
-		return "main/main";
+		return "/main/searchMain";
 	}
 
 	// 메인 숙소 페이지
