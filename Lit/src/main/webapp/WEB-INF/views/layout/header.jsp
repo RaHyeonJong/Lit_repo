@@ -489,10 +489,10 @@ body {
    position: relative;
    float: left;
    margin: 0;
-   width: 20%;
    height: 60px;
    z-index: 2;
    padding-top: 17px;
+   padding-right: 20px;
 }
 #header h1 img {
    display: block;
