@@ -40,15 +40,11 @@ public interface HostDao {
 	//호스트 mem_no로 select하기
 	public List selectByHostMemno();
 
-<<<<<<< HEAD
 	public void deleteDayoff(Day_off day_off);
 
 	public void deleteAllDayoff(int lodge_no);
 
-	
-=======
 	//숙소 이미지 넣기
 	public void insertLodgeView();
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 }

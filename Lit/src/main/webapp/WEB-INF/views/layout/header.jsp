@@ -446,19 +446,8 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-#header {
-=======
-#header {
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
-<<<<<<< HEAD
 #header {
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;

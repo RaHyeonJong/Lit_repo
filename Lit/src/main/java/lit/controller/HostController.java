@@ -285,12 +285,6 @@ public class HostController {
 			mav.setViewName("jsonView");
 				
 			System.out.println("체크인시간 :" +check_in_hour);
-		
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 //			System.out.println("시간 :"+hour);
 //			System.out.println("분 : "+min);	
 //			session.setAttribute("check_in_time", hour+"시"+min+"분");
