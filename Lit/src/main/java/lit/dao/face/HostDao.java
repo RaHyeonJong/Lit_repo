@@ -42,6 +42,8 @@ public interface HostDao {
 
 	public void deleteDayoff(Day_off day_off);
 
+	public void deleteAllDayoff(int lodge_no);
+
 	
 
 }

@@ -91,6 +91,12 @@ public class HostServiceImpl implements HostService{
 	public void deleteDayoff(Day_off day_off) {
 		hostDao.deleteDayoff(day_off);
 	}
+
+
+	@Override
+	public void deleteAllDayoff(int lodge_no) {
+		hostDao.deleteAllDayoff(lodge_no);
+	}
 	
 	
 	

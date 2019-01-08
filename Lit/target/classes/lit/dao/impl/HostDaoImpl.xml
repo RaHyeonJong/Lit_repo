@@ -77,6 +77,11 @@ sysdate,
 		AND day_off_date = #{day_off_date }
 </delete>
 
+<delete id="deleteAllDayoff" parameterType="int">
+	DELETE FROM day_off
+	WHERE lodge_no = #{lodge_no }
+</delete>
+
 
 </mapper>
 

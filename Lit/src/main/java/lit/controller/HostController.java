@@ -191,31 +191,33 @@ public class HostController {
 			
 			  Date today = new Date();
 			  SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-			  model.addAttribute("today", date.format(today));
-			  model.addAttribute("lodge_no", lodge_no);
 			  
-
-		
-
-		
-				}
+			  Calendar cal = Calendar.getInstance();
+			  cal.add(Calendar.MONTH, 36);
+			  
+			  model.addAttribute("today", date.format(today));
+			  model.addAttribute("after3years", date.format(cal.getTime()));
+			  model.addAttribute("lodge_no", lodge_no);
+		}
 				
 		//1단계 숙소관리
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.POST)
-		public ModelAndView manageLodgeProc(@RequestParam(defaultValue="1") int selectShowMonth, 
-											ModelAndView mav,
-											String selectDisableDay, HttpSession session,Day_off day_off )
+		public ModelAndView manageLodgeProc(
+				@RequestParam(defaultValue="1") int selectShowMonth, 
+				ModelAndView mav,
+				String selectDisableDay, 
+				HttpSession session,
+				int lodge_no)
 		{
-			  
+			hostService.deleteAllDayoff(lodge_no);
+			
 			 mav.setViewName("jsonView");
 			 Date today = new Date();
 			 
 			 SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");//날짜형태
-			 
-			 
+
 			 mav.addObject("today", date.format(today));//오늘날짜
 			
-			 
 			 //시작
 			 Calendar cal = Calendar.getInstance ( );//오늘 날짜를 기준으루..
 			 cal.add ( cal.MONTH, selectShowMonth ); //2개월 전....
@@ -225,43 +227,26 @@ public class HostController {
 			 //끝
 
 			 session.setAttribute("available_term", selectShowMonth);
-			 
-			 
-			
-			 
-//			 Gson gson = new Gson();
-//			 Type type = new TypeToken<ArrayList<String>>(){}.getType();
-//	
-//			 
-//			 List<String> off_list = gson.fromJson(selectDisableDay,type);
-//			 
-//			 System.out.println(off_list);
-//			 
-//				 session.setAttribute("day_off_date", off_list);
-//				 
-//					//day_off
-//					List<String> d1 = (ArrayList<String>)session.getAttribute("day_off_date");
-//						
-//					System.out.println("d1"+d1);
-//					
-//					
-//						for(String d2 : d1 ) {
-//						java.sql.Date off_date3 = java.sql.Date.valueOf(d2); 
-//						System.out.println("d2"+off_date3);
-//						day_off.setDay_off_date(off_date3);						
-////						hostService.insertFirst(day_off);
-//						}
-						
-							 
-		
+			 	
 			 return mav;
 				
 				}
 		
 		@RequestMapping(value="/host/selectDayoff")
-		public ModelAndView selectDayoffProc(Day_off day_off, String act, ModelAndView mav) {
+		public ModelAndView selectDayoffProc(
+				Day_off day_off, 
+				String selected_date, 
+				String act, 
+				ModelAndView mav) {
 			
-			System.out.println(day_off);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			Date day_off_date = null;
+			try {
+				day_off_date = dateFormat.parse(selected_date);
+				day_off.setDay_off_date(day_off_date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			
 			if("insert".equals(act))
 				hostService.insertSecond(day_off);
