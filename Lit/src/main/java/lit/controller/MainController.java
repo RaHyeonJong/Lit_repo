@@ -1,7 +1,6 @@
 package lit.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,7 +63,7 @@ public class MainController {
 	}
 	
 	// 메인 페이지
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchMain", method = RequestMethod.POST)
 	public String main(Model model,
 			@RequestParam(required=false, defaultValue="") String location, 
 			@RequestParam(required=false, defaultValue="") String checkin, 
@@ -107,8 +105,7 @@ public class MainController {
 		model.addAttribute("cityLat", cityLat);
 		model.addAttribute("cityLng", cityLng);
 		
-		
-		return "main/main";
+		return "/main/searchMain";
 	}
 
 	// 메인 숙소 페이지

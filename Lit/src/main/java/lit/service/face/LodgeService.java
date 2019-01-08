@@ -60,7 +60,7 @@ public interface LodgeService {
 	//숙소 저장(좋아요)
 	public void insertLike(Favorite favorite);
 	public void deleteLike(Favorite favorite);
-	public boolean selectLike(Favorite favorite);
+	public boolean selectLike(Member member);
 	
 	//호스트에게 메시지 보내기
 	public void insertMessage(Message message);

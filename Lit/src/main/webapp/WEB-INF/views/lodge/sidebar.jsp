@@ -329,6 +329,37 @@ display: inline-block;
 vertical-align: middle;
 text-align: center;
 }
+
+#ch_Btn{ 
+  margin-left : 5px;
+  padding: 14px 0;
+  border: 2px #4eab75 solid;
+  background-color: #4da973;
+  cursor: pointer;
+  font-family: "Montserrat", "helvetica neue", helvetica, arial, sans-serif;
+  font-size: .9em;
+  text-transform: uppercase;
+  transition: color 0.4s, background-color 0.4s;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 210px;
+  top: 50%;
+  left: 50%;
+  width: 149 px;
+  color: white;
+  }
+
 </style>
 </head>
 <body>
@@ -381,7 +412,7 @@ text-align: center;
 </c:when>
 <c:otherwise>
 	
-<button>숙소 정보 변경하기</button>
+<button id = "ch_Btn">숙소 정보 변경하기</button>
 
 </c:otherwise>
 </c:choose>

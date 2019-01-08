@@ -59,7 +59,7 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/view", method = RequestMethod.GET)
-	public void LodgeView(Lodge lodge,HttpSession session, Model model, Comment comment, Favorite favorite,Day_off day_off ) {
+	public void LodgeView(Lodge lodge,HttpSession session, Model model, Comment comment,Day_off day_off ) {
 		
 		//기본 리스트
 		lodge = lodgeService.LodgeView(lodge);
@@ -81,9 +81,9 @@ public class LodgeController {
 		model.addAttribute("replyList",replyList);		
 	
 		//좋아요
-		boolean like =  lodgeService.selectLike(favorite);
+//		boolean like =  lodgeService.selectLike(member);
 //		System.out.println(like);
-		model.addAttribute("lodge_like", like);
+//		model.addAttribute("lodge_like", like);
 		
 		//결제한 회원
 		if((Member)session.getAttribute("member") != null) {
@@ -360,18 +360,17 @@ public class LodgeController {
 	
 	
 	@RequestMapping(value ="/like", method =RequestMethod.POST)
-	public ModelAndView LikeLodge(Favorite favorite, ModelAndView like) {
+	public ModelAndView LikeLodge(Member member,Favorite favorite, ModelAndView like) {
 		
 		like.setViewName("jsonView");
 		
-		boolean lodge_like = lodgeService.selectLike(favorite);
+		boolean lodge_like = lodgeService.selectLike(member);
 		
-		if(lodge_like) {
+		if(!lodge_like) {
 			lodgeService.insertLike(favorite);
 			like.addObject("like",lodge_like);
 		}else {
 			lodgeService.deleteLike(favorite);
-			like.addObject("unlike",lodge_like);
 		}
 		
 		

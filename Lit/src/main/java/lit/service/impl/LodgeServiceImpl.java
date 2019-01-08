@@ -154,14 +154,14 @@ public class LodgeServiceImpl implements LodgeService {
 	
 	
 	@Override
-	public boolean selectLike(Favorite favorite) {
+	public boolean selectLike(Member member) {
 		
-		int fav =lodgedao.selectFavorite(favorite); 
+		int fav =lodgedao.selectFavorite(member); 
 		
 		if( fav< 1){
-			return  true;
+			return  false;
 		}else{
-			return false;
+			return true;
 		}
 			
 	
