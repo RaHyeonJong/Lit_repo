@@ -439,13 +439,15 @@ public class HostController {
 	
 	
 	@RequestMapping(value="/host/addview", method=RequestMethod.POST)
-	public void hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no) {
+	public void hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no,Model model) {
 		
 		image.setLodge_no(lodge_no);
 		
 		
 		
+		
 		hostService.hostaddViewList(msr,req,image);
+	
 		
 		
 		
