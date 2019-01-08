@@ -33,8 +33,10 @@ public class Lodge {
 	private double longitude; //경도
 	private int mem_no;
 	private String[] stored_name;
-
+	private int reportCnt; // 신고당한 횟수
 	
+
+
 
 	@Override
 	public String toString() {
@@ -47,7 +49,17 @@ public class Lodge {
 				+ ", ready_time=" + ready_time + ", check_in_time=" + check_in_time + ", available_term="
 				+ available_term + ", stay_cost=" + stay_cost + ", regit_date=" + regit_date + ", lodge_activation="
 				+ lodge_activation + ", latitude=" + latitude + ", longitude=" + longitude + ", mem_no=" + mem_no
-				+ ", stored_name=" + Arrays.toString(stored_name) + "]";
+				+ ", stored_name=" + Arrays.toString(stored_name) + ", reportCnt=" + reportCnt + "]";
+	}
+
+
+	public int getReportCnt() {
+		return reportCnt;
+	}
+
+
+	public void setReportCnt(int reportCnt) {
+		this.reportCnt = reportCnt;
 	}
 
 

@@ -29,14 +29,41 @@ public class Pay {
 	private String pay_state;			// NOMAL or REFUND_WAITING or REFUND_COMPLETE
 	
 	private String stored_name;		// �닕�냼 �뜽�꽕�씪 �씠誘몄�
+	private String payMember;
+	private String lodgeName;
+    private String hostName;
+    
+    
+
 	
 	@Override
 	public String toString() {
-		return "Pay [pay_no=" + pay_no + ", mem_no=" + mem_no + ", lodge_no=" + lodge_no + ", room_no=" + room_no
-				+ ", pay_method_no=" + pay_method_no + ", pay_method=" + pay_method + ", pay_sum=" + pay_sum
-				+ ", cleaning_cost=" + cleaning_cost + ", service_fee=" + service_fee + ", stay_term=" + stay_term
-				+ ", pay_time=" + pay_time + ", stay_start=" + stay_start + ", stay_end=" + stay_end + ", stay_heads="
-				+ stay_heads + ", pay_state_no=" + pay_state_no + ", pay_state=" + pay_state + "]";
+		return "Pay [CARD=" + CARD + ", PHONE=" + PHONE + ", NOMAL=" + NOMAL + ", REFUND_WAITING=" + REFUND_WAITING
+				+ ", REFUND_COMPLETE=" + REFUND_COMPLETE + ", pay_no=" + pay_no + ", mem_no=" + mem_no + ", lodge_no="
+				+ lodge_no + ", lodge_name=" + lodge_name + ", room_no=" + room_no + ", pay_method_no=" + pay_method_no
+				+ ", pay_method=" + pay_method + ", pay_sum=" + pay_sum + ", cleaning_cost=" + cleaning_cost
+				+ ", service_fee=" + service_fee + ", stay_term=" + stay_term + ", pay_time=" + pay_time
+				+ ", stay_start=" + stay_start + ", stay_end=" + stay_end + ", stay_heads=" + stay_heads
+				+ ", pay_state_no=" + pay_state_no + ", pay_state=" + pay_state + ", stored_name=" + stored_name
+				+ ", payMember=" + payMember + ", lodgeName=" + lodgeName + ", hostName=" + hostName + "]";
+	}
+	public String getPayMember() {
+		return payMember;
+	}
+	public void setPayMember(String payMember) {
+		this.payMember = payMember;
+	}
+	public String getLodgeName() {
+		return lodgeName;
+	}
+	public void setLodgeName(String lodgeName) {
+		this.lodgeName = lodgeName;
+	}
+	public String getHostName() {
+		return hostName;
+	}
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
 	}
 	public int getPay_state_no() {
 		return pay_state_no;

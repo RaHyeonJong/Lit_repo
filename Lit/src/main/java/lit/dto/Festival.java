@@ -11,12 +11,62 @@ public class Festival {
 	private int hit;					//조회수
 	private String origin_name;			//썸네일 이미지파일 원본이름
 	private String stored_name;			//썸네일 이미지파일 저장이름
+	private double latitude;
+	private double longitude;
+    private String address;
+    private Date start_date;            //축제 시작 기간
+    private Date end_date;              //축제 끝난 기간	
 	
+
+
+
 	@Override
 	public String toString() {
 		return "Festival [festival_no=" + festival_no + ", festival_name=" + festival_name + ", festival_contents="
 				+ festival_contents + ", festival_term=" + festival_term + ", written_time=" + written_time + ", hit="
-				+ hit + ", origin_name=" + origin_name + ", stored_name=" + stored_name + "]";
+				+ hit + ", origin_name=" + origin_name + ", stored_name=" + stored_name + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", address=" + address + ", start_date=" + start_date + ", end_date="
+				+ end_date + "]";
+	}
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public int getFestival_no() {
