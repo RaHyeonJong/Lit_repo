@@ -15,12 +15,15 @@
 <div style="position:fixed; left:0; top:0; width:100%; height:100%; overflow:hidden;">
 <img width=100% height="100%" src="/resources/images/logo_background.jpg"></div>
 
+<<<<<<< HEAD
 <div style="position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(255,255,255,0.2); ">
 <div style="position:fixed; width:468px; height:428px; top:10%; left:5%; background-color:#fefefe; text-align: center;">
 	
 	<h2>Life is Trip에서 숙소를 찾아보세요.</h2>
 	<div>혼자하는 여행에 적합한 개인실부터 여럿이 함께하는 여행에 좋은 집 전체 숙소까지, 라이프이즈트립에는 다 있습니다.</div>
 
+=======
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	<form action="/main/searchMain" method="POST">
 
 		<input type="text" id="cityLat" name="cityLat"/>
