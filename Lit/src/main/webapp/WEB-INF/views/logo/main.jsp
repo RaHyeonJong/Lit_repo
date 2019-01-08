@@ -9,13 +9,19 @@
 <meta charset="UTF-8">
 <title>Life if Trip 인생은 여행이다</title>
 </head>
-<body>
+<body style="margin:0;">
 
 <div id="wrapper"> 
-	
-	<h1>로고 페이지</h1>
+<div style="position:fixed; left:0; top:0; width:100%; height:100%; overflow:hidden;">
+<img width=100% height="100%" src="/resources/images/logo_background.jpg"></div>
 
-	<form action="/main" method="POST">
+<div style="position:fixed; z-index:101; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(255,255,255,0.2); ">
+<div style="position:fixed; width:468px; height:428px; top:10%; left:5%; background-color:#fefefe; text-align: center;">
+	
+	<h2>Life is Trip에서 숙소를 찾아보세요.</h2>
+	<div>혼자하는 여행에 적합한 개인실부터 여럿이 함께하는 여행에 좋은 집 전체 숙소까지, 라이프이즈트립에는 다 있습니다.</div>
+
+	<form action="/main/searchMain" method="POST">
 
 		<input type="text" id="cityLat" name="cityLat"/>
 		<input type="text" id="cityLng" name="cityLng"/>
@@ -29,7 +35,7 @@
 		
 		인원수<br>
 		<select name="people" data-vars-select-name="people">
-			<option selected="" value="1">성인 1명</option>
+			<option selected value="1">성인 1명</option>
 			<option value="2">성인 2명</option>
 			<option value="3">성인 3명</option>
 			<option value="4">성인 4명</option>
@@ -50,6 +56,8 @@
 		<button>검색</button>
 	</form>
 	
+</div>
+</div>
 </div> <!-- wrapper end -->
 
 <script>
