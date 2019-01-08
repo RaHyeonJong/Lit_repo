@@ -21,7 +21,7 @@
       var marker;
 	  var map;
 	  var geocoder;
-	  var locationLat;
+	  var locationLat; 
 	  var locationLng;
 	console.log(locationLat);
 	  
@@ -115,15 +115,7 @@ $(document).ready(function(){
 		
 		$("#addr").submit();
 
-		
 	});
-	
-	
-	
-	
-	
-
-
 	
 });
 

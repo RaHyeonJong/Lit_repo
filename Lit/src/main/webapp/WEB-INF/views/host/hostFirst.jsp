@@ -13,11 +13,13 @@
 $(document).ready(function(){
 	$("#move-calendar").click(function(){
 		location.href="/host/manageLodge?lodge_no="+${lodge_no};
-		
-		
+	
 	});
 	
-	
+	$("#addView_btn").click(function(){
+		location.href="/host/addview?lodge_no=${lodge_no}";	
+	});
+		
 	
 });
 
@@ -64,7 +66,7 @@ float:right;
 			</div>
 			<div class="content3">
 				<h3>3단계</h3>
-				<button>숙소꾸미기 및 마무리</button>
+				<button id = "addView_btn">숙소꾸미기 및 마무리</button>
 			</div>
 		</div>
 		<button id="nextbutton">계속</button>

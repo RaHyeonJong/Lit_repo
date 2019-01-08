@@ -40,6 +40,7 @@ $(document).ready(function(){
 	
 	// 프로필 보기
 	$('#view-profile-btn').click(function(){
+		
 		$.ajax({
 			type: "GET",
 			url: "/mypage/viewMyProfile",

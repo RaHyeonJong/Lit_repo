@@ -124,7 +124,7 @@ VALUES(comment_seq.nextval,#{lodge_no},#{contents},#{mem_no})
 
 </delete>
 
-<select id="selectFavorite" parameterType="lit.dto.Favorite" resultType="int">
+<select id="selectFavorite" parameterType="lit.dto.Member" resultType="int">
 	SELECT COUNT(*) FROM favorite
 	WHERE mem_no = #{mem_no}
 
