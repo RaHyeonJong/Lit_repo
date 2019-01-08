@@ -689,7 +689,7 @@ $(function() {
 				data :{"lodge_no" : lodge_no, "mem_no" : mem_no },
 				dataType : "json",
 				success : function(data){
-					if(data.like){
+					if(data){
 					window.lb = likeButton;
 					likeButton.classList.toggle('selected');
 					}
@@ -984,7 +984,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 지역정보 -->
 			<div>
-				구글 맵 사용 하여 숙소 위치 표시		
+			<h3>숙소 위치</h3>
 			<div id="map"></div>
 			
 			</div>

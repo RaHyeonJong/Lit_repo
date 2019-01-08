@@ -218,9 +218,6 @@ $(document).ready(function(){
 <div id = "infoview">
 <ul style ="list-style: none; padding: 0 20 20 20;">
 <li><i class="fas fa-user-friends"></i>게스트 ${person }명</li><br>
-<%-- <li><i class="far fa-calendar-check"></i><span >체크인  <fmt:formatDate type="DATE" pattern="yy년MM월dd일" value="${startDate }"/></span>&nbsp;&nbsp;&nbsp; --%>
-<!-- <i class="fas fa-arrow-right"></i>&nbsp;&nbsp;&nbsp; -->
-<%-- <span>체크아웃  <fmt:formatDate type="DATE" pattern="yy년MM월dd일" value="${endDate }"/></span></li><br> --%>
 <li>요금 <fmt:formatNumber type="number" pattern="###,###" value="${pay_sum }"/>원</li><br>
 
 <li>청소비 <fmt:formatNumber type = "number" pattern="###,###" value = "${clean }"/></li><br>

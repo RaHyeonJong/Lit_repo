@@ -162,6 +162,7 @@ $(document).ready(function() {
 		
 		console.log($('#modal-people2').attr('top'));
 		console.log($('#modal-people2').attr('left'));
+		
 	});
 
 	$('#priceFilterBtn').click(function() { // 가격 필터 버튼 누를 시
@@ -174,13 +175,15 @@ $(document).ready(function() {
 	$('#peopleFilter-send').click(function() {
 		alert('인원 필터');
 		searchFilterSend();
-		
+		if(searchFilter.peopleCnt != 0)
+			$('#peopleFilterBtn').html(searchFilter.peopleCnt + '명');
 	});
 	
 	$('#priceFilter-send').click(function() { 
 		
-		
 		searchFilterSend();
+		
+		$('#priceFilterBtn').html(searchFilter.minPrice + '원~' + searchFilter.maxPrice + '원');
 	});
 	
 	function searchFilterSend() {
@@ -317,7 +320,7 @@ $(document).ready(function() {
 						searchFilter.swLat = sw.lat();
 						searchFilter.swLng = sw.lng();
 						
-						alert(searchFilter);
+						
 						
 						$.ajax({
 							type: "get",
