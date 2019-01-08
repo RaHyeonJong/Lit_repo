@@ -96,6 +96,17 @@ public class HostServiceImpl implements HostService{
 
 
 	@Override
+	public void deleteDayoff(Day_off day_off) {
+		hostDao.deleteDayoff(day_off);
+	}
+
+
+	@Override
+	public void deleteAllDayoff(int lodge_no) {
+		hostDao.deleteAllDayoff(lodge_no);
+	}
+	
+	
 	public void hostaddViewList(MultipartHttpServletRequest msr,HttpServletRequest req,Image image) {
 				
 		List<MultipartFile> fileList = msr.getFiles("file");

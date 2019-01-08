@@ -115,15 +115,7 @@ $(document).ready(function(){
 		
 		$("#addr").submit();
 
-		
 	});
-	
-	
-	
-	
-	
-
-
 	
 });
 
