@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,16 +21,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import lit.dto.Day_off;
+import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.service.face.HostService;
@@ -282,10 +287,6 @@ public class HostController {
 		
 			
 
-				
-		
-			
-
 //			System.out.println("시간 :"+hour);
 //			System.out.println("분 : "+min);	
 //			session.setAttribute("check_in_time", hour+"시"+min+"분");
@@ -431,10 +432,26 @@ public class HostController {
 	}
 
 			
-			
+	//------------------숙소 이미지 추가하기
+	@RequestMapping(value="/host/addview", method=RequestMethod.GET)
+	public void hostAddView(Model model,int lodge_no) {
+		model.addAttribute("lodge_no", lodge_no);
 		
+	}
 	
 	
+	@RequestMapping(value="/host/addview", method=RequestMethod.POST)
+	public void hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no) {
+		
+		image.setLodge_no(lodge_no);
+		
+		
+		
+		hostService.hostaddViewList(msr,req,image);
+		
+		
+		
+	}
 	
 
 }

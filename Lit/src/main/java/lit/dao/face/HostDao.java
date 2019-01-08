@@ -40,6 +40,7 @@ public interface HostDao {
 	//호스트 mem_no로 select하기
 	public List selectByHostMemno();
 
-	
+	//숙소 이미지 넣기
+	public void insertLodgeView();
 
 }
