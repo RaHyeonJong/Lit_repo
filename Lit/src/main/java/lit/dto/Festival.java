@@ -11,6 +11,8 @@ public class Festival {
 	private int hit;					//조회수
 	private String origin_name;			//썸네일 이미지파일 원본이름
 	private String stored_name;			//썸네일 이미지파일 저장이름
+	private Date start_date;
+	private Date end_date;
 	
 	@Override
 	public String toString() {
@@ -18,10 +20,31 @@ public class Festival {
 				+ festival_contents + ", festival_term=" + festival_term + ", written_time=" + written_time + ", hit="
 				+ hit + ", origin_name=" + origin_name + ", stored_name=" + stored_name + "]";
 	}
+	
 
 	public int getFestival_no() {
 		return festival_no;
 	}
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
 
 	public void setFestival_no(int festival_no) {
 		this.festival_no = festival_no;
