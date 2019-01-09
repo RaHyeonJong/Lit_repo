@@ -166,7 +166,7 @@
     
     <!-- 환불 완료 결제 수 조회(페이징 처리) -->
     <select id="refundFinishSelectCntAll" resultType="int">
-        SELECT COUNT(*) FROM pay WHERE pay_state_no = 2 
+        SELECT COUNT(*) FROM pay WHERE pay_state_no = 3
     </select>
     
     <!-- 정상 결제 수 조회(페이징 처리) --> 

@@ -86,9 +86,12 @@ $(document).ready(function(){
 			success : function(res){
 				console.log(res.login);
 				if(res.login == true){
-					window.location.href = "/tempmain";
+					window.location.href = "/main";
 				}else{
-					$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+					if(res.ban == false)
+						$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+					else
+						$("#loginMsgDiv").html("로그인 실패! 관리자에 의해 차단된 계정입니다.");
 				}
 			},
 			error : function(){
@@ -446,12 +449,8 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
-#header {
-=======
 
 #header {
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -812,7 +811,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 					src="/resources/images/logo.jpg" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
-   				 <input class="Search-box" type="search" id="location-input" autocomplete="off">
+   				 <input class="Search-box" type="search" id="location-input" autocomplete="off" placeholder="장소를 검색해보세요" style="padding-left:10px;">
    					
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
