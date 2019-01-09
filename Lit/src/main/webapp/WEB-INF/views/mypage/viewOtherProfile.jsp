@@ -119,7 +119,7 @@ $(document).ready(function(){
 
 <div id="myModal" class="modal">
    <div class="modal-content">
-      <form action="/message/write" method="post">
+<!--       <form action="/message/write" method="post"> -->
          <span id="close" class="close">&times;</span>
          <h1><i class="fa fa-envelope-o" aria-hidden="true" style="color:skyblue;"></i>&nbsp;Message</h1>
          <hr>
@@ -131,7 +131,7 @@ $(document).ready(function(){
          <button type="submit" class="sendBtn" onclick="sendBtn_click();">S E N D</button>
          <input type="hidden" value="${member.mem_no }" name="sender_no" />
          <input type="hidden" value="${other.mem_no }"  name="receiver_no"/>
-      </form>   
+<!--       </form>    -->
    </div>
 </div>
 
@@ -169,7 +169,17 @@ $(document).ready(function(){
    function sendBtn_click()
    {
 
-
+		var text=  $("#contents").val();
+		
+		if(!text)
+		{
+			
+			alert("실패");
+		}
+		else
+		{
+			alert("완료");
+		}
 	   
 		
    }

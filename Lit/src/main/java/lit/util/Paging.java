@@ -15,7 +15,44 @@ public class Paging {
 	private int endNo;	//게시물리스트 마지막 번호
 	
 	private int mem_no;	// 회원번호
-	
+	private int lodge_activation; // 관리자 숙소 승인상태
+	private int mem_case_no; // 관리자 멤버 형태
+	private int answer; // 관리자 고객센터 대답 여부
+    private int pay_state_no; // 관리자 결제 환불상태 
+    
+    
+	public int getLodge_activation() {
+		return lodge_activation;
+	}
+
+	public void setLodge_activation(int lodge_activation) {
+		this.lodge_activation = lodge_activation;
+	}
+
+	public int getMem_case_no() {
+		return mem_case_no;
+	}
+
+	public void setMem_case_no(int mem_case_no) {
+		this.mem_case_no = mem_case_no;
+	}
+
+	public int getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(int answer) {
+		this.answer = answer;
+	}
+
+	public int getPay_state_no() {
+		return pay_state_no;
+	}
+
+	public void setPay_state_no(int pay_state_no) {
+		this.pay_state_no = pay_state_no;
+	}
+
 	// 총 게시글 수만 입력하는 생성자
 	//	curPage == 1
 	//	pageCount == 10
@@ -173,7 +210,11 @@ public class Paging {
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", mem_no=" + mem_no + "]";
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", mem_no=" + mem_no + ", lodge_activation="
+				+ lodge_activation + ", mem_case_no=" + mem_case_no + ", answer=" + answer + ", pay_state_no="
+				+ pay_state_no + "]";
 	}
+
+
 	
 }
