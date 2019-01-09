@@ -20,15 +20,26 @@ public class Member {
 	private String mem_intro;
 	private int mem_activation;	// 0 = 鍮꾪솢�꽦�솕, 1 = �솢�꽦�솕
 	private String uKey;
+	private int reportCnt; // 신고당한 횟수 
 	
+
 	@Override
 	public String toString() {
-		return "Member [mem_no=" + mem_no + ", mem_case_no="	+ mem_case_no + ", mem_case=" + mem_case + ", mem_id=" 
-				+ mem_id + ", mem_pw=" + mem_pw + ", mem_name="	+ mem_name + ", mem_phone=" + mem_phone 
-				+ ", mem_birth=" + mem_birth + ", origin_name=" + origin_name + ", stored_name=" + stored_name
-				+ ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation + ", uKey=" + uKey +"]";
+		return "Member [ADMIN=" + ADMIN + ", USER=" + USER + ", HOST=" + HOST + ", mem_no=" + mem_no + ", mem_case_no="
+				+ mem_case_no + ", mem_case=" + mem_case + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name="
+				+ mem_name + ", mem_phone=" + mem_phone + ", mem_birth=" + mem_birth + ", origin_name=" + origin_name
+				+ ", stored_name=" + stored_name + ", mem_intro=" + mem_intro + ", mem_activation=" + mem_activation
+				+ ", uKey=" + uKey + ", reportCnt=" + reportCnt + "]";
 	}
-	
+
+	public int getReportCnt() {
+		return reportCnt;
+	}
+
+	public void setReportCnt(int reportCnt) {
+		this.reportCnt = reportCnt;
+	}
+
 	public int getMem_no() {
 		return mem_no;
 	}

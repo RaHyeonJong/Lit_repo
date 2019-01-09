@@ -9,15 +9,20 @@ public class Image {
 	private int mem_no; 
 	private int board_no;
 	private int thumb_nail;
-	
-	
+    private int festival_no; // 페스티발 번호 	
+
 	@Override
 	public String toString() {
 		return "Image [image_no=" + image_no + ", origin_name=" + origin_name + ", stored_name=" + stored_name
 				+ ", lodge_no=" + lodge_no + ", mem_no=" + mem_no + ", board_no=" + board_no + ", thumb_nail="
-				+ thumb_nail + "]";
+				+ thumb_nail + ", festival_no=" + festival_no + "]";
 	}
-
+	public int getFestival_no() {
+		return festival_no;
+	}
+	public void setFestival_no(int festival_no) {
+		this.festival_no = festival_no;
+	}
 	public int getImage_no() {
 		return image_no;
 	}

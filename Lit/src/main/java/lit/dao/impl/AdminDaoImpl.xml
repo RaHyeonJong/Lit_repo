@@ -2,8 +2,253 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  
+
+
 <mapper namespace="lit.dao.face.AdminDao">
 
+	<!-- /////////// 회원관리 /////////// -->
+
+	<!-- 멤버 리스트 보이기 -->
+	<select id="memberSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Member">
+
+		SELECT * FROM ( SELECT rownum rnum, B.* FROM (
+		SELECT m.*,
+		(select count(*)
+		from report where mem_no=m.mem_no) AS reportCnt
+		FROM member m WHERE
+		mem_case_no = #{mem_case_no } ) B ORDER BY mem_no ) R
+		WHERE R.rnum BETWEEN ${startNo } AND ${endNo }
+
+	</select>
+
+	<!-- 일반 유저 수 보이기 -->
+	<select id="userSelectCntAll" resultType="int">
+		SELECT COUNT(*) FROM
+		member
+		WHERE mem_case_no = 1
+	</select>
+
+	<!-- 호스트 수 보이기 -->
+	<select id="hostSelectCntAll" resultType="int">
+		SELECT COUNT(*) FROM
+		member
+		WHERE mem_case_no = 2
+	</select>
+
+	<!-- 멤버 상세정보 보이기 -->
+	<select id="selectMemberByMemberno" resultType="lit.dto.Member" parameterType="lit.dto.Member">
+		SELECT m.*, 
+		(select count(*) from report where mem_no=m.mem_no) AS reportCnt, i.stored_name
+		FROM member m , image i
+		WHERE m.mem_no= i.mem_no (+)
+		AND m.mem_no = #{mem_no }
+	</select>
+
+	<!-- /////////// 숙소관리 /////////// -->
+
+	<!-- 숙소 리스트 보이기 -->
+	<select id="lodgeSelectAll" resultType="lit.dto.Lodge" parameterType="lit.util.Paging">
+		SELECT *FROM
+		(SELECT rownum rnum, R.*
+		FROM (SELECT l.*,
+		(select count(*) from report where lodge_no=l.lodge_no)
+		AS reportCnt
+		FROM lodge l WHERE lodge_activation=#{lodge_activation } ORDER BY
+		lodge_no
+		) R )B
+		WHERE B.rnum BETWEEN #{startNo } AND #{endNo }
+		ORDER BY
+		B.rnum
+	</select>
+
+	<!-- 비활성화 숙소 총 수 구하기 -->
+	<select id="lodgeActivation0CntAll" resultType="int">
+		SELECT COUNT(*) FROM lodge
+		WHERE lodge_activation=0
+	</select>
+
+	<!-- 활성화 숙소 총 수 구하기 -->
+	<select id="lodgeActivation1CntAll" resultType="int">
+		SELECT COUNT(*) FROM lodge
+		WHERE lodge_activation=1
+	</select>
+
+
+	<!-- 숙소 승인 하기 -->
+	<update id="updateLodgeActivate" parameterType="int">
+		UPDATE lodge SET
+		lodge_activation = 1
+		WHERE lodge_no = #{lodge_no }
+	</update>
+
+
+	<!-- /////////// 고객센터 관리 /////////// -->
+
+	<!-- 고객센터 리스트 보이기 -->
+	<select id="csSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Board">
+		SELECT * FROM(
+		SELECT rownum rnum, R.* FROM
+		(SELECT * FROM board WHERE answer = #{answer } ORDER BY board_no )R )
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+	<!-- 고객센터 답변 달린 게시글 수 구하기 -->
+	<select id="answer1CntAll" resultType="int">
+		SELECT COUNT(*) FROM board
+		WHERE answer = 1
+	</select>
+
+	<!-- 고객센터 답변 안 달린 게시글 수 구하기 -->
+	<select id="answer0CntAll" resultType="int">
+		SELECT COUNT(*) FROM board
+		WHERE answer = 0
+	</select>
+
+
+	<!-- /////////// 축제,행사 관리 /////////// -->
+
+	<!-- 축제 행사 관리 리스트 -->
+	<select id="festivalSelectAll" resultType="lit.dto.Festival" parameterType="lit.util.Paging">
+        SELECT * FROM (
+        SELECT ROWNUM rnum, R.* FROM(
+        SELECT f.festival_no, f.festival_name, f.start_date, f.end_date, i.stored_name
+        FROM festival f, image i
+        WHERE f.festival_no = i.festival_no
+        ORDER BY festival_no DESC ) R )
+        WHERE rnum BETWEEN ${startNo } AND ${endNo }
+	</select>
+
+    <!-- 축제 총 수 구하기 -->
+	<select id="festivalSelectCntAll" resultType="int">
+		SELECT COUNT(*) FROM festival
+	</select>
+
+    <!-- 축제 글쓰기 -->
+	<insert id="insertFestival" parameterType="lit.dto.Festival">
+	  <selectKey resultType="int" keyProperty="festival_no" order="BEFORE">
+        SELECT festival_seq.nextVal FROM DUAL     
+      </selectKey> 
+	    INSERT INTO festival(festival_no, festival_name, festival_contents,start_date,end_date,latitude,longitude,address)
+	    VALUES (#{festival_no }, #{festival_name }, #{festival_contents }, #{start_date },#{end_date },#{latitude }, #{longitude },#{address } )
+	</insert>
+ 
+    <!-- 축제 썸네일 삽입하기 -->
+    <insert id="insertFestiThumbNail" parameterType="lit.dto.Image">
+        INSERT INTO image(image_no, origin_name, stored_name, festival_no, thumb_nail )
+        VALUES (image_seq.nextVal, #{origin_name }, #{stored_name }, #{festival_no }, 1)   
+    </insert>
+
+	<!-- 축제 상세정보 보이기 -->
+	<select id="selectFestivalByFestivalno" resultType="lit.dto.Festival" parameterType="int">
+        SELECT f.festival_no , f.festival_name , f.festival_contents, f.written_time, f.hit,
+        f.start_date, f.end_date, f.address, i.stored_name FROM festival f, image i WHERE f.festival_no = i.festival_no
+        AND f.festival_no = #{festival_no }
+	</select>
+	
+	<!-- /////////// 결제 관리 /////////// -->
+	
+	<!-- 결제 리스트 보이기 -->
+	<select id="paySelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Pay">
+        SELECT * FROM (
+        SELECT rownum rnum, R.* FROM (
+        SELECT P.*,
+		(SELECT mem_name FROM member m WHERE m.mem_no = p.mem_no )AS payMember,
+        (SELECT l.lodge_name FROM lodge l WHERE l.lodge_no = p.lodge_no ) AS lodgeName,
+        (SELECT m.mem_name FROM lodge l, member m WHERE l.lodge_no = p.lodge_no AND m.mem_no = l.mem_no ) AS hostName
+		FROM pay p WHERE pay_state_no= #{pay_state_no } ORDER BY pay_no DESC ) R )B
+        WHERE B.rnum BETWEEN ${startNo } AND ${endNo } ORDER BY B.rnum
+	</select>
+	
+    <!-- 환불 대기 중인 결제 수 조회(페이징 처리) -->
+    <select id="refundSelectCntAll" resultType="int">
+        SELECT COUNT(*) FROM pay WHERE pay_state_no = 2 
+    </select>
+    
+    <!-- 환불 완료 결제 수 조회(페이징 처리) -->
+    <select id="refundFinishSelectCntAll" resultType="int">
+        SELECT COUNT(*) FROM pay WHERE pay_state_no = 2 
+    </select>
+    
+    <!-- 정상 결제 수 조회(페이징 처리) --> 
+    <select id="paySelectCntAll" resultType="int">
+        SELECT COUNT(*) FROM pay WHERE pay_state_no = 1
+    </select>
+    
+    <!-- 환불 승인하기 -->
+    <update id="updateRefund" parameterType="int">
+		UPDATE pay SET
+		pay_state_no = 3
+		WHERE pay_no = #{pay_no } 
+	</update>
+    
+         
+	<!-- /////////// 신고 관리 /////////// -->
+	
+	<!-- 멤버신고 관리 리스트 -->
+    <select id="reportMemberSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">
+    SELECT * FROM 
+    (SELECT rownum rnum, R.* FROM(
+    SELECT r.report_no, r.reporter_no, r.mem_no, m.mem_name as reportedName, m.mem_activation,
+    (SELECT COUNT(*) FROM report WHERE mem_no = m.mem_no ) AS reportCnt 
+    FROM report r, member m WHERE r.mem_no = m.mem_no)R )
+    WHERE rnum BETWEEN #{startNo } AND #{endNo }
+    </select>
+
+    <!-- 신고당한 멤버 수 (페이징 처리) -->
+    <select id="reportMemberSelectCntAll" resultType="int">
+    SELECT COUNT(*) FROM report WHERE mem_no IS NOT NULL
+    </select>
+    
+    <!-- 멤버 비활성화하기 -->
+	<update id="updateMemberActivation" parameterType="int">
+		UPDATE member SET
+		mem_activation = 0
+		WHERE mem_no = #{mem_no }
+	</update>
+	
+	
+	<!-- 숙소신고 관리 리스트 -->
+	<select id="reportLodgeSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">
+	SELECT * FROM 
+    (SELECT rownum rnum, R.* FROM(
+    SELECT r.report_no, r.reporter_no, r.lodge_no, l.lodge_name as reportedName, l.lodge_activation,
+    (SELECT COUNT(*) FROM report WHERE lodge_no = l.lodge_no ) AS reportCnt 
+    FROM report r, lodge l WHERE r.lodge_no = l.lodge_no )R )
+    WHERE rnum BETWEEN #{startNo } AND #{endNo } 
+	</select>
+	
+    <!-- 신고당한 숙소 수 (페이징 처리) -->
+    <select id="reportLodgeSelectCntAll" resultType="int">
+    SELECT COUNT(*) FROM report WHERE lodge_no IS NOT NULL
+    </select>	
+	
+    <!-- 숙소 비활성화하기 -->
+	<update id="updateReportLodgeActivation" parameterType="int">
+		UPDATE lodge SET
+		lodge_activation = 0
+		WHERE lodge_no = #{lodge_no }
+	</update>	
+	
+	<!-- 신고 받은 댓글 리스트 -->
+	<select id="reportCommentSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">
+	 SELECT * FROM 
+    (SELECT rownum rnum, R.* FROM(
+    SELECT r.report_no, r.reporter_no, r.comment_no, c.contents as reportedName, written_time,
+    (SELECT COUNT(*) FROM report WHERE comment_no = c.comment_no ) AS reportCnt 
+    FROM report r, comment_tb c WHERE r.comment_no = c.comment_no )R )
+    WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 신고 댓글 수(페이징 처리) -->
+	<select id="reportCommentSelectCntAll" resultType="int">
+	  SELECT COUNT(*) FROM report WHERE comment_no IS NOT NULL
+	</select>
+	
+	<!-- 신고받은 댓글 삭제하기  -->
+	<delete id="deleteReportComment" parameterType="int">
+	   UPDATE comment_tb SET contents = '관리자에 의해 삭제된 댓글 입니다' WHERE comment_no = #{comment_no }
+	</delete>
+	
+	
+	
 </mapper>
