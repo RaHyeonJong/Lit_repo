@@ -84,6 +84,9 @@ public interface AdminService {
 	
 	// 축제 썸네일 업로드 
 	public void uploadThumbNail(ServletContext context, MultipartFile multipartFile, Image image);
+	
+	// 축제 상세 정보 보이기
+	public Festival viewFestival(int festival_no);
 
 	
 	// -------------------- 결제 관리 --------------------

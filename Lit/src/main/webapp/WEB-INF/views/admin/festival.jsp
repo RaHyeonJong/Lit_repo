@@ -49,7 +49,7 @@
         <c:forEach items="${festivalList }" var="festival">
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" width="350px" height="350px" src="/resources/images/festival/${festival.stored_name }" ></a>
+            <a href="/festival/view?festival_no=${festival.festival_no }"><img class="card-img-top" width="350px" height="350px" src="/resources/images/festival/${festival.stored_name }" ></a>
             <div class="card-body" style="text-align:center;">            
               <!-- 축제 제목 -->
               <p style="font-family:Charm;"><b>${festival.festival_name }</b></p>

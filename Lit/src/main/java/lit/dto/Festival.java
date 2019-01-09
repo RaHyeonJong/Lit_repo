@@ -1,6 +1,6 @@
 package lit.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Festival {
 	private int festival_no;			//축제번호
@@ -17,8 +17,6 @@ public class Festival {
     private Date start_date;            //축제 시작 기간
     private Date end_date;              //축제 끝난 기간	
 	
-
-
 
 	@Override
 	public String toString() {

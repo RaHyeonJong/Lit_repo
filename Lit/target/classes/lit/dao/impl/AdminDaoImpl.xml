@@ -139,13 +139,12 @@
     </insert>
 
 	<!-- 축제 상세정보 보이기 -->
-	<select id="selectFestivalByFestivalno" resultType="lit.dto.Festival" parameterType="lit.dto.Festival">
-		SELECT m.*, 
-		(select count(*) from report where mem_no=m.mem_no) AS reportCnt, i.stored_name
-		FROM member m , image i
-		WHERE m.mem_no= i.mem_no (+)
-		AND m.mem_no = #{mem_no }
+	<select id="selectFestivalByFestivalno" resultType="lit.dto.Festival" parameterType="int">
+        SELECT f.festival_no , f.festival_name , f.festival_contents, f.written_time, f.hit,
+        f.start_date, f.end_date, f.address, i.stored_name FROM festival f, image i WHERE f.festival_no = i.festival_no
+        AND f.festival_no = #{festival_no }
 	</select>
+	
 	<!-- /////////// 결제 관리 /////////// -->
 	
 	<!-- 결제 리스트 보이기 -->

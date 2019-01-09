@@ -188,6 +188,17 @@ public class AdminController {
 
 	}
 	
+	// 축제 상세보이기
+	
+	@RequestMapping(value="/festival/view", method=RequestMethod.GET)
+	public void festivalView (Model model, int festival_no) { 
+		
+		Festival festivalView = adminService.viewFestival(festival_no);
+		model.addAttribute("festivalView", festivalView);
+	}
+	
+	
+	
 	// -------------------- 결제 관리 --------------------  
 	
 	// 결제 리스트 보이기

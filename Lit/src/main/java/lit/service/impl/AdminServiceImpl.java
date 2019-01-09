@@ -222,6 +222,13 @@ public class AdminServiceImpl implements AdminService{
 		 adminDao.insertFestiThumbNail(image);	
 	}
 
+	// 축제 상세 보이기 
+	@Override
+	public Festival viewFestival(int festival_no) {
+		
+		return adminDao.selectFestivalByFestivalno(festival_no);
+	}
+	
 	// -------------------- 결제 관리 --------------------
 	
 	// 결제 리스트 보이기
