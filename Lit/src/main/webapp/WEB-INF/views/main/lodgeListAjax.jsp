@@ -24,7 +24,6 @@
 					</div>
 					<div>
 						${list.convenient_facility }
-						
 					</div>
 			</span>
 				

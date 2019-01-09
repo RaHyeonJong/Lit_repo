@@ -131,7 +131,24 @@ public class HostServiceImpl implements HostService{
 			System.out.println("stored_name :"+ image.getStored_name());
 			System.out.println("lodge_no :"+ image.getLodge_no());
 			
+<<<<<<< HEAD
 //			hostDao.insertLodgeView();y
+=======
+			String safeFile = path+System.currentTimeMillis()+origin_name;
+			
+			
+			hostDao.insertLodgeView(image);
+			
+			try {
+				mf.transferTo(new File(safeFile));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 			
 		}
 	
