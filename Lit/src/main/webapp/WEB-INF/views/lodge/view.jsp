@@ -372,7 +372,7 @@ border: 1px solid gray;
 
 </style>
  
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 var map;
 var latVal = ${view.latitude};//숙소 위도
@@ -683,6 +683,7 @@ $(function() {
 	$(document).ready(function(){
 
 		$('#lodge_like').click(function(){
+		
 			var lodge_no = '${view.lodge_no}',
 				mem_no = '${member.mem_no}';
 				var likeButton = document.getElementById('lodge_like');
@@ -994,7 +995,7 @@ $(function() {
 
 		<!-- wrapper 끝 -->
 	</div>
-
+<c:import url="../layout/footer.jsp"/>
 <c:import url="../lodge/sidebar.jsp"/>
    <!-- 구글 맵 -->  
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
@@ -1003,3 +1004,4 @@ $(function() {
 </body>
 
 </html>
+

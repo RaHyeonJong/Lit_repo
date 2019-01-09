@@ -131,9 +131,6 @@ public class HostServiceImpl implements HostService{
 			System.out.println("stored_name :"+ image.getStored_name());
 			System.out.println("lodge_no :"+ image.getLodge_no());
 			
-<<<<<<< HEAD
-//			hostDao.insertLodgeView();y
-=======
 			String safeFile = path+System.currentTimeMillis()+origin_name;
 			
 			
@@ -148,7 +145,6 @@ public class HostServiceImpl implements HostService{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 			
 		}
 	

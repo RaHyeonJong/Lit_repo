@@ -26,12 +26,16 @@ public interface MainDao {
 
 	List<Festival> selectThemeFestival(String theme); // 테마별 행사 리스트
 
-	List<Lodge> selectLodge(); // 모든 숙소 리스트
+	List<Lodge> selectLodge(int page); // 모든 숙소 리스트
 
 	List<Lodge> selectLodgeByBounds(SearchFilter searchFilter);
 
 	List<Lodge> selectLodgeSearch(SearchFilter searchFilter);
 
 	String[] selectLodgeName(int lodge_no);
+
+	List<Lodge> selectPagingLodge(int page);
+
+	List<Festival> selectPagingFestival(int page);
 
 }
