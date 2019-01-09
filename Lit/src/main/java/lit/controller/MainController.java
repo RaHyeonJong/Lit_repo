@@ -63,7 +63,7 @@ public class MainController {
 	}
 	
 	// 메인 페이지
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/searchMain", method = RequestMethod.POST)
 	public String main(Model model,
 			@RequestParam(required=false, defaultValue="") String location, 
 			@RequestParam(required=false, defaultValue="") String checkin, 
@@ -105,8 +105,7 @@ public class MainController {
 		model.addAttribute("cityLat", cityLat);
 		model.addAttribute("cityLng", cityLng);
 		
-		
-		return "main/main";
+		return "/main/searchMain";
 	}
 
 	// 메인 숙소 페이지
@@ -114,22 +113,22 @@ public class MainController {
 	public void mainLodge(Model model) {
 		logger.info("메인 숙소 페이지 띄우기");
 
-		// 최고 평점순 숙소 리스트
-		List<Lodge> bestLodgeList = mainService.getBestLodgeList();
-
-		// 서울 숙소 리스트
-		List<Lodge> seoulLodgeList = mainService.getLocalLodgeList("seoul");
-
-		// 부산 숙소 리스트
-		List<Lodge> busanLodgeList = mainService.getLocalLodgeList("busan");
-		
-		// 제주 숙소 리스트
-		List<Lodge> jejuLodgeList = mainService.getLocalLodgeList("jeju");
-		
-		model.addAttribute("bestLodgeList", bestLodgeList);
-		model.addAttribute("seoulLodgeList", seoulLodgeList);
-		model.addAttribute("busanLodgeList", busanLodgeList);
-		model.addAttribute("jejuLodgeList", jejuLodgeList);
+//		// 최고 평점순 숙소 리스트
+//		List<Lodge> bestLodgeList = mainService.getBestLodgeList();
+//
+//		// 서울 숙소 리스트
+//		List<Lodge> seoulLodgeList = mainService.getLocalLodgeList("seoul");
+//
+//		// 부산 숙소 리스트
+//		List<Lodge> busanLodgeList = mainService.getLocalLodgeList("busan");
+//		
+//		// 제주 숙소 리스트
+//		List<Lodge> jejuLodgeList = mainService.getLocalLodgeList("jeju");
+//		
+//		model.addAttribute("bestLodgeList", bestLodgeList);
+//		model.addAttribute("seoulLodgeList", seoulLodgeList);
+//		model.addAttribute("busanLodgeList", busanLodgeList);
+//		model.addAttribute("jejuLodgeList", jejuLodgeList);
 	}
 
 	// 메인 행사 페이지
@@ -137,22 +136,22 @@ public class MainController {
 	public void mainFestival(Model model) {
 		logger.info("메인 행사 페이지 띄우기");
 
-		// 최고 평점순 행사 리스트
-		List<Festival> bestFestivalList = mainService.getBestFestivalList();
-
-		// 서울 행사 리스트
-		List<Festival> seoulFestivalList = mainService.getLocalFestivalList("seoul");
-
-		// 부산 행사 리스트
-		List<Festival> busanFestivalList = mainService.getLocalFestivalList("busan");
-		
-		// 제주 행사 리스트
-		List<Festival> jejuFestivalList = mainService.getLocalFestivalList("jeju");
-		
-		model.addAttribute("bestFestivalList", bestFestivalList);
-		model.addAttribute("seoulFestivalList", seoulFestivalList);
-		model.addAttribute("busanFestivalList", busanFestivalList);
-		model.addAttribute("jejuFestivalList", jejuFestivalList);
+//		// 최고 평점순 행사 리스트
+//		List<Festival> bestFestivalList = mainService.getBestFestivalList();
+//
+//		// 서울 행사 리스트
+//		List<Festival> seoulFestivalList = mainService.getLocalFestivalList("seoul");
+//
+//		// 부산 행사 리스트
+//		List<Festival> busanFestivalList = mainService.getLocalFestivalList("busan");
+//		
+//		// 제주 행사 리스트
+//		List<Festival> jejuFestivalList = mainService.getLocalFestivalList("jeju");
+//		
+//		model.addAttribute("bestFestivalList", bestFestivalList);
+//		model.addAttribute("seoulFestivalList", seoulFestivalList);
+//		model.addAttribute("busanFestivalList", busanFestivalList);
+//		model.addAttribute("jejuFestivalList", jejuFestivalList);
 	}
 
 	@RequestMapping(value="/lodgeListAjax")
