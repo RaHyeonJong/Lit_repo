@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Comment;
 import lit.dto.Favorite;
@@ -269,6 +270,29 @@ public class MypageController {
 		} finally {
 			if(writer != null) writer.close();
 		}		
+	}
+	
+	@RequestMapping(value="/mypage/scanMsgCnt")
+	public ModelAndView scanMesCnt(ModelAndView mav, HttpSession session)
+	{
+		
+		
+		int receiver_no;
+		int count = -1; //비로그인
+		
+		if(session.getAttribute("login") != null && (boolean) session.getAttribute("login") == true)
+		{
+			receiver_no = ((Member) session.getAttribute("member")).getMem_no();
+			count = messageService.messagecount(receiver_no); 
+			
+		}
+
+		mav.setViewName("jsonView");
+			
+		mav.addObject("count",count);
+			
+			
+		return mav;
 	}
 	
 }

@@ -20,8 +20,31 @@ $(document).ready(function(){
 	var modal_join = $('#modal-join');
 	var modal_certification = $('#modal-certification');
 	var modal_joinResult = $('#modal-joinResult');
+
 	
-	
+//	쪽지 갯수 실시간 
+//class="message_count"
+
+	setInterval(function(){
+		$.ajax({
+			type:"GET",
+			url:"/mypage/scanMsgCnt",
+			data:{},
+			dataType:"json",
+			success:function(res)
+			{
+				if(res.count != -1) //로그인 성공
+					$('.message_count').html('쪽지  ' + res.count + '개');
+				else 			//로그인 실패
+					return;
+			},
+			error:function()
+			{
+				alert("오류");
+			}
+			
+		})
+	}, 10000);
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
@@ -308,6 +331,7 @@ $(document).ready(function(){
 					dur = 180;
 					var min, sec;
 					timer = setInterval(function(){
+						
 						min = parseInt(dur/60%60, 10);
 						sec = parseInt(dur%60, 10);
 						
@@ -446,12 +470,8 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
-#header {
-=======
 
 #header {
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -816,15 +836,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    					
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
-<!-- 					<div class= "search_modal "style="left: 101;"> -->
-<!--    					<ul style ="padding : 0;" class="prevention"> -->
-<!--    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br> -->
-<!--    					<li><button class= "btn">모두</button></li> -->
-<!--    					<li><button class= "btn">숙소</button></li> -->
-<!--    					<li><button class= "btn">행사</button></li> -->
-<!--    					</ul> -->
-<!--    					</div> -->
-		
 		</div>
 
 
@@ -841,7 +852,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
-					<li><a href="/mypage/main?go=message">쪽지 ${counter }개</a>
+				
+					<li><a href="/mypage/main?go=message" class="message_count">쪽지 ${counter }개</a>
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
@@ -856,7 +868,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
-					<li><a href="/mypage/main?go=message">쪽지 <b>${counter }</b>개</a>
+					<li><a href="/mypage/main?go=message" class="message_count">쪽지 <b>${counter }</b>개</a>
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>

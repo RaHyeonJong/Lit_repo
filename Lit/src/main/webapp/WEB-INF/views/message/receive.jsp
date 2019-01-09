@@ -54,22 +54,22 @@ $(document).ready(function(){
 </script>
 <script>
 
-	//td를 누르면 벌어지는 일
-	var msg_no;
-	
 	$(".category").click(function(e){
 		
-		msg_no = $(e.target).closest('tr').children('td').first().html();
+		var msg_no = $(e.target).closest('tr').children('td').html();
+		var read = $(e.target).closest('tr').children('td.read');
+		var t = $(this);
 		
 		$.ajax({
 	         type: "POST",
 	         url: "/message/receive",
 	         data: {"message_no": msg_no}, 
 	         dataType: "json",
-	         success : function(e){
-	     		$(this).next('tr.sub_category').toggle();
-	     		alert(msg_no);
-	         },
+	         success : function(){
+	        	read.html("읽음");
+	        	read.css("color","red");
+	        	t.next('tr.sub_category').toggle();		        	 
+	     	},
 	         error : function(){
 	            alert("에러났어요!");
 	         }
@@ -155,7 +155,7 @@ $(document).ready(function(){
 	<input type="hidden" value="${message.receiver_no }" name="receiver_no" />
 	<input type="hidden" value="${message.message_no }" name="message_no" />
 	<!-- 테이블 -->
-	<table class="table-list">
+	<table class="table-list" id="table-list">
 		<thead>
 			<tr>
 				<th style="	background-color:#0265e8; color:white;">번 호</th>
@@ -177,10 +177,10 @@ $(document).ready(function(){
 				<td id="send_time">${r.send_time }</td>
 				<c:choose>
 				<c:when test="${r.read eq 0 }">
-					<td id="read" style="color:blue; font-weight:bold;">읽지 않음 </td>
+					<td id="read" class="read" style="color:blue; font-weight:bold;">읽지 않음 </td>
 				</c:when>
 				<c:when test="${r.read ne 0 }">
-					<td id="read" style="color:red; font-weight:bold">읽음</td>
+					<td id="read" class="read" style="color:red; font-weight:bold">읽음</td>
 				</c:when>
 				</c:choose>
 				
