@@ -128,7 +128,7 @@ public class HostServiceImpl implements HostService{
 			String safeFile = path+System.currentTimeMillis()+origin_name;
 			
 			
-			hostDao.insertLodgeView();
+			hostDao.insertLodgeView(image);
 			
 			try {
 				mf.transferTo(new File(safeFile));

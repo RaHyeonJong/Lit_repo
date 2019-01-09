@@ -83,5 +83,11 @@ sysdate,
 </delete>
 
 
+<insert id="insertLodgeView" parameterType="lit.dto.Image">
+	INSERT INTO image(image_no,lodge_no,origin_name,stored_name) VALUES(image_seq.nextval,#{lodge_no},#{origin_name},#{stored_name})
+
+
+</insert>
+
 </mapper>
 

@@ -27,22 +27,6 @@ public class Festival {
 				+ end_date + "]";
 	}
 
-	public Date getStart_date() {
-		return start_date;
-	}
-
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
-	}
-
-	public Date getEnd_date() {
-		return end_date;
-	}
-
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
-	}
-
 	public double getLatitude() {
 		return latitude;
 	}
@@ -66,10 +50,31 @@ public class Festival {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 
 	public int getFestival_no() {
 		return festival_no;
 	}
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
 
 	public void setFestival_no(int festival_no) {
 		this.festival_no = festival_no;

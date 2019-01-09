@@ -810,10 +810,15 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<a href="/main"><img style="height: 50px;"
 					src="/resources/images/logo.jpg" alt="로고" /></a>
 			</h3>
-			  <form action="#" class="Search">
-   				 <input class="Search-box" type="search" id="location-input" autocomplete="off" placeholder="장소를 검색해보세요" style="padding-left:10px;">
+			<!-- 검색창 -->
+			  <form action="/main/searchMain" class="Search" method="POST" name="formname" onsubmit="return check()">
+			  		<input type="hidden" id="cityLng" name="cityLng"/>
+			  		<input type="hidden" id="cityLat" name="cityLat"/>
+   				 <input class="Search-box" type="search" id="location-input" autocomplete="off" onkeypress="JavaScript:press(this.form)">
    					
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
+   				 
+   				 <input type="submit" style="display:none;" />
   			</form>
 <!-- 					<div class= "search_modal "style="left: 101;"> -->
 <!--    					<ul style ="padding : 0;" class="prevention"> -->
@@ -1054,6 +1059,8 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </form>
 </div></div>
 <!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
+
+<!-- 검색창 자동완성기능 -->
 <script>
 ////////// 자동완성기능 /////////
 function initAutocomplete() {
@@ -1071,6 +1078,20 @@ function initAutocomplete() {
 
 google.maps.event.addDomListener(window, 'load', initAutocomplete);
 ///////////////////////////////
+function press(f) { 
+		if(f.keyCode == 13){ //javascript에서는 13이 enter키를 의미함 
+			formname.submit(); //formname에 사용자가 지정한 form의 name입력 
+			console.log("enter");
+		} 
+}
+
+function check() {
+	if(document.getElementById('cityLat').value) {
+		alert("장소를 입력하세요!");
+		return false;
+	}
+	return true;
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete"

@@ -70,7 +70,6 @@ margin:0 auto;
 			, dayClick :  function(date, jsEvent, view){
 //클릭했을때 컨트롤러로 해당클릭날짜 전송				
 				var element = $(this);
-				
 				var color = $(this).css('background-color');				
 				var lodge_no = ${lodge_no };
 				var selected_date = date.format();

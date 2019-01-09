@@ -8,23 +8,207 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<style type="text/css">
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+/* body { */
+/*   font-family: "Raleway", sans-serif; */
+/*   height: 100vh; */
+/*   display: flex; */
+/*   justify-content: center; */
+/*   align-items: center; */
+/*   flex-direction: column; */
+/*   background-color: #eff5f6; */
+/* } */
+
+/* .wrapper { */
+/*   display: flex; */
+/*   flex-direction: row; */
+/*   flex-wrap: wrap; */
+/*   align-items: center; */
+/*   justify-content: center; */
+/* } */
+
+#wrapper{
+min-width:978px;
+max-width:1200px;
+margin:0 auto;
+}
+
+h1 {
+  font-family: inherit;
+  margin: 0 0 .75em 0;
+  color: #728c8d;
+  text-align: center;
+}
+
+.box {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  float:left;
+}
+
+.upload-options {
+  position: relative;
+  height: 75px;
+  background-color: cadetblue;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  transition: background-color ease-in-out 150ms;
+}
+.upload-options:hover {
+  background-color: #7fb1b3;
+}
+.upload-options input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.upload-options label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+}
+.upload-options label::after {
+  content: 'add';
+  font-family: 'Material Icons';
+  position: absolute;
+  font-size: 2.5rem;
+  color: #e6e6e6;
+  top: calc(50% - 2.5rem);
+  left: calc(50% - 1.25rem);
+  z-index: 0;
+}
+.upload-options label span {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center;
+}
+.upload-options label span:hover i.material-icons {
+  color: lightgray;
+}
+
+.js--image-preview {
+  height: 225px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-image: url("");
+  background-color: white;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.js--image-preview::after {
+  content: "photo_size_select_actual";
+  font-family: 'Material Icons';
+  position: relative;
+  font-size: 4.5em;
+  color: #e6e6e6;
+  top: calc(50% - 3rem);
+  left: calc(50% - 2.25rem);
+  z-index: 0;
+}
+.js--image-preview.js--no-default::after {
+  display: none;
+}
+.js--image-preview:nth-child(2) {
+  background-image: url("http://bastianandre.at/giphy.gif");
+}
+
+i.material-icons {
+  transition: color 100ms ease-in-out;
+  font-size: 2.25em;
+  line-height: 55px;
+  color: white;
+  display: block;
+}
+
+.drop {
+  display: block;
+  position: absolute;
+  background: rgba(95, 158, 160, 0.2);
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.animate {
+  -webkit-animation: ripple 0.4s linear;
+          animation: ripple 0.4s linear;
+}
+
+@-webkit-keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+            transform: scale(2.5);
+  }
+}
+
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+            transform: scale(2.5);
+  }
+}
+
+</style>
 </head>
 
+
 <script type="text/javascript">
- 
-</script>
-<script type="text/javascript">
+
+
 
 var sel_files =[];
+var i=1;
 
 $(document).ready(function(){
-
-	$("#input_imgs").on("change",handleImgsFilesSelect);
+	var testId="#image"+i;
+	i+=1;
+	
+	
+	$("#submit_button").click(function(){
+		
+		$('#sendPhoto').submit();
+		location.href="/host/hostFirst";
+		
+	});
+	
+	
+	$(testId).on("change",handleImgsFilesSelect);
 	
 });
 	function handleImgsFilesSelect(e){
 		var files =e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
+		var testClass= ".js--image-preview" + i
+		i+=1;
 		
 		filesArr.forEach(function(f){
 			if(!f.type.match("image.*")){
@@ -35,8 +219,10 @@ $(document).ready(function(){
 			var reader = new FileReader();
 			reader.onload = function(e){
 				var img_html = "<img src=\""+e.target.result+"\"/>";
-				$(".imgs_wrap").append(img_html);
-			}
+			
+				$(testClass).append(img_html);
+				
+				}
 			reader.readAsDataURL(f);
 		});
 	}
@@ -45,30 +231,101 @@ $(document).ready(function(){
 
 
 </script>
-<style>
-.imgs_wrap{
- 	width : 600px;
- 	margin-top: 50px;
-}
-.imgs_wrap img{
-	max-width: 200px;
-}
 
-</style>
 
 <body>
+<div id="wrapper">
+ <form id="sendPhoto" name="fileForm" action="/host/addview" method="post" enctype="multipart/form-data">
+ <input type ="hidden" name ="lodge_no" value="<c:out value="${lodge_no }"/>">
+ <div>
+ 
+ 
+  <div class="box insert1">
+    <div class="js--image-preview1"></div>
+    <div class="upload-options">
+      <label>
+        <input type="file" id="image1" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+      </label>
+    </div>
+  </div>
+   
+  <div class="box">
+    <div class="js--image-preview2"></div>
+    <div class="upload-options">
+      <label>
+        <input type="file" id="image2" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+      </label>
+    </div>
+  </div>
+  
+   
+  <div class="box">
+    <div class="js--image-preview3"></div>
+    <div class="upload-options">
+      <label>
+        <input type="file" id="image3" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+      </label>
+    </div>
+  </div>
+  
+  
+  
+  </div>
+	  <div>
+	   <div class="box">
+	    <div class="js--image-preview4"></div>
+	    <div class="upload-options">
+	      <label>
+	        <input type="file" id="image4" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+	      </label>
+	    </div>
+	  </div>
+	  
+	   
+	  <div class="box">
+	    <div class="js--image-preview5"></div>
+	    <div class="upload-options">
+	      <label>
+	        <input type="file" id="image5" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+	      </label>
+	    </div>
+	  </div>
+	  
+	   <div class="box">
+	   	<div>
+	   		<h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요</h4>
+	   		<button id="submit_button">확인</button>
+	   	</div>
+
+	  </div>
+	  
+   
+  </div>
+
+  </form>
 
 
-<div>
-<div class= "imgs_wrap">
+
 
 </div>
-</div>
-<form name="fileForm" action="/host/addview" method="post" enctype="multipart/form-data">
-<input id = "input_imgs" multiple="multiple" accept="image|*" type="file" name="file">
-<input type ="hidden" name ="lodge_no" value="<c:out value="${lodge_no }"/>">
-<input type ="submit" value="전송">
-</form>
+
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

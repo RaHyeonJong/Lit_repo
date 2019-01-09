@@ -42,8 +42,11 @@ public class MainController {
 		logger.info("메인 페이지 띄우기");
 		
 		
-//		// 추천 숙소 리스트
-//		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
+		
+		// 추천 숙소 리스트
+//		List<Lodge> recommendLodgeList = mainService.getPagingLodge(1); // 추천 숙소 6개 가져오는 메소드
+		// 가장 많이 찜한 숙소 리스트
+//		List<Lodge> favoriteLodgeList = mainService.getPagingLodge(2);
 //		// 추천 행사 리스트
 //		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
 //
@@ -54,38 +57,47 @@ public class MainController {
 		
 		// 도시별 추천 숙소, 행사 리스트 추가
 		
-//		model.addAttribute("recommendLodgeList", recommendLodgeList);
+		List<Lodge> lodgeList = mainService.getLodgeList(1); // 9개씩
+		
+		List<Festival> festivalList = mainService.getRecommendFestivalList(1); // 4개씩
+		
+		model.addAttribute("lodgeList", lodgeList); // 추천 숙소 리스트
+		model.addAttribute("festivalList", festivalList);  // 가장 많이 찜한 숙소 리스트
 //		model.addAttribute("recommendFestivalList", recommendFestivalList);
 //		model.addAttribute("themeLodgeList", themeLodgeList);
 //		model.addAttribute("themeFestivalList", themeFestivalList);
 		
-		return "main/main";
+		return "/main/main";
 	}
 	
 	// 메인 페이지
 	@RequestMapping(value = "/searchMain", method = RequestMethod.POST)
 	public String main(Model model,
-			@RequestParam(required=false, defaultValue="") String location, 
-			@RequestParam(required=false, defaultValue="") String checkin, 
-			@RequestParam(required=false, defaultValue="") String checkout, 
-			@RequestParam(required=false, defaultValue="") int people, 
-			@RequestParam(required=false, defaultValue="") String cityLat, 
-			@RequestParam(required=false, defaultValue="") String cityLng
+			/*@RequestParam(required=false, defaultValue="") */String location, 
+			/*@RequestParam(required=false, defaultValue="") */String checkin, 
+			/*@RequestParam(required=false, defaultValue="") */String checkout, 
+			/*@RequestParam(required=false, defaultValue="") */String people, 
+			@RequestParam(required=false, defaultValue="") double cityLat, 
+			@RequestParam(required=false, defaultValue="") double cityLng
 			
 			) {
 		
 		logger.info("메인 페이지 띄우기");
-		
+		int people_num = 0;
+		if(people != null) {
+			people_num = Integer.parseInt(people);
+		}
 		System.out.println(location);
 		System.out.println(checkin);
 		System.out.println(checkout);
 		System.out.println(people);
+		System.out.println(people_num);
 		System.out.println(cityLat);
 		System.out.println(cityLng);
 		
 		
 
-//		// 추천 숙소 리스트
+		// 추천 숙소 리스트
 //		List<Lodge> recommendLodgeList = mainService.getRecommendLodge();
 //		// 추천 행사 리스트
 //		List<Festival> recommendFestivalList = mainService.getRecommendFestivalList();
@@ -256,6 +268,32 @@ public class MainController {
 		}
 		
 		return lodgeList;
+	}
+	
+	@RequestMapping(value="/mainAjax", method = RequestMethod.POST)
+	public String mainAjax(int page, Model model) {
+		
+		int index = (page % 10) + 2;
+		
+		
+		
+		String[] lodgeComment = {"1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11", "12", "13","14", "15", "16", "17", "18", "19", "20"};
+		
+		String[] festivalComment = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
+		
+		List<Lodge> lodgeList = mainService.getLodgeList(page); // 9개씩
+		
+		List<Festival> festivalList = mainService.getRecommendFestivalList(page); // 4개씩
+		
+		logger.info(lodgeList.toString());
+		
+		model.addAttribute("lodgeList", lodgeList);
+		model.addAttribute("festivalList", festivalList);
+		model.addAttribute("lodgeComment1", lodgeComment[(index-2)*2]);
+		model.addAttribute("lodgeComment2", lodgeComment[(index-2)*2 + 1]);		
+		model.addAttribute("festivalComment", festivalComment[index-2]);
+		
+		return "/main/mainAjax";
 	}
 	
 }
