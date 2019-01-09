@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -189,6 +190,7 @@ public class LodgeServiceImpl implements LodgeService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 	
 		
+		
 		for(Pay pay : pa) {
 			Date stay_st = pay.getStay_start();
 			Date stay_e = pay.getStay_end();
@@ -260,6 +262,34 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.deleteReportComment(report);
 		
 	}
+
+//	@Override
+//	public Pay stayHeads(Lodge lodge) {
+//		
+//		List<Pay> pa = lodgedao.reservationDay_off(lodge);
+//		
+//		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+//
+//		Pay heads = new Pay();
+//		for(Pay pp : pa) {
+//			heads.setStay_start(pp.getStay_start());
+//			heads.setStay_end(pp.getStay_end());
+//			heads.setLodge_no(lodge.getLodge_no());
+//			
+//			String sp = date.format(heads.getStay_start());
+//			String es = date.format(heads.getStay_end());
+//			java.sql.Date start_date = java.sql.Date.valueOf(sp); 
+//			java.sql.Date end_date = java.sql.Date.valueOf(es);
+//			
+//			heads.setStay_start(start_date);
+//			heads.setStay_end(end_date);
+//			
+//			lodgedao.heads(heads);
+//			System.out.println(heads);
+//		}
+//		
+//		return null;
+//	}
 
 	
 

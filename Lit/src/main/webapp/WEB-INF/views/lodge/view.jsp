@@ -600,12 +600,14 @@ $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
     
-    var $start = $("#datepicker"),
-    	$end = $("#datepicker2");
- 	
-    		// What dates should be disabled - year.month.date
+    var $start = $("#datepicker2"),
+    	$end = $("#datepicker");
+
+	 var select_date = ${view.available_term};
+    var now = new Date();
+  	 var end_date = new Date(now.getFullYear(), now.getMonth()+select_date, now.getDate());
+    
 	 	var disabledDates = ${d_off};
-        	
 
     	$start.datepicker({
     		language: 'en',
@@ -643,17 +645,18 @@ $(function() {
     	    }
     	  }
     	})
-    
-
+    	
+    	
     	function getFormattedDate(date) {
     	  var year = date.getFullYear(),
     	    month = date.getMonth() + 1,
     	    date = date.getDate();
     	    
     	    return year + '.' + month + '.' + date;
-    	}
-    		
-   	 $start.datepicker({
+    	}	
+    
+   	
+ 	   $start.datepicker({
  		language : 'en',
  		minDate : new Date(),
  		onSelect : function(fd, date){
@@ -661,10 +664,11 @@ $(function() {
  			.update('minDate',date)
  		}
  	})
+ 	
  	 $end.datepicker({
  		language : 'en',
- 		minDate : new Date(),
- 	onSelect : function(fd,date){
+ 		maxDate : end_date,
+	 	onSelect : function(fd,date){
  		$start.data('datepicker')
  		.update('maxDate',date)
  	}
@@ -809,10 +813,8 @@ $(function() {
 								class=""
 								style="font-family: 'Circular', Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; margin: 0; text-align: left; line-height: 1.3; color: #2199e8; text-decoration: none">
 									<img
-									src="https://a0.muscache.com/im/pictures/2dcf3c71-aa22-4fbe-8a7f-2f4ee519e393.jpg?aki_policy=profile_x_medium"
-									alt="" class="profile-img"> <img alt=""
-									class="width-77 row-pad-top-2"
-									src="https://a1.muscache.com/airbnb/rookery/dls/5.0_stars-8b3a9b9fe0d1aa014b1f97859cd599b1.png">
+									src="/resources/images/empty_profile_photo.jpg"
+									alt="" class="profile-img">
 							</a></th>
 						</tr>
 					</tbody>
@@ -842,16 +844,12 @@ $(function() {
 			<div class="facility">
 				<h3>편의 시설</h3>
 				<span > 
-				<svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="m12 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 5a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm5.92-5.78a.5.5 0 1 1 -.84.55c-1.19-1.81-3.07-2.77-5.08-2.77s-3.89.96-5.08 2.78a.5.5 0 0 1 -.84-.55c1.38-2.1 3.58-3.23 5.92-3.23s4.54 1.13 5.92 3.23zm2.98-3.03a.5.5 0 1 1 -.79.61c-1.66-2.14-5.22-3.8-8.11-3.8-2.83 0-6.26 1.62-8.12 3.82a.5.5 0 0 1 -.76-.65c2.05-2.42 5.75-4.17 8.88-4.17 3.19 0 7.05 1.8 8.9 4.19zm2.95-2.33a.5.5 0 0 1 -.71-.02c-2.94-3.07-6.71-4.84-11.14-4.84s-8.2 1.77-11.14 4.85a.5.5 0 0 1 -.72-.69c3.12-3.27 7.14-5.16 11.86-5.16s8.74 1.89 11.86 5.16a.5.5 0 0 1 -.02.71z" fill-rule="evenodd"></path></svg>
 				 <span> ${item.get(1)}</span>
 				  <br>
-				  <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="m23.99 18.38-.5-2a .5.5 0 0 0 -.49-.38h-22a .5.5 0 0 0 -.49.38l-.5 2a .5.5 0 0 0 .49.62h23a .5.5 0 0 0 .49-.62zm-1.13-.38h-21.72l.25-1h21.22zm-21.36-3h21a .5.5 0 0 0 .5-.53c-.21-3.22-1.22-5.47-3-5.47a4911.8 4911.8 0 0 0 -8.8 0h-1.71c-.2 0-.26-.08-.19-.27a9.59 9.59 0 0 1 .17-.48c.13-.34.27-.68.43-1 .41-.79.82-1.25 1.1-1.25h10.5c.87 0 1.43-.7 1.4-1.52s-.64-1.48-1.55-1.48h-11.35c-3.84 0-7.29 4.4-8.99 11.38a.5.5 0 0 0 .49.62zm8.5-11h11.35c.35 0 .55.21.56.52.01.29-.14.48-.4.48h-10.51c-.8 0-1.42.68-1.99 1.8a10.74 10.74 0 0 0 -.65 1.61c-.31.82.23 1.59 1.13 1.59h1.71a33801.74 33801.74 0 0 1 8.8 0c .94 0 1.71 1.58 1.95 4h-19.8c1.65-6.21 4.7-10 7.85-10zm5 8a1 1 0 1 1 2 0 1 1 0 0 1 -2 0zm3 0a1 1 0 1 1 2 0 1 1 0 0 1 -2 0z" fill-rule="evenodd"></path></svg>
 				 <span> ${item.get(2)}</span> 
 				  <br> 
-				<svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="M22.5 23H21V1h1.5a.5.5 0 0 0 0-1H.5a.5.5 0 1 0 0 1H2v22H.5a.5.5 0 1 0 0 1h22a.5.5 0 0 0 0-1zM11 3v20H3V1h8v2zm9 20h-8V1h8v22zM4.146 10.854a.5.5 0 0 1 0-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 1 1-.708.708L7 9.707V14.5a.5.5 0 0 1-1 0V9.707l-1.146 1.147a.5.5 0 0 1-.708 0zm10 2a.5.5 0 1 1 .708-.708L16 13.293V8.5a.5.5 0 1 1 1 0v4.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2z" fill-rule="evenodd"></path></svg>
 				 <span> ${item.get(3)}</span>
 				  <br> 
-				<svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style="height: 19px; width: 19px; fill: currentcolor;"><path d="m5 3.5a1.5 1.5 0 1 0 -3 0 1.5 1.5 0 0 0 3 0zm-1.5.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm4 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0-2a .5.5 0 1 1 0 1 .5.5 0 0 1 0-1zm4.5 3c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 15c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm9.5-21h-19a2.51 2.51 0 0 0 -2.5 2.5v19c0 1.38 1.12 2.5 2.5 2.5h19c1.38 0 2.5-1.12 2.5-2.5v-19c0-1.38-1.12-2.5-2.5-2.5zm1.5 21.5c0 .83-.68 1.5-1.5 1.5h-19c-.83 0-1.5-.68-1.5-1.5v-19c0-.83.68-1.5 1.5-1.5h19c .83 0 1.5.68 1.5 1.5zm-6.17-6.12a.5.5 0 0 1 .04.71 2.49 2.49 0 0 1 -.63.48c-1.15.65-2.67.65-4.49-.38-1.52-.85-2.66-.85-3.51-.38a1.57 1.57 0 0 0 -.37.27.5.5 0 1 1 -.75-.66 2.49 2.49 0 0 1 .63-.48c1.15-.65 2.67-.65 4.49.38 1.52.85 2.66.85 3.51.38a1.57 1.57 0 0 0 .37-.27.5.5 0 0 1 .71-.04zm0-3.5a.5.5 0 0 1 .04.71 2.49 2.49 0 0 1 -.63.48c-1.15.65-2.67.65-4.49-.38-1.52-.85-2.66-.85-3.51-.38a1.57 1.57 0 0 0 -.37.27.5.5 0 1 1 -.75-.66 2.49 2.49 0 0 1 .63-.48c1.15-.65 2.67-.65 4.49.38 1.52.85 2.66.85 3.51.38a1.57 1.57 0 0 0 .37-.27.5.5 0 0 1 .71-.04z" fill-rule="evenodd"></path></svg>
 				 <span> ${item.get(4)}</span> 
 				  <br> 
 				</span>
@@ -900,7 +898,7 @@ $(function() {
     	<c:if test = "${review.parent_comment_no == 0 }">
 					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
        				<a href="/resources/" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
- 					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
+ 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
@@ -927,7 +925,7 @@ $(function() {
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
 						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 20px;">    
 	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
-	 					<img class="user_img" src="https://a0.muscache.com/im/pictures/user/f4118b8f-179e-4655-9185-c2d2693b53a6.jpg?aki_policy=profile_x_medium" height="48" width="48" alt="Hyun님의 사용자 프로필" title="Hyun님의 사용자 프로필"></a>
+	 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>

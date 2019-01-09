@@ -77,6 +77,8 @@ public class MessageController {
 	      
 	      //읽지않음에서 읽음으로 변경
 	     messageService.countupdate(message);
+	     
+	     
 	      
 	     return messageService.countList(message);
 

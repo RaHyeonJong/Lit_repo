@@ -18,7 +18,7 @@ $(document).ready(function(){
 			type:"GET",
 			url: "/message/send",
 			data: {},
-			dataType: "html",
+			dataType: "json",
 			success: function(res)
 			{
 				$('#contents-div').html(res);				
@@ -53,23 +53,24 @@ $(document).ready(function(){
 
 </script>
 <script>
-
+	var td = $('tr.sub_category').hide();
 	//td를 누르면 벌어지는 일
 	var msg_no;
 	
 	$(".category").click(function(e){
 		
-		msg_no = $(e.target).closest('tr').children('td').first().html();
+		var read = document.getElementById("read");
 		
+		msg_no = $(e.target).closest('tr').children('td').first().html();
+		var t = $(this);
 		$.ajax({
 	         type: "POST",
 	         url: "/message/receive",
 	         data: {"message_no": msg_no}, 
 	         dataType: "json",
 	         success : function(e){
-	     		$(this).next('tr.sub_category').toggle();
-	     		alert(msg_no);
-	         },
+				t.next('tr.sub_category').toggle();
+	         },	
 	         error : function(){
 	            alert("에러났어요!");
 	         }
