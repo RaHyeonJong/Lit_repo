@@ -812,7 +812,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 					src="/resources/images/logo.jpg" alt="로고" /></a>
 			</h3>
 			  <form action="#" class="Search">
-   				 <input class="Search-box" type="search" id="Search-box" autocomplete="off">
+   				 <input class="Search-box" type="search" id="location-input" autocomplete="off">
    					
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
   			</form>
@@ -1055,3 +1055,24 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </form>
 </div></div>
 <!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
+<script>
+////////// 자동완성기능 /////////
+function initAutocomplete() {
+	var input = document.getElementById('location-input');
+	var searchBox = new google.maps.places.Autocomplete(input);
+	
+	 google.maps.event.addListener(searchBox, 'place_changed', function () {
+	        var place = searchBox.getPlace();
+	        
+	        document.getElementById('cityLat').value = place.geometry.location.lat();
+	        document.getElementById('cityLng').value = place.geometry.location.lng();
+	    });
+	
+}
+
+google.maps.event.addDomListener(window, 'load', initAutocomplete);
+///////////////////////////////
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete"
+         async defer></script>
