@@ -871,7 +871,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!--  관리자 로그인 -->
 				<c:if test="${member.mem_case eq 'admin' }">
-					<li><a href="/admin/main">관리자 페이지</a></li>
+					<li><a href="/admin/member">관리자 페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
