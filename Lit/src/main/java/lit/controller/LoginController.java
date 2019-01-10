@@ -42,29 +42,21 @@ public class LoginController {
 		
 		if(existAccount) {			
 			member = loginService.getMember(member);
-			
-<<<<<<< HEAD
 			session.setAttribute("login", true);
 			session.setAttribute("member", member);
 	
 			resultMap.put("login", true);
-=======
-			if(member.getMem_activation() == 1) {
-				message.setReceiver_no(member.getMem_no());
-				int counter = messageService.messagecount(message);
-				
+
+			if(member.getMem_activation() == 1) {				
 				session.setAttribute("login", true);
 				session.setAttribute("member", member);
-				session.setAttribute("counter", counter);
-				
-				System.out.println("카운팅값:"+counter);
-				
+			
 				resultMap.put("login", true);
 			} else {
 				resultMap.put("login", false);
 				resultMap.put("ban", true);
 			}
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
 		} else {
 			resultMap.put("login", false);
 			resultMap.put("ban", false);

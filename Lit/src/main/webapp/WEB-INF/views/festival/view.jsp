@@ -77,17 +77,11 @@
 
 <body>
 <div id="wrapper">
-
-<<<<<<< HEAD
 	<div id="box1">
 	
 		<div id="img_box">
 			${festivalView.festival_contents }
 		</div>
-=======
-
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-
 	</div>
 
 	

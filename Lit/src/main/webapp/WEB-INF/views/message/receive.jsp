@@ -5,7 +5,6 @@
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 받은 쪽지함 -->
-
 <script>
 $(document).ready(function(){
 	$('tr.sub_category').hide();
@@ -13,19 +12,19 @@ $(document).ready(function(){
 	//받은 쪽지함에서 보낸 쪽지함 버튼 누르면 Ajax가 발동된다.
 	
 	$('#send').click(function(){
-		
+		 
 		$.ajax({
 			type:"GET",
 			url: "/message/send",
 			data: {},
-			dataType: "json",
+			dataType: "html",
 			success: function(res)
-			{
-				$('#contents-div').html(res);				
+			{	
+				$("#contents-div").html(res);
 			},
 			error:function()
 			{
-				alert("에러났어요!");
+				alert("에러  났어요!");
 			}	
 		});
 	});
@@ -53,43 +52,25 @@ $(document).ready(function(){
 
 </script>
 <script>
-<<<<<<< HEAD
-
-=======
-	var td = $('tr.sub_category').hide();
 	//td를 누르면 벌어지는 일
-	var msg_no;
-	
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
+
 	$(".category").click(function(e){
 		
-<<<<<<< HEAD
 		var msg_no = $(e.target).closest('tr').children('td').html();
 		var read = $(e.target).closest('tr').children('td.read');
 		var t = $(this);
-=======
-		var read = document.getElementById("read");
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-		
-		msg_no = $(e.target).closest('tr').children('td').first().html();
-		var t = $(this);
+	
 		$.ajax({
 	         type: "POST",
 	         url: "/message/receive",
 	         data: {"message_no": msg_no}, 
 	         dataType: "json",
-<<<<<<< HEAD
 	         success : function(){
 	        	read.html("읽음");
 	        	read.css("color","red");
 	        	t.next('tr.sub_category').toggle();		        	 
 	     	},
-=======
-	         success : function(e){
-				t.next('tr.sub_category').toggle();
-	         },	
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-	         error : function(){
+	        error : function(){
 	            alert("에러났어요!");
 	         }
 	      });

@@ -44,7 +44,7 @@ $(document).ready(function(){
 			}
 			
 		})
-	}, 10000);
+	}, 5000);
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
@@ -474,13 +474,7 @@ body {
    top: 75px;
 }
 
-<<<<<<< HEAD
 #header {
-=======
-
-#header {
-
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;

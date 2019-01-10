@@ -50,7 +50,7 @@
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="/festival/view?festival_no=${festival.festival_no }">
-            <img  src="/resources/images/festival/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; border-radius:15%" ></a>
+            <img  src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; border-radius:15%" ></a>
             <div class="card-body" style="text-align:center;">            
               <!-- 축제 제목 -->
               <p style="font-family:Charm;"><b>${festival.festival_name }</b></p>
