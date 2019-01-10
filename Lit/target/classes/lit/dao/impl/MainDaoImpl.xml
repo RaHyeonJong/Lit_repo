@@ -28,6 +28,11 @@
 	WHERE lodge_no = #{lodge_no}
 	</select>
 	
+	<select id="selectFestivalImageName" parameterType="int" resultType="String">
+	SELECT stored_name FROM image
+	WHERE festival_no = #{festival_no}
+	</select>
+	
 	<select id="selectRecommendLodge" resultType="lit.dto.Lodge">
 	SELECT * FROM (
     	SELECT ROWNUM rnum, a.* FROM (

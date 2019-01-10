@@ -101,9 +101,23 @@ width: 49%;
 float: right;
 height:800px;
 }
+
+#inputCharge{
+width:185px;
+height:30px;
+font-size:13px;
+
+}
 .move-button{
 padding:10px;
-padding-top:355px;
+padding-top:50px;
+position: absolute;
+margin-top: 225px;
+margin-left: 185px;
+background-color: white;
+width: 380px;
+height: 70px;
+
 
 }
 
@@ -177,10 +191,21 @@ padding: 10px;
 
 .coast{
 width:150px;
+    font-family: inherit;
 border:0;
 outline:0;
 background-color:white;
 color:green;
+}
+
+.content2-1{
+margin-bottom:10px;
+font-weight:bold;
+}
+
+select{
+
+
 }
     
 
@@ -189,16 +214,16 @@ color:green;
 <body>
 
 <div id="wrapper">
-	<div class="left" style="border:1px solid red;">
+	<div class="left">
 	 <div class="innerleft">
 		<div class="content1 category">
 			<h2>숙소의 요금을 설정해주세요</h2>
-		</div>
+		</div>	
 		<div class="content2 category">
-			<div>기본요금을 입력해주세요</div>
+			<div class="content2-1">기본요금을 입력해주세요</div>
 			<input type="text" id="inputCharge" name="stay_cost" />
 			<div id="checkCharge"></div>
-			<div><button class="coast">권장요금 : 45000원</button></div>
+			<div class="coast">제안요금 : 45000원</div>
 		</div>
 		<div class="content3 category">
 			<div>
@@ -226,11 +251,12 @@ color:green;
 						<option value="23">23</option>
 						<option value="24">24</option>
 					</select>
-					<label>분</label>
+					<label>시</label>
 					<select id="check_in_min" name="check_in_min">
 						<option value="00">00</option>
 						<option value="30">30</option>
 					</select>
+					<label>분</label>
 					<br>
 					<br>
 					<label>체크아웃시간</label>
@@ -256,29 +282,31 @@ color:green;
 						<option value="23">23</option>
 						<option value="24">24</option>
 					</select>
-					<label>분</label>
+					<label>시</label>
 					<select id="check_out_min" name="check_out_min">
 						<option value="00">00</option>
 						<option value="30">30</option>
 					</select>
+					<label>분</label>
 					
 					
 					
 					
 					
-   		  <div class="move-button">
-	             <div class="cut"></div>
-	              <button id="backButton">뒤로</button>
-	              <button id="nextButton">완료</button>
-            </div>  
+   		
 				
 			</div>
 		</div>
 		
 		
 	 </div><!-- inner end -->
+	   <div class="move-button">
+	             <div class="cut"></div>
+	              <button id="backButton">뒤로</button>
+	              <button id="nextButton">완료</button>
+            </div>  
 	</div><!-- left end -->
-	<div class="right" style="border:1px solid blue;">
+	<div class="right">
 		<div class="right1-1">
 			<img src="/resources/images/hostPageIcon.svg" />
 			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>

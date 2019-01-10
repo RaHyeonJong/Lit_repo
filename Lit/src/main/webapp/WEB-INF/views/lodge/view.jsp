@@ -683,7 +683,10 @@ $(function() {
 	$(document).ready(function(){
 
 		$('#lodge_like').click(function(){
-		
+			if("${!login}"){
+				alert("로그인 후 이용해 주세요");
+				return;
+			}
 			var lodge_no = '${view.lodge_no}',
 				mem_no = '${member.mem_no}';
 				var likeButton = document.getElementById('lodge_like');
@@ -813,10 +816,16 @@ $(function() {
 							<th class="small-2 large-2 columns last"><a href="#"
 								class=""
 								style="font-family: 'Circular', Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; margin: 0; text-align: left; line-height: 1.3; color: #2199e8; text-decoration: none">
-									<img
-									src="/resources/images/empty_profile_photo.jpg"
-									alt="" class="profile-img">
-							</a></th>
+									
+								<c:if test="${view.profile_stored_name eq null }">		
+									<img src="/resources/images/empty_profile_photo.jpg"alt="" class="profile-img">
+								</c:if>
+								<c:if test="${view.profile_stored_name ne null }">		
+									<img src="/resources/images/${view.profile_stored_name }"alt="" class="profile-img">
+								</c:if>
+							</a>
+							
+							</th>
 						</tr>
 					</tbody>
 				</table>
@@ -854,7 +863,7 @@ $(function() {
 				 <span> ${item.get(4)}</span> 
 				  <br> 
 				</span>
-			</div>
+			</div><br>
 			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
 			<div id="modalLayer">
  			 <div class="modalContent">
@@ -863,8 +872,11 @@ $(function() {
     			${lodgeItem }<br><br>
     			</c:forEach>
  				
-    			<p style = "font-size: 20px;font-weight: bold;">노트북 작업공간</p>
-    			<c:out value = "${view.convenient_area }"/>
+    			<p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
+    			<c:forEach items= "${area}" var = "area">
+    			${area}<br><br>
+					    			
+    			</c:forEach>
     			<button class = "close_btn" type="button"></button>
  			 </div>
 			</div>
@@ -898,8 +910,13 @@ $(function() {
 				    <c:forEach items = "${lodgeReview}" var = "review">
     	<c:if test = "${review.parent_comment_no == 0 }">
 					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
-       				<a href="/resources/" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
- 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
+       				<a href="/viewProfile?mem_no=${review.mem_no }" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+       				<c:if test="${review.stored_name ne null }">
+ 					<img class="user_img" src="/resources/images/${review.stored_name }" height="48" width="48" >
+       				</c:if>
+       				<c:if test="${review.stored_name eq null }">
+ 					<img class="user_img" src="/resources/images/empty_profile_photo.jpg" height="48" width="48" >
+       				</c:if></a>
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
@@ -925,8 +942,14 @@ $(function() {
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
 						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 20px;">    
-	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
-	 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
+	       				<a href="#" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+	 					<c:if test="${review2.stored_name ne null }">
+ 						<img class="user_img" src="/resources/images/${review.stored_name }" height="48" width="48" >
+       					</c:if>
+       					<c:if test="${review2.stored_name eq null }">
+ 						<img class="user_img" src="/resources/images/empty_profile_photo.jpg" height="48" width="48" >
+       					</c:if></a>
+	       				
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>
@@ -998,7 +1021,7 @@ $(function() {
 <c:import url="../layout/footer.jsp"/>
 <c:import url="../lodge/sidebar.jsp"/>
    <!-- 구글 맵 -->  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"
     async defer></script>
 
 </body>

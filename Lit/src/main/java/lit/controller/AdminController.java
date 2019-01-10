@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import lit.dao.face.AdminDao;
 import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Image;
@@ -30,6 +32,7 @@ public class AdminController {
 	
 	@Autowired AdminService adminService;
 	@Autowired ServletContext context;
+	@Autowired AdminDao adminDao;
 	
 	@RequestMapping(value="/admin/layout/header", method=RequestMethod.GET)
 	public void adminMain( ) {
@@ -168,7 +171,9 @@ public class AdminController {
 			Festival festival , 
 			Image image,
 			String start_date1 , 
-			String end_date2 ) { 
+			String end_date2,
+			String latitude1,
+			String longitude1) { 
 		
 		// 스트링타입을 sqlDate 형태로 형변환
 		Date start_date = Date.valueOf(start_date1.replace("/", "-"));
@@ -176,6 +181,13 @@ public class AdminController {
 		
 		festival.setStart_date(start_date);
 		festival.setEnd_date(end_date);
+		
+		// loatitude, logitude 형변환 후 festival DTO에 넣기
+		double latitude = Double.parseDouble(latitude1);
+		double longitude = Double.parseDouble(longitude1);
+		
+		festival.setLatitude(latitude);
+		festival.setLongitude(longitude);
 		
 		adminService.writeFestival(festival);
 		int festival_no = festival.getFestival_no();
@@ -191,11 +203,28 @@ public class AdminController {
 	@RequestMapping(value="/festival/view", method=RequestMethod.GET)
 	public void festivalView (Model model, int festival_no) { 
 		
+		//행사 상세보기
 		Festival festivalView = adminService.viewFestival(festival_no);
+		
+		//행사 추천리스트 [성훈]
+		List<Festival> recommendView = adminService.viewRecommend();
+		
+		System.out.println(festivalView);
 		model.addAttribute("festivalView", festivalView);
+		model.addAttribute("recommendView", recommendView);
+		
 	}
 	
 	
+	// 축제 삭제하기
+	@RequestMapping(value="/festival/delete", method=RequestMethod.GET)
+	public String festivalDelete (Festival festival, Image image) { 
+		
+		adminService.deleteFestivalImage(image);
+		adminService.deleteFestival(festival);
+		return "redirect:/admin/festival";
+		
+	}
 	
 	// -------------------- 결제 관리 --------------------  
 	
@@ -259,6 +288,14 @@ public class AdminController {
 		return "redirect:/admin/reportMember";
 	}
 	
+	// 체크박스로 선택된 멤버 비활성화 시키기
+	@RequestMapping(value="/admin/checkMemDisable", method=RequestMethod.POST)
+	public String memberActiveResult(String names ) { 
+		
+		adminService.checkMemberDisable(names);
+		return "redirect:/admin/reportMember";
+	}	
+	
 	// 신고당한 숙소 리스트 보이기
 	
 	@RequestMapping(value="/admin/reportLodge", method=RequestMethod.GET)
@@ -287,6 +324,13 @@ public class AdminController {
 		return "redirect:/admin/reportLodge";
 	}
 	
+	// 체크박스로 선택된 숙소 비활성 시키기 
+	@RequestMapping(value="/admin/checkLodgeDisable", method=RequestMethod.POST)
+	public String cehckLodgeDisable(String names ) { 
+		
+		adminService.checkLodgeDisable(names);
+		return "redirect:/admin/reportLodge";
+	}		
 	
 	// 신고당한 댓글 리스트 보이기
 	
@@ -314,6 +358,21 @@ public class AdminController {
 		adminService.deleteReportComment(comment_no);
 		return "redirect:/admin/reportComment";
 	}
+	
+	
+	// 승인 대기중인 숙소 개수 가져오기
+	@RequestMapping(value="/admin/countForAdminHeader", method=RequestMethod.POST)
+	public ModelAndView countForAdminHeader(ModelAndView mav) { 
+		
+		int lodge0Cnt = adminDao.lodgeActivation0CntAll();
+		int cs0Cnt = adminDao.answer0CntAll();
+		
+		mav.addObject("lodge0Cnt", lodge0Cnt);
+		mav.addObject("cs0Cnt", cs0Cnt);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 	
 	
 }

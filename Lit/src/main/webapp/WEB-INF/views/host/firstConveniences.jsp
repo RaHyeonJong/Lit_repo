@@ -202,7 +202,19 @@ $(document).ready(function(){
 	
 	
 	$("#nextButton").click(function(){
-		location
+		
+		var check = $("input[type=checkbox][name=convenient_facility]:checked").val();
+
+		var etc_check = $("input[type=checkbox][name=convenient_area]:checked").val(); 
+		
+		if(check==null){
+			alert("편의시설을 선택해 주세요");
+			return;
+		}else if(etc_check==null){
+			alert("기타시설을 선택해 주세요");
+			return;
+		}
+		
 		$('form').submit();
 
 	});

@@ -228,6 +228,21 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminDao.selectFestivalByFestivalno(festival_no);
 	}
+
+	// 축제 이미지 삭제하기 
+	@Override
+	public void deleteFestivalImage(Image image) {
+		
+		adminDao.deleteFestivalImage(image);
+	}
+
+	
+	// 축제 삭제하기
+	@Override
+	public void deleteFestival(Festival festival) {
+		
+		adminDao.deleteFestival(festival);
+	}
 	
 	// -------------------- 결제 관리 --------------------
 	
@@ -322,6 +337,13 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.updateMemberActivation(mem_no);
 	}
 
+	// 체크박스로 선택된 멤버 비활성화
+	@Override
+	public void checkMemberDisable(String names) {
+		
+		adminDao.updateCheckMemberDisable(names);
+	}
+	
 	// 숙소 신고 리스트 보이기 
 	@Override
 	public List<Report> lodgeReportList(Paging paging) {
@@ -354,6 +376,13 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.updateReportLodgeActivation(lodge_no);
 	}
 
+	// 체크박스로 선택된 숙소 비활성화 하기 
+	@Override
+	public void checkLodgeDisable(String names) {
+		
+		adminDao.updateCheckLodgeDisable(names);
+	}
+		
 	// 신고 댓글 리스트
 	@Override
 	public List<Report> commentReportList(Paging paging) {
@@ -385,6 +414,19 @@ public class AdminServiceImpl implements AdminService{
 		
 		adminDao.deleteReportComment(comment_no);
 	}
+
+	@Override
+	public List<Festival> viewRecommend() {
+		
+		return adminDao.viewRecommend();
+	}
+
+
+
+
+
+
+
 
 
 

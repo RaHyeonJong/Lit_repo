@@ -56,10 +56,11 @@
 	</select>
 	
 
-	<select id="messagecount" parameterType="lit.dto.Message" resultType="int">
+	<select id="messagecount" parameterType="int" resultType="int">
 		
 		SELECT COUNT(*) FROM message
 		WHERE receiver_no = #{receiver_no }
+		AND read =0 
 				
 	</select>
 
@@ -70,13 +71,6 @@
 		WHERE message_no = #{message_no }
 	
 	</update>
-	
-	<select id="countList" parameterType="lit.dto.Message" resultType="lit.dto.Message">
-	
-		SELECT * FROM message
-		WHERE message_no = #{message_no }
-	
-	</select>
 	
 	<insert id="sendwrite" parameterType="lit.dto.Message">
 	
