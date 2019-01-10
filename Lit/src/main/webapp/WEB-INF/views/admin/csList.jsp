@@ -79,7 +79,7 @@
                
         <div class="w3-bar">
 	    <nav>
-		<ul class="pagination" style="padding-left: 265px;">
+		<ul class="pagination" style="padding-left: 30%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
@@ -185,7 +185,7 @@
                
         <div class="w3-bar">
 	    <nav>
-		<ul class="pagination" style="padding-left: 265px;">
+		<ul class="pagination" style="padding-left: 40%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

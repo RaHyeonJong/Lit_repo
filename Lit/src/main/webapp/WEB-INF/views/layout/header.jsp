@@ -20,8 +20,31 @@ $(document).ready(function(){
 	var modal_join = $('#modal-join');
 	var modal_certification = $('#modal-certification');
 	var modal_joinResult = $('#modal-joinResult');
+
 	
-	
+//	쪽지 갯수 실시간 
+//class="message_count"
+
+	setInterval(function(){
+		$.ajax({
+			type:"GET",
+			url:"/mypage/scanMsgCnt",
+			data:{},
+			dataType:"json",
+			success:function(res)
+			{
+				if(res.count != -1) //로그인 성공
+					$('.message_count').html('쪽지  ' + res.count + '개');
+				else 			//로그인 실패
+					return;
+			},
+			error:function()
+			{
+				alert("오류");
+			}
+			
+		})
+	}, 5000);
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
@@ -86,9 +109,12 @@ $(document).ready(function(){
 			success : function(res){
 				console.log(res.login);
 				if(res.login == true){
-					window.location.href = "/tempmain";
+					window.location.href = "/main";
 				}else{
-					$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+					if(res.ban == false)
+						$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+					else
+						$("#loginMsgDiv").html("로그인 실패! 관리자에 의해 차단된 계정입니다.");
 				}
 			},
 			error : function(){
@@ -308,6 +334,7 @@ $(document).ready(function(){
 					dur = 180;
 					var min, sec;
 					timer = setInterval(function(){
+						
 						min = parseInt(dur/60%60, 10);
 						sec = parseInt(dur%60, 10);
 						
@@ -446,7 +473,6 @@ body {
    left: 0;
    top: 75px;
 }
-
 #header {
 /*    position: relative; */
    z-index: 100;
@@ -462,6 +488,7 @@ body {
    position: sticky;
    will-change: transform;
 }
+
 #header:hover {
    
 }
@@ -817,15 +844,6 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
    				 
    				 <input type="submit" style="display:none;" />
   			</form>
-<!-- 					<div class= "search_modal "style="left: 101;"> -->
-<!--    					<ul style ="padding : 0;" class="prevention"> -->
-<!--    					<li>&nbsp;&nbsp;&nbsp;&nbsp;프로젝트 둘러보기</li><br><br> -->
-<!--    					<li><button class= "btn">모두</button></li> -->
-<!--    					<li><button class= "btn">숙소</button></li> -->
-<!--    					<li><button class= "btn">행사</button></li> -->
-<!--    					</ul> -->
-<!--    					</div> -->
-		
 		</div>
 
 
@@ -842,7 +860,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			
 				<!-- 일반 로그인 -->
 				<c:if test="${member.mem_case eq 'user' }">
-					<li><a href="/mypage/main?go=message">쪽지 ${counter }개</a>
+				
+					<li><a href="/mypage/main?go=message" class="message_count">쪽지 ${counter }개</a>
 					<li><a href="#">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
@@ -857,7 +876,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
-					<li><a href="/mypage/main?go=message">쪽지 <b>${counter }</b>개</a>
+					<li><a href="/mypage/main?go=message" class="message_count">쪽지 <b>${counter }</b>개</a>
 					<li><a href="#">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
@@ -872,7 +891,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!--  관리자 로그인 -->
 				<c:if test="${member.mem_case eq 'admin' }">
-					<li><a href="/admin/main">관리자 페이지</a></li>
+					<li><a href="/admin/member">관리자 페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -1090,6 +1109,7 @@ function check() {
 	return true;
 }
 </script>
+
 <!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete&v=3.exp&sensor=false&libraries=places"
          async defer></script>

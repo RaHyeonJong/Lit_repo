@@ -13,7 +13,9 @@ public class Comment {
 	private int mem_no;
 	private String mem_name;
 	private Date written_time;
-
+	private String stored_name;
+	
+	
 	@Override
 	public String toString() {
 		return "Comment [comment_no=" + comment_no + ", parent_comment_no=" + parent_comment_no + ", board_no="
@@ -91,6 +93,14 @@ public class Comment {
 
 	public void setLodge_name(String lodge_name) {
 		this.lodge_name = lodge_name;
+	}
+
+	public String getStored_name() {
+		return stored_name;
+	}
+
+	public void setStored_name(String stored_name) {
+		this.stored_name = stored_name;
 	}
 	
 	

@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -47,8 +48,9 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.SelectLodgeImage(lodge);
 	}
 
+	
 	@Override
-	public List LodgeConvenient(Lodge lodge) {
+	public List<String> LodgeConvenient(Lodge lodge) {
 		lodgedao.selectConvenient(lodge);
 		String[] sub = lodge.getConvenient_facility().split("#"); 
 		List<String> list = new ArrayList<>();
@@ -58,7 +60,16 @@ public class LodgeServiceImpl implements LodgeService {
 		
 		return list; 
 	}
-
+	@Override
+	public List<String> LodgeConvenientArea(Lodge lodge) {
+		lodgedao.selectConvenientArea(lodge);
+		String[] area_sub = lodge.getConvenient_area().split("#");
+		List<String> area_list = new ArrayList<>();
+		for(String area : area_sub) {
+			area_list.add(area);
+		}
+		return area_list;
+	}
 	
 	@Override
 	public Lodge LodgeReservationView(Lodge lodge) {
@@ -189,6 +200,7 @@ public class LodgeServiceImpl implements LodgeService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 	
 		
+		
 		for(Pay pay : pa) {
 			Date stay_st = pay.getStay_start();
 			Date stay_e = pay.getStay_end();
@@ -261,22 +273,6 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
-	
 
-
-
-
-
-
-
-
-	
-	
-
-
-
-	
-	
-	
 	
 }

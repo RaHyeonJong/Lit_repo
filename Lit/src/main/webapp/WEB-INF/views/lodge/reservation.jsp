@@ -84,7 +84,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	var pay_method = $("input[name='selectMeans']:checked").val(), //결제수단
+	var pay_method = $("input[name=selectMeans]:checked").val(), //결제수단
 		mem_no = "${member.mem_no}", 
 		mem_name = "${member.mem_name}",
 		amount ="${pay_sum}", //합계
@@ -181,25 +181,13 @@ $(document).ready(function(){
 		
 	}); //결제하기
 	
-	$("input:radio[name:selectMeans]").change(function(){
-		
-		var means =$(":input:radio[name=selectMeans]:checked").val();
-		var selectCard_div = $("#selectCard_div");
-		var selectTelecom_div = $("#selectTelecom_div");
-		
-		if(means=='card'){
-			selectCard_div.css("display","block");
-			selectTelecom_div.css("display","none");
-		}
-		if(means=="phone"){
-			selectCard_div.css("display","none");
-			selectTelecom_div.css("display","block");
-		}
+	$("input:radio[name=selectMeans]").change(function(){
+		pay_method =$(":input:radio[name=selectMeans]:checked").val();
 		
 		
 	}); // 카드, 휴대폰 결제
 
-
+ 
 	
 });	
 
@@ -226,9 +214,10 @@ $(document).ready(function(){
 <hr style="border-color: rgb(255, 255, 255)">
 <li>합계  <fmt:formatNumber type ="number" pattern="###,###" value="${pay_sum }"/>원</li>
 </ul>
-<label style ="margin-left: 5px;"><input type="radio" name="selectMeans" value="card" checked="checked"/>체크/신용카드 결제</label>
-<label><input type="radio" name="selectMeans" value="phone"/>휴대폰 결제</label><br><br>
-<button id ="agreeBtn">결제하기</button> <button id ="cencelBtn" onclick="location.href='/lodge/view?=${reservation.lodge_no}'">취소</button>
+<label style ="margin-left: 5px;">
+<input type="radio" name="selectMeans" value="card" />체크/신용카드 결제</label>
+<label><input type="radio" checked="checked" name="selectMeans"value="phone"/>휴대폰 결제</label><br><br>
+<button id ="agreeBtn">결제하기</button> <button id ="cencelBtn" onclick="history.back(); return false ;">취소</button>
 </div>
 
 

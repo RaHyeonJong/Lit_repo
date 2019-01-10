@@ -64,26 +64,31 @@ public class LodgeController {
 		//기본 리스트
 		lodge = lodgeService.LodgeView(lodge);
 		model.addAttribute("view",lodge);
+		
 
-		//이미지
+		//숙소 이미지
 		List<Image> lodgeimage = lodgeService.LodgeImage(lodge);
 		model.addAttribute("lodgeimg", lodgeimage);
+		
+
 		
 		//편의시설
 		List<String> convenient = lodgeService.LodgeConvenient(lodge);
 		model.addAttribute("item", convenient);
+				
+		//편의공간
+		List<String> area = lodgeService.LodgeConvenientArea(lodge);
+		model.addAttribute("area",area);
+		System.out.println(area);
 		
 		// 댓글
 		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
-				
+		//주인 댓글		
 		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
 	
-		//좋아요
-//		boolean like =  lodgeService.selectLike(member);
-//		System.out.println(like);
-//		model.addAttribute("lodge_like", like);
+
 		
 		//결제한 회원
 		if((Member)session.getAttribute("member") != null) {
@@ -116,15 +121,22 @@ public class LodgeController {
 			String d2 = datelist.stream().map(date3 -> "'"+date3+"'").collect(Collectors.joining(","));
 			
 			date.add(d2);
-			reDate.addAll(date);
-			
-			
+	
 			model.addAttribute("off",date);
-			model.addAttribute("d_off", reDate);
 			
-		}
-		System.out.println(date);
-		System.out.println(reDate);
+			}
+			
+			if(date.size() !=0 ) {
+			reDate.addAll(date);
+			model.addAttribute("d_off", reDate);
+				
+			}else if(date.size()==0){
+				model.addAttribute("d_off", reDate);
+			}else if(date.size()==0 || reDate.size()==0){
+				String[] d_off = new String[] {};
+				model.addAttribute("d_off",d_off);
+			}
+		
 	}
 	
 	

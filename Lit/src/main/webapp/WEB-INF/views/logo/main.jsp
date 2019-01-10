@@ -89,7 +89,7 @@ function initAutocomplete() {
 	
 }
 
-google.maps.event.addDomListener(window, 'load', initAutocomplete);
+// google.maps.event.addDomListener(window, 'load', initAutocomplete);
 ///////////////////////////////
 
 function check() {
@@ -108,8 +108,7 @@ function check() {
 	return true;
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&v=3.exp&sensor=false&libraries=places&callback=initAutocomplete"
          async defer></script>
 </body>
 </html>
