@@ -3,6 +3,7 @@ package lit.dao.face;
 import java.util.List;
 
 import lit.dto.Day_off;
+import lit.dto.Image;
 import lit.dto.Lodge;
 
 public interface HostDao {
@@ -45,6 +46,6 @@ public interface HostDao {
 	public void deleteAllDayoff(int lodge_no);
 
 	//숙소 이미지 넣기
-	public void insertLodgeView();
+	public void insertLodgeView(Image image);
 
 }

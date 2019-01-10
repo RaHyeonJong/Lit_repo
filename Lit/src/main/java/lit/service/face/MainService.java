@@ -12,7 +12,7 @@ public interface MainService {
 
 	List<Lodge> getRecommendLodge(); // 숙소 추천 리스트(평점순)
 
-	List<Festival> getRecommendFestivalList(); // 행사 추천 리스트(평점순)
+	List<Festival> getRecommendFestivalList(int page); // 행사 추천 리스트(평점순)
 
 	List<Lodge> getBestLodgeList(); // 최고 평점 숙소 리스트
 	
@@ -26,13 +26,15 @@ public interface MainService {
 
 	List<Festival> getThemeFestivalList(String string); // 테마별 행사 리스트
 	
-	List<Lodge> getLodgeList(); // 모든 숙소 가져오기
+	List<Lodge> getLodgeList(int page); // 모든 숙소 가져오기
 
 	List<Lodge> getLodgeListByBounds(SearchFilter searchFilter); // bounds 숙소 리스트
 
 	List<Lodge> getSearchList(SearchFilter searchFilter);
 
 	String[] getLodgeImageName(int lodge_no);
+
+	List<Lodge> getPagingLodge(int page);
 
 
 }

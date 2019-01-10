@@ -119,8 +119,14 @@ public class HostServiceImpl implements HostService{
 			UUID uid = UUID.randomUUID();
 			String stored_name = uid.toString()+"_"+origin_name;
 //			long fileSize = mf.getSize(); //파일 사이즈
-			image.setOrigin_name(origin_name);
-			image.setStored_name(stored_name);
+			
+			File file = new File(path);
+			if(origin_name != null && !origin_name.equals("")) {
+					//파일명 앞에 업로드 시간 초단위로 붙여 파일명 중복 방지
+					image.setOrigin_name(origin_name);
+					image.setStored_name(stored_name);
+					
+			}
 			System.out.println("orgin_name :"+ image.getOrigin_name());
 			System.out.println("stored_name :"+ image.getStored_name());
 			System.out.println("lodge_no :"+ image.getLodge_no());
@@ -128,7 +134,7 @@ public class HostServiceImpl implements HostService{
 			String safeFile = path+System.currentTimeMillis()+origin_name;
 			
 			
-			hostDao.insertLodgeView();
+			hostDao.insertLodgeView(image);
 			
 			try {
 				mf.transferTo(new File(safeFile));
@@ -141,15 +147,8 @@ public class HostServiceImpl implements HostService{
 			}
 			
 		}
-		
+	
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

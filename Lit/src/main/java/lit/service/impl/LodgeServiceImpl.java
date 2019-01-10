@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -189,6 +190,7 @@ public class LodgeServiceImpl implements LodgeService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 	
 		
+		
 		for(Pay pay : pa) {
 			Date stay_st = pay.getStay_start();
 			Date stay_e = pay.getStay_end();
@@ -261,22 +263,5 @@ public class LodgeServiceImpl implements LodgeService {
 		
 	}
 
-	
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-	
-	
-	
 	
 }

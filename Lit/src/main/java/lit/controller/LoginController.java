@@ -43,20 +43,27 @@ public class LoginController {
 		
 		boolean existAccount = loginService.checkMembership(member);
 		
-		if(existAccount) {
+		if(existAccount) {			
 			member = loginService.getMember(member);
-			message.setReceiver_no(member.getMem_no());
-			int counter = messageService.messagecount(message);
 			
-			session.setAttribute("login", true);
-			session.setAttribute("member", member);
-			session.setAttribute("counter", counter);
-			
-			System.out.println("카운팅값:"+counter);
-			
-			resultMap.put("login", true);
+			if(member.getMem_activation() == 1) {
+				message.setReceiver_no(member.getMem_no());
+				int counter = messageService.messagecount(message);
+				
+				session.setAttribute("login", true);
+				session.setAttribute("member", member);
+				session.setAttribute("counter", counter);
+				
+				System.out.println("카운팅값:"+counter);
+				
+				resultMap.put("login", true);
+			} else {
+				resultMap.put("login", false);
+				resultMap.put("ban", true);
+			}
 		} else {
 			resultMap.put("login", false);
+			resultMap.put("ban", false);
 		}
 		mav.addAllObjects(resultMap);
 		mav.setViewName("jsonView");

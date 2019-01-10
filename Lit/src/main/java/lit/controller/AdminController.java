@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Board;
-import lit.dto.Comment;
 import lit.dto.Festival;
 import lit.dto.Image;
 import lit.dto.Lodge;
