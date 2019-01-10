@@ -77,6 +77,10 @@ public interface AdminDao {
     
     // 축제 삭세하기
     public void deleteFestival(Festival festival);
+
+    // 축제 추천 보이기  
+    public List<Festival> viewRecommend();
+
 	
 	// -------------------- 결제 관리 --------------------	
 	 

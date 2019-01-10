@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Member;
@@ -71,16 +70,14 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/receive", method=RequestMethod.POST)
-	public @ResponseBody Message receiveProc(Message message, ModelAndView mav)
-	{
-	     mav.setViewName("jsonView"); 
-	      
+	public ModelAndView receiveProc(Message message, ModelAndView mav)
+	{     
 	      //읽지않음에서 읽음으로 변경
 	     messageService.countupdate(message);
 	     
+	     mav.setViewName("jsonView");
 	     
-	      
-	     return messageService.countList(message);
+	     return mav;
 
 	   }
 	
@@ -97,8 +94,9 @@ public class MessageController {
 	public String writeProc(Message message)
 	{
 		messageService.sendwrite(message);
-		
+	
 		return "redirect:/mypage/main";
+		
 	}
 	
 	//메시지 삭제 처리

@@ -203,8 +203,16 @@ public class AdminController {
 	@RequestMapping(value="/festival/view", method=RequestMethod.GET)
 	public void festivalView (Model model, int festival_no) { 
 		
+		//행사 상세보기
 		Festival festivalView = adminService.viewFestival(festival_no);
+		
+		//행사 추천리스트 [성훈]
+		List<Festival> recommendView = adminService.viewRecommend();
+		
+		System.out.println(festivalView);
 		model.addAttribute("festivalView", festivalView);
+		model.addAttribute("recommendView", recommendView);
+		
 	}
 	
 	

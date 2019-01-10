@@ -415,6 +415,12 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.deleteReportComment(comment_no);
 	}
 
+	@Override
+	public List<Festival> viewRecommend() {
+		
+		return adminDao.viewRecommend();
+	}
+
 
 
 
