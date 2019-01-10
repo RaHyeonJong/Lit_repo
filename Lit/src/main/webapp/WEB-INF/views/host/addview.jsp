@@ -191,6 +191,7 @@ function initImageUpload(box) {
 
 	  function getFile(e){
 	    let file = e.currentTarget.files[0];
+	   
 	    checkType(file);
 	  }
 	  
@@ -208,14 +209,14 @@ function initImageUpload(box) {
 	  function checkType(file){
 	    let imageType = /image.*/;
 	    if (!file.type.match(imageType)) {
-	      throw 'Datei ist kein Bild';
+	      	alert("이미지 파일만 가능합니다.");
 	    } else if (!file){
-	      throw 'Kein Bild gewählt';
+	    	alert("이미지 파일만 가능합니다.");
 	    } else {
 	      previewImage(file);
 	    }
 	  }
-	  
+	
 	}
 
 	/// drop-effect
@@ -266,12 +267,24 @@ function initImageUpload(box) {
 
 
 	$(document).ready(function(){
+		
+		$("#submit_button").click(function(){
+			var dd = $('.image-upload')[0].files[0];
+			if(dd ==null){
+				alert("최소 첫번째 사진을 삽입해 주세요");
+			}
+			("#sendPhoto").submit();
+			
+		});
+		
+		
 		var boxes = document.querySelectorAll('.box');
+	
 		for (let i = 0; i < boxes.length; i++) {
-		  let box = boxes[i];
-		  initDropEffect(box);
-		  initImageUpload(box);
-			}  
+			  let box = boxes[i];
+			  initDropEffect(box);
+			  initImageUpload(box);
+				}	
 		});
 </script>
 
@@ -334,18 +347,21 @@ function initImageUpload(box) {
        </div>
      </div>
      
-      <div class="box">
+      
+  </div>
+  
+
+  
+	
+  </form>
+	
+	  <div class="box">
          <div>
-            <h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요</h4>
+            <h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요. 사진이 충분하지 않을시 마지막 사진과 동일한 사진이 자동으로 추가됩니다.</h4>
             <button id="submit_button">확인</button>
          </div>
 
      </div>
-  </div>
-
-  </form>
-
-
 
 
 </div>

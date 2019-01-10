@@ -473,10 +473,6 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
- 
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 #header {
 /*    position: relative; */
