@@ -80,4 +80,7 @@ public interface LodgeService {
 	//예약 날짜 비활성
 	public Set<String> reservationDay(Lodge lodge);
 	
+	//수용인원
+//	public Pay stayHeads(Lodge lodge);
+	
 }

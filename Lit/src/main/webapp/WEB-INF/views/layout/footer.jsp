@@ -7,10 +7,7 @@
 
   <style type="text/css">
   /* REMOVE THIS, USE YOUR OWN  */
- html,body { 
-    text-align: -webkit-center;
 
- } 
 
 /* STYLES SPECIFIC TO FOOTER  */
 .footer {
@@ -18,6 +15,8 @@
   position: relative;
   height: auto;
   display: block;
+    margin-left: 362px;
+  
   
 }
 .footer .col {

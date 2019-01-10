@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
@@ -185,9 +185,6 @@ i.material-icons {
 
 
 
-var sel_files =[];
-var i=1;
-
 $(document).ready(function(){
 	var testId="#image"+i;
 	i+=1;
@@ -232,6 +229,102 @@ $(document).ready(function(){
 
 </script>
 
+</head>
+
+
+<script type="text/javascript">
+
+function initImageUpload(box) {
+	  let uploadField = box.querySelector('.image-upload');
+
+	  uploadField.addEventListener('change', getFile);
+
+	  function getFile(e){
+	    let file = e.currentTarget.files[0];
+	    checkType(file);
+	  }
+	  
+	  function previewImage(file){
+	    let thumb = box.querySelector('.js--image-preview'),
+	        reader = new FileReader();
+
+	    reader.onload = function() {
+	      thumb.style.backgroundImage = 'url(' + reader.result + ')';
+	    }
+	    reader.readAsDataURL(file);
+	    thumb.className += ' js--no-default';
+	  }
+
+	  function checkType(file){
+	    let imageType = /image.*/;
+	    if (!file.type.match(imageType)) {
+	      throw 'Datei ist kein Bild';
+	    } else if (!file){
+	      throw 'Kein Bild gewählt';
+	    } else {
+	      previewImage(file);
+	    }
+	  }
+	  
+	}
+
+	/// drop-effect
+	function initDropEffect(box){
+	  let area, drop, areaWidth, areaHeight, maxDistance, dropWidth, dropHeight, x, y;
+	  
+	  // get clickable area for drop effect
+	  area = box.querySelector('.js--image-preview');
+	  area.addEventListener('click', fireRipple);
+	  
+	  function fireRipple(e){
+	    area = e.currentTarget
+	    // create drop
+	    if(!drop){
+	      drop = document.createElement('span');
+	      drop.className = 'drop';
+	      this.appendChild(drop);
+	    }
+	    // reset animate class
+	    drop.className = 'drop';
+	    
+	    // calculate dimensions of area (longest side)
+	    areaWidth = getComputedStyle(this, null).getPropertyValue("width");
+	    areaHeight = getComputedStyle(this, null).getPropertyValue("height");
+	    maxDistance = Math.max(parseInt(areaWidth, 10), parseInt(areaHeight, 10));
+
+	    // set drop dimensions to fill area
+	    drop.style.width = maxDistance + 'px';
+	    drop.style.height = maxDistance + 'px';
+	    
+	    // calculate dimensions of drop
+	    dropWidth = getComputedStyle(this, null).getPropertyValue("width");
+	    dropHeight = getComputedStyle(this, null).getPropertyValue("height");
+	    
+	    // calculate relative coordinates of click
+	    // logic: click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center
+	    x = e.pageX - this.offsetLeft - (parseInt(dropWidth, 10)/2);
+	    y = e.pageY - this.offsetTop - (parseInt(dropHeight, 10)/2) - 30;
+	    
+	    // position drop and animate
+	    drop.style.top = y + 'px';
+	    drop.style.left = x + 'px';
+	    drop.className += ' animate';
+	    e.stopPropagation();
+	    
+	  }
+	}
+
+
+	$(document).ready(function(){
+		var boxes = document.querySelectorAll('.box');
+		for (let i = 0; i < boxes.length; i++) {
+		  let box = boxes[i];
+		  initDropEffect(box);
+		  initImageUpload(box);
+			}  
+		});
+</script>
+
 
 <body>
 <div id="wrapper">
@@ -240,6 +333,65 @@ $(document).ready(function(){
  <div>
  
  
+  <div class="box">
+    <div class="js--image-preview"></div>
+    <div class="upload-options">
+      <label>
+        <input type="file"  name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+      </label>
+    </div>
+  </div>
+   
+  <div class="box">
+    <div class="js--image-preview"></div>
+    <div class="upload-options">
+      <label>
+        <input type="file"  name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+      </label>
+    </div>
+  </div>
+  
+   
+  <div class="box">
+    <div class="js--image-preview"></div>
+    <div class="upload-options">
+      <label>
+        <input type="file"  name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+      </label>
+    </div>
+  </div>
+  
+  
+  
+  </div>
+     <div>
+      <div class="box">
+       <div class="js--image-preview"></div>
+       <div class="upload-options">
+         <label>
+           <input type="file"  name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+         </label>
+       </div>
+     </div>
+     
+      
+     <div class="box">
+       <div class="js--image-preview"></div>
+       <div class="upload-options">
+         <label>
+           <input type="file"  name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
+         </label>
+       </div>
+     </div>
+     
+      <div class="box">
+         <div>
+            <h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요</h4>
+            <button id="submit_button">확인</button>
+         </div>
+
+     </div>
+     
   <div class="box insert1">
     <div class="js--image-preview1"></div>
     <div class="upload-options">
@@ -313,19 +465,4 @@ $(document).ready(function(){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

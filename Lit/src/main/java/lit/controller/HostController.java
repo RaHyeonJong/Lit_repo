@@ -169,6 +169,7 @@ public class HostController {
 			
 			lodge.setConvenient_facility(w);
 		}
+		
 		for(String otherCon1 : otherCon) {
 
 			List<String> otherCon3 = Arrays.asList(otherCon);
