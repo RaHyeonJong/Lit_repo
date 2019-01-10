@@ -66,9 +66,20 @@
 	
 	#img_recommend
 	{
-		margin-top:50px;
-		border:3px solid black;
+		width:75%; 
+/* 		900px */
+		margin-top:100px;
 		float:left;
+		
+	}
+	
+	#img_row
+	{
+		float:left;
+		width:32%;
+		height:300px;
+		margin-right:10px;
+		
 	}
 
 </style>
@@ -100,9 +111,23 @@
 	</div>
 
 	<div id="img_recommend">
+	
+		<c:if test="${login }">
 		<h1>${member.mem_name }님 여기는 어떨까요!?</h1>
-	
-	
+		</c:if>
+		
+		<c:if test="${not login }">
+		<h1>Guest님 여기는 어떨까요!?</h1>
+		</c:if>
+		
+		<c:forEach items="${recommendView }" var="recommend">
+		<div id="img_row">
+			<a href="/festival/view?festival_no=${recommend.festival_no }">
+			<img src="/resources/images/${recommend.stored_name }" style="width:100%; height:300px; border-radius:15%;"><br></a>
+				<h3 align="center">${recommend.festival_name }</h3>
+			
+		</div>			
+		</c:forEach>
 	</div>
 
 </div>

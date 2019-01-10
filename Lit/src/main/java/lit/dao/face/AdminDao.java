@@ -71,6 +71,10 @@ public interface AdminDao {
 	
     // 축제 상세 보이기
     public Festival selectFestivalByFestivalno(int festival_no);
+    
+    // 축제 추천 보이기
+    
+    public List<Festival> viewRecommend();
 	
 	// -------------------- 결제 관리 --------------------	
 	 

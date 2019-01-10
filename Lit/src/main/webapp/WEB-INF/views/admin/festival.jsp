@@ -47,7 +47,7 @@
       
       <div class="row">
         <c:forEach items="${festivalList }" var="festival">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:20px;">
           <div class="card h-100">
             <a href="/festival/view?festival_no=${festival.festival_no }">
             <img  src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; border-radius:15%" ></a>
@@ -65,7 +65,7 @@
 
         
        <!-- 축제 리스트 페이징 처리 -->
-               
+              
         <div class="pagination" style="text-align:center;">
 	    <nav>
 		<ul class="pagination" style="padding-left: 300px;">

@@ -145,6 +145,19 @@
         AND f.festival_no = #{festival_no }
 	</select>
 	
+	<select id="viewRecommend" resultType="lit.dto.Festival">
+	
+      SELECT * FROM (
+        SELECT ROWNUM rnum, R.* FROM(
+        SELECT f.festival_no, f.festival_name, f.start_date, f.end_date, i.stored_name, f.address
+        FROM festival f, image i
+        WHERE f.festival_no = i.festival_no
+        ORDER BY dbms_random.value) R )
+        WHERE rnum BETWEEN 1 AND 3
+ 
+	
+	</select>
+	
 	<!-- /////////// 결제 관리 /////////// -->
 	
 	<!-- 결제 리스트 보이기 -->

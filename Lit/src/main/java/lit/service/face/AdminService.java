@@ -88,6 +88,9 @@ public interface AdminService {
 	// 축제 상세 정보 보이기
 	public Festival viewFestival(int festival_no);
 
+	// 축제 추천 정보 [성훈]
+	
+	public List<Festival> viewRecommend();
 	
 	// -------------------- 결제 관리 --------------------
 	
