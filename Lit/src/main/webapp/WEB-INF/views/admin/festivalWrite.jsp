@@ -66,8 +66,8 @@
             <input type="button" class="btn btn-outline-primary" onclick="sample6_execDaumPostcode()" value="주소검색" 
             style="height: 28px; font-size: 14px;"><br><br>
             <input type="text" id="sample6_address" size="50" name="address" placeholder="주소">
-            <input type="hidden" id="latitude" name="latitude" >
-            <input type="hidden" id="longitude" name="longitude">
+            <input type="hidden" id="latitude" name="latitude1" >
+            <input type="hidden" id="longitude" name="longitude1">
             <button id="mapView" onclick="viewMap();" class="btn btn-outline-primary"
             style="height: 28px; font-size: 14px;">지도보기</button>
             <br><br>

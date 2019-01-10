@@ -111,7 +111,7 @@
 	<select id="festivalSelectAll" resultType="lit.dto.Festival" parameterType="lit.util.Paging">
         SELECT * FROM (
         SELECT ROWNUM rnum, R.* FROM(
-        SELECT f.festival_no, f.festival_name, f.start_date, f.end_date, i.stored_name
+        SELECT f.festival_no, f.festival_name, f.start_date, f.end_date, i.stored_name, f.address
         FROM festival f, image i
         WHERE f.festival_no = i.festival_no
         ORDER BY festival_no DESC ) R )
@@ -141,8 +141,21 @@
 	<!-- 축제 상세정보 보이기 -->
 	<select id="selectFestivalByFestivalno" resultType="lit.dto.Festival" parameterType="int">
         SELECT f.festival_no , f.festival_name , f.festival_contents, f.written_time, f.hit,
-        f.start_date, f.end_date, f.address, i.stored_name FROM festival f, image i WHERE f.festival_no = i.festival_no
+        f.start_date, f.end_date, f.latitude, f.longitude, f.address, i.stored_name FROM festival f, image i WHERE f.festival_no = i.festival_no
         AND f.festival_no = #{festival_no }
+	</select>
+	
+	<select id="viewRecommend" resultType="lit.dto.Festival">
+	
+      SELECT * FROM (
+        SELECT ROWNUM rnum, R.* FROM(
+        SELECT f.festival_no, f.festival_name, f.start_date, f.end_date, i.stored_name, f.address
+        FROM festival f, image i
+        WHERE f.festival_no = i.festival_no
+        ORDER BY dbms_random.value) R )
+        WHERE rnum BETWEEN 1 AND 3
+ 
+	
 	</select>
 	
 	<!-- /////////// 결제 관리 /////////// -->
@@ -166,7 +179,7 @@
     
     <!-- 환불 완료 결제 수 조회(페이징 처리) -->
     <select id="refundFinishSelectCntAll" resultType="int">
-        SELECT COUNT(*) FROM pay WHERE pay_state_no = 2 
+        SELECT COUNT(*) FROM pay WHERE pay_state_no = 3
     </select>
     
     <!-- 정상 결제 수 조회(페이징 처리) --> 
@@ -201,11 +214,18 @@
     
     <!-- 멤버 비활성화하기 -->
 	<update id="updateMemberActivation" parameterType="int">
-		UPDATE member SET
-		mem_activation = 0
+		UPDATE member SET 
+		mem_activation = case
+		WHEN mem_activation = 1 then 0
+		WHEN mem_activation = 0 then 1
+		END
 		WHERE mem_no = #{mem_no }
 	</update>
 	
+	<!-- 체크박스로 선택된 멤버 전체 비활성화 하기 -->
+	<update id="updateCheckMemberDisable" parameterType="String">
+	  UPDATE member SET mem_activation = 0 WHERE mem_no IN (${_parameter })
+	</update>
 	
 	<!-- 숙소신고 관리 리스트 -->
 	<select id="reportLodgeSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">
@@ -224,10 +244,17 @@
 	
     <!-- 숙소 비활성화하기 -->
 	<update id="updateReportLodgeActivation" parameterType="int">
-		UPDATE lodge SET
-		lodge_activation = 0
+		UPDATE lodge SET lodge_activation = case
+		WHEN lodge_activation = 1 then 0
+		WHEN lodge_activation = 0 then 1 
+		END
 		WHERE lodge_no = #{lodge_no }
 	</update>	
+	
+	<!-- 체크박스로 선택된 숙소 전체 비활성화 하기 -->
+	<update id="updateCheckLodgeDisable" parameterType="String">
+	  UPDATE lodge SET lodge_activation = 0 WHERE lodge_no IN (${_parameter })
+	</update>
 	
 	<!-- 신고 받은 댓글 리스트 -->
 	<select id="reportCommentSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">

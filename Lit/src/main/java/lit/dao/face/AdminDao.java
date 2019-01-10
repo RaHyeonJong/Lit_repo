@@ -71,6 +71,10 @@ public interface AdminDao {
 	
     // 축제 상세 보이기
     public Festival selectFestivalByFestivalno(int festival_no);
+    
+    // 축제 추천 보이기
+    
+    public List<Festival> viewRecommend();
 	
 	// -------------------- 결제 관리 --------------------	
 	 
@@ -100,6 +104,9 @@ public interface AdminDao {
 	// 회원 비활성화 
 	public void updateMemberActivation(int mem_no);
 	
+	// 회원 체크박스 전체 비활성화
+	public void updateCheckMemberDisable(String names);
+	
 	// -----------------------
 	// 신고 숙소 리스트 보이기
 	public List<Report> reportLodgeSelectAll(Paging paging);
@@ -108,7 +115,10 @@ public interface AdminDao {
 	public int reportLodgeSelectCntAll();
 	
 	// 숙소 비활성화 
-	public void updateReportLodgeActivation(int lodge_no);	
+	public void updateReportLodgeActivation(int lodge_no);
+	
+	// 숙소 체크박스 전체 비활성화
+	public void updateCheckLodgeDisable(String names);
 	
 	// -----------------------
 	
