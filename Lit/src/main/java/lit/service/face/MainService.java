@@ -36,5 +36,7 @@ public interface MainService {
 
 	List<Lodge> getPagingLodge(int page);
 
+	String getFestivalImageName(int festival_no);
+
 
 }

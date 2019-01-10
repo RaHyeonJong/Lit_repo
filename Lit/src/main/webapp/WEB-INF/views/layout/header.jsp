@@ -1083,13 +1083,13 @@ function press(f) {
 }
 
 function check() {
-	if(document.getElementById('cityLat').value) {
+	if(document.getElementById('cityLat').value == "") {
 		alert("장소를 입력하세요!");
 		return false;
 	}
 	return true;
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete"
+<!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete&v=3.exp&sensor=false&libraries=places"
          async defer></script>
