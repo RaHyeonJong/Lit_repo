@@ -66,18 +66,25 @@ public class LodgeController {
 		model.addAttribute("view",lodge);
 		
 
-		//이미지
+		//숙소 이미지
 		List<Image> lodgeimage = lodgeService.LodgeImage(lodge);
 		model.addAttribute("lodgeimg", lodgeimage);
+		
+
 		
 		//편의시설
 		List<String> convenient = lodgeService.LodgeConvenient(lodge);
 		model.addAttribute("item", convenient);
+				
+		//편의공간
+		List<String> area = lodgeService.LodgeConvenientArea(lodge);
+		model.addAttribute("area",area);
+		System.out.println(area);
 		
 		// 댓글
 		List<Comment> lodgereview = lodgeService.commentList(lodge);
 		model.addAttribute("lodgeReview",lodgereview);
-				
+		//주인 댓글		
 		List<Comment> replyList = lodgeService.replyList(comment);
 		model.addAttribute("replyList",replyList);		
 	
@@ -130,9 +137,6 @@ public class LodgeController {
 				model.addAttribute("d_off",d_off);
 			}
 		
-		
-			System.out.println(date);
-			System.out.println(reDate);
 	}
 	
 	

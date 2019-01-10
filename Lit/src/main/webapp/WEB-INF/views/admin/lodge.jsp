@@ -170,7 +170,7 @@ $("#btnAccess").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 300px;">
+		<ul class="pagination" style="padding-left: 50%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

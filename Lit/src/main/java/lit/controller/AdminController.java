@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import lit.dao.face.AdminDao;
 import lit.dto.Board;
 import lit.dto.Festival;
 import lit.dto.Image;
@@ -30,6 +32,7 @@ public class AdminController {
 	
 	@Autowired AdminService adminService;
 	@Autowired ServletContext context;
+	@Autowired AdminDao adminDao;
 	
 	@RequestMapping(value="/admin/layout/header", method=RequestMethod.GET)
 	public void adminMain( ) {
@@ -213,6 +216,15 @@ public class AdminController {
 	}
 	
 	
+	// 축제 삭제하기
+	@RequestMapping(value="/festival/delete", method=RequestMethod.GET)
+	public String festivalDelete (Festival festival, Image image) { 
+		
+		adminService.deleteFestivalImage(image);
+		adminService.deleteFestival(festival);
+		return "redirect:/admin/festival";
+		
+	}
 	
 	// -------------------- 결제 관리 --------------------  
 	
@@ -346,6 +358,21 @@ public class AdminController {
 		adminService.deleteReportComment(comment_no);
 		return "redirect:/admin/reportComment";
 	}
+	
+	
+	// 승인 대기중인 숙소 개수 가져오기
+	@RequestMapping(value="/admin/countForAdminHeader", method=RequestMethod.POST)
+	public ModelAndView countForAdminHeader(ModelAndView mav) { 
+		
+		int lodge0Cnt = adminDao.lodgeActivation0CntAll();
+		int cs0Cnt = adminDao.answer0CntAll();
+		
+		mav.addObject("lodge0Cnt", lodge0Cnt);
+		mav.addObject("cs0Cnt", cs0Cnt);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 	
 	
 }

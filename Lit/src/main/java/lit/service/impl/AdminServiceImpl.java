@@ -228,6 +228,21 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminDao.selectFestivalByFestivalno(festival_no);
 	}
+
+	// 축제 이미지 삭제하기 
+	@Override
+	public void deleteFestivalImage(Image image) {
+		
+		adminDao.deleteFestivalImage(image);
+	}
+
+	
+	// 축제 삭제하기
+	@Override
+	public void deleteFestival(Festival festival) {
+		
+		adminDao.deleteFestival(festival);
+	}
 	
 	// -------------------- 결제 관리 --------------------
 	
@@ -405,6 +420,9 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminDao.viewRecommend();
 	}
+
+
+
 
 
 
