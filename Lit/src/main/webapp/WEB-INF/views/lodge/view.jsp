@@ -771,7 +771,7 @@ $(function() {
       <button id = "lodge_like"><svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>저장</button></div>
       <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
-      <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
+      <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[4].stored_name }"/></div>
       <div class="photo " id="photo6" style =" overflow: hidden;"><img src=""/></div>
       <div class="photo " id="photo7" style =" overflow: hidden;"><img src=""/></div>
       <div class="photo " id="photo8" style =" overflow: hidden;"><img src=""/></div>
