@@ -683,7 +683,10 @@ $(function() {
 	$(document).ready(function(){
 
 		$('#lodge_like').click(function(){
-		
+			if("${!login}"){
+				alert("로그인 후 이용해 주세요");
+				return;
+			}
 			var lodge_no = '${view.lodge_no}',
 				mem_no = '${member.mem_no}';
 				var likeButton = document.getElementById('lodge_like');
@@ -776,7 +779,7 @@ $(function() {
       <button id = "lodge_like"><svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>저장</button></div>
       <div class="photo " id="photo4" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[3].stored_name }"></div>
-      <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
+      <div class="photo " id="photo5" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[4].stored_name }"/></div>
       <div class="photo " id="photo6" style =" overflow: hidden;"><img src=""/></div>
       <div class="photo " id="photo7" style =" overflow: hidden;"><img src=""/></div>
       <div class="photo " id="photo8" style =" overflow: hidden;"><img src=""/></div>
@@ -813,10 +816,16 @@ $(function() {
 							<th class="small-2 large-2 columns last"><a href="#"
 								class=""
 								style="font-family: 'Circular', Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; margin: 0; text-align: left; line-height: 1.3; color: #2199e8; text-decoration: none">
-									<img
-									src="/resources/images/empty_profile_photo.jpg"
-									alt="" class="profile-img">
-							</a></th>
+									
+								<c:if test="${view.profile_stored_name eq null }">		
+									<img src="/resources/images/empty_profile_photo.jpg"alt="" class="profile-img">
+								</c:if>
+								<c:if test="${view.profile_stored_name ne null }">		
+									<img src="/resources/images/${view.profile_stored_name }"alt="" class="profile-img">
+								</c:if>
+							</a>
+							
+							</th>
 						</tr>
 					</tbody>
 				</table>
@@ -854,7 +863,7 @@ $(function() {
 				 <span> ${item.get(4)}</span> 
 				  <br> 
 				</span>
-			</div>
+			</div><br>
 			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
 			<div id="modalLayer">
  			 <div class="modalContent">
@@ -863,8 +872,11 @@ $(function() {
     			${lodgeItem }<br><br>
     			</c:forEach>
  				
-    			<p style = "font-size: 20px;font-weight: bold;">노트북 작업공간</p>
-    			<c:out value = "${view.convenient_area }"/>
+    			<p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
+    			<c:forEach items= "${area}" var = "area">
+    			${area}<br><br>
+					    			
+    			</c:forEach>
     			<button class = "close_btn" type="button"></button>
  			 </div>
 			</div>
@@ -898,8 +910,13 @@ $(function() {
 				    <c:forEach items = "${lodgeReview}" var = "review">
     	<c:if test = "${review.parent_comment_no == 0 }">
 					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
-       				<a href="/resources/" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
- 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
+       				<a href="/viewProfile?mem_no=${review.mem_no }" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+       				<c:if test="${review.stored_name ne null }">
+ 					<img class="user_img" src="/resources/images/${review.stored_name }" height="48" width="48" >
+       				</c:if>
+       				<c:if test="${review.stored_name eq null }">
+ 					<img class="user_img" src="/resources/images/empty_profile_photo.jpg" height="48" width="48" >
+       				</c:if></a>
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
@@ -925,8 +942,14 @@ $(function() {
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
 						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 20px;">    
-	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
-	 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
+	       				<a href="#" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+	 					<c:if test="${review2.stored_name ne null }">
+ 						<img class="user_img" src="/resources/images/${review.stored_name }" height="48" width="48" >
+       					</c:if>
+       					<c:if test="${review2.stored_name eq null }">
+ 						<img class="user_img" src="/resources/images/empty_profile_photo.jpg" height="48" width="48" >
+       					</c:if></a>
+	       				
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>

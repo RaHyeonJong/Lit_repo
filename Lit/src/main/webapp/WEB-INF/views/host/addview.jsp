@@ -178,56 +178,6 @@ i.material-icons {
 }
 
 </style>
-</head>
-
-
-<script type="text/javascript">
-
-
-
-$(document).ready(function(){
-	var testId="#image"+i;
-	i+=1;
-	
-	
-	$("#submit_button").click(function(){
-		
-		$('#sendPhoto').submit();
-		location.href="/host/hostFirst";
-		
-	});
-	
-	
-	$(testId).on("change",handleImgsFilesSelect);
-	
-});
-	function handleImgsFilesSelect(e){
-		var files =e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		var testClass= ".js--image-preview" + i
-		i+=1;
-		
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-			sel_files.push(f);
-			var reader = new FileReader();
-			reader.onload = function(e){
-				var img_html = "<img src=\""+e.target.result+"\"/>";
-			
-				$(testClass).append(img_html);
-				
-				}
-			reader.readAsDataURL(f);
-		});
-	}
-
-
-
-
-</script>
 
 </head>
 
@@ -391,67 +341,6 @@ function initImageUpload(box) {
          </div>
 
      </div>
-     
-  <div class="box insert1">
-    <div class="js--image-preview1"></div>
-    <div class="upload-options">
-      <label>
-        <input type="file" id="image1" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-      </label>
-    </div>
-  </div>
-   
-  <div class="box">
-    <div class="js--image-preview2"></div>
-    <div class="upload-options">
-      <label>
-        <input type="file" id="image2" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-      </label>
-    </div>
-  </div>
-  
-   
-  <div class="box">
-    <div class="js--image-preview3"></div>
-    <div class="upload-options">
-      <label>
-        <input type="file" id="image3" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-      </label>
-    </div>
-  </div>
-  
-  
-  
-  </div>
-	  <div>
-	   <div class="box">
-	    <div class="js--image-preview4"></div>
-	    <div class="upload-options">
-	      <label>
-	        <input type="file" id="image4" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-	      </label>
-	    </div>
-	  </div>
-	  
-	   
-	  <div class="box">
-	    <div class="js--image-preview5"></div>
-	    <div class="upload-options">
-	      <label>
-	        <input type="file" id="image5" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-	      </label>
-	    </div>
-	  </div>
-	  
-	   <div class="box">
-	   	<div>
-	   		<h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요</h4>
-	   		<button id="submit_button">확인</button>
-	   	</div>
-
-	  </div>
-	  
-   
   </div>
 
   </form>
