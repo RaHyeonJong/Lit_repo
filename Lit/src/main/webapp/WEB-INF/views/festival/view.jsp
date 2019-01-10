@@ -8,7 +8,7 @@
 </head>
 <body>
 
-${festivalView.festival_no }
+
 
 
 </body>

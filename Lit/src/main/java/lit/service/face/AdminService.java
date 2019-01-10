@@ -124,6 +124,9 @@ public interface AdminService {
 	// 멤버 비활성화 시키기
 	public void MemberDisable(int mem_no);
 	
+	// 체크박스로 선택된 멤버 비활성화 시키기
+	public void checkMemberDisable(String names);
+	
 	// 신고 숙소 리스트 보이기
 	public List<Report> lodgeReportList(Paging paging);	
 	
@@ -133,8 +136,11 @@ public interface AdminService {
 	// 페이징 정보 만들기
 	public Paging getReportLodgePaging(int curPage, int listCount, int pageCount);
 	
-	// 멤버 비활성화 시키기
+	// 숙소 비활성화 시키기
 	public void LodgeDisable(int lodge_no);
+	
+	// 체크박스로 선택된 숙소 비활성화 시키기
+	public void checkLodgeDisable(String names);
 	
 	// 신고 댓글 리스트 보이기
 	public List<Report> commentReportList(Paging paging);
