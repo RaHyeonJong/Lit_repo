@@ -95,23 +95,24 @@ font-size:13px;
 .left { 
 width: 50%; 
 float: left; 
-border:1px solid red;
+
 
 }
 
 .innerleft{
 padding-left:30%;
+height:800px;
 
 
 
 
 }
 .right {
-
+bakcground-color:#E0E0E0;
 width: 49%; 
-
+height: 800px;
 float: right; 
-border:1px solid blue;
+
 }
 .continue{
 float:right;
@@ -173,6 +174,8 @@ color: white;
     -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     position: relative;
+        margin-bottom: 10px;
+    margin-top: 30px;
 
 
 }
@@ -213,7 +216,8 @@ color:#8c8c8c;
 width:55%;
 border:1px solid green;
 padding : 10px;
-margin:100px 10px 10px 10px;
+margin:250px 10px 10px 50px;
+border-radius:10%;
 
 }
 			
