@@ -54,8 +54,9 @@ $(document).ready(function(){
 	var $start = $('#start'),
 		$end = $('#end');
 	
-	
-	
+	 var select_date = ${view.available_term};
+	    var now = new Date();
+	   var end_date = new Date(now.getFullYear(), now.getMonth()+select_date, now.getDate());
 	 $start.datepicker({
 		language : 'en',
 		minDate : new Date(),
@@ -66,7 +67,7 @@ $(document).ready(function(){
 	})
 	 $end.datepicker({
 		language : 'en',
-		minDate : new Date(),
+		maxDate : end_date,
 	onSelect : function(fd,date){
 		$start.data('datepicker')
 		.update('maxDate',date)

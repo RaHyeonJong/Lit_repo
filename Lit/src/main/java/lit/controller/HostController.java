@@ -169,6 +169,7 @@ public class HostController {
 			
 			lodge.setConvenient_facility(w);
 		}
+		
 		for(String otherCon1 : otherCon) {
 
 			List<String> otherCon3 = Arrays.asList(otherCon);
@@ -232,6 +233,11 @@ public class HostController {
 			 //끝
 
 			 session.setAttribute("available_term", selectShowMonth);
+			 
+			 
+			
+			 
+	
 			 	
 			 return mav;
 				
@@ -434,13 +440,15 @@ public class HostController {
 	
 	
 	@RequestMapping(value="/host/addview", method=RequestMethod.POST)
-	public void hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no) {
+	public void hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no,Model model) {
 		
 		image.setLodge_no(lodge_no);
 		
 		
 		
+		
 		hostService.hostaddViewList(msr,req,image);
+	
 		
 		
 		

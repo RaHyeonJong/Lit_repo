@@ -14,6 +14,12 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
+<!-- autocomplete from jQuery Ui -->
+    <script src='{% static "js/jquery-1.11.3.min.js" %}'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+    
+
 <script type="text/javascript">
 
 
@@ -56,15 +62,15 @@ $("#lodgeDisable").click(function() {
 		
 				if( len-1 != idx ) {
 					names += ",";
-				}
+				} alert("숙소 전체 비활성화 진행합니다.");
 		});
 			console.log(names); 
 
 	
 	// 전송 폼
 	var $form = $("<form>")
-		.attr("action", "/admin/lodgeDisable")
-		.attr("method", "get")
+		.attr("action", "/admin/checkLodgeDisable")
+		.attr("method", "post")
 		.append(
 			$("<input>")
 				.attr("type", "hidden")
@@ -113,7 +119,9 @@ $("#lodgeDisable").click(function() {
 				<div class="w3-container reportMemberList">
 					<div class="card-body" style="padding-bottom: 70px;">
 						<div class="table-responsive" style="text-align: center;">
-
+						<div style="text-align: right;">
+                        <button id="lodgeDisable" name="lodgeDisable" class="btn btn-outline-secondary">전체비활성화</button>
+						</div>&nbsp;
 							<table class="table table-bordered" id="dataTable"
 								    style="width: 100%; cellspacing: 0; top: 20%">
 								<thead>
@@ -132,12 +140,16 @@ $("#lodgeDisable").click(function() {
 								<tbody>
 									<c:forEach items="${reportLodgeList }" var="reportLodge">
 
-										<tr>
-										    <td><input type="checkbox" name="checkRow"></td>
+										<tr>										   
+										    <td>
+										    <c:if test="${reportLodge.lodge_activation eq 1 }">
+										    <input type="checkbox" name="checkRow" value="${reportLodge.lodge_no }">
+										    </c:if>
+										    </td>
 											<td>${reportLodge.report_no }</td>
 											<td><a href="/admin/memberView?mem_no=${reportLodge.reporter_no }">${reportLodge.reporter_no}</a></td>
 											<td>${reportLodge.lodge_no }</td>
-											<td>${reportLodge.reportedName }</td>
+											<td><a href="">${reportLodge.reportedName }</a></td>
 											<td><span style="color:red;">
 											${reportLodge.reportCnt }</span></td>
 											<td>                          
@@ -149,12 +161,24 @@ $("#lodgeDisable").click(function() {
                                             <span style="color:red;">비활성</span>
                                             </c:when>
                                             </c:choose>
-											<td><button class="btn btn-danger" id="lodgeDisable"
-                                             onclick="location.href='/admin/lodgeDisable?lodge_no=${reportLodge.lodge_no }'"> 비활성화</button></td>
+											<td>
+											<c:choose>
+											<c:when test="${reportLodge.lodge_activation eq 1 }">
+											<button class="btn btn-danger" 
+                                             onclick="location.href='/admin/lodgeDisable?lodge_no=${reportLodge.lodge_no }'"> 비활성화</button>
+									        </c:when>
+									        <c:when test="${reportLodge.lodge_activation eq 0 }">
+									         <button class="btn btn-primary" style="width:85px;" 
+                                             onclick="location.href='/admin/lodgeDisable?lodge_no=${reportLodge.lodge_no }'">활성화</button>
+									        </c:when>
+									        </c:choose> 
+									        </td>
+									        </tr>
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
+                         </div>
+                        
 						<hr>
 
         <!-- 신고멤버 페이징 처리 -->

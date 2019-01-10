@@ -18,7 +18,7 @@ $(document).ready(function(){
 			type:"GET",
 			url: "/message/send",
 			data: {},
-			dataType: "html",
+			dataType: "json",
 			success: function(res)
 			{
 				$('#contents-div').html(res);				
@@ -53,23 +53,42 @@ $(document).ready(function(){
 
 </script>
 <script>
+<<<<<<< HEAD
 
+=======
+	var td = $('tr.sub_category').hide();
+	//td를 누르면 벌어지는 일
+	var msg_no;
+	
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	$(".category").click(function(e){
 		
+<<<<<<< HEAD
 		var msg_no = $(e.target).closest('tr').children('td').html();
 		var read = $(e.target).closest('tr').children('td.read');
 		var t = $(this);
+=======
+		var read = document.getElementById("read");
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 		
+		msg_no = $(e.target).closest('tr').children('td').first().html();
+		var t = $(this);
 		$.ajax({
 	         type: "POST",
 	         url: "/message/receive",
 	         data: {"message_no": msg_no}, 
 	         dataType: "json",
+<<<<<<< HEAD
 	         success : function(){
 	        	read.html("읽음");
 	        	read.css("color","red");
 	        	t.next('tr.sub_category').toggle();		        	 
 	     	},
+=======
+	         success : function(e){
+				t.next('tr.sub_category').toggle();
+	         },	
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	         error : function(){
 	            alert("에러났어요!");
 	         }

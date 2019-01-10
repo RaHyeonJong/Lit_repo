@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Board;
-import lit.dto.Comment;
 import lit.dto.Festival;
 import lit.dto.Image;
 import lit.dto.Lodge;
@@ -170,7 +168,9 @@ public class AdminController {
 			Festival festival , 
 			Image image,
 			String start_date1 , 
-			String end_date2 ) { 
+			String end_date2,
+			String latitude1,
+			String longitude1) { 
 		
 		// 스트링타입을 sqlDate 형태로 형변환
 		Date start_date = Date.valueOf(start_date1.replace("/", "-"));
@@ -178,6 +178,13 @@ public class AdminController {
 		
 		festival.setStart_date(start_date);
 		festival.setEnd_date(end_date);
+		
+		// loatitude, logitude 형변환 후 festival DTO에 넣기
+		double latitude = Double.parseDouble(latitude1);
+		double longitude = Double.parseDouble(longitude1);
+		
+		festival.setLatitude(latitude);
+		festival.setLongitude(longitude);
 		
 		adminService.writeFestival(festival);
 		int festival_no = festival.getFestival_no();
@@ -264,6 +271,14 @@ public class AdminController {
 		return "redirect:/admin/reportMember";
 	}
 	
+	// 체크박스로 선택된 멤버 비활성화 시키기
+	@RequestMapping(value="/admin/checkMemDisable", method=RequestMethod.POST)
+	public String memberActiveResult(String names ) { 
+		
+		adminService.checkMemberDisable(names);
+		return "redirect:/admin/reportMember";
+	}	
+	
 	// 신고당한 숙소 리스트 보이기
 	
 	@RequestMapping(value="/admin/reportLodge", method=RequestMethod.GET)
@@ -292,6 +307,13 @@ public class AdminController {
 		return "redirect:/admin/reportLodge";
 	}
 	
+	// 체크박스로 선택된 숙소 비활성 시키기 
+	@RequestMapping(value="/admin/checkLodgeDisable", method=RequestMethod.POST)
+	public String cehckLodgeDisable(String names ) { 
+		
+		adminService.checkLodgeDisable(names);
+		return "redirect:/admin/reportLodge";
+	}		
 	
 	// 신고당한 댓글 리스트 보이기
 	

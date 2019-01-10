@@ -109,9 +109,12 @@ $(document).ready(function(){
 			success : function(res){
 				console.log(res.login);
 				if(res.login == true){
-					window.location.href = "/tempmain";
+					window.location.href = "/main";
 				}else{
-					$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+					if(res.ban == false)
+						$("#loginMsgDiv").html("로그인 실패! 로그인 정보를 다시 확인해주세요!");
+					else
+						$("#loginMsgDiv").html("로그인 실패! 관리자에 의해 차단된 계정입니다.");
 				}
 			},
 			error : function(){
@@ -471,7 +474,13 @@ body {
    top: 75px;
 }
 
+<<<<<<< HEAD
 #header {
+=======
+
+#header {
+
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -486,6 +495,7 @@ body {
    position: sticky;
    will-change: transform;
 }
+
 #header:hover {
    
 }
@@ -831,10 +841,15 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<a href="/main"><img style="height: 50px;"
 					src="/resources/images/logo.jpg" alt="로고" /></a>
 			</h3>
-			  <form action="#" class="Search">
-   				 <input class="Search-box" type="search" id="location-input" autocomplete="off">
+			<!-- 검색창 -->
+			  <form action="/main/searchMain" class="Search" method="POST" name="formname" onsubmit="return check()">
+			  		<input type="hidden" id="cityLng" name="cityLng"/>
+			  		<input type="hidden" id="cityLat" name="cityLat"/>
+   				 <input class="Search-box" type="search" id="location-input" autocomplete="off" onkeypress="JavaScript:press(this.form)">
    					
    				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
+   				 
+   				 <input type="submit" style="display:none;" />
   			</form>
 		</div>
 
@@ -883,7 +898,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	
 				<!--  관리자 로그인 -->
 				<c:if test="${member.mem_case eq 'admin' }">
-					<li><a href="/admin/main">관리자 페이지</a></li>
+					<li><a href="/admin/member">관리자 페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
 					<c:if test="${member.stored_name eq null}">
 						<li><img style="width:50px; height:50px" src="/resources/images/empty_profile_photo.jpg"/></li>	
@@ -1067,6 +1082,8 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </form>
 </div></div>
 <!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
+
+<!-- 검색창 자동완성기능 -->
 <script>
 ////////// 자동완성기능 /////////
 function initAutocomplete() {
@@ -1084,6 +1101,20 @@ function initAutocomplete() {
 
 google.maps.event.addDomListener(window, 'load', initAutocomplete);
 ///////////////////////////////
+function press(f) { 
+		if(f.keyCode == 13){ //javascript에서는 13이 enter키를 의미함 
+			formname.submit(); //formname에 사용자가 지정한 form의 name입력 
+			console.log("enter");
+		} 
+}
+
+function check() {
+	if(document.getElementById('cityLat').value) {
+		alert("장소를 입력하세요!");
+		return false;
+	}
+	return true;
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?&libraries=places"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&v=3.exp&sensor=false&callback=initAutocomplete"

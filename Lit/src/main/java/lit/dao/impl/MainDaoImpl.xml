@@ -27,5 +27,35 @@
 	SELECT stored_name FROM image
 	WHERE lodge_no = #{lodge_no}
 	</select>
+	
+	<select id="selectRecommendLodge" resultType="lit.dto.Lodge">
+	SELECT * FROM (
+    	SELECT ROWNUM rnum, a.* FROM (
+        	SELECT * FROM Lodge
+        	ORDER BY lodge_no DESC
+    	) a
+	)
+	WHERE <![CDATA[ rnum <= 6 ]]>
+	</select>
+	
+	<select id="selectPagingLodge" parameterType="int" resultType="lit.dto.Lodge">
+	SELECT * FROM (
+    	SELECT ROWNUM rnum, a.* FROM (
+        	SELECT * FROM Lodge
+        	ORDER BY lodge_no DESC
+    	) a
+	)
+	WHERE rnum BETWEEN ((#{page} - 1) * 9 + 1) AND (#{page} * 9)
+	</select>
+	
+	<select id="selectPagingFestival" parameterType="int" resultType="lit.dto.Festival">
+	SELECT * FROM (
+    	SELECT ROWNUM rnum, a.* FROM (
+        	SELECT * FROM Festival
+        	ORDER BY festival_no DESC
+    	) a
+	)
+	WHERE rnum BETWEEN ((#{page} - 1) * 4 + 1) AND (#{page} * 4)
+	</select>
 
 </mapper>

@@ -75,5 +75,6 @@ public interface LodgeDao {
 	//예약날짜
 	public List<Pay> reservationDay_off(Lodge lodge);
 	
+	public Pay heads(Pay pay);
 	
 }

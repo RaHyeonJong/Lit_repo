@@ -166,7 +166,7 @@
     
     <!-- 환불 완료 결제 수 조회(페이징 처리) -->
     <select id="refundFinishSelectCntAll" resultType="int">
-        SELECT COUNT(*) FROM pay WHERE pay_state_no = 2 
+        SELECT COUNT(*) FROM pay WHERE pay_state_no = 3
     </select>
     
     <!-- 정상 결제 수 조회(페이징 처리) --> 
@@ -201,11 +201,18 @@
     
     <!-- 멤버 비활성화하기 -->
 	<update id="updateMemberActivation" parameterType="int">
-		UPDATE member SET
-		mem_activation = 0
+		UPDATE member SET 
+		mem_activation = case
+		WHEN mem_activation = 1 then 0
+		WHEN mem_activation = 0 then 1
+		END
 		WHERE mem_no = #{mem_no }
 	</update>
 	
+	<!-- 체크박스로 선택된 멤버 전체 비활성화 하기 -->
+	<update id="updateCheckMemberDisable" parameterType="String">
+	  UPDATE member SET mem_activation = 0 WHERE mem_no IN (${_parameter })
+	</update>
 	
 	<!-- 숙소신고 관리 리스트 -->
 	<select id="reportLodgeSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">
@@ -224,10 +231,17 @@
 	
     <!-- 숙소 비활성화하기 -->
 	<update id="updateReportLodgeActivation" parameterType="int">
-		UPDATE lodge SET
-		lodge_activation = 0
+		UPDATE lodge SET lodge_activation = case
+		WHEN lodge_activation = 1 then 0
+		WHEN lodge_activation = 0 then 1 
+		END
 		WHERE lodge_no = #{lodge_no }
 	</update>	
+	
+	<!-- 체크박스로 선택된 숙소 전체 비활성화 하기 -->
+	<update id="updateCheckLodgeDisable" parameterType="String">
+	  UPDATE lodge SET lodge_activation = 0 WHERE lodge_no IN (${_parameter })
+	</update>
 	
 	<!-- 신고 받은 댓글 리스트 -->
 	<select id="reportCommentSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Report">

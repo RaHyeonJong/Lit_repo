@@ -20,13 +20,13 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List<Lodge> getRecommendLodge() {
 		
-		return mainDao.selectRecommendLodge();
+		return mainDao.selectRecommendLodge(); // 추천 숙소 6개 가져오는 메소드
 	}
 
 	@Override
-	public List<Festival> getRecommendFestivalList() {
+	public List<Festival> getRecommendFestivalList(int page) {
 		
-		return mainDao.selectRecommendFestival();
+		return mainDao.selectPagingFestival(page);
 	}
 
 	@Override
@@ -66,9 +66,9 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Lodge> getLodgeList() {
+	public List<Lodge> getLodgeList(int page) {
 		// TODO Auto-generated method stub
-		return mainDao.selectLodge();
+		return mainDao.selectPagingLodge(page);
 	}
 
 	@Override
@@ -87,6 +87,12 @@ public class MainServiceImpl implements MainService{
 	public String[] getLodgeImageName(int lodge_no) {
 		// TODO Auto-generated method stub
 		return mainDao.selectLodgeName(lodge_no);
+	}
+
+	@Override
+	public List<Lodge> getPagingLodge(int page) {
+		
+		return mainDao.selectPagingLodge(page);
 	}
 
 }

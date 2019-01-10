@@ -75,7 +75,11 @@ public class MessageController {
 	      //읽지않음에서 읽음으로 변경
 	     messageService.countupdate(message);
 	     
+<<<<<<< HEAD
 	     mav.setViewName("jsonView");
+=======
+	     
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	      
 	     return mav;
 
