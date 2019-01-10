@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: LSH
 Build-Jdk: 1.8.0_181
-=======
-Built-By: raracraft
-Build-Jdk: 1.8.0_191
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 Created-By: Maven Integration for Eclipse
 
