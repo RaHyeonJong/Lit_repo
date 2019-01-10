@@ -128,7 +128,7 @@ $(document).ready(function(){
          <p>
          <textarea class="contents" id="contents" name="contents" placeholder="메시지를 입력해주세요."></textarea></p>
          <p style="text-align:right;">
-         <button type="submit" class="sendBtn" id="sendBtn" onclick="sendBtn_click();">S E N D</button>
+         <input type="submit" class="sendBtn" id="sendBtn" onclick="sendBtn_click()" value="S E N D "/>
          <input type="hidden" value="${member.mem_no }" name="sender_no" />
          <input type="hidden" value="${other.mem_no }"  name="receiver_no"/>
 <!--        </form>  -->
@@ -170,18 +170,21 @@ $(document).ready(function(){
    function sendBtn_click()
    {
 
-		var contents = $('#contents').val();
+	   	var contents = $("#contents").val();
 
-		if(!contents)
-		{
-			$("#contents").attr('placeholder','반드시 메시지를 적어주세요.');
-			$("#contents").css('background', 'pink');
-			$("#sendBtn").attr("disabled","disabled");
-			$("#contents").reset();
-			alert("실패");
-		}
-			
-			alert("성공");		
+	   	if(!contents)
+	   	{
+	  
+	   		$("#contents").css("background","pink");
+	   		$("#contents").attr("placeholder","메시지를 다시 입력해주세요");
+	   		alert("실 D패");
+	   	}
+	
+	   	else
+	   		{
+	   		console.log(contents);
+	   		alert("성공");
+	   		}
 
    }
 

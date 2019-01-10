@@ -194,7 +194,10 @@ public class AdminController {
 	public void festivalView (Model model, int festival_no) { 
 		
 		Festival festivalView = adminService.viewFestival(festival_no);
+		
+		System.out.println(festivalView);
 		model.addAttribute("festivalView", festivalView);
+		
 	}
 	
 	
