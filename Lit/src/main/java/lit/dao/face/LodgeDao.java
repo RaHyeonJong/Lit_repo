@@ -20,10 +20,14 @@ public interface LodgeDao {
 	public Lodge SelectLodgeView(Lodge lodge);
 	
 	//편의시설 스플릿 
-	public List selectConvenient(Lodge lodge);
+	public List<String> selectConvenient(Lodge lodge);
+	
+	//편의공간
+	public List<String> selectConvenientArea(Lodge lodge);
 	
 	//상세뷰 이미지
 	public List<Image> SelectLodgeImage(Lodge lodge);
+	
 	
 	//예약뷰 보여주기 
 	public Lodge SelectLodgeReservation(Lodge lodge);
