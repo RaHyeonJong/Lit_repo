@@ -71,6 +71,12 @@ public interface AdminDao {
 	
     // 축제 상세 보이기
     public Festival selectFestivalByFestivalno(int festival_no);
+    
+    // 축제 이미지 삭제하기
+    public void deleteFestivalImage(Image image);
+    
+    // 축제 삭세하기
+    public void deleteFestival(Festival festival);
 	
 	// -------------------- 결제 관리 --------------------	
 	 
