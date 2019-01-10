@@ -55,11 +55,31 @@ public class MainController {
 //		// 테마별 행사 리스트
 //		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
 		
-		// 도시별 추천 숙소, 행사 리스트 추가
+		
+		
+//		for(int i=0;i<lodgeList.size();i++) {
+//			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+//			lodgeList.get(i).setStored_name(imageArray);
+//		}
+		
 		
 		List<Lodge> lodgeList = mainService.getLodgeList(1); // 9개씩
 		
 		List<Festival> festivalList = mainService.getRecommendFestivalList(1); // 4개씩
+		
+		// ImageName 넣기
+		for(int i=0;i<lodgeList.size();i++) { 
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
+		}
+		
+		// 행사 리스트에 stored_name 입력
+		for(int i=0;i<festivalList.size();i++) {
+			String imageName = mainService.getFestivalImageName(festivalList.get(i).getFestival_no());
+			festivalList.get(i).setStored_name(imageName);
+		}
+		
+		System.out.println(festivalList);
 		
 		model.addAttribute("lodgeList", lodgeList); // 추천 숙소 리스트
 		model.addAttribute("festivalList", festivalList);  // 가장 많이 찜한 숙소 리스트
@@ -73,27 +93,22 @@ public class MainController {
 	// 메인 페이지
 	@RequestMapping(value = "/searchMain", method = RequestMethod.POST)
 	public String main(Model model,
-			/*@RequestParam(required=false, defaultValue="") */String location, 
-			/*@RequestParam(required=false, defaultValue="") */String checkin, 
-			/*@RequestParam(required=false, defaultValue="") */String checkout, 
-			/*@RequestParam(required=false, defaultValue="") */String people, 
-			@RequestParam(required=false, defaultValue="") double cityLat, 
-			@RequestParam(required=false, defaultValue="") double cityLng
+			SearchFilter searchFilter
 			
 			) {
 		
 		logger.info("메인 페이지 띄우기");
 		int people_num = 0;
-		if(people != null) {
-			people_num = Integer.parseInt(people);
-		}
-		System.out.println(location);
-		System.out.println(checkin);
-		System.out.println(checkout);
-		System.out.println(people);
-		System.out.println(people_num);
-		System.out.println(cityLat);
-		System.out.println(cityLng);
+//		if(people != null) {
+//			people_num = Integer.parseInt(people);
+//		}
+//		System.out.println(location);
+//		System.out.println(checkin);
+//		System.out.println(checkout);
+//		System.out.println(people);
+//		System.out.println(people_num);
+//		System.out.println(cityLat);
+//		System.out.println(cityLng);
 		
 		
 
@@ -114,8 +129,8 @@ public class MainController {
 //		model.addAttribute("themeLodgeList", themeLodgeList);
 //		model.addAttribute("themeFestivalList", themeFestivalList);
 		
-		model.addAttribute("cityLat", cityLat);
-		model.addAttribute("cityLng", cityLng);
+		model.addAttribute("cityLat", searchFilter.getCityLat());
+		model.addAttribute("cityLng", searchFilter.getCityLng());
 		
 		return "/main/searchMain";
 	}
@@ -284,6 +299,12 @@ public class MainController {
 		List<Lodge> lodgeList = mainService.getLodgeList(page); // 9개씩
 		
 		List<Festival> festivalList = mainService.getRecommendFestivalList(page); // 4개씩
+		
+		// 행사 리스트에 stored_name 입력
+		for(int i=0;i<festivalList.size();i++) {
+			String imageName = mainService.getFestivalImageName(festivalList.get(i).getFestival_no());
+			festivalList.get(i).setStored_name(imageName);
+		}
 		
 		logger.info(lodgeList.toString());
 		

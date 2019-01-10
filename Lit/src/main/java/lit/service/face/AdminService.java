@@ -87,6 +87,12 @@ public interface AdminService {
 	
 	// 축제 상세 정보 보이기
 	public Festival viewFestival(int festival_no);
+	
+	// 축제 이미지 삭제하기
+	public void deleteFestivalImage(Image image);
+	
+	// 축제 삭제하기
+	public void deleteFestival(Festival festival);
 
 	// 축제 추천 정보 [성훈]
 	

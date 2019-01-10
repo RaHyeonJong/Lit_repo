@@ -145,6 +145,16 @@
         AND f.festival_no = #{festival_no }
 	</select>
 	
+	<!-- 축제 이미지 삭제하기 -->
+	<delete id="deleteFestivalImage" parameterType="lit.dto.Image">
+	  DELETE FROM image WHERE festival_no = #{festival_no }
+	</delete>
+	
+	<!-- 축제 삭제하기 -->
+    <delete id="deleteFestival" parameterType="lit.dto.Festival">
+      DELETE FROM festival WHERE festival_no = #{festival_no } 
+    </delete>
+
 	<select id="viewRecommend" resultType="lit.dto.Festival">
 	
       SELECT * FROM (
@@ -154,9 +164,9 @@
         WHERE f.festival_no = i.festival_no
         ORDER BY dbms_random.value) R )
         WHERE rnum BETWEEN 1 AND 3
- 
-	
+ 	
 	</select>
+
 	
 	<!-- /////////// 결제 관리 /////////// -->
 	

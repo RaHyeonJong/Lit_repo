@@ -95,4 +95,10 @@ public class MainServiceImpl implements MainService{
 		return mainDao.selectPagingLodge(page);
 	}
 
+	@Override
+	public String getFestivalImageName(int festival_no) {
+		// TODO Auto-generated method stub
+		return mainDao.selectFestivalImageName(festival_no);
+	}
+
 }
