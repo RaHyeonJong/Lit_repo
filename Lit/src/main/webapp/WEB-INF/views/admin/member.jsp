@@ -8,9 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 
 </head>
 

@@ -89,5 +89,15 @@ sysdate,
 
 </insert>
 
+<select id="selectByHostEdge" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
+
+	SELECT * FROM lodge
+	WHERE lodge_no = #{lodge_no}
+
+</select>
+
+
+
+
 </mapper>
 

@@ -406,6 +406,7 @@ public class LodgeController {
 				lodgeService.reportLodge(report);
 				writer.write("1");
 			} else {
+				lodgeService.deleteReport(report);
 				writer.write("-1");
 			}
 		} catch (IOException e) {

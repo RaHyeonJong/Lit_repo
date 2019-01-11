@@ -25,7 +25,7 @@ public interface HostDao {
 	//---------------단계별 정보수정
 	
 	//본인이 등록한 숙소정보 select
-	public List selectByHostEdge();
+	public List<Lodge> selectByHostEdge(Lodge lodge);
 
 	//1단계 정보수정
 	public void updateElementOne(Lodge lodge);

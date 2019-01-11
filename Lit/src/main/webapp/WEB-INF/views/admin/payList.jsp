@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 </head>
 
 <script type="text/javascript">

@@ -28,7 +28,7 @@ public interface HostService {
 	
 	
 	//본인이 등록한 1,2,3단계정보보기
-	public List viewHostElement();
+	public List<Lodge> viewHostElement(Lodge lodge);
 	
 	//1단계 정보수정
 	public void hostElementFirstFix(Lodge lodge);

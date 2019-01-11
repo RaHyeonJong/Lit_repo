@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <title>Life is trip 인생은 여행이다</title>
 
 <style>
