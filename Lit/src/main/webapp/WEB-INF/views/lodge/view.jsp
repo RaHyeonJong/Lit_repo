@@ -865,44 +865,30 @@ $(function() {
 			</div>
 			<!-- 유형 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
-			<!-- 편의시설 -->
-			<div class="facility">
-<<<<<<< HEAD
-				<h3><i class="fas fa-home"></i> 편의 시설</h3>
-				<span> 
-				 <span> ${item.get(1)}</span>
-				  <br>
-				 <span> ${item.get(2)}</span> 
-				  <br> 
-				 <span> ${item.get(3)}</span>
-				  <br> 
-				 <span> ${item.get(4)}</span> 
-				  <br> 
-				</span>
-=======
-				<h3>편의 시설</h3>
-				<c:forEach items="${item }" var ="item" step="1" end="4">
-				${item}<br>
-				</c:forEach>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
-			</div><br>
-			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
-			<div id="modalLayer">
- 			 <div class="modalContent">
-    			<a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
-    			<c:forEach items="${item}" var = "lodgeItem">
-    			${lodgeItem }<br>
-    			</c:forEach>
- 				
-    			<p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
-    			<c:forEach items= "${area}" var = "area">
-    			${area}<br>
-					    			
-    			</c:forEach>
-    			<button class = "close_btn" type="button"></button>
- 			 </div>
-			</div>
-			<!-- 편의시설 끝 -->
+			      <!-- 편의시설 -->
+         <div class="facility">
+            <h3>편의 시설</h3>
+            <c:forEach items="${item }" var ="item" step="1" end="4">
+            ${item}<br>
+            </c:forEach>
+         </div><br>
+         <a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
+         <div id="modalLayer">
+           <div class="modalContent">
+             <a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
+             <c:forEach items="${item}" var = "lodgeItem">
+             ${lodgeItem }<br>
+             </c:forEach>
+             
+             <p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
+             <c:forEach items= "${area}" var = "area">
+             ${area}<br>
+                            
+             </c:forEach>
+             <button class = "close_btn" type="button"></button>
+           </div>
+         </div>
+         <!-- 편의시설 끝 -->
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
 			<div style = "width: 900px;">
@@ -922,7 +908,7 @@ $(function() {
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
         		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
         		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
-      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
+      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/> style="resize:none;"></textarea>
        			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
 				</c:if>
