@@ -363,12 +363,13 @@ public class AdminController {
 	// 승인 대기중인 숙소 개수 가져오기
 	@RequestMapping(value="/admin/countForAdminHeader", method=RequestMethod.POST)
 	public ModelAndView countForAdminHeader(ModelAndView mav) { 
-		
+				
 		int lodge0Cnt = adminDao.lodgeActivation0CntAll();
 		int cs0Cnt = adminDao.answer0CntAll();
 		
 		mav.addObject("lodge0Cnt", lodge0Cnt);
 		mav.addObject("cs0Cnt", cs0Cnt);
+		
 		mav.setViewName("jsonView");
 		return mav;
 	}

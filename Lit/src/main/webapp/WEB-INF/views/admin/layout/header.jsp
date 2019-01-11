@@ -30,9 +30,9 @@
       <!-- 네비 바 검색 -->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" placeholder="Life Is Trip 바로가기" aria-label="Search" aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
+            <button class="btn btn-info" type="button">
               <i class="fas fa-search"></i>
             </button>
           </div>
@@ -46,7 +46,7 @@
         <li class="nav-item dropdown no-arrow mx-1">
           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">+9</span>
+            <span id="lodge0cnt" class="badge badge-danger">0</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
             <a class="dropdown-item" href="/admin/lodge?lodge_activation=0">숙소 승인 대기</a>
@@ -57,7 +57,7 @@
         <li class="nav-item dropdown no-arrow mx-1">
           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
+            <span id="cs0cnt" class="badge badge-danger">0</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
             <a class="dropdown-item" href="#">메세지</a>
@@ -86,6 +86,37 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin.min.js"></script>
+
+    <!-- 숙소, 고객지원 실시간 개수  -->
+    <script type="text/javascript">
+    
+    setInterval(function(){
+    
+    	$.ajax({
+			type:"post",
+			url:"/admin/countForAdminHeader",
+			data:{},
+			dataType:"json",
+			success:function(res)
+			{
+				$('#lodge0cnt').html(res.lodge0Cnt);
+				$('#cs0cnt').html(res.cs0Cnt);
+				return;
+			},
+			error:function()
+			{
+				alert("오류");
+			}
+			
+		})
+	}, 10000);
+    
+    
+    </script>
+    
+    
+    
+    
 
 </body>
 </html>
