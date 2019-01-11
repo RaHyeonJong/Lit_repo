@@ -253,7 +253,7 @@ a{color:#000;}
 .mask{width:100%; height:100%; position:fixed; left:0; top:0; z-index:10; background:#000; opacity:.5; filter:alpha(opacity=50);}
 
 #modalLayer{display:none; position:relative;}
-#modalLayer .modalContent{width:300px; height:700px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
+#modalLayer .modalContent{width:300px; height:500px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer; 
 border: none;}
 
@@ -599,7 +599,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
     }
 </script>
 
-<script type="text/javascript">
+<script type="text/javascript">//상세뷰 데이트 피커
 $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
@@ -722,10 +722,7 @@ $(function() {
 	});//도큐먼트 끝
 
 </script>
-<script type="text/javascript">
-
-</script>
-<script type="text/javascript">
+<script type="text/javascript"> //댓글 신고
 
 	function comment_Report(comment_no){
 		
@@ -870,6 +867,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 편의시설 -->
 			<div class="facility">
+<<<<<<< HEAD
 				<h3><i class="fas fa-home"></i> 편의 시설</h3>
 				<span> 
 				 <span> ${item.get(1)}</span>
@@ -881,18 +879,24 @@ $(function() {
 				 <span> ${item.get(4)}</span> 
 				  <br> 
 				</span>
+=======
+				<h3>편의 시설</h3>
+				<c:forEach items="${item }" var ="item" step="1" end="4">
+				${item}<br>
+				</c:forEach>
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 			</div><br>
 			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
 			<div id="modalLayer">
  			 <div class="modalContent">
     			<a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
     			<c:forEach items="${item}" var = "lodgeItem">
-    			${lodgeItem }<br><br>
+    			${lodgeItem }<br>
     			</c:forEach>
  				
     			<p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
     			<c:forEach items= "${area}" var = "area">
-    			${area}<br><br>
+    			${area}<br>
 					    			
     			</c:forEach>
     			<button class = "close_btn" type="button"></button>

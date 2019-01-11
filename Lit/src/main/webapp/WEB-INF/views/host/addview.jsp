@@ -272,6 +272,7 @@ function initImageUpload(box) {
 			var dd = $('.image-upload')[0].files[0];
 			if(dd ==null){
 				alert("최소 첫번째 사진을 삽입해 주세요");
+				return;
 			}
 			("#sendPhoto").submit();
 			

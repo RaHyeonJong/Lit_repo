@@ -38,6 +38,7 @@ import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
 import lit.service.face.HostService;
+import lit.service.face.LodgeService;
 
 @Controller
 public class HostController {
@@ -377,24 +378,31 @@ public class HostController {
 	
 	//1단계 숙소정보 수정
 	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.GET)
-	public void hostElementFirstFix() {
+	public void hostElementFirstFix(Lodge lodge,Model model) {
+
+		List<Lodge> hostLodgeElementList = hostService.viewHostElement(lodge);
 		
-		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
+		model.addAttribute("fristUpdate", hostLodgeElementList);
 		
 	}
 	
 	//1단계 숙소정보 수정
 	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.POST)
-	public void hostElementFirstFixProc(Lodge lodge) {
-			
+	public ModelAndView hostElementFirstFixProc(Lodge lodge,ModelAndView mav) {
+		
+		
+		
+		
 		hostService.hostElementFirstFix(lodge);
+		
+			return mav;
 		}
 	
 	//2단계 숙소정보 수정
 	@RequestMapping(value="/host/hostSecondFix", method=RequestMethod.GET)
-	public void hostElementSecondFix() {
+	public void hostElementSecondFix(Lodge lodge) {
 		
-		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
+		List<Lodge> hostLodgeElementList = hostService.viewHostElement(lodge);
 	}
 	
 	//2단계 숙소정보 수정
@@ -408,7 +416,7 @@ public class HostController {
 	@RequestMapping(value="/host/hostThirdFix", method=RequestMethod.GET)
 	public void hostElementThirdFix() {
 		
-		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
+//		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
 		
 	}
 	
