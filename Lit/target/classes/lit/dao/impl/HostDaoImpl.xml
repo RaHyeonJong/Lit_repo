@@ -78,7 +78,6 @@ sysdate,
 
 </insert>
 
-<<<<<<< HEAD
 <select id="getLodgeList" parameterType="int" resultType="lit.dto.Lodge">
 	SELECT * FROM lodge
 	WHERE mem_no = #{mem_no }
@@ -93,7 +92,7 @@ sysdate,
 	AND p.lodge_no = #{lodge_no }
 	ORDER BY pay_no DESC
 </select>
-=======
+
 <select id="selectByHostEdge" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
 
 	SELECT * FROM lodge
@@ -103,7 +102,6 @@ sysdate,
 
 
 
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 </mapper>
 

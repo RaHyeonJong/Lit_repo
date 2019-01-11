@@ -27,11 +27,7 @@ import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Pay;
 import lit.service.face.HostService;
-<<<<<<< HEAD
 import lit.util.Paging;
-=======
-import lit.service.face.LodgeService;
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 @Controller
 public class HostController {
