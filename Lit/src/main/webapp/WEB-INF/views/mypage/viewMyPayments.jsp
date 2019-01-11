@@ -129,7 +129,7 @@ $(document).ready(function(){
 <span style="color:#666; font-weight:normal;"> (${pay.pay_no })</span></div></td>
 <td rowspan="2" style="padding:5px;">
 <table onclick="location.href='/lodge/view?lodge_no=${pay.lodge_no }'" style="width:100%; cursor:pointer;"><tr>
-<td style="width:50px;"><img src="/resources/images/${pay.stored_name }" width=50px; height=50px;/></td>
+<td style="width:50px;"><img src="/resources/images/lodge_image/${pay.stored_name }" width=50px; height=50px;/></td>
 <td><div style="width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left;">${pay.lodge_name }</div></td>
 </tr></table>
 </td>
@@ -174,7 +174,7 @@ $(document).ready(function(){
     <!-- 페이징 번호 -->
     <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="page">
     	<c:if test="${paging.curPage eq page }">
-	   	<td style="background-color:#0275D8; color:white;">${page }</td>
+	   	<td style="background-color:#008489; color:white;">${page }</td>
 	   	</c:if>
 	
 	   	<c:if test="${paging.curPage ne page }">

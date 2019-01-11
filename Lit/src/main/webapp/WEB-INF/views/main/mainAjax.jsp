@@ -32,7 +32,7 @@
 				<c:forEach var="list" items="${festivalList }">
 					<div class="festivalList" style="width: 24%; display: inline-block;">
 						<div class="festivalList-image">
-							<img src="/resources/images/festival/${list.stored_name }" width="100%" height="100%">
+							<img src="/resources/images/${list.stored_name }" width="100%" height="100%">
 						</div>
 						<div>
 							<span>${list.festival_name }</span>

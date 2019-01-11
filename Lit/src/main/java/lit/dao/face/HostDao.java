@@ -5,6 +5,7 @@ import java.util.List;
 import lit.dto.Day_off;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Pay;
 
 public interface HostDao {
 	
@@ -47,5 +48,9 @@ public interface HostDao {
 
 	//숙소 이미지 넣기
 	public void insertLodgeView(Image image);
+
+	public List<Lodge> getLodgeList(int mem_no);
+
+	public List<Pay> getPayList(int lodge_no);
 
 }
