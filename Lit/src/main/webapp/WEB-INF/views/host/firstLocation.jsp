@@ -33,6 +33,12 @@ $(document).ready(function(){
 	
 	$("#nextButton").click(function(){
 
+	var frist = $('#locationTextField').val();
+		if(frist ==""){
+			
+		alert("주소를 입력해 주세요");
+		return;
+		}	
 			$('#sendLocation').submit();
 	
 		

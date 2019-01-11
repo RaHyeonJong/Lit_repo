@@ -8,38 +8,57 @@ import org.springframework.stereotype.Service;
 import lit.dao.face.MessageDao;
 import lit.dto.Message;
 import lit.service.face.MessageService;
+import lit.util.Paging;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 
 	@Autowired MessageDao messageDao;
 
+	//받은 쪽지함 리스트
 	@Override
-	public List<Message> messagelist() {
-
-		return messageDao.messagelist();
+	public List<Message> receivelist(Paging paging) {
+	
+		return messageDao.receivelist(paging);
 		
 	}
 
+	//보낸 쪽지함 리스트
 	@Override
-	public Message messageView(Message message) {
-
-		
-		return messageDao.messageview(message);
-		
-	}
-
-
-	@Override
-	public void delete(Message message) {
-		
-		messageDao.delete(message);
-	}
-
-	@Override
-	public void write(Message message) {
-		
-		messageDao.write(message);
+	public List<Message> sendlist(Paging paging) {
+		return messageDao.sendlist(paging);
 	}
 	
+	//전송
+	@Override
+	public void sendwrite(Message message) {
+
+		messageDao.sendwrite(message);
+		
+	}
+
+	@Override
+	public int receivecount(int mem_no) {
+		return messageDao.receivecount(mem_no);
+	}
+	
+	@Override
+	public int sendcount(int mem_no)
+	{
+		return messageDao.sendcount(mem_no);
+	}
+
+	@Override
+	public int messagecount(int receiver_no) {
+		return messageDao.messagecount(receiver_no);
+	}
+
+	@Override
+	public void countupdate(Message message) {
+
+		messageDao.countupdate(message);
+		
+	}
+
+
 }

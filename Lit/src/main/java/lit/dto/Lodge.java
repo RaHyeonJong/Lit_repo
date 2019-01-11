@@ -1,5 +1,6 @@
 package lit.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Lodge {
@@ -31,6 +32,14 @@ public class Lodge {
 	private double latitude; //위도
 	private double longitude; //경도
 	private int mem_no;
+	private String[] stored_name;
+	
+	private String profile_stored_name; //호스트 이미지
+	
+	private int reportCnt; // 신고당한 횟수
+	
+
+
 
 	@Override
 	public String toString() {
@@ -42,10 +51,45 @@ public class Lodge {
 				+ ", convenient_facility=" + convenient_facility + ", convenient_area=" + convenient_area
 				+ ", ready_time=" + ready_time + ", check_in_time=" + check_in_time + ", available_term="
 				+ available_term + ", stay_cost=" + stay_cost + ", regit_date=" + regit_date + ", lodge_activation="
-				+ lodge_activation + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+				+ lodge_activation + ", latitude=" + latitude + ", longitude=" + longitude + ", mem_no=" + mem_no
+				+ ", stored_name=" + Arrays.toString(stored_name) + ", reportCnt=" + reportCnt + "]";
 	}
 
 	
+	
+
+	public String getProfile_stored_name() {
+		return profile_stored_name;
+	}
+
+
+
+
+	public void setProfile_stored_name(String profile_stored_name) {
+		this.profile_stored_name = profile_stored_name;
+	}
+
+
+
+
+	public int getReportCnt() {
+		return reportCnt;
+	}
+
+
+	public void setReportCnt(int reportCnt) {
+		this.reportCnt = reportCnt;
+	}
+
+
+	public String[] getStored_name() {
+		return stored_name;
+	}
+
+
+	public void setStored_name(String[] stored_name) {
+		this.stored_name = stored_name;
+	}
 
 
 	public int getMem_no() {

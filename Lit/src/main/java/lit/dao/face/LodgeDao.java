@@ -20,10 +20,14 @@ public interface LodgeDao {
 	public Lodge SelectLodgeView(Lodge lodge);
 	
 	//편의시설 스플릿 
-	public List selectConvenient(Lodge lodge);
+	public List<String> selectConvenient(Lodge lodge);
+	
+	//편의공간
+	public List<String> selectConvenientArea(Lodge lodge);
 	
 	//상세뷰 이미지
-	public List<Image> SelectLodgeImage();
+	public List<Image> SelectLodgeImage(Lodge lodge);
+	
 	
 	//예약뷰 보여주기 
 	public Lodge SelectLodgeReservation(Lodge lodge);
@@ -34,7 +38,7 @@ public interface LodgeDao {
 	public int SelectPayment(Pay pay);
 	
 	//후기 리스트
-	public List<Comment> lodgeComment();
+	public List<Comment> lodgeComment(Lodge lodge);
 	
 	//댓글 개수 
 	public int commentCount(Lodge lodge);
@@ -56,7 +60,7 @@ public interface LodgeDao {
 	//좋아요(숙소 저장)
 	public void insertlodgetLike(Favorite favorite);
 	public void deleteFavorite(Favorite favorite);
-	public int selectFavorite(Favorite favorite);
+	public int selectFavorite(Member member);
 	
 	//호스트에게 메시지 보내기
 	public void insertContent(Message message);
@@ -69,8 +73,12 @@ public interface LodgeDao {
 	public int reportComment(Report report);
 	public void deleteReportComment(Report report);
 	
+	//휴무일
 	public List<Day_off> selectday_off(Lodge lodge);
 	
+	//예약날짜
+	public List<Pay> reservationDay_off(Lodge lodge);
 	
+	public Pay heads(Pay pay);
 	
 }

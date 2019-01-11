@@ -20,13 +20,13 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List<Lodge> getRecommendLodge() {
 		
-		return mainDao.selectRecommendLodge();
+		return mainDao.selectRecommendLodge(); // 추천 숙소 6개 가져오는 메소드
 	}
 
 	@Override
-	public List<Festival> getRecommendFestivalList() {
+	public List<Festival> getRecommendFestivalList(int page) {
 		
-		return mainDao.selectRecommendFestival();
+		return mainDao.selectPagingFestival(page);
 	}
 
 	@Override
@@ -66,21 +66,39 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Lodge> getLodgeList() {
+	public List<Lodge> getLodgeList(int page) {
 		// TODO Auto-generated method stub
-		return mainDao.selectLodge();
+		return mainDao.selectPagingLodge(page);
 	}
 
 	@Override
-	public List<Lodge> getLodgeListByBounds(MapBounds bounds) {
+	public List<Lodge> getLodgeListByBounds(SearchFilter searchFilter) {
 		// TODO Auto-generated method stub
-		return mainDao.selectLodgeByBounds(bounds);
+		return mainDao.selectLodgeByBounds(searchFilter);
 	}
 
 	@Override
 	public List<Lodge> getSearchList(SearchFilter searchFilter) {
 		// TODO Auto-generated method stub
 		return mainDao.selectLodgeSearch(searchFilter);
+	}
+
+	@Override
+	public String[] getLodgeImageName(int lodge_no) {
+		// TODO Auto-generated method stub
+		return mainDao.selectLodgeName(lodge_no);
+	}
+
+	@Override
+	public List<Lodge> getPagingLodge(int page) {
+		
+		return mainDao.selectPagingLodge(page);
+	}
+
+	@Override
+	public String getFestivalImageName(int festival_no) {
+		// TODO Auto-generated method stub
+		return mainDao.selectFestivalImageName(festival_no);
 	}
 
 }

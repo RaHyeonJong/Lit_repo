@@ -37,16 +37,29 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> resultMap = new HashMap<>();
 		
+		
 		boolean existAccount = loginService.checkMembership(member);
 		
-		if(existAccount) {
+		if(existAccount) {			
 			member = loginService.getMember(member);
 			session.setAttribute("login", true);
 			session.setAttribute("member", member);
-			
+	
 			resultMap.put("login", true);
+
+			if(member.getMem_activation() == 1) {				
+				session.setAttribute("login", true);
+				session.setAttribute("member", member);
+			
+				resultMap.put("login", true);
+			} else {
+				resultMap.put("login", false);
+				resultMap.put("ban", true);
+			}
+
 		} else {
 			resultMap.put("login", false);
+			resultMap.put("ban", false);
 		}
 		mav.addAllObjects(resultMap);
 		mav.setViewName("jsonView");

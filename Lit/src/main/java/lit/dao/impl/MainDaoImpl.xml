@@ -8,17 +8,59 @@
 	SELECT * FROM lodge
 	</select>
 	
-	<select id="selectLodgeByBounds" parameterType="lit.dto.MapBounds" resultType="lit.dto.Lodge">
+	<select id="selectLodgeByBounds" parameterType="lit.dto.SearchFilter" resultType="lit.dto.Lodge">
 	SELECT * FROM lodge
-	WHERE latitude between #{swLat2} AND #{neLat2} AND
-	longitude BETWEEN #{swLng2} AND #{neLng2}
+	WHERE latitude BETWEEN #{swLat} AND #{neLat}
+	AND	longitude BETWEEN #{swLng} AND #{neLng}
+	AND lodge_capacity >= #{peopleCnt}
+	AND stay_cost BETWEEN #{minPrice} AND #{maxPrice}
 	</select>
 	
 	<select id="selectLodgeSearch" parameterType="lit.dto.SearchFilter" resultType="lit.dto.Lodge">
 	SELECT * FROM lodge
-	WHERE latitude between #{swLat} AND #{neLat} AND
-	longitude BETWEEN #{swLng} AND #{neLng}
+	WHERE latitude between #{swLat} AND #{neLat}
+	AND	longitude BETWEEN #{swLng} AND #{neLng}
 	AND lodge_capacity >= #{peopleCnt}
+	</select>
+	
+	<select id="selectLodgeName" parameterType="int" resultType="String">
+	SELECT stored_name FROM image
+	WHERE lodge_no = #{lodge_no}
+	</select>
+	
+	<select id="selectFestivalImageName" parameterType="int" resultType="String">
+	SELECT stored_name FROM image
+	WHERE festival_no = #{festival_no}
+	</select>
+	
+	<select id="selectRecommendLodge" resultType="lit.dto.Lodge">
+	SELECT * FROM (
+    	SELECT ROWNUM rnum, a.* FROM (
+        	SELECT * FROM Lodge
+        	ORDER BY lodge_no DESC
+    	) a
+	)
+	WHERE <![CDATA[ rnum <= 6 ]]>
+	</select>
+	
+	<select id="selectPagingLodge" parameterType="int" resultType="lit.dto.Lodge">
+	SELECT * FROM (
+    	SELECT ROWNUM rnum, a.* FROM (
+        	SELECT * FROM Lodge
+        	ORDER BY lodge_no DESC
+    	) a
+	)
+	WHERE rnum BETWEEN ((#{page} - 1) * 9 + 1) AND (#{page} * 9)
+	</select>
+	
+	<select id="selectPagingFestival" parameterType="int" resultType="lit.dto.Festival">
+	SELECT * FROM (
+    	SELECT ROWNUM rnum, a.* FROM (
+        	SELECT * FROM Festival
+        	ORDER BY festival_no DESC
+    	) a
+	)
+	WHERE rnum BETWEEN ((#{page} - 1) * 4 + 1) AND (#{page} * 4)
 	</select>
 
 </mapper>

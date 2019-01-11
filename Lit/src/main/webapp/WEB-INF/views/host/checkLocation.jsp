@@ -21,7 +21,7 @@
       var marker;
 	  var map;
 	  var geocoder;
-	  var locationLat;
+	  var locationLat; 
 	  var locationLng;
 	console.log(locationLat);
 	  
@@ -112,18 +112,10 @@ $(document).ready(function(){
 	});
 	
 	$("#nextButton").click(function(){
-
-		$("#checkLocation").submit();
-		location.href="/host/firstConveniences";
 		
+		$("#addr").submit();
+
 	});
-	
-	
-	
-	
-	
-
-
 	
 });
 
@@ -232,26 +224,32 @@ color: white;
 			<div class="category">
 				<h3>주소를 확인해주세요</h3>
 			</div>
-
-			<form id="checkLoction" action="/host/checkLocation" method="POST">
-				<div>
-					<input name="latitude" type="hidden" id="markerX" value="${lat}"/>
-					<input name="longitude" type="hidden" id="markerY" value="${lng}"/>
-					<input name="lodge_addr" id="txtAddress" value="${addr}"/> <br>
-				</div>
-			
-				<br>
-				<div id="map"></div>
-				<br>
-				<div class="cut"></div>
-				<div class="move-button">
-					<button id="backButton">뒤로</button>
-					<button id="nextButton">다음</button>
-				</div>	
+			<form id = "addr" action="/host/checkLocation" method="post">
+			<div>
+				<input type="hidden" id="markerX" name ="latitude" value="${lat}"/>
+				<input type="hidden" id="markerY" name="longitude" value="${lng}"/>
+				<input id="txtAddress" name ="lodge_addr" value="${lodge_addr}"/> <br>
+			</div>
 			</form>
+			<br>
+			<div id="map"></div>
+			<br>
+			  <div class="cut"></div>
+            <div class="move-button">
+               <button id="backButton">뒤로</button>
+               <button id="nextButton">다음</button>
+            </div>   
+       </div><!-- inner end -->
+   </div><!-- left end -->
+   <div class="right" style="border:1px solid blue;">
+      <div>
+         <h3>위치가 정확한지 확인하시고 <br>
+         숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
+      </div>
+      
+   </div><!-- right end -->
 
-	 	</div><!-- inner end -->
-	</div><!-- left end -->
+	
 	<div class="right" style="border:1px solid blue;">
 		<div>
 			<h3>위치가 정확한지 확인하시고 <br>

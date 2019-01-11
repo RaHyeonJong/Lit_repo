@@ -2,6 +2,7 @@ package lit.service.face;
 
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,10 +21,15 @@ public interface LodgeService {
 	//숙소 번호를 받아와서 숙소 조회
 	public Lodge LodgeView(Lodge lodge);
 	
-	public List LodgeConvenient(Lodge lodge);
+	//편의시설
+	public List<String> LodgeConvenient(Lodge lodge);
+	
+	//편의공간
+	public List<String> LodgeConvenientArea(Lodge lodge);
+	
 	
 	//상세뷰 이미지
-	public List<Image> LodgeImage();
+	public List<Image> LodgeImage(Lodge lodge);
 	
 	
 	//예약 하고 자하는 숙소의 결제 정보 보여주기
@@ -36,7 +42,7 @@ public interface LodgeService {
 	public boolean SelectLodgePay(Pay pay);
 	
 	//후기 리스트
-	public List<Comment> commentList();
+	public List<Comment> commentList(Lodge lodge);
 	
 	//후기 개수
 	public int lodgeCountcomment(Lodge lodge);
@@ -59,7 +65,7 @@ public interface LodgeService {
 	//숙소 저장(좋아요)
 	public void insertLike(Favorite favorite);
 	public void deleteLike(Favorite favorite);
-	public boolean selectLike(Favorite favorite);
+	public boolean selectLike(Member member);
 	
 	//호스트에게 메시지 보내기
 	public void insertMessage(Message message);
@@ -76,5 +82,10 @@ public interface LodgeService {
 	//휴무일
 	public List<Day_off> selectDay(Lodge lodge);
 	
+	//예약 날짜 비활성
+	public Set<String> reservationDay(Lodge lodge);
+	
+	//수용인원
+//	public Pay stayHeads(Lodge lodge);
 	
 }

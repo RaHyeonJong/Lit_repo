@@ -2,6 +2,7 @@ package lit.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -15,14 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import lit.dto.Comment;
 import lit.dto.Favorite;
 import lit.dto.Lodge;
 import lit.dto.Member;
+import lit.dto.Message;
 import lit.dto.Pay;
 import lit.dto.Report;
 import lit.service.face.LoginService;
+import lit.service.face.MessageService;
 import lit.service.face.MypageService;
 import lit.util.Paging;
 
@@ -32,9 +36,37 @@ public class MypageController {
 	@Autowired ServletContext context;
 	@Autowired LoginService loginService;
 	@Autowired MypageService mypageService;
+	@Autowired MessageService messageService;
 	
 	@RequestMapping(value="/mypage/main")
-	public void mypageMain() {}
+	public void mypageMain(Model model, String go, HttpSession session) 
+	{
+		//메시지가 있는ㄷ것과 없는 것
+		
+		model.addAttribute("go", go);
+		
+		if("message".equals(go))
+		{
+			Member mem = (Member) session.getAttribute("member");
+		
+			// 리시버 넘버에 mem_no 넣는거잖아요
+			System.out.println("테스트 : " + mem.getMem_no());
+			
+			//현재 로그인한 사람의 mem_no의 받은 쪽지함 카운트
+			int totalCount = messageService.receivecount(mem.getMem_no());
+			
+			//첫번째 페이지에 10개 10개
+			//totalCount, curPage, listCount, pageCount (8 ,1 ,2, 10)
+			Paging paging = new Paging(totalCount, 1, 10, 10);
+		
+			paging.setMem_no(mem.getMem_no());
+			
+			List<Message> receivelist = messageService.receivelist(paging);
+
+			model.addAttribute("paging",paging);
+			model.addAttribute("receivelist", receivelist);
+		}
+	}
 	
 	@RequestMapping(value="/mypage/viewMyProfile")
 	public void viewMyProfile() {}
@@ -49,7 +81,7 @@ public class MypageController {
 			@RequestParam(value="name-for-update") String mem_name,
 			@RequestParam(value="pw-for-update") String mem_pw,
 			@RequestParam(value="mem-phone-for-update") String mem_phone,
-			@RequestParam(value="intro-for-update") String mem_intro	) {
+			@RequestParam(value="intro-for-update") String mem_intro ) {
 				
 		Member mem = new Member();
 		mem.setMem_no(((Member)session.getAttribute("member")).getMem_no());
@@ -238,6 +270,29 @@ public class MypageController {
 		} finally {
 			if(writer != null) writer.close();
 		}		
+	}
+	
+	@RequestMapping(value="/mypage/scanMsgCnt")
+	public ModelAndView scanMesCnt(ModelAndView mav, HttpSession session)
+	{
+		
+		
+		int receiver_no;
+		int count = -1; //비로그인
+		
+		if(session.getAttribute("login") != null && (boolean) session.getAttribute("login") == true)
+		{
+			receiver_no = ((Member) session.getAttribute("member")).getMem_no();
+			count = messageService.messagecount(receiver_no); 
+			
+		}
+
+		mav.setViewName("jsonView");
+			
+		mav.addObject("count",count);
+			
+			
+		return mav;
 	}
 	
 }

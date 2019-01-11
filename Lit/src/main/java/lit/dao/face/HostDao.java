@@ -2,17 +2,21 @@ package lit.dao.face;
 
 import java.util.List;
 
+import lit.dto.Day_off;
+import lit.dto.Image;
 import lit.dto.Lodge;
 
 public interface HostDao {
 	
 	//-------------단계별 정보등록
-
+	
 	//1단계 숙소등록
 	public void insertOne(Lodge lodge);
 
 	//2단계 숙소등록
-	public void insertTwo(Lodge lodge);
+	public void insertTwo(Day_off day_off);
+
+
 	
 	//3단계 숙소등록
 	public void insertThree(Lodge lodge);
@@ -37,6 +41,11 @@ public interface HostDao {
 	//호스트 mem_no로 select하기
 	public List selectByHostMemno();
 
-	
+	public void deleteDayoff(Day_off day_off);
+
+	public void deleteAllDayoff(int lodge_no);
+
+	//숙소 이미지 넣기
+	public void insertLodgeView(Image image);
 
 }

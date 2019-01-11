@@ -11,13 +11,15 @@
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#nextbutton").click(function(){
-		location.href="/host/firstRoom";
-		
-		
+	$("#move-calendar").click(function(){
+		location.href="/host/manageLodge?lodge_no="+${lodge_no};
+	
 	});
 	
-	
+	$("#addView_btn").click(function(){
+		location.href="/host/addview?lodge_no=${lodge_no}";	
+	});
+		
 	
 });
 
@@ -46,44 +48,25 @@ float:right;
 	
 	
 	<div class="left" style="border: 1px solid red;">
+	
+	 	<label>나와랏 : ${lodge_no}</label>
 		<div id="content1">
 			<h2>호스트로 가는길</h2>
 		</div>
 
 		<div id="content2">
-			<h3>1단계</h3>
-			<div class="content2-1">
-				<h3>등록하려는 숙소 유형을 선택해 주세요.</h3>
+			
+			<div class="content1">
+				<h3>1단계</h3>
+				<button>숙소상세정보등록</button>
 			</div>
-			<div class="content2-2">
-			  <form action="" method="post">
-				<select name="category" style="width:124px; height:25px;">
-					<option value="show">집유형</option>
-					<option value="all">집전체</option>
-				    <option value="lot">다인실</option>
-				    <option value="alone">개인실</option>
-				</select>
-				<select name="max-capacity" style="width:124px; height:25px">
-					<option value="show">가능인원</option>
-				    <option value="one">최대1명숙박가능</option>
-				    <option value="two">최대2명숙박가능</option>
-				    <option value="three">최대3명숙박가능</option>
-				    <option value="four">최대4명숙박가능</option>
-				    <option value="five">최대5명숙박가능</option>
-				    <option value="six">최대6명숙박가능</option>
-				    <option value="seven">최대7명숙박가능</option>
-				    <option value="eight">최대8명숙박가능</option>
-				    <option value="nine">최대9명숙박가능</option>
-				    <option value="ten">최대10명숙박가능</option>
-				    <option value="eleven">최대11명숙박가능</option>
-				    <option value="twelve">최대12명숙박가능</option>
-				    <option value="thirteen">최대13명숙박가능</option>
-				    <option value="fourteen">최대14명숙박가능</option>
-				    <option value="fifteen">최대15명숙박가능</option>
-				    <option value="sixteen">최대16명숙박가능</option>
-				</select> <br>
-				<input type="text" style="width:250px; height:25px;"/> <br><br>
-				</form>
+			<div class="content2">
+			  	<h3>2단계</h3>
+			  	<button id="move-calendar">예약가능날짜설정</button>
+			</div>
+			<div class="content3">
+				<h3>3단계</h3>
+				<button id = "addView_btn">숙소꾸미기 및 마무리</button>
 			</div>
 		</div>
 		<button id="nextbutton">계속</button>
