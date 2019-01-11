@@ -25,6 +25,16 @@ $(document).ready(function(){
 	
 	$("#nextButton").click(function(){
 		
+		if(document.getElementById('building_no').value=='건물유형'){
+			alert("건물유형을 선택해 주세요");
+			return;
+		}
+		
+		if(document.getElementById('lodge_case').value=='숙소유형'){
+			alert("숙소유형을 선택해 주세요");
+			return;
+		}
+		
 		
 		if(document.getElementById('lodge_name').value == ""){
 			

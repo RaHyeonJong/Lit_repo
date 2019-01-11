@@ -31,7 +31,7 @@
 	<p style="margin:0; text-align:right;">라이프이즈트립에는 다 있습니다.</p>
 	</div>
 
-	<form action="/main/searchMain" method="POST">
+	<form action="/main/searchMain" method="POST" onsubmit="return check()">
 
 		<input type="hidden" id="cityLat" name="cityLat"/>
 		<input type="hidden" id="cityLng" name="cityLng"/>
@@ -42,11 +42,11 @@
 		<input id="location-input" type="text" name="location" placeholder="장소를 검색하세요." style="width:338px; padding:10px;"/></td></tr>
 		<tr><td style="width:50%; padding:20px 0 0 30px; text-align:left;"><h4 style="margin:0; text-align:left;">체크인</h4></td>
 		<td style="width:50%; padding:20px 30px 0 0; text-align:left;"><h4 style="margin:0; text-align:left;">체크아웃</h4></td></tr>
-		<tr><td style="padding:5px 0 0 30px; text-align:left;"><input style="width:90%; padding:5px;" type="text" name="checkin" placeholder="년 - 월 - 일" data-language="en" class="datepicker-here" data-date-format="yyyy-mm-dd" autocomplete="off"/></td>
-		<td style="padding:5px 30px 0 0; text-align:left;"><input style="width:90%; padding:5px;" type="text" name="checkout" placeholder="년 - 월 - 일" data-language="en" class="datepicker-here" data-date-format="yyyy-mm-dd" autocomplete="off"/></td></tr>
+		<tr><td style="padding:5px 0 0 30px; text-align:left;"><input style="width:90%; padding:5px;" type="text" id="checkin" name="checkin" placeholder="년 - 월 - 일" data-language="en" class="datepicker-here" data-date-format="yyyy-mm-dd" autocomplete="off"/></td>
+		<td style="padding:5px 30px 0 0; text-align:left;"><input style="width:90%; padding:5px;" type="text" id="checkout" name="checkout" placeholder="년 - 월 - 일" data-language="en" class="datepicker-here" data-date-format="yyyy-mm-dd" autocomplete="off"/></td></tr>
 		<tr><td colspan="2" style="padding:20px 30px 5px 30px;"><h4 style="margin:0; text-align:left;">인원수</h4></td></tr>
 		<tr><td colspan="2" style="padding:0 30px 0 30px; text-align:left;">
-		<select name="peopleCnt" data-vars-select-name="people" style="width:48%; padding:5px;">
+		<select name="peopleCnt" id="peopleCnt"data-vars-select-name="people" style="width:48%; padding:5px;">
 			<option selected value="1">성인 1명</option>
 			<option value="2">성인 2명</option>
 			<option value="3">성인 3명</option>
@@ -91,6 +91,22 @@ function initAutocomplete() {
 
 // google.maps.event.addDomListener(window, 'load', initAutocomplete);
 ///////////////////////////////
+
+function check() {
+	if(document.getElementById('cityLat').value == "") {
+		alert(document.getElementById('cityLat').value + "장소를 입력하세요!");
+		return false;
+	}
+	if(document.getElementById('checkin').value == "") {
+		alert("체크인 날짜를 입력하세요!");
+		return false;
+	}
+	if(document.getElementById('checkout').value == "") {
+		alert("체크아웃 날짜를 입력하세요!");
+		return false;
+	}
+	return true;
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&v=3.exp&sensor=false&libraries=places&callback=initAutocomplete"
          async defer></script>

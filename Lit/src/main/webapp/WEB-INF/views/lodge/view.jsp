@@ -1035,7 +1035,7 @@ $(function() {
 <c:import url="../layout/footer.jsp"/>
 <c:import url="../lodge/sidebar.jsp"/>
    <!-- 구글 맵 -->  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"
     async defer></script>
 
 </body>

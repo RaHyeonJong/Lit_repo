@@ -14,16 +14,18 @@
 	position: fixed;
 	height: 776px;
 	right: 0px;
-/* 	float: right; */
+	/* 	float: right; */
 }
+
 #mapFixed {
 	position: fixed;
 	top: 145px;
 	height: 776px;
 	width: 50%;
 	right: 0px;
-/* 	float: right; */
+	/* 	float: right; */
 }
+
 #search_filter {
 	position: fixed;
 	z-index: 102;
@@ -56,57 +58,117 @@
 	text-decoration: none !important;
 	width: auto !important;
 }
+
 #lodgeList2 {
-	display: table; 
-	border: 1px solid gray; 
+	display: table;
+	border: 1px solid gray;
 	margin: 20px 0;
 	width: 48%;
 }
+
 #lodgeImage {
-	display: table-cell; 
-	width: 300px; 
+	display: table-cell;
+	width: 300px;
 	height: 200px;
 	border: 1px solid gray;
 }
+
 #lodgeInfo {
-	display: table-cell; 
+	display: table-cell;
 	border: 1px solid gray;
 	width: 100%;
-	height: 200px !important; 
+	height: 200px !important;
 	vertical-align: middle !important;
+}
+
+#modal-people2 {
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 14px 36px 2px !important;
+	border-width: 1px !important;
+	border-style: solid !important;
+	border-color: rgba(0, 0, 0, 0.2) !important;
+	border-image: initial !important;
+	border-radius: 4px !important;
+	padding: 24px !important;
+}
+
+#peopleDiv {
+	display: table !important;
+	width: 100% !important;
+}
+
+#peopleDiv1 {
+	display: table-cell !important;
+	width: 100% !important;
+	vertical-align: middle !important;
+	text-align: left;
+}
+
+#peopleDiv2 {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+#peopleDiv21 {
+	display: table !important;
+	width: 120px !important;
+	text-align: center !important;
+}
+
+#peopleMinus {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+#peopleCnt {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+#peoplePlus {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+.people-counter-button {
+	height: 2em;
+	width: 2em;
+	border: 1px solid rgb(0, 132, 137);
+	border-radius: 50%;
+	background-color: transparent;
+	line-height: 1;
+	color: rgb(0, 132, 137);
 }
 </style>
 
 </head>
 <body>
 
-<div id="wrapper"> 
+	<div id="wrapper">
 
 		<div>
 			<!-- header 시작 -->
 			<c:import url="../layout/header.jsp" />
 		</div>
-		
+
 		<!-- header 끝 -->
-		
-		<div id="search_filter" style="z-index: 90; top: 0;">
+
+		<div id="search_filter" style="z-index: 91; top: 0;">
 			<button>날짜</button>
 			<button id="peopleFilterBtn">인원</button>
 			<button>숙소 종류</button>
 			<button id="priceFilterBtn">가격</button>
 		</div>
-		
-		
+
+
 		<div id="lodgeCount"></div>
 		<div>
 			<div id="lodgeList" style="margin-left: 20px; margin-top: 142px;"></div>
 		</div>
-	
-</div>
+
+	</div>
 
 	<div id="mapFixed">
-		<div id="map">
-		</div>
+		<div id="map"></div>
 	</div>
 </body>
 
@@ -118,7 +180,7 @@
 <script>
 var searchFilter = new Object(); // 검색 필터 오브젝트
 
-searchFilter.peopleCnt = 0;				// 인원 (파라미터)
+searchFilter.peopleCnt = 1;				// 인원 (파라미터)
 searchFilter.minPrice = 0;				// 최소 가격(파라미터)
 searchFilter.maxPrice = 99999999;		// 최대 가격(파라미터)
 
@@ -137,6 +199,7 @@ var marker;
 var cost;
 var infowindow;
 var markerArray = [];
+var peopleMax = 9; // 최대 인원
 
 $(document).ready(function() {
 	$('#header').css('z-index', 91); // 모달 띄울 때
@@ -146,12 +209,12 @@ $(document).ready(function() {
 	// 인원 모달 위치
 	var peopleDiv = $("#peopleFilterBtn");
 	var peopleDivX = peopleDiv.offset().left;
-	var peopleDivY = peopleDiv.offset().top + peopleDiv.height() + 30;
+	var peopleDivY = peopleDiv.offset().top + peopleDiv.height() + 32;
 	
 	// 가격 모달 위치
 	var priceDiv = $("#priceFilterBtn");
 	var priceDivX = priceDiv.offset().left;
-	var priceDivY = priceDiv.offset().top + priceDiv.height() + 30;
+	var priceDivY = priceDiv.offset().top + priceDiv.height() + 32;
 	
 	$('#peopleFilterBtn').click(function() { // 인원 필터 버튼 누를 시
 		
@@ -172,11 +235,16 @@ $(document).ready(function() {
 		$('#modal-price').css("display", "block");
 	});
 	
-	$('#peopleFilter-send').click(function() {
+	$('#peopleSend').click(function() { // 인원 적용 버튼 누를 시
 		alert('인원 필터');
 		searchFilterSend();
-		if(searchFilter.peopleCnt != 0)
-			$('#peopleFilterBtn').html(searchFilter.peopleCnt + '명');
+		$('#peopleFilterBtn').html(searchFilter.peopleCnt + '명');
+	});
+	
+	$('#peopleCancel').click(function() { // 인원 취소 버튼 누를 시
+		alert('인원 초기화');
+		searchFilter.peopleCnt = 1;
+		$('#peopleFilterBtn').html('인원');
 	});
 	
 	$('#priceFilter-send').click(function() { 
@@ -191,12 +259,11 @@ $(document).ready(function() {
 		// 필터 기본값
 		$('#priceMinFilter').attr('value', 0);
 		$('#priceMaxFilter').attr('value', 99999999);
-		$('#peopleFilter').attr('value', 0);
+// 		$('#peopleFilter').attr('value', 1);
 		
 		
 		
 		$('.modal').css("display", "none");
-		searchFilter.peopleCnt = $('#peopleFilter').val();
 		searchFilter.minPrice = $('#priceMinFilter').val();
 		searchFilter.maxPrice = $('#priceMaxFilter').val();
 		
@@ -275,7 +342,31 @@ $(document).ready(function() {
 			});
 } // searchFilterSend() end
 
+	// 모달 반투명 배경 클릭
+	$(window).click(function(e) {
+		if(e.target == $('#modal-people')[0]) {
+			$('.modal').css("display", "none");
+		} else if(e.target == $('#modal-price')[0]) {
+			$('.modal').css("display", "none");
+		}
+	});
 	
+	$('#peopleMinus').click(function() {
+		if(searchFilter.peopleCnt > 1) {
+			searchFilter.peopleCnt--;
+			$('#peopleCnt').html(searchFilter.peopleCnt + '+');
+		}
+	});
+	
+	$('#peoplePlus').click(function() {
+		if(searchFilter.peopleCnt < peopleMax) {
+			searchFilter.peopleCnt++;
+			$('#peopleCnt').html(searchFilter.peopleCnt + '+');
+		}
+	});
+	
+	
+
 }); // document ready end
 	
 
@@ -389,35 +480,57 @@ $(document).ready(function() {
 					} // function map() end
 					
 			}
+			
+	
 	</script>
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
-	
+
 <!-- 가격 필터 모달 -->
-<div id="modal-price" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div id="modal-price2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
-<div id="modal-price3">
-	<!-- price min, max filter 추가 -->
-	<label for="min">최소</label>
-	<input type="text" id="priceMinFilter" name="priceMinFilter" /><br>
-	<label for="max">최대</label>
-	<input type="text" id="priceMaxFilter" name="priceMaxFilter" />
-	<button id="priceFilter-send">적용</button>
-	
+<div id="modal-price" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-price2"
+		style="position: fixed; width: 568px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		<div id="modal-price3">
+			<!-- price min, max filter 추가 -->
+			<label for="min">최소</label> <input type="text" id="priceMinFilter"
+				name="priceMinFilter" /><br> <label for="max">최대</label> <input
+				type="text" id="priceMaxFilter" name="priceMaxFilter" />
+			<button id="priceFilter-send">적용</button>
+
+		</div>
+	</div>
 </div>
-</div></div>
 <!-- 가격 필터 모달 끝 -->
 
 <!-- 인원 필터 모달 -->
-<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div id="modal-people2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
-<div id="modal-people3">
-	
-	<!-- 모달 내용 -->
-	<input type="text" id="peopleFilter" />
-	
-	<button id="peopleFilter-send">적용</button>
+<div id="modal-people" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-people2"
+		style="position: fixed; width: 344px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		<div id="modal-people3">
+
+			<div id="peopleDiv" style="margin-bottom: 16px;">
+				<div id="peopleDiv1">인원</div>
+				<div id="peopleDiv2">
+					<div id="peopleDiv21">
+						<button class="people-counter-button" id="peopleMinus" style="cursor: pointer;">-</button>
+						<div id="peopleCnt">1+</div>
+						<button class="people-counter-button" id="peoplePlus" style="cursor: pointer;">+</button>
+					</div>
+				</div>
+			</div>
+			
+			<div style="display: flex;">
+				<div id="peopleCancel" style="text-align: left;flex-grow: 1 !important;cursor: pointer;">삭제</div>
+				<div id="peopleSend" style="color: rgb(0, 132, 137);cursor: pointer;">적용</div>
+			</div>
+			<!-- 모달 내용 -->
+			<!-- 	<input type="text" id="peopleFilter" /> -->
+
+			<!-- 	<button id="peopleFilter-send">적용</button> -->
+		</div>
+	</div>
 </div>
-</div></div>
 <!--   인원 모달 끝    -->
 </html>
