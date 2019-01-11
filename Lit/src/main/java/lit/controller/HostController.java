@@ -447,7 +447,7 @@ public class HostController {
 		
 		
 		
-		hostService.hostaddViewList(msr,req,image);
+//		hostService.hostaddViewList(msr,req,image);
 	
 		
 		
