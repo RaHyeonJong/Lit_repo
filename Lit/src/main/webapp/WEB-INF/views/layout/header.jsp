@@ -11,7 +11,7 @@
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal_login = $('#modal-login');
@@ -455,7 +455,7 @@ body {
 #wrapper {
 	min-width:1200px; 
 	width: 100%;
-	margin:0 auto;"
+	margin:0 auto;
 }
 
 #right-menu ul li {
@@ -473,10 +473,6 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
- 
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 
 #header {
 /*    position: relative; */

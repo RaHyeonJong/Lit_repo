@@ -809,8 +809,22 @@ $(function() {
 									</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
-									<span> 
-									<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light">호스트 에게 연락하기</a></span> 
+									<span>
+									<c:if test="${login }"> 
+						
+										<c:if test="${member.mem_case eq 'user' or member.mem_case eq 'host' }">
+											<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+										</c:if>
+										
+										<c:if test="${member.mem_case eq 'admin' }">
+											<a href="#" onClick="alert('관리자는 이용 불가입니다.');" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+										</c:if>
+										
+									</c:if>
+									<c:if test="${not login }">
+										<a href="#" onClick="alert('로그인을 해주세요!!');" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+									</c:if>
+									</span> 
 								</p>
 							</th>
 							<th class="small-2 large-2 columns last"><a href="#"
@@ -835,8 +849,8 @@ $(function() {
 			<!-- 숙소 정원, 유형, 침대 개수 -->
 
 			<div class="lodge_info">
-				<span>󰄂</span> 
-				<span>수용인원 ${view.lodge_capacity }명</span>
+				<i class="fas fa-users"></i> 
+				<span> 수용 인원  ${view.lodge_capacity }명</span>
 				<c:if test = "${view.building_case_no  == 1}" >
 				<span>아파트</span>
 				</c:if>
@@ -852,8 +866,8 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 편의시설 -->
 			<div class="facility">
-				<h3>편의 시설</h3>
-				<span > 
+				<h3><i class="fas fa-home"></i> 편의 시설</h3>
+				<span> 
 				 <span> ${item.get(1)}</span>
 				  <br>
 				 <span> ${item.get(2)}</span> 
@@ -884,7 +898,7 @@ $(function() {
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
 			<div style = "width: 900px;">
-			<p style ="font-size: 20px; font-weight: bold;">예약 가능 날짜<p>
+			<p style ="font-size: 20px; font-weight: bold;"><i class="far fa-calendar-check"></i> 예약 날짜<p>
 			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
 			<p id="datepicker2" data-language='en'></p>
 			</div>
@@ -1006,7 +1020,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 지역정보 -->
 			<div>
-			<h3>숙소 위치</h3>
+			<h3><i class="fas fa-map-marker-alt"></i> 위 치</h3>
 			<div id="map"></div>
 			
 			</div>

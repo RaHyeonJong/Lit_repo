@@ -33,6 +33,7 @@ $(document).ready(function(){
       });
       
    });
+ 
 });
 </script>
 
@@ -120,7 +121,7 @@ $(document).ready(function(){
 
 <div id="myModal" class="modal">
    <div class="modal-content">
-  	<form action="/message/write" method="post">
+  	<form action="/message/write" method="post" id="frm">
          <span id="close" class="close">&times;</span>
          <h1><i class="fa fa-envelope-o" aria-hidden="true" style="color:skyblue;"></i>&nbsp;Message</h1>
          <hr>
@@ -129,7 +130,7 @@ $(document).ready(function(){
          <p>
          <textarea class="contents" id="contents" name="contents" placeholder="메시지를 입력해주세요."></textarea></p>
          <p style="text-align:right;">
-         <input type="submit" class="sendBtn" id="sendBtn" onclick="sendBtn_click()" value="S E N D "/>
+         <input type="submit" class="sendBtn" id="sendBtn" onclick="return sendform()" value="S E N D "/>
          <input type="hidden" value="${member.mem_no }" name="sender_no" />
          <input type="hidden" value="${other.mem_no }"  name="receiver_no"/>
        </form> 
@@ -166,25 +167,40 @@ $(document).ready(function(){
    }
    
    //전송 버튼 누르면 벌어지는 일
-   function sendBtn_click()
+   function sendform()
    {
 
 	   	var contents = $("#contents").val();
+		var sender = "${member.mem_name}";
+		var receiver = "${other.mem_name}";
 
-	   	if(!contents)
-	   	{
-	  
-	   		$("#contents").css("background","pink");
-	   		$("#contents").attr("placeholder","메시지를 다시 입력해주세요");
-	   		alert("실 D패");
-	   	}
-	
-	   	else
-	   		{
-	   		console.log(contents);
-	   		alert("성공");
-	   		}
-
+		//만약, 보낸이와 받는이가 서로 같으면 비활성화
+		if(sender == receiver)
+		{
+			$("sendBtn").attr("disabled","disabled");
+			alert("보낸이와 받는이가 서로 같습니다. 다시 확인해주세요.");
+			return false;
+		}
+		//그렇지 않으면 (보낸이와 받는이가 서로 다르다면)
+		else
+		{
+			//보낸이와 받는이가 서로 다르되, 쪽지 내용이 적혀있지 미전송
+			if(!contents)
+			{
+				$("#contents").css("background","pink");
+				$("#contents").attr("placeholder","내용을 정확히 입력해주세요");
+				console.log("전송 실패");
+				return false;
+			}
+			//보낸이와 받는이가 서로 다르되, 쪽지 내용 적혀있으면 전송
+			else
+			{
+				$("#contents").css("background","white");
+				console.log("전송 가능");
+				document.getElementById('frm').submit();
+			}
+			
+		}
    }
 
 </script>
