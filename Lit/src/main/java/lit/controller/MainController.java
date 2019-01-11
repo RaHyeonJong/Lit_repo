@@ -1,7 +1,11 @@
 package lit.controller;
 
 import java.io.IOException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -254,6 +258,13 @@ public class MainController {
 	public @ResponseBody List searchFilterAjax(
 			String searchFilterJson
 			) { 
+		
+		Date today = new Date();
+		Date startDate2 = null;
+		Date endDate2 = null;
+		
+		
+		
 		System.out.println("search ajax");
 		System.out.println(searchFilterJson);
 		
@@ -273,9 +284,64 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(searchFilter);
+		System.out.println(searchFilter.getCate());
 		
-		List<Lodge> lodgeList = mainService.getLodgeListByBounds(searchFilter); // 필터 적용 리스트 가져오기
+		SimpleDateFormat dt = new SimpleDateFormat("mm/dd/yyyy"); 
+		
+		try {
+			if(!"".equals(searchFilter.getStartDate())) {
+				startDate2 = dt.parse(searchFilter.getStartDate());
+				endDate2 =  dt.parse(searchFilter.getEndDate());
+			} else {
+				startDate2 = new Date();
+				endDate2 = new Date();
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		System.out.println("date");
+		System.out.println(startDate2);
+		System.out.println(endDate2);
+		
+		System.out.println(searchFilter);
+		searchFilter.setMaxPrice(999999);
+		
+		
+		
+		List<Lodge> lodgeList2 = mainService.getLodgeListByBounds(searchFilter); // 필터 적용 리스트 가져오기
+		
+		List<Lodge> lodgeList = new ArrayList<>();
+		
+		for(Lodge l:lodgeList2) {
+			int term = l.getAvailable_term();
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, term);
+			
+			Date startTerm = today;
+			Date endTerm = cal.getTime();
+			
+			System.out.println("=========");
+			System.out.println(startTerm.getTime());
+			System.out.println(startDate2.getTime());
+			
+			if(startDate2.getTime() >= startTerm.getTime() && endDate2.getTime() <= endTerm.getTime()) {
+				if(searchFilter.getCate().length == 0) {
+					lodgeList.add(l);
+				} else {
+					for(int i : searchFilter.getCate()) {
+						if(l.getLodge_case_no() == i) {
+							lodgeList.add(l);
+						}
+					}
+				}
+				
+			}
+			
+		}
+		
+		System.out.println("date1 : " + lodgeList2.size());
+		System.out.println("date2 : " + lodgeList.size());
 		
 		for(int i=0;i<lodgeList.size();i++) {
 			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());

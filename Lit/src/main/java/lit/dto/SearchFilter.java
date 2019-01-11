@@ -13,13 +13,46 @@ public class SearchFilter {
 	private String location;
 	private double cityLat;
 	private double cityLng;
-	
+	private String startDate;
+	private String endDate;
+	private int[] cate;
+
 	@Override
 	public String toString() {
 		return "SearchFilter [peopleCnt=" + peopleCnt + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", neLat="
 				+ neLat + ", neLng=" + neLng + ", swLat=" + swLat + ", swLng=" + swLng + ", checkin=" + checkin
 				+ ", checkout=" + checkout + ", location=" + location + ", cityLat=" + cityLat + ", cityLng=" + cityLng
-				+ "]";
+				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
+	}
+
+	
+	
+	public int[] getCate() {
+		return cate;
+	}
+
+
+
+	public void setCate(int[] cate) {
+		this.cate = cate;
+	}
+
+
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public int getPeopleCnt() {
