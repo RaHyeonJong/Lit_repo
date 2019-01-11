@@ -21,6 +21,26 @@ $(document).ready(function(){
 	var modal_certification = $('#modal-certification');
 	var modal_joinResult = $('#modal-joinResult');
 
+
+//호스트 숙소 보여주는 모달
+
+	var globalModal = $(".global-modal");
+	$(".btn-green-flat-trigger").on("click",function(e){
+		e.preventDefault();
+	$(globalModal).toggleClass('global-modal-show');
+	});
+	$( ".overlay" ).on( "click", function() {
+	      $( globalModal ).toggleClass('global-modal-show');
+	 });
+	    $( ".global-modal_close" ).on( "click", function() {
+	      $( globalModal ).toggleClass('global-modal-show');
+	 });
+	    $(".mobile-close").on("click", function(){
+	      $( globalModal ).toggleClass('global-modal-show');
+	 });
+	
+	
+	
 	
 //	쪽지 갯수 실시간 
 //class="message_count"
@@ -473,10 +493,6 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #header {
 /*    position: relative; */
    z-index: 100;
@@ -828,6 +844,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 	font-weight : initial;
 	background-color: white;
 }
+
+
 </style>
 
 <header id="header">

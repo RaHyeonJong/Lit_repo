@@ -98,13 +98,6 @@ $(document).ready(function(){
 		success: function(mav) {
 		
 			document.getElementById("total").innerHTML = mav;
-// 			$("#stay_cost").html(mav.add);
-// 			$("#cost").html(mav.st);
-// 			$("#service").html(mav.ser);
-// 			$("#sum").html(mav.total);
-// 			 $("#reserBtn").click(function(){
-// 					location.href = "/lodge/reservation";
-// 				});	
 			}
 			
 			 
@@ -185,7 +178,39 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/javascript"> //신고
+<script type="text/javascript"> //숙소 신고
+
+	function report(){ 
+	
+		var mem_no = "${member.mem_no}",
+			lodge_no = "${view.lodge_no}";
+	
+		if(mem_no ==""){
+			alert("로그인 후 이용해 주세요");
+			return;
+		}	
+			
+	$.ajax({
+		url : "report",
+		type : "get",
+		data : {"lodge_no" : lodge_no ,"reporter_no" : mem_no},
+		dataType : "text",
+		success : function(e){
+			if(e=="1"){
+				alert("신고되었습니다.");
+			}else if(e== "-1"){
+				alert("신고가 취소되었습니다.");
+			}
+		},
+		error : function(e){
+			alert("에러났어요");
+		}
+		
+	});
+
+
+	}
+
 
 
 </script>
