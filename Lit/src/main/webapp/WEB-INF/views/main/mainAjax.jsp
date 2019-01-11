@@ -14,7 +14,7 @@
 				<c:forEach var="list" end="5" items="${lodgeList }">
 					<div class="LodgeList" style="width: 15%; display: inline-block;">
 						<div class="LodgeList-image">
-							<img src="/resources/images/main/recommendLodgeList1.jpg" width="100%" height="100%">
+							<img src="/resources/images/lodge_image/${list.stored_name[0] }" width="100%" height="100%">
 						</div>
 						<div>
 							<span>${list.lodge_name }</span>
@@ -51,7 +51,7 @@
 				<c:forEach var="list" begin="6" items="${lodgeList }">
 					<div class="LodgeList" style="width: 31%; display: inline-block;">
 						<div class="LodgeList-image">
-							<img src="/resources/images/main/recommendLodgeList1.jpg" width="100%" height="100%">
+							<img src="/resources/images/lodge_image/${list.stored_name[0] }" width="100%" height="100%">
 						</div>
 						<div>
 							<span>${list.lodge_name }</span>

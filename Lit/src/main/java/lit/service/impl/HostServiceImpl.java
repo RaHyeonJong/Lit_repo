@@ -56,9 +56,9 @@ public class HostServiceImpl implements HostService{
 	
 	//본인이 등록한 1,2,3단계 정보보기
 	@Override
-	public List viewHostElement() {
+	public List<Lodge> viewHostElement(Lodge lodge) {
 		
-		return hostDao.selectByHostEdge();
+		return hostDao.selectByHostEdge(lodge);
 	}
 	
 	

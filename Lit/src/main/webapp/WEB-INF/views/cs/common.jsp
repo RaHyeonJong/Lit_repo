@@ -2,6 +2,13 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <jsp:include page="../layout/header.jsp" />
+
+<head>
+
+	<title>Life Is Trip 인생은 여행이다.</title>
+
+</head>
+
 <style>
 	
 	/* 	자주하는질문, 1:1문의하기   가운데*/
