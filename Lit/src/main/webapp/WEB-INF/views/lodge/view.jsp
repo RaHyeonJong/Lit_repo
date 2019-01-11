@@ -910,7 +910,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
 			
-			
+				<h2><i class="fas fa-pencil-alt"></i>  후 기</h2>
 			
 				<c:if test ="${login && payd}">
 				<!-- 후기 작성 -->
