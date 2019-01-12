@@ -449,13 +449,8 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
- 
-#header {
-=======
 
 #header {
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 /*    position: relative; */
    z-index: 100;
    left: 0;
@@ -1066,8 +1061,16 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </div></div>
 <!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&v=3.exp&sensor=false&callback=initialize"
+         async defer></script>
+
 <!-- 검색창 자동완성기능 -->
 <script>
+function initialize(){
+	initAutocomplete();
+	initMap();
+}
+
 ////////// 자동완성기능 /////////
 function initAutocomplete() {
 	var input = document.getElementById('location-input');
@@ -1099,6 +1102,4 @@ function check() {
 	return true;
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete"
-         async defer></script>
+

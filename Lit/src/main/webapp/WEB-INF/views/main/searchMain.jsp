@@ -390,8 +390,7 @@ $(document).ready(function() {
 					
 			}
 	</script>
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
+<!-- <script	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script> -->
 	
 <!-- 가격 필터 모달 -->
 <div id="modal-price" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
