@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보 상세보기</title>
-
+<title>Life Is Trip 인생은 여행이다.</title>
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <link href="https://fonts.googleapis.com/css?family=Charm:700" rel="stylesheet">
 
 </head>

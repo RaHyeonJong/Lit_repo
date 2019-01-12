@@ -233,7 +233,7 @@ $(document).ready(function(){
 
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
-/* 	ul li { list-style: none; }  74오류나면 수정*/
+/* 	ul li { list-style: none; }  74오류나면 수정 */
 	.nav_side { position: absolute; top: 694px; left:1050px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}

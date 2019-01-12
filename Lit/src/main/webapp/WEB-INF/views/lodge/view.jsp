@@ -5,7 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
- 
+ <link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
+
+<head>
+	<title>Life Is Trip 인생은 여행이다</title>
+</head>
 
 <style>
 
@@ -805,8 +809,22 @@ $(function() {
 									</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
-									<span> 
-									<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light">호스트 에게 연락하기</a></span> 
+									<span>
+									<c:if test="${login }"> 
+						
+										<c:if test="${member.mem_case eq 'user' or member.mem_case eq 'host' }">
+											<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+										</c:if>
+										
+										<c:if test="${member.mem_case eq 'admin' }">
+											<a href="#" onClick="alert('관리자는 이용 불가입니다.');" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+										</c:if>
+										
+									</c:if>
+									<c:if test="${not login }">
+										<a href="#" onClick="alert('로그인을 해주세요!!');" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+									</c:if>
+									</span> 
 								</p>
 							</th>
 							<th class="small-2 large-2 columns last"><a href="#"
@@ -831,8 +849,8 @@ $(function() {
 			<!-- 숙소 정원, 유형, 침대 개수 -->
 
 			<div class="lodge_info">
-				<span>󰄂</span> 
-				<span>수용인원 ${view.lodge_capacity }명</span>
+				<i class="fas fa-users"></i> 
+				<span> 수용 인원  ${view.lodge_capacity }명</span>
 				<c:if test = "${view.building_case_no  == 1}" >
 				<span>아파트</span>
 				</c:if>
@@ -846,34 +864,34 @@ $(function() {
 			</div>
 			<!-- 유형 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
-			<!-- 편의시설 -->
-			<div class="facility">
-				<h3>편의 시설</h3>
-				<c:forEach items="${item }" var ="item" step="1" end="4">
-				${item}<br>
-				</c:forEach>
-			</div><br>
-			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
-			<div id="modalLayer">
- 			 <div class="modalContent">
-    			<a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
-    			<c:forEach items="${item}" var = "lodgeItem">
-    			${lodgeItem }<br>
-    			</c:forEach>
- 				
-    			<p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
-    			<c:forEach items= "${area}" var = "area">
-    			${area}<br>
-					    			
-    			</c:forEach>
-    			<button class = "close_btn" type="button"></button>
- 			 </div>
-			</div>
-			<!-- 편의시설 끝 -->
+			      <!-- 편의시설 -->
+         <div class="facility">
+            <h3>편의 시설</h3>
+            <c:forEach items="${item }" var ="item" step="1" end="4">
+            ${item}<br>
+            </c:forEach>
+         </div><br>
+         <a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
+         <div id="modalLayer">
+           <div class="modalContent">
+             <a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
+             <c:forEach items="${item}" var = "lodgeItem">
+             ${lodgeItem }<br>
+             </c:forEach>
+             
+             <p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
+             <c:forEach items= "${area}" var = "area">
+             ${area}<br>
+                            
+             </c:forEach>
+             <button class = "close_btn" type="button"></button>
+           </div>
+         </div>
+         <!-- 편의시설 끝 -->
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
 			<div style = "width: 900px;">
-			<p style ="font-size: 20px; font-weight: bold;">예약 가능 날짜<p>
+			<p style ="font-size: 20px; font-weight: bold;"><i class="far fa-calendar-check"></i> 예약 날짜<p>
 			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
 			<p id="datepicker2" data-language='en'></p>
 			</div>
@@ -881,7 +899,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
 			
-			
+				<h2><i class="fas fa-pencil-alt"></i>  후 기</h2>
 			
 				<c:if test ="${login && payd}">
 				<!-- 후기 작성 -->
@@ -889,7 +907,7 @@ $(function() {
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
         		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
         		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
-      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
+      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/> style="resize:none;"></textarea>
        			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
 				</c:if>
@@ -995,7 +1013,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 지역정보 -->
 			<div>
-			<h3>숙소 위치</h3>
+			<h3><i class="fas fa-map-marker-alt"></i> 위 치</h3>
 			<div id="map"></div>
 			
 			</div>

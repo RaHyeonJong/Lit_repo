@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <script src="/resources/dist/js/datepicker.min.js"></script>
 <!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
