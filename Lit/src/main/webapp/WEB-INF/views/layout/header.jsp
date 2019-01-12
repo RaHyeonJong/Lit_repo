@@ -493,10 +493,6 @@ body {
    left: 0;
    top: 75px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 #header {
 /*    position: relative; */
    z-index: 100;
@@ -1144,11 +1140,8 @@ function check() {
 	return true;
 }
 </script>
-<<<<<<< HEAD
 
-=======
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete&v=3.exp&sensor=false&libraries=places"
          async defer></script>
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git

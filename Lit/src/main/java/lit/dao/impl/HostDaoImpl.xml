@@ -79,7 +79,8 @@ sysdate,
 </insert>
 
 <select id="getLodgeList" parameterType="int" resultType="lit.dto.Lodge">
-	SELECT * FROM lodge
+	SELECT l.*, (SELECT stored_name FROM image i WHERE l.lodge_no = i.lodge_no AND i.thumb_nail = 1) thumb_nail_image
+	FROM lodge l
 	WHERE mem_no = #{mem_no }
 </select>
 

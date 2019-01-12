@@ -561,9 +561,7 @@ $(document).ready(function() {
 			
 	
 	</script>
-<<<<<<< HEAD
-<!-- <script	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script> -->
-=======
+
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
 
@@ -580,7 +578,6 @@ $(document).ready(function() {
 <!-- 			<button id="priceFilter-send">적용</button> -->
 
 
->>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	
 			<input type="text" style="height: 0px; font-size:0px; border:none;" id="datepicker" data-range="true"
     data-multiple-dates-separator="-"
