@@ -1,5 +1,6 @@
 package lit.controller;
 
+import java.io.Writer;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -377,23 +378,23 @@ public class HostController {
 	}
 	
 	//1단계 숙소정보 수정
-	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.GET)
+	@RequestMapping(value="/host/firstRoomF", method=RequestMethod.GET)
 	public void hostElementFirstFix(Lodge lodge,Model model) {
 
 		List<Lodge> hostLodgeElementList = hostService.viewHostElement(lodge);
+		
+		model.addAttribute("lodge_no",lodge.getLodge_no());
 		
 		model.addAttribute("fristUpdate", hostLodgeElementList);
 		
 	}
 	
 	//1단계 숙소정보 수정
-	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.POST)
+	@RequestMapping(value="/host/firstRoomF", method=RequestMethod.POST)
 	public ModelAndView hostElementFirstFixProc(Lodge lodge,ModelAndView mav) {
 		
-		
-		
-		
-		hostService.hostElementFirstFix(lodge);
+		 hostService.hostElementFirstFix(lodge);
+		 mav.setViewName("jsonView");
 		
 			return mav;
 		}
