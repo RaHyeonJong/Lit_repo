@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.velocity.runtime.directive.Parse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,11 @@ public class HostController {
 	//--------------------------1단계
 	//1단계 숙소기본정보등록페이지
 	@RequestMapping(value="/host/hostFirst", method=RequestMethod.GET)
-	public void hostFirst(Model model, int lodge_no) {
+	public void hostFirst(Model model, int lodge_no,HttpSession session) {
 		
 		
 		model.addAttribute("lodge_no", lodge_no);
+		session.setAttribute("fix_lodge_no", lodge_no);
 		
 		
 		
@@ -119,6 +121,34 @@ public class HostController {
 		return "redirect:/host/checkLocation";
 	}
 	
+	//숙소위치 변경페이지
+	@RequestMapping(value="/host/firstLocationF", method=RequestMethod.GET)
+	public void locationFix() {
+			
+			
+		}
+	//숙소위치 변경페이지
+	@RequestMapping(value="/host/firstLocationF", method=RequestMethod.POST)
+	public String locationFixProc(Lodge lodge,Model model,HttpSession session,Double cityLat, Double cityLng) {
+		
+		
+		lodge.setLatitude(cityLat);
+		lodge.setLongitude(cityLng);
+		session.setAttribute("lodge_addr", lodge.getLodge_addr());
+		session.setAttribute("lng", lodge.getLongitude());
+		session.setAttribute("lat", lodge.getLatitude());
+		
+		
+
+		logger.info(lodge.toString());
+		
+		return "redirect:/host/checkLocationF";
+			
+		}
+		
+	
+	
+	
 	
 	
 	//1단계 주소확인페이지
@@ -130,7 +160,7 @@ public class HostController {
 		model.addAttribute("lat", cityLat);
 
 	}
-
+	
 	//1단계 주소확인페이지
 	@RequestMapping(value="/host/checkLocation", method=RequestMethod.POST)
 	public String checkLocationElement(Lodge lodge,HttpSession session) {		
@@ -143,6 +173,29 @@ public class HostController {
 
 		return "redirect:/host/firstConveniences";
 	}
+	
+	
+	//변경 주소확인페이지
+		@RequestMapping(value="/host/checkLocationF", method=RequestMethod.GET)
+		public void clf(Model model, String addr, String cityLat, String cityLng) {
+			
+			model.addAttribute("addr", addr);
+			model.addAttribute("lng", cityLng);
+			model.addAttribute("lat", cityLat);
+
+		}
+		
+		//변경 주소확인페이지
+		@RequestMapping(value="/host/checkLocationF", method=RequestMethod.POST)
+		public String clfProc(Lodge lodge,HttpSession session) {		
+			
+				lodge.setLodge_no((int)session.getAttribute("fix_lodge_no"));
+			System.out.println(lodge.getLodge_no());
+
+			hostService.updateLocation(lodge);
+
+			return "redirect:/host/firstConveniencesF";
+		}
 	
 	//1단계 편의시설
 	@RequestMapping(value="/host/firstConveniences", method=RequestMethod.GET)
@@ -187,6 +240,49 @@ public class HostController {
 		return "redirect:/host/lodgeCharge";
 		}
 	
+	//수정 편의시설
+		@RequestMapping(value="/host/firstConveniencesF", method=RequestMethod.GET)
+
+		public void fcf(Lodge lodge) {}
+
+
+			
+		//1단계 편의시설
+		@RequestMapping(value="/host/firstConveniencesF", method=RequestMethod.POST)
+		public String fcfproc(Lodge lodge,HttpSession session) {
+			
+			String[] word = lodge.getConvenient_facility().split(",");
+			String[] otherCon = lodge.getConvenient_area().split(",");
+			System.out.println(lodge.getConvenient_facility());
+			
+			
+			for(String word2 : word) {
+
+				List<String> word3 = Arrays.asList(word);
+				
+				String w = word3.stream().map(facility->""+facility+"")
+						.collect(Collectors.joining(""));
+				
+				lodge.setConvenient_facility(w);
+			}
+			
+			for(String otherCon1 : otherCon) {
+
+				List<String> otherCon3 = Arrays.asList(otherCon);
+				
+				String t = otherCon3.stream().map(area->""+area+"")
+						.collect(Collectors.joining(""));
+				
+				lodge.setConvenient_area(t);
+			}
+			
+			
+				session.setAttribute("convenient_facility", lodge.getConvenient_facility());
+				session.setAttribute("convenient_area", lodge.getConvenient_area());
+				logger.info(lodge.toString());
+			return "redirect:/host/lodgeCharge";
+			}
+	
 	
 	
 	//1단계 숙소관리
@@ -199,7 +295,7 @@ public class HostController {
 			  SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 			  
 			  Calendar cal = Calendar.getInstance();
-			  cal.add(Calendar.MONTH, 36);
+			  cal.add(Calendar.MONTH, 1);
 			  
 			  model.addAttribute("today", date.format(today));
 			  model.addAttribute("after3years", date.format(cal.getTime()));
@@ -209,11 +305,12 @@ public class HostController {
 		//1단계 숙소관리
 		@RequestMapping(value="/host/manageLodge", method=RequestMethod.POST)
 		public ModelAndView manageLodgeProc(
-				@RequestParam(defaultValue="1") int selectShowMonth, 
+				@RequestParam(defaultValue="36") int selectShowMonth, 
 				ModelAndView mav,
 				String selectDisableDay, 
 				HttpSession session,
-				int lodge_no)
+				int lodge_no,
+				Lodge lodge)
 		{
 			hostService.deleteAllDayoff(lodge_no);
 			
@@ -233,6 +330,10 @@ public class HostController {
 			 //끝
 
 			 session.setAttribute("available_term", selectShowMonth);
+			 lodge.setAvailable_term(selectShowMonth);
+			 lodge.setLodge_no(lodge_no);
+			 logger.info(lodge.toString());
+			 hostService.updateAvailabeTerm(lodge);
 			 
 			 
 			
@@ -315,7 +416,7 @@ public class HostController {
 			
 //			int member_no = ((Member) session.getAttribute("member")).getMem_no();
 			
-			lodge.setMem_no(5);
+			lodge.setMem_no(((Member)session.getAttribute("member")).getMem_no());
 
 			logger.info(lodge.toString());
 
@@ -359,8 +460,7 @@ public class HostController {
 	public void hostThirdElement(Lodge lodge) {
 				
 		
-	//3단계 숙소등록정보를 INSERT
-	hostService.insertThird(lodge);
+
 				
 			}
 	
@@ -368,12 +468,6 @@ public class HostController {
 	
 	//---------- 변경페이지 ----------
 	
-	//호스트등록정보 변경페이지
-	@RequestMapping(value="/host/hostElementChange", method=RequestMethod.GET)
-	public void hostElementChange() {
-		
-		
-	}
 	
 	//1단계 숙소정보 수정
 	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.GET)

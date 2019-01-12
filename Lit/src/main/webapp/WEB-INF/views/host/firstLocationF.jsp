@@ -29,10 +29,11 @@ google.maps.event.addDomListener(window, 'load', init);
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#backButton").click(function(){
-		location.href="/host/firstRoom";
+		location.href="/host/firstRoomF";
 	});
 	
 	$("#nextButton").click(function(){
+
 
 	var frist = $('#locationTextField').val();
 		if(frist ==""){
@@ -188,9 +189,9 @@ margin:250px 10px 10px 50px;
 <div id="wrapper">
 	<div class="left">
 	 <div class="innerleft">
-	  <form action="/host/firstLocation" method="post" id="sendLocation">
+	  <form action="/host/firstLocationF" method="post" id="sendLocation">
 		<div class="category content1-1">
-			<h2>숙소의 위치를 알려주세요</h2>
+			<h2>변경할 숙소의 위치를 알려주세요</h2>
 		</div>
 		
 		<div class="category content1-2">

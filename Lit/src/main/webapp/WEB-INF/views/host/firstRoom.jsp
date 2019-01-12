@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>숙소 유형 및 내부사항</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
@@ -235,11 +235,12 @@ border-radius:10%;
 </style>
 </head>
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 
 <div id="wrapper">
 	<div class="left" >
 	 <div class="innerleft">
-	  
+	 
 		<div class="category content2_1">
 			<h2>호스트의 숙소 정보를 입력해주세요</h2>
 		</div>

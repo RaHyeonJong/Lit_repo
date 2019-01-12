@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>요금설정 및  체크인시간 설정</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script>

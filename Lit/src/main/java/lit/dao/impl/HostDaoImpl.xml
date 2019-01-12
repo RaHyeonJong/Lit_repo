@@ -89,5 +89,16 @@ sysdate,
 
 </insert>
 
+<!-- 노출기간업데이트 -->
+<update id="updateAvailable" parameterType="lit.dto.Lodge">
+UPDATE lodge SET available_term = #{available_term} WHERE lodge_no=${lodge_no}
+
+</update>
+
+<!-- 숙소위치수정 -->
+<update id="updateLocation1" parameterType="lit.dto.Lodge">
+UPDATE lodge SET lodge_addr =#{lodge_addr}, latitude=#{latitude}, longitude=#{longitude} WHERE lodge_no=#{lodge_no}
+</update>
+
 </mapper>
 
