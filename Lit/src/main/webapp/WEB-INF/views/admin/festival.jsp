@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>축제 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <link href="https://fonts.google.com/specimen/Do+Hyeon?selection.family=Do+Hyeon" rel="stylesheet">
 
 
@@ -47,14 +48,19 @@
       
       <div class="row">
         <c:forEach items="${festivalList }" var="festival">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:20px;">
           <div class="card h-100">
-            <a href="/festival/view?festival_no=${festival.festival_no }"><img class="card-img-top" width="350px" height="350px" src="/resources/images/festival/${festival.stored_name }" ></a>
+            <a href="/festival/view?festival_no=${festival.festival_no }"></a>
+            <button class="btn btn-outline-danger" style="background:#fcf0ea; position:absolute; padding-right:5%;" onclick="location='/festival/delete?festival_no=${festival.festival_no}'">삭제</button>
+            <a href="/festival/view?festival_no=${festival.festival_no }">
+            <img  src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; border-radius:15%" ></a>
+
             <div class="card-body" style="text-align:center;">            
               <!-- 축제 제목 -->
               <p style="font-family:Charm;"><b>${festival.festival_name }</b></p>
               <p class="card-text" style="font-size:12px;">
-                                   ${festival.start_date } ~ ${festival.end_date }</p>                                
+                                   ${festival.start_date } ~ ${festival.end_date }<br>
+                                   ${festival.address }</p>                                
             </div>
           </div>
         </div>
@@ -64,9 +70,10 @@
         
        <!-- 축제 리스트 페이징 처리 -->
                
-        <div class="pagination" style="text-align:center;">
+              
+        <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 300px;">
+		<ul class="pagination" style="padding-left: 58%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

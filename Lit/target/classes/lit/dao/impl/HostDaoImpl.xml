@@ -8,13 +8,8 @@
 <insert id="insertOne" parameterType="lit.dto.Lodge">
 
 <selectKey resultType="int" keyProperty="lodge_no" order="BEFORE">
-
 SELECT lodge_seq.nextval from dual
-
 </selectKey>
-
-
-
 
 INSERT INTO Lodge(
 LODGE_NO,
@@ -55,14 +50,8 @@ sysdate,
 #{latitude},
 #{longitude},
 #{mem_no}
-
-
 )
-
-
-
 </insert>
-
 
 
 <insert id="insertTwo" parameterType="lit.dto.Day_off">
@@ -88,6 +77,31 @@ sysdate,
 
 
 </insert>
+
+<select id="getLodgeList" parameterType="int" resultType="lit.dto.Lodge">
+	SELECT * FROM lodge
+	WHERE mem_no = #{mem_no }
+</select>
+
+<select id="getPayList" parameterType="int" resultType="lit.dto.Pay">
+	SELECT p.*, l.lodge_name, i.stored_name
+	FROM pay p, lodge l, image i
+	WHERE p.lodge_no = l.lodge_no  
+	AND p.lodge_no = i.lodge_no (+)
+	AND i.thumb_nail(+) = 1
+	AND p.lodge_no = #{lodge_no }
+	ORDER BY pay_no DESC
+</select>
+
+<select id="selectByHostEdge" parameterType="lit.dto.Lodge" resultType="lit.dto.Lodge">
+
+	SELECT * FROM lodge
+	WHERE lodge_no = #{lodge_no}
+
+</select>
+
+
+
 
 </mapper>
 

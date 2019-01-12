@@ -178,56 +178,6 @@ i.material-icons {
 }
 
 </style>
-</head>
-
-
-<script type="text/javascript">
-
-
-
-$(document).ready(function(){
-	var testId="#image"+i;
-	i+=1;
-	
-	
-	$("#submit_button").click(function(){
-		
-		$('#sendPhoto').submit();
-		location.href="/host/hostFirst";
-		
-	});
-	
-	
-	$(testId).on("change",handleImgsFilesSelect);
-	
-});
-	function handleImgsFilesSelect(e){
-		var files =e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		var testClass= ".js--image-preview" + i
-		i+=1;
-		
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-			sel_files.push(f);
-			var reader = new FileReader();
-			reader.onload = function(e){
-				var img_html = "<img src=\""+e.target.result+"\"/>";
-			
-				$(testClass).append(img_html);
-				
-				}
-			reader.readAsDataURL(f);
-		});
-	}
-
-
-
-
-</script>
 
 </head>
 
@@ -241,6 +191,7 @@ function initImageUpload(box) {
 
 	  function getFile(e){
 	    let file = e.currentTarget.files[0];
+	   
 	    checkType(file);
 	  }
 	  
@@ -258,14 +209,14 @@ function initImageUpload(box) {
 	  function checkType(file){
 	    let imageType = /image.*/;
 	    if (!file.type.match(imageType)) {
-	      throw 'Datei ist kein Bild';
+	      	alert("이미지 파일만 가능합니다.");
 	    } else if (!file){
-	      throw 'Kein Bild gewählt';
+	    	alert("이미지 파일만 가능합니다.");
 	    } else {
 	      previewImage(file);
 	    }
 	  }
-	  
+	
 	}
 
 	/// drop-effect
@@ -316,12 +267,25 @@ function initImageUpload(box) {
 
 
 	$(document).ready(function(){
+		
+		$("#submit_button").click(function(){
+			var dd = $('.image-upload')[0].files[0];
+			if(dd ==null){
+				alert("최소 첫번째 사진을 삽입해 주세요");
+				return;
+			}
+			("#sendPhoto").submit();
+			
+		});
+		
+		
 		var boxes = document.querySelectorAll('.box');
+	
 		for (let i = 0; i < boxes.length; i++) {
-		  let box = boxes[i];
-		  initDropEffect(box);
-		  initImageUpload(box);
-			}  
+			  let box = boxes[i];
+			  initDropEffect(box);
+			  initImageUpload(box);
+				}	
 		});
 </script>
 
@@ -384,79 +348,21 @@ function initImageUpload(box) {
        </div>
      </div>
      
-      <div class="box">
+      
+  </div>
+  
+
+  
+	
+  </form>
+	
+	  <div class="box">
          <div>
-            <h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요</h4>
+            <h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요. 사진이 충분하지 않을시 마지막 사진과 동일한 사진이 자동으로 추가됩니다.</h4>
             <button id="submit_button">확인</button>
          </div>
 
      </div>
-     
-  <div class="box insert1">
-    <div class="js--image-preview1"></div>
-    <div class="upload-options">
-      <label>
-        <input type="file" id="image1" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-      </label>
-    </div>
-  </div>
-   
-  <div class="box">
-    <div class="js--image-preview2"></div>
-    <div class="upload-options">
-      <label>
-        <input type="file" id="image2" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-      </label>
-    </div>
-  </div>
-  
-   
-  <div class="box">
-    <div class="js--image-preview3"></div>
-    <div class="upload-options">
-      <label>
-        <input type="file" id="image3" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-      </label>
-    </div>
-  </div>
-  
-  
-  
-  </div>
-	  <div>
-	   <div class="box">
-	    <div class="js--image-preview4"></div>
-	    <div class="upload-options">
-	      <label>
-	        <input type="file" id="image4" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-	      </label>
-	    </div>
-	  </div>
-	  
-	   
-	  <div class="box">
-	    <div class="js--image-preview5"></div>
-	    <div class="upload-options">
-	      <label>
-	        <input type="file" id="image5" name = "file" class="image-upload" accept="image|.jpg,image/.png,image/jpeg" />
-	      </label>
-	    </div>
-	  </div>
-	  
-	   <div class="box">
-	   	<div>
-	   		<h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요</h4>
-	   		<button id="submit_button">확인</button>
-	   	</div>
-
-	  </div>
-	  
-   
-  </div>
-
-  </form>
-
-
 
 
 </div>

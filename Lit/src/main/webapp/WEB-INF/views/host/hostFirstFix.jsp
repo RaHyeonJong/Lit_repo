@@ -16,8 +16,7 @@
 
 
 $(document).ready(function(){
-		
-	
+
 	
 	$("#backButton").click(function(){
 		location.href="/host/hostFirst";
@@ -61,8 +60,8 @@ $(document).ready(function(){
 		return false;
 	});
 	
+		
 
-	
 	
 });
 	
@@ -243,11 +242,11 @@ margin:100px 10px 10px 10px;
 		<div class="category content2_2">
 			<h3>건물 유형을 선택해주세요</h3>
 
-			<select id ="building_no" name = "building_case_no">
+			<select id ="building_no" name = "building_case_no" >
 				<option>건물유형</option>
-				<option  value="1">아파트</option>
-				<option	 value="2">단독주택</option>
-				<option  value="3">연립주택</option>
+				<option  value="1"<c:if test="${fristUpdate[0].building_case_no == 1 }">selected</c:if> >아파트</option>
+				<option  value="2"<c:if test="${fristUpdate[0].building_case_no == 2 }">selected</c:if> >단독주택</option>
+				<option  value="3"<c:if test="${fristUpdate[0].building_case_no == 3 }">selected</c:if> >연립주택</option>
 			</select>
 		</div>
 		<div class="category content2_3">
@@ -255,15 +254,15 @@ margin:100px 10px 10px 10px;
 
 			<select id= "lodge_case" name = "lodge_case_no">
 				<option>숙소유형</option>
-				<option value="1">팬션</option>
-				<option value="2">모텔</option>
-				<option value="3">게스트하우스</option>
+				<option value="1" <c:if test="${fristUpdate[0].lodge_case_no == 1 }">selected</c:if>>팬션</option>
+				<option value="2" <c:if test="${fristUpdate[0].lodge_case_no == 2 }">selected</c:if>>모텔</option>
+				<option value="3"  <c:if test="${fristUpdate[0].lodge_case_no == 3 }">selected</c:if>>게스트하우스</option>
 			</select>
 		</div>
 		
 		<div class="lodge-name category" >
 			<h3>숙소 이름을 입력해주세요</h3>
-			<input class="inputName" id="lodge_name" name= "lodge_name" type="text" style="width:185px;height:30px;font-size:13px;"/>
+			<input class="inputName" id="lodge_name" placeholder="${fristUpdate[0].lodge_name }" name= "lodge_name" type="text" style="width:185px;height:30px;font-size:13px;"/>
 		
 		</div>
 		<div class="category content2_5">

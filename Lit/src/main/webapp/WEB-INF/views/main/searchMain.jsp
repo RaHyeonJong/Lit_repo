@@ -8,22 +8,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Life is trip 인생은 여행이다</title>
+    
 
 <style>
 #map {
 	position: fixed;
 	height: 776px;
 	right: 0px;
-/* 	float: right; */
+	/* 	float: right; */
 }
+
 #mapFixed {
 	position: fixed;
 	top: 145px;
 	height: 776px;
 	width: 50%;
 	right: 0px;
-/* 	float: right; */
+	/* 	float: right; */
 }
+
 #search_filter {
 	position: fixed;
 	z-index: 102;
@@ -56,57 +59,117 @@
 	text-decoration: none !important;
 	width: auto !important;
 }
+
 #lodgeList2 {
-	display: table; 
-	border: 1px solid gray; 
+	display: table;
+	border: 1px solid gray;
 	margin: 20px 0;
 	width: 48%;
 }
+
 #lodgeImage {
-	display: table-cell; 
-	width: 300px; 
+	display: table-cell;
+	width: 300px;
 	height: 200px;
 	border: 1px solid gray;
 }
+
 #lodgeInfo {
-	display: table-cell; 
+	display: table-cell;
 	border: 1px solid gray;
 	width: 100%;
-	height: 200px !important; 
+	height: 200px !important;
 	vertical-align: middle !important;
+}
+
+#modal-people2, #modal-cate2 {
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 14px 36px 2px !important;
+	border-width: 1px !important;
+	border-style: solid !important;
+	border-color: rgba(0, 0, 0, 0.2) !important;
+	border-image: initial !important;
+	border-radius: 4px !important;
+	padding: 24px !important;
+}
+
+#peopleDiv {
+	display: table !important;
+	width: 100% !important;
+}
+
+#peopleDiv1 {
+	display: table-cell !important;
+	width: 100% !important;
+	vertical-align: middle !important;
+	text-align: left;
+}
+
+#peopleDiv2 {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+#peopleDiv21 {
+	display: table !important;
+	width: 120px !important;
+	text-align: center !important;
+}
+
+#peopleMinus {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+#peopleCnt {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+#peoplePlus {
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+.people-counter-button {
+	height: 2em;
+	width: 2em;
+	border: 1px solid rgb(0, 132, 137);
+	border-radius: 50%;
+	background-color: transparent;
+	line-height: 1;
+	color: rgb(0, 132, 137);
 }
 </style>
 
 </head>
 <body>
 
-<div id="wrapper"> 
+	<div id="wrapper">
 
 		<div>
 			<!-- header 시작 -->
 			<c:import url="../layout/header.jsp" />
 		</div>
-		
+
 		<!-- header 끝 -->
-		
-		<div id="search_filter" style="z-index: 90; top: 0;">
-			<button>날짜</button>
+
+		<div id="search_filter" style="z-index: 91; top: 0;">
+			<button id="dateFilterBtn">날짜</button>
 			<button id="peopleFilterBtn">인원</button>
-			<button>숙소 종류</button>
+			<button id="cateFilterBtn">숙소 종류</button>
 			<button id="priceFilterBtn">가격</button>
 		</div>
-		
-		
+
+
 		<div id="lodgeCount"></div>
 		<div>
 			<div id="lodgeList" style="margin-left: 20px; margin-top: 142px;"></div>
 		</div>
-	
-</div>
+
+	</div>
 
 	<div id="mapFixed">
-		<div id="map">
-		</div>
+		<div id="map"></div>
 	</div>
 </body>
 
@@ -118,9 +181,15 @@
 <script>
 var searchFilter = new Object(); // 검색 필터 오브젝트
 
-searchFilter.peopleCnt = 0;				// 인원 (파라미터)
+searchFilter.peopleCnt = 1;				// 인원 (파라미터)
 searchFilter.minPrice = 0;				// 최소 가격(파라미터)
 searchFilter.maxPrice = 99999999;		// 최대 가격(파라미터)
+
+searchFilter.startDate = "";
+searchFilter.endDate = "";
+
+searchFilter.cate = [];
+
 
 // 경계 값 (파라미터)
 searchFilter.neLat = 0;
@@ -137,6 +206,7 @@ var marker;
 var cost;
 var infowindow;
 var markerArray = [];
+var peopleMax = 9; // 최대 인원
 
 $(document).ready(function() {
 	$('#header').css('z-index', 91); // 모달 띄울 때
@@ -146,12 +216,22 @@ $(document).ready(function() {
 	// 인원 모달 위치
 	var peopleDiv = $("#peopleFilterBtn");
 	var peopleDivX = peopleDiv.offset().left;
-	var peopleDivY = peopleDiv.offset().top + peopleDiv.height() + 30;
+	var peopleDivY = peopleDiv.offset().top + peopleDiv.height() + 32;
 	
 	// 가격 모달 위치
 	var priceDiv = $("#priceFilterBtn");
 	var priceDivX = priceDiv.offset().left;
-	var priceDivY = priceDiv.offset().top + priceDiv.height() + 30;
+	var priceDivY = priceDiv.offset().top + priceDiv.height() + 32;
+	
+	// 달력 모달 위치
+	var dateDiv = $("#dateFilterBtn");
+	var dateDivX = dateDiv.offset().left;
+	var dateDivY = dateDiv.offset().top + dateDiv.height() + 32;
+	
+	// 숙소 종류 모달 위치
+	var cateDiv = $("#cateFilterBtn");
+	var cateDivX = cateDiv.offset().left;
+	var cateDivY = cateDiv.offset().top + cateDiv.height() + 32;
 	
 	$('#peopleFilterBtn').click(function() { // 인원 필터 버튼 누를 시
 		
@@ -172,11 +252,31 @@ $(document).ready(function() {
 		$('#modal-price').css("display", "block");
 	});
 	
-	$('#peopleFilter-send').click(function() {
+	$('#cateFilterBtn').click(function() { // 숙소 종류 필터 버튼 누를 시
+		$('.modal').css("display", "none");
+		$('#modal-cate2').css('left', cateDivX);
+		$('#modal-cate2').css('top', cateDivY);
+		$('#modal-cate').css("display", "block");
+	});
+	
+	$('#dateFilterBtn').click(function() { // 달력 필터 버튼 누를 시
+		$('.modal').css("display", "none");
+		$('#modal-date2').css('left', dateDivX);
+		$('#modal-date2').css('top', dateDivY);
+		$('#modal-date').css("display", "block");
+		$('#datepicker').focus();
+	});
+	
+	$('#peopleSend').click(function() { // 인원 적용 버튼 누를 시
 		alert('인원 필터');
 		searchFilterSend();
-		if(searchFilter.peopleCnt != 0)
-			$('#peopleFilterBtn').html(searchFilter.peopleCnt + '명');
+		$('#peopleFilterBtn').html(searchFilter.peopleCnt + '명');
+	});
+	
+	$('#peopleCancel').click(function() { // 인원 취소 버튼 누를 시
+		alert('인원 초기화');
+		searchFilter.peopleCnt = 1;
+		$('#peopleFilterBtn').html('인원');
 	});
 	
 	$('#priceFilter-send').click(function() { 
@@ -186,17 +286,31 @@ $(document).ready(function() {
 		$('#priceFilterBtn').html(searchFilter.minPrice + '원~' + searchFilter.maxPrice + '원');
 	});
 	
+	
+	
+	$('#cateSend').click(function() {
+		searchFilter.cate = [];
+		
+		$('input:checkbox[name="cate"]').each(function(){
+			if(this.checked == true){
+				
+				searchFilter.cate.push($(this).val());
+			}
+		});	
+		console.log(searchFilter.cate);
+		searchFilterSend();
+	});
+	
 	function searchFilterSend() {
 		
 		// 필터 기본값
 		$('#priceMinFilter').attr('value', 0);
 		$('#priceMaxFilter').attr('value', 99999999);
-		$('#peopleFilter').attr('value', 0);
+// 		$('#peopleFilter').attr('value', 1);
 		
 		
 		
 		$('.modal').css("display", "none");
-		searchFilter.peopleCnt = $('#peopleFilter').val();
 		searchFilter.minPrice = $('#priceMinFilter').val();
 		searchFilter.maxPrice = $('#priceMaxFilter').val();
 		
@@ -212,11 +326,11 @@ $(document).ready(function() {
 						alert(list.length);
 						
 						
-						marker = new google.maps.Marker({
-							position : myLatlng,
-							map : map,
-							title : 'Click to zoom'
-						});
+// 						marker = new google.maps.Marker({
+// 							position : myLatlng,
+// 							map : map,
+// 							title : 'Click to zoom'
+// 						});
 						
 						
 					for( i in markerArray)
@@ -275,7 +389,62 @@ $(document).ready(function() {
 			});
 } // searchFilterSend() end
 
+	// 모달 반투명 배경 클릭
+	$(window).click(function(e) {
+		if(e.target == $('#modal-people')[0]) {
+			$('.modal').css("display", "none");
+		} else if(e.target == $('#modal-price')[0]) {
+			$('.modal').css("display", "none");
+		} else if(e.target == $('#modal-date')[0]) {
+			$('.modal').css("display", "none");
+			
+			var con = $('#datepicker').val();
+			console.log(con);
+			searchFilter.startDate =  con.substring(0, 10);
+			searchFilter.endDate = con.substring(11, 21);
+			
+			$('#dateFilterBtn').html(con);
+			$('#dateFilterBtn').css("background", "#008489");
+			$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+			
+			searchFilterSend();
+		}
+	});
 	
+	$('#peopleMinus').click(function() {
+		if(searchFilter.peopleCnt > 1) {
+			searchFilter.peopleCnt--;
+			$('#peopleCnt').html(searchFilter.peopleCnt + '+');
+		}
+	});
+	
+	$('#peoplePlus').click(function() {
+		if(searchFilter.peopleCnt < peopleMax) {
+			searchFilter.peopleCnt++;
+			$('#peopleCnt').html(searchFilter.peopleCnt + '+');
+		}
+	});
+	$("#datepicker").datepicker();
+	
+	$('#datepicker').keypress(function(e){
+		if ( e.which == 13 ) { 
+			e.preventDefault(); 
+			
+			$('.modal').css("display", "none");
+			
+			var con = $('#datepicker').val();
+			console.log(con);
+			searchFilter.startDate =  con.substring(0, 10);
+			searchFilter.endDate = con.substring(11, 21);
+			
+			$('#dateFilterBtn').html(con);
+			$('#dateFilterBtn').css("background-color", "#008489");
+			
+			searchFilterSend();
+		}
+	});
+	
+
 }); // document ready end
 	
 
@@ -389,34 +558,114 @@ $(document).ready(function() {
 					} // function map() end
 					
 			}
+			
+	
 	</script>
+<<<<<<< HEAD
 <!-- <script	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script> -->
+=======
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
+
+<!-- 달력 필터 모달 -->
+<div id="modal-date" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-date2"
+		style="position: fixed; display:inline; background-color: #fefefe; text-align: center;">
+		<div id="modal-date3">
+			<!-- price min, max filter 추가 -->
+<!-- 			<label for="min">최소</label> <input type="text" id="priceMinFilter" -->
+<!-- 				name="priceMinFilter" /><br> <label for="max">최대</label> <input -->
+<!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
+<!-- 			<button id="priceFilter-send">적용</button> -->
+
+
+>>>>>>> branch 'master' of https://github.com/RaHyeonJong/Lit_repo.git
 	
-<!-- 가격 필터 모달 -->
-<div id="modal-price" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div id="modal-price2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
-<div id="modal-price3">
-	<!-- price min, max filter 추가 -->
-	<label for="min">최소</label>
-	<input type="text" id="priceMinFilter" name="priceMinFilter" /><br>
-	<label for="max">최대</label>
-	<input type="text" id="priceMaxFilter" name="priceMaxFilter" />
-	<button id="priceFilter-send">적용</button>
+			<input type="text" style="height: 0px; font-size:0px; border:none;" id="datepicker" data-range="true"
+    data-multiple-dates-separator="-"
+    data-language="en"></input>
 	
+		</div>
+	</div>
 </div>
-</div></div>
+<!-- 달력 필터 모달 끝 -->
+
+<!-- 가격 필터 모달 -->
+<div id="modal-price" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-price2"
+		style="position: fixed; width: 568px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		<div id="modal-price3">
+			<!-- price min, max filter 추가 -->
+<!-- 			<label for="min">최소</label> <input type="text" id="priceMinFilter" -->
+<!-- 				name="priceMinFilter" /><br> <label for="max">최대</label> <input -->
+<!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
+<!-- 			<button id="priceFilter-send">적용</button> -->
+
+			<div id="test-slider"></div>
+
+		</div>
+	</div>
+</div>
 <!-- 가격 필터 모달 끝 -->
 
 <!-- 인원 필터 모달 -->
-<div id="modal-people" class="modal" style="display:none; position:fixed; z-index:90; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.65); ">
-<div id="modal-people2" style="position:fixed; width:568px; padding-bottom:20px; background-color:#fefefe; text-align: center;">
-<div id="modal-people3">
-	
-	<!-- 모달 내용 -->
-	<input type="text" id="peopleFilter" />
-	
-	<button id="peopleFilter-send">적용</button>
+<div id="modal-people" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-people2"
+		style="position: fixed; width: 344px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		<div id="modal-people3">
+
+			<div id="peopleDiv" style="margin-bottom: 16px;">
+				<div id="peopleDiv1">인원</div>
+				<div id="peopleDiv2">
+					<div id="peopleDiv21">
+						<button class="people-counter-button" id="peopleMinus" style="cursor: pointer;">-</button>
+						<div id="peopleCnt">1+</div>
+						<button class="people-counter-button" id="peoplePlus" style="cursor: pointer;">+</button>
+					</div>
+				</div>
+			</div>
+			
+			<div style="display: flex;">
+				<div id="peopleCancel" style="text-align: left;flex-grow: 1 !important;cursor: pointer;">삭제</div>
+				<div id="peopleSend" style="color: rgb(0, 132, 137);cursor: pointer;">적용</div>
+			</div>
+			<!-- 모달 내용 -->
+			<!-- 	<input type="text" id="peopleFilter" /> -->
+
+			<!-- 	<button id="peopleFilter-send">적용</button> -->
+		</div>
+	</div>
 </div>
-</div></div>
 <!--   인원 모달 끝    -->
+
+<!-- 숙소종류 필터 모달 -->
+<div id="modal-cate" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-cate2"
+		style="position: fixed; width: 344px;s padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		<div id="modal-cate3">
+			<table sytle="width:100%;">
+				<tr><td><input type="checkbox" id="catePension" name="cate" value="1"/></td><td style="text-align: left;padding-left: 10px;">펜션</td></tr>
+				<tr><td></td><td style="text-align: left;padding-left: 10px;font-size:15px;padding-bottom:15px;">집 전체를 단독으로 사용합니다</td></tr>
+				<tr><td><input type="checkbox" id="cateMotel" name="cate" value="2"/></td><td style="text-align: left;padding-left: 10px;">모텔</td></tr>
+				<tr><td></td><td style="text-align: left;padding-left: 10px;font-size:15px;padding-bottom:15px;">부티크 호텔, 호스텔 등의 개인실이나 다인실을 이용합니다</td></tr>
+				<tr><td><input type="checkbox" id="cateHouse" name="cate" value="3"/></td><td style="text-align: left;padding-left: 10px;">게스트하우스</td></tr>
+				<tr><td></td><td style="text-align: left;padding-left: 10px;font-size:15px;padding-bottom:15px;">사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께 이용합니다</td></tr>
+				<tr><td colspan="2" style="text-align:right;">
+				<div style="display: flex;">
+					<div id="cateCancel" style="text-align: left;flex-grow: 1 !important;cursor: pointer;">삭제</div>
+					<div id="cateSend" style="color: rgb(0, 132, 137);cursor: pointer;">적용</div>
+				</div>
+				</td></tr>
+			</table>
+
+		</div>
+	</div>
+</div>
+<!-- 숙소종류 필터 모달 끝 -->
+
+
 </html>

@@ -5,8 +5,8 @@
 <c:forEach items = "${list}" var = "list">
 <%-- <c:forEach var="a" begin="1" end="9" step="1"> --%>
 
-<div id="lodgeList2">
 	<a href="/lodge/view?lodge_no=${list.lodge_no }">
+<div id="lodgeList2">
 	<div id="lodgeImage">
 		<div id="lodgeImage2" style="width: 300px; height: 200px;">
 			<img src="/resources/images/lodge_image/${list.stored_name[0] }" width="100%" height="100%">
@@ -30,7 +30,7 @@
 		</div>
 			
 	</div>
-		</a>
 </div>
+		</a>
 
 </c:forEach>

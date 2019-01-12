@@ -20,13 +20,10 @@ public interface MessageDao {
 	public int sendcount(int mem_no);
 	
 	//로그인 상단에 쪽지 갯수
-	public int messagecount(Message message);
+	public int messagecount(int receiver_no);
 	
 	//받은쪽지함이든 보낸쪽지함이든 누르면 읽지 않음에서 읽음으로 변경
 	public void countupdate(Message message);
-
-	//버튼 누르면 화면에 띄우는거
-	public Message countList(Message message);
 	
 	//쪽지 쓰기
 	public void sendwrite(Message message);

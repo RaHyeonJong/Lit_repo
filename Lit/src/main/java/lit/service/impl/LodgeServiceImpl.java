@@ -48,8 +48,9 @@ public class LodgeServiceImpl implements LodgeService {
 		return lodgedao.SelectLodgeImage(lodge);
 	}
 
+	
 	@Override
-	public List LodgeConvenient(Lodge lodge) {
+	public List<String> LodgeConvenient(Lodge lodge) {
 		lodgedao.selectConvenient(lodge);
 		String[] sub = lodge.getConvenient_facility().split("#"); 
 		List<String> list = new ArrayList<>();
@@ -59,7 +60,16 @@ public class LodgeServiceImpl implements LodgeService {
 		
 		return list; 
 	}
-
+	@Override
+	public List<String> LodgeConvenientArea(Lodge lodge) {
+		lodgedao.selectConvenientArea(lodge);
+		String[] area_sub = lodge.getConvenient_area().split("#");
+		List<String> area_list = new ArrayList<>();
+		for(String area : area_sub) {
+			area_list.add(area);
+		}
+		return area_list;
+	}
 	
 	@Override
 	public Lodge LodgeReservationView(Lodge lodge) {
@@ -262,6 +272,7 @@ public class LodgeServiceImpl implements LodgeService {
 		lodgedao.deleteReportComment(report);
 		
 	}
+
 
 	
 }

@@ -38,4 +38,6 @@ public interface MainDao {
 
 	List<Festival> selectPagingFestival(int page);
 
+	String selectFestivalImageName(int festival_no);
+
 }

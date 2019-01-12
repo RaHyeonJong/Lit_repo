@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>숙소 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 </head>
@@ -170,7 +171,7 @@ $("#btnAccess").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 300px;">
+		<ul class="pagination" style="padding-left: 50%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

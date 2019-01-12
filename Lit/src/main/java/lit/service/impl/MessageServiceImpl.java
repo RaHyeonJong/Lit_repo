@@ -49,8 +49,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public int messagecount(Message message) {
-		return messageDao.messagecount(message);
+	public int messagecount(int receiver_no) {
+		return messageDao.messagecount(receiver_no);
 	}
 
 	@Override
@@ -60,11 +60,5 @@ public class MessageServiceImpl implements MessageService {
 		
 	}
 
-	@Override
-	public Message countList(Message message) {
-		return messageDao.countList(message);
-	}
 
-	
-	
 }

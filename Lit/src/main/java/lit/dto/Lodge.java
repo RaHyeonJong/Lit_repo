@@ -33,6 +33,9 @@ public class Lodge {
 	private double longitude; //경도
 	private int mem_no;
 	private String[] stored_name;
+	
+	private String profile_stored_name; //호스트 이미지
+	
 	private int reportCnt; // 신고당한 횟수
 	
 
@@ -51,6 +54,22 @@ public class Lodge {
 				+ lodge_activation + ", latitude=" + latitude + ", longitude=" + longitude + ", mem_no=" + mem_no
 				+ ", stored_name=" + Arrays.toString(stored_name) + ", reportCnt=" + reportCnt + "]";
 	}
+
+	
+	
+
+	public String getProfile_stored_name() {
+		return profile_stored_name;
+	}
+
+
+
+
+	public void setProfile_stored_name(String profile_stored_name) {
+		this.profile_stored_name = profile_stored_name;
+	}
+
+
 
 
 	public int getReportCnt() {

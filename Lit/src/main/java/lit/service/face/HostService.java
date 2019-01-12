@@ -3,12 +3,14 @@ package lit.service.face;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lit.dto.Day_off;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Pay;
 
 public interface HostService {
 
@@ -28,7 +30,7 @@ public interface HostService {
 	
 	
 	//본인이 등록한 1,2,3단계정보보기
-	public List viewHostElement();
+	public List<Lodge> viewHostElement(Lodge lodge);
 	
 	//1단계 정보수정
 	public void hostElementFirstFix(Lodge lodge);
@@ -52,5 +54,12 @@ public interface HostService {
 	
 	//숙소 이미지 등록
 	public void hostaddViewList(MultipartHttpServletRequest msr,HttpServletRequest req,Image image);
+
+	
+	// 호스트페이지 : 숙소리스트 가져오기
+	public List<Lodge> getLodgeList(HttpSession session);
+
+	// 호스트페이지 : 결제내역 가져오기
+	public List<Pay> getPayList(int lodge_no);
 
 }

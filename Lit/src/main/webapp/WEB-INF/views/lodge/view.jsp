@@ -5,7 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
- 
+ <link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
+
+<head>
+	<title>Life Is Trip 인생은 여행이다</title>
+</head>
 
 <style>
 
@@ -249,7 +253,7 @@ a{color:#000;}
 .mask{width:100%; height:100%; position:fixed; left:0; top:0; z-index:10; background:#000; opacity:.5; filter:alpha(opacity=50);}
 
 #modalLayer{display:none; position:relative;}
-#modalLayer .modalContent{width:300px; height:700px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
+#modalLayer .modalContent{width:300px; height:500px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer; 
 border: none;}
 
@@ -595,7 +599,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
     }
 </script>
 
-<script type="text/javascript">
+<script type="text/javascript">//상세뷰 데이트 피커
 $(function() {
     $("#datepicker").datepicker();
     $("#datepicker2").datepicker();
@@ -683,7 +687,10 @@ $(function() {
 	$(document).ready(function(){
 
 		$('#lodge_like').click(function(){
-		
+			if("${!login}"){
+				alert("로그인 후 이용해 주세요");
+				return;
+			}
 			var lodge_no = '${view.lodge_no}',
 				mem_no = '${member.mem_no}';
 				var likeButton = document.getElementById('lodge_like');
@@ -715,10 +722,7 @@ $(function() {
 	});//도큐먼트 끝
 
 </script>
-<script type="text/javascript">
-
-</script>
-<script type="text/javascript">
+<script type="text/javascript"> //댓글 신고
 
 	function comment_Report(comment_no){
 		
@@ -806,17 +810,37 @@ $(function() {
 									</p>
 								<p class="body-text light row-pad-bot-4"style="font-size: xx-large;">${view.lodge_name }</p>
 								<p class="body-text light">
-									<span> 
-									<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light">호스트 에게 연락하기</a></span> 
+									<span>
+									<c:if test="${login }"> 
+						
+										<c:if test="${member.mem_case eq 'user' or member.mem_case eq 'host' }">
+											<a href="/viewProfile?mem_no=${view.mem_no }" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+										</c:if>
+										
+										<c:if test="${member.mem_case eq 'admin' }">
+											<a href="#" onClick="alert('관리자는 이용 불가입니다.');" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+										</c:if>
+										
+									</c:if>
+									<c:if test="${not login }">
+										<a href="#" onClick="alert('로그인을 해주세요!!');" class="color-rausch light"><i class="far fa-envelope" style="color:skyblue;"></i> 호스트와 연락하기</a>
+									</c:if>
+									</span> 
 								</p>
 							</th>
 							<th class="small-2 large-2 columns last"><a href="#"
 								class=""
 								style="font-family: 'Circular', Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; margin: 0; text-align: left; line-height: 1.3; color: #2199e8; text-decoration: none">
-									<img
-									src="/resources/images/empty_profile_photo.jpg"
-									alt="" class="profile-img">
-							</a></th>
+									
+								<c:if test="${view.profile_stored_name eq null }">		
+									<img src="/resources/images/empty_profile_photo.jpg"alt="" class="profile-img">
+								</c:if>
+								<c:if test="${view.profile_stored_name ne null }">		
+									<img src="/resources/images/${view.profile_stored_name }"alt="" class="profile-img">
+								</c:if>
+							</a>
+							
+							</th>
 						</tr>
 					</tbody>
 				</table>
@@ -826,8 +850,8 @@ $(function() {
 			<!-- 숙소 정원, 유형, 침대 개수 -->
 
 			<div class="lodge_info">
-				<span>󰄂</span> 
-				<span>수용인원 ${view.lodge_capacity }명</span>
+				<i class="fas fa-users"></i> 
+				<span> 수용 인원  ${view.lodge_capacity }명</span>
 				<c:if test = "${view.building_case_no  == 1}" >
 				<span>아파트</span>
 				</c:if>
@@ -841,38 +865,34 @@ $(function() {
 			</div>
 			<!-- 유형 끝 -->
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
-			<!-- 편의시설 -->
-			<div class="facility">
-				<h3>편의 시설</h3>
-				<span > 
-				 <span> ${item.get(1)}</span>
-				  <br>
-				 <span> ${item.get(2)}</span> 
-				  <br> 
-				 <span> ${item.get(3)}</span>
-				  <br> 
-				 <span> ${item.get(4)}</span> 
-				  <br> 
-				</span>
-			</div>
-			<a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
-			<div id="modalLayer">
- 			 <div class="modalContent">
-    			<a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
-    			<c:forEach items="${item}" var = "lodgeItem">
-    			${lodgeItem }<br><br>
-    			</c:forEach>
- 				
-    			<p style = "font-size: 20px;font-weight: bold;">노트북 작업공간</p>
-    			<c:out value = "${view.convenient_area }"/>
-    			<button class = "close_btn" type="button"></button>
- 			 </div>
-			</div>
-			<!-- 편의시설 끝 -->
+			      <!-- 편의시설 -->
+         <div class="facility">
+            <h3>편의 시설</h3>
+            <c:forEach items="${item }" var ="item" step="1" end="4">
+            ${item}<br>
+            </c:forEach>
+         </div><br>
+         <a href="#modalLayer" class="modalLink">편의시설 더 보기</a>
+         <div id="modalLayer">
+           <div class="modalContent">
+             <a href="#"style = "font-size: 20px;font-weight: bold;text-decoration:none !important;">모든 편의 시설</a>
+             <c:forEach items="${item}" var = "lodgeItem">
+             ${lodgeItem }<br>
+             </c:forEach>
+             
+             <p style = "font-size: 20px;font-weight: bold;">편의 공간</p>
+             <c:forEach items= "${area}" var = "area">
+             ${area}<br>
+                            
+             </c:forEach>
+             <button class = "close_btn" type="button"></button>
+           </div>
+         </div>
+         <!-- 편의시설 끝 -->
 		<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 예약 달력 -->
 			<div style = "width: 900px;">
-			<p style ="font-size: 20px; font-weight: bold;">예약 가능 날짜<p>
+			<p style ="font-size: 20px; font-weight: bold;"><i class="far fa-calendar-check"></i> 예약 날짜<p>
 			<p id="datepicker" data-language='en' style=" width: 600px;  margin: 0; float: right;"></p>
 			<p id="datepicker2" data-language='en'></p>
 			</div>
@@ -880,7 +900,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 후기 -->
 			
-			
+				<h2><i class="fas fa-pencil-alt"></i>  후 기</h2>
 			
 				<c:if test ="${login && payd}">
 				<!-- 후기 작성 -->
@@ -888,7 +908,7 @@ $(function() {
         		<input type="hidden" id="lodge_no" name="lodge_no" value="<c:out value="${view.lodge_no}"/>"> 
         		<input type="hidden" id = "mem_name" name = "mem_name" value="<c:out value ="${member.mem_name }"/>"> 
         		<input type="hidden" id = "mem_no" name = "mem_no" value="<c:out value ="${member.mem_no }"/>"> 
-      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/>></textarea>
+      			  <textarea id= "contents" class="form-control" name="contents" rows="5" cols="60" placeholder="후기를 작성해주세요"<c:out value="${reply.contents}"/> style="resize:none;"></textarea>
        			 <button onclick="fn_formSubmit()">저장</button>  				 
 				</div>
 				</c:if>
@@ -898,8 +918,13 @@ $(function() {
 				    <c:forEach items = "${lodgeReview}" var = "review">
     	<c:if test = "${review.parent_comment_no == 0 }">
 					<div id="reviewitem<c:out value ="${review.comment_no }"/>" class = "parent_comment<c:out value ="${review.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px;">    
-       				<a href="/resources/" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
- 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
+       				<a href="/viewProfile?mem_no=${review.mem_no }" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+       				<c:if test="${review.stored_name ne null }">
+ 					<img class="user_img" src="/resources/images/${review.stored_name }" height="48" width="48" >
+       				</c:if>
+       				<c:if test="${review.stored_name eq null }">
+ 					<img class="user_img" src="/resources/images/empty_profile_photo.jpg" height="48" width="48" >
+       				</c:if></a>
        				 <c:out value="${review.mem_name}"/><br>
 	       			<fmt:formatDate value="${review.written_time}" pattern="yyyy년 MM월 dd일"/>
        				 <br/>
@@ -925,8 +950,14 @@ $(function() {
 				<c:forEach items = "${lodgeReview}" var = "review2">
 					<c:if test="${review2.parent_comment_no == review.comment_no }">
 						<div id="reviewitem<c:out value ="${review2.comment_no }"/>" class = "parent_comment<c:out value ="${review2.parent_comment_no }"/>"style=" width: 600px; padding: 5px; margin-top: 5px; margin-left: 20px;">    
-	       				<a href="/users/show/61727682" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
-	 					<img class="user_img" src="/resources/images/empty_profile_photo" height="48" width="48" ></a>
+	       				<a href="#" target="_blank" rel="noopener noreferrer" class="_1oa3geg" aria-busy="false">
+	 					<c:if test="${review2.stored_name ne null }">
+ 						<img class="user_img" src="/resources/images/${review.stored_name }" height="48" width="48" >
+       					</c:if>
+       					<c:if test="${review2.stored_name eq null }">
+ 						<img class="user_img" src="/resources/images/empty_profile_photo.jpg" height="48" width="48" >
+       					</c:if></a>
+	       				
 	       				 <c:out value="${review2.mem_name}"/><br>
 		       			<fmt:formatDate value="${review2.written_time}" pattern="yyyy년 MM월 dd일"/>
 	       				 <br/>
@@ -983,7 +1014,7 @@ $(function() {
 			<div style="margin-top:24px;margin-bottom:24px"><div class="line"></div></div>
 			<!-- 지역정보 -->
 			<div>
-			<h3>숙소 위치</h3>
+			<h3><i class="fas fa-map-marker-alt"></i> 위 치</h3>
 			<div id="map"></div>
 			
 			</div>
@@ -998,7 +1029,7 @@ $(function() {
 <c:import url="../layout/footer.jsp"/>
 <c:import url="../lodge/sidebar.jsp"/>
    <!-- 구글 맵 -->  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIJtUuAMaDJxl6mn0sm9e6UCuE6cUTXD8&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"
     async defer></script>
 
 </body>

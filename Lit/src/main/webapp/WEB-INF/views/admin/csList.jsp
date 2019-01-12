@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 관리</title>
+<title>Life is trip 인생은 여행이다</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 </head>
 
 <body>
@@ -67,7 +68,7 @@
 											<td>${cs.title }</td>
 											<td>${cs.mem_no }</td>
 											<td>${cs.written_time }</td>
-											<td><a href="">상세보기</a></td>
+											<td><a href="/cs/view?board_no=${cs.board_no }">상세보기</a></td>
 											<td><span style="color:red;">답변 대기</span></td>
 									</c:forEach>
 								</tbody>
@@ -79,7 +80,7 @@
                
         <div class="w3-bar">
 	    <nav>
-		<ul class="pagination" style="padding-left: 265px;">
+		<ul class="pagination" style="padding-left: 30%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
@@ -185,7 +186,7 @@
                
         <div class="w3-bar">
 	    <nav>
-		<ul class="pagination" style="padding-left: 265px;">
+		<ul class="pagination" style="padding-left: 40%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

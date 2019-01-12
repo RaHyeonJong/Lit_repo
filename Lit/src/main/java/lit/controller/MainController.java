@@ -1,7 +1,11 @@
 package lit.controller;
 
 import java.io.IOException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -55,11 +59,31 @@ public class MainController {
 //		// 테마별 행사 리스트
 //		List<Festival> themeFestivalList = mainService.getThemeFestivalList("");
 		
-		// 도시별 추천 숙소, 행사 리스트 추가
+		
+		
+//		for(int i=0;i<lodgeList.size();i++) {
+//			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+//			lodgeList.get(i).setStored_name(imageArray);
+//		}
+		
 		
 		List<Lodge> lodgeList = mainService.getLodgeList(1); // 9개씩
 		
 		List<Festival> festivalList = mainService.getRecommendFestivalList(1); // 4개씩
+		
+		// ImageName 넣기
+		for(int i=0;i<lodgeList.size();i++) { 
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
+		}
+		
+		// 행사 리스트에 stored_name 입력
+		for(int i=0;i<festivalList.size();i++) {
+			String imageName = mainService.getFestivalImageName(festivalList.get(i).getFestival_no());
+			festivalList.get(i).setStored_name(imageName);
+		}
+		
+		System.out.println(festivalList);
 		
 		model.addAttribute("lodgeList", lodgeList); // 추천 숙소 리스트
 		model.addAttribute("festivalList", festivalList);  // 가장 많이 찜한 숙소 리스트
@@ -73,27 +97,22 @@ public class MainController {
 	// 메인 페이지
 	@RequestMapping(value = "/searchMain", method = RequestMethod.POST)
 	public String main(Model model,
-			/*@RequestParam(required=false, defaultValue="") */String location, 
-			/*@RequestParam(required=false, defaultValue="") */String checkin, 
-			/*@RequestParam(required=false, defaultValue="") */String checkout, 
-			/*@RequestParam(required=false, defaultValue="") */String people, 
-			@RequestParam(required=false, defaultValue="") double cityLat, 
-			@RequestParam(required=false, defaultValue="") double cityLng
+			SearchFilter searchFilter
 			
 			) {
 		
 		logger.info("메인 페이지 띄우기");
 		int people_num = 0;
-		if(people != null) {
-			people_num = Integer.parseInt(people);
-		}
-		System.out.println(location);
-		System.out.println(checkin);
-		System.out.println(checkout);
-		System.out.println(people);
-		System.out.println(people_num);
-		System.out.println(cityLat);
-		System.out.println(cityLng);
+//		if(people != null) {
+//			people_num = Integer.parseInt(people);
+//		}
+//		System.out.println(location);
+//		System.out.println(checkin);
+//		System.out.println(checkout);
+//		System.out.println(people);
+//		System.out.println(people_num);
+//		System.out.println(cityLat);
+//		System.out.println(cityLng);
 		
 		
 
@@ -114,8 +133,8 @@ public class MainController {
 //		model.addAttribute("themeLodgeList", themeLodgeList);
 //		model.addAttribute("themeFestivalList", themeFestivalList);
 		
-		model.addAttribute("cityLat", cityLat);
-		model.addAttribute("cityLng", cityLng);
+		model.addAttribute("cityLat", searchFilter.getCityLat());
+		model.addAttribute("cityLng", searchFilter.getCityLng());
 		
 		return "/main/searchMain";
 	}
@@ -239,6 +258,13 @@ public class MainController {
 	public @ResponseBody List searchFilterAjax(
 			String searchFilterJson
 			) { 
+		
+		Date today = new Date();
+		Date startDate2 = null;
+		Date endDate2 = null;
+		
+		
+		
 		System.out.println("search ajax");
 		System.out.println(searchFilterJson);
 		
@@ -258,9 +284,64 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(searchFilter);
+		System.out.println(searchFilter.getCate());
 		
-		List<Lodge> lodgeList = mainService.getLodgeListByBounds(searchFilter); // 필터 적용 리스트 가져오기
+		SimpleDateFormat dt = new SimpleDateFormat("mm/dd/yyyy"); 
+		
+		try {
+			if(!"".equals(searchFilter.getStartDate())) {
+				startDate2 = dt.parse(searchFilter.getStartDate());
+				endDate2 =  dt.parse(searchFilter.getEndDate());
+			} else {
+				startDate2 = new Date();
+				endDate2 = new Date();
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		System.out.println("date");
+		System.out.println(startDate2);
+		System.out.println(endDate2);
+		
+		System.out.println(searchFilter);
+		searchFilter.setMaxPrice(999999);
+		
+		
+		
+		List<Lodge> lodgeList2 = mainService.getLodgeListByBounds(searchFilter); // 필터 적용 리스트 가져오기
+		
+		List<Lodge> lodgeList = new ArrayList<>();
+		
+		for(Lodge l:lodgeList2) {
+			int term = l.getAvailable_term();
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, term);
+			
+			Date startTerm = today;
+			Date endTerm = cal.getTime();
+			
+			System.out.println("=========");
+			System.out.println(startTerm.getTime());
+			System.out.println(startDate2.getTime());
+			
+			if(startDate2.getTime() >= startTerm.getTime() && endDate2.getTime() <= endTerm.getTime()) {
+				if(searchFilter.getCate().length == 0) {
+					lodgeList.add(l);
+				} else {
+					for(int i : searchFilter.getCate()) {
+						if(l.getLodge_case_no() == i) {
+							lodgeList.add(l);
+						}
+					}
+				}
+				
+			}
+			
+		}
+		
+		System.out.println("date1 : " + lodgeList2.size());
+		System.out.println("date2 : " + lodgeList.size());
 		
 		for(int i=0;i<lodgeList.size();i++) {
 			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
@@ -284,6 +365,12 @@ public class MainController {
 		List<Lodge> lodgeList = mainService.getLodgeList(page); // 9개씩
 		
 		List<Festival> festivalList = mainService.getRecommendFestivalList(page); // 4개씩
+		
+		// 행사 리스트에 stored_name 입력
+		for(int i=0;i<festivalList.size();i++) {
+			String imageName = mainService.getFestivalImageName(festivalList.get(i).getFestival_no());
+			festivalList.get(i).setStored_name(imageName);
+		}
 		
 		logger.info(lodgeList.toString());
 		

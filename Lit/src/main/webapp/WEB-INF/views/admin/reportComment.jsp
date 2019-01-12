@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 </head>
 
 <script type="text/javascript">
@@ -56,7 +57,7 @@ $("#commentDelete").click(function() {
 		
 				if( len-1 != idx ) {
 					names += ",";
-				}
+				} alert("체크된 댓글 전체삭제를 진행합니다");
 		});
 			console.log(names); 
 
@@ -113,7 +114,9 @@ $("#commentDelete").click(function() {
 				<div class="w3-container reportCommentList">
 					<div class="card-body" style="padding-bottom: 70px;">
 						<div class="table-responsive" style="text-align: center;">
-
+                         <div style="text-align: right;">
+                         <button id="commentDelete" name="commentDelete" class="btn btn-outline-secondary">전체비활성화</button>
+                         </div>&nbsp;	
 							<table class="table table-bordered" id="dataTable"
 								    style="width: 100%; cellspacing: 0; top: 20%">
 								<thead>
@@ -132,7 +135,7 @@ $("#commentDelete").click(function() {
 									<c:forEach items="${reportCommentList }" var="reportComment">
 
 										<tr>
-										    <td><input type="checkbox" name="checkRow"></td>
+										    <td><input type="checkbox" name="checkRow" value="${reportComment.comment_no }"></td>
 											<td>${reportComment.report_no }</td>
 											<td><a href="/admin/memberView?mem_no=${reportComment.reporter_no }">${reportComment.reporter_no}</a></td>
 											<td>${reportComment.comment_no }</td>
@@ -151,7 +154,7 @@ $("#commentDelete").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 300px;">
+		<ul class="pagination" style="padding-left: 23%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

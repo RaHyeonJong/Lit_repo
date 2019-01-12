@@ -16,13 +16,10 @@ public interface MessageService {
 	public void sendwrite(Message message);
 
 	//Header부분 쪽지 갯수
-	public int messagecount(Message message);
+	public int messagecount(int receiver_no);
 	
 	//0에서 1로 변경
 	public void countupdate(Message message);
-	
-	//0에서 1로 변경의 조건
-	public Message countList(Message message);
 	
 	//마이페이지의 받은쪽지함의 카운트
 	public int receivecount(int mem_no);

@@ -8,8 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
+
 </head>
 
 <body>
@@ -80,7 +82,7 @@
                              <span style="color:blue;">활성</span>
                             </c:when>
                             <c:when test="${memberList.mem_activation != 1 }">
-                             <span style="color:light-gray;">비활성</span>
+                             <span style="color:red;">비활성</span>
                             </c:when>
                           </c:choose>
                       </td>
@@ -96,7 +98,7 @@
                
         <div class="w3-bar">
 	    <nav>
-		<ul class="pagination" style="padding-left: 265px;">
+		<ul class="pagination" style="padding-left: 23%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
@@ -314,7 +316,6 @@
     
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin.min.js"></script>
-
     
     
 </body>

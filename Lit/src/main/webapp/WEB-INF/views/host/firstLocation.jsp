@@ -9,8 +9,7 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVZshgMFwiPl0L4xp4unmDwNRwlSBI6U8&libraries=places&callback=initAutocomplete"
-         async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVZshgMFwiPl0L4xp4unmDwNRwlSBI6U8&libraries=places&callback=initAutocomplete" async defer></script>
 <script type="text/javascript">
 function init() {
     var input = document.getElementById('locationTextField');
@@ -34,6 +33,12 @@ $(document).ready(function(){
 	
 	$("#nextButton").click(function(){
 
+	var frist = $('#locationTextField').val();
+		if(frist ==""){
+			
+		alert("주소를 입력해 주세요");
+		return;
+		}	
 			$('#sendLocation').submit();
 	
 		

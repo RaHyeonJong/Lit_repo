@@ -4,15 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
+
+
 </head>
+<!-- autocomplete from jQuery Ui -->
+    <script src='{% static "js/jquery-1.11.3.min.js" %}'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
 
 <script type="text/javascript">
 
@@ -56,15 +62,16 @@ $("#memDisable").click(function() {
 		
 				if( len-1 != idx ) {
 					names += ",";
-				}
+					
+				} alert("전체 비활성화를 실행합니다");
 		});
 			console.log(names); 
 
 	
 	// 전송 폼
 	var $form = $("<form>")
-		.attr("action", "/admin/memDisable")
-		.attr("method", "get")
+		.attr("action", "/admin/checkMemDisable")
+		.attr("method", "post")
 		.append(
 			$("<input>")
 				.attr("type", "hidden")
@@ -113,12 +120,16 @@ $("#memDisable").click(function() {
 				<div class="w3-container reportMemberList">
 					<div class="card-body" style="padding-bottom: 70px;">
 						<div class="table-responsive" style="text-align: center;">
-
+						<div style="text-align: right;">
+						<button id="memDisable" name="memDisable" class="btn btn-outline-secondary">전체비활성화</button>
+						</div>&nbsp;	
 							<table class="table table-bordered" id="dataTable"
 								    style="width: 100%; cellspacing: 0; top: 20%">
 								<thead>
-									<tr>
-									    <th><input type="checkbox" id="checkAll" onclick="checkAll();"></th>
+									<tr>	 
+									    <th>
+									    <input type="checkbox" id="checkAll" onclick="checkAll();">
+									    </th>
 										<th>신고 번호</th>
 										<th>신고멤버</th>
 										<th>신고당한멤버</th>
@@ -133,7 +144,11 @@ $("#memDisable").click(function() {
 									<c:forEach items="${reportMemberList }" var="reportMember">
 
 										<tr>
-										    <td><input type="checkbox" name="checkRow"></td>
+										    <td>
+										    <c:if test="${reportMember.mem_activation eq 1 }">
+										    <input type="checkbox" name="checkRow" value="${reportMember.mem_no }">
+											</c:if>
+											</td>
 											<td>${reportMember.report_no }</td>
 											<td><a href="/admin/memberView?mem_no=${reportMember.reporter_no }">${reportMember.reporter_no}</a></td>
 											<td><a href="/admin/memberView?mem_no=${reportMember.mem_no }">${reportMember.mem_no }</a></td>
@@ -149,8 +164,19 @@ $("#memDisable").click(function() {
                                             <span style="color:red;">비활성</span>
                                             </c:when>
                                             </c:choose>
-											<td><button class="btn btn-danger" id="memDisable"
-                                             onclick="location.href='/admin/memDisable?mem_no=${reportMember.mem_no }'"> 비활성화</button></td>
+											<td>
+											 <c:choose>
+											 <c:when test="${reportMember.mem_activation eq 1 }">
+											 <button class="btn btn-danger" 
+                                             onclick="location.href='/admin/memDisable?mem_no=${reportMember.mem_no }'"> 비활성화</button>
+									         </c:when>
+									         <c:when test="${reportMember.mem_activation eq 0 }">
+									         <button class="btn btn-primary" style="width:85px;"
+                                             onclick="location.href='/admin/memDisable?mem_no=${reportMember.mem_no }'">활성화</button>
+									         </c:when>
+									         </c:choose>
+									         </td>
+									         </tr>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -161,7 +187,7 @@ $("#memDisable").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 300px;">
+		<ul class="pagination" style="padding-left: 23%;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
