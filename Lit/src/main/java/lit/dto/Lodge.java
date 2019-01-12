@@ -32,12 +32,28 @@ public class Lodge {
 	private double latitude; //위도
 	private double longitude; //경도
 	private int mem_no;
+	
+	private String thumb_nail_image;
 	private String[] stored_name;
 	
 	private String profile_stored_name; //호스트 이미지
 	
 	private int reportCnt; // 신고당한 횟수
 	
+
+
+
+	public String getThumb_nail_image() {
+		return thumb_nail_image;
+	}
+
+
+
+
+	public void setThumb_nail_image(String thumb_nail_image) {
+		this.thumb_nail_image = thumb_nail_image;
+	}
+
 
 
 

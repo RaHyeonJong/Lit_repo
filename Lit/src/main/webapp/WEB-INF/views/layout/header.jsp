@@ -64,7 +64,7 @@ $(document).ready(function(){
 			}
 			
 		})
-	}, 5000);
+	}, 5000000000);
 	
 // 	로그인으로 가는 버튼을 클릭했을 때...
 	$('.goLogin').click(function(){
@@ -884,7 +884,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'user' }">
 				
 					<li><a href="/mypage/main?go=message" class="message_count">쪽지 ${counter }개</a>
-					<li><a href="#">호스트가 되어보세요</a></li>
+					<li><a href="/host/firstRoom">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
@@ -899,7 +899,8 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
 					<li><a href="/mypage/main?go=message" class="message_count">쪽지 <b>${counter }</b>개</a>
-					<li><a href="#">호스트 페이지</a></li>
+					<li><a href="/host/firstRoom">숙소추가하기</a></li>
+					<li><a href="/host/main">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
@@ -936,7 +937,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 <table style="width:100%;">
 <tr><td colspan="2">
 <div style="text-align:right; padding-right:10px;"><span class="closeModal" style="cursor:pointer; font-size:30px;">&times;</span></div></td></tr>
-<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/caitlyn999.jpg"/></td></tr>
+<tr><td colspan="2"><img style="width:100%; overflow:hidden;" src="/resources/images/login_title_image.jpg"/></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
 <div style="text-align:center;"><input type="email" name="mem_id" style="width:528px; height:100%; padding:10px; font-size:20px; " placeholder="이메일 주소"/></div></td></tr>
 <tr><td colspan="2" style="padding-top:10px;">
@@ -1098,8 +1099,16 @@ Life is Trip 서비스 약관, 결제 서비스 약관, 차별 금지 정책에 
 </div></div>
 <!-- ====== 프로필 사진 등록 모달창 // ======================================== -->
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&v=3.exp&sensor=false&callback=initialize"
+         async defer></script>
+
 <!-- 검색창 자동완성기능 -->
 <script>
+function initialize(){
+	initAutocomplete();
+	initMap();
+}
+
 ////////// 자동완성기능 /////////
 function initAutocomplete() {
 	var input = document.getElementById('location-input');
@@ -1131,6 +1140,7 @@ function check() {
 	return true;
 }
 </script>
+
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete&v=3.exp&sensor=false&libraries=places"

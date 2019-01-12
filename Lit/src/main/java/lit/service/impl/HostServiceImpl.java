@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import lit.dao.face.HostDao;
 import lit.dto.Day_off;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
+import lit.dto.Pay;
 import lit.service.face.HostService;
 
 @Service
@@ -148,6 +151,23 @@ public class HostServiceImpl implements HostService{
 			
 		}
 	
+	}
+
+
+	@Override
+	public List<Lodge> getLodgeList(HttpSession session) {
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		
+		List<Lodge> list = hostDao.getLodgeList(mem_no);
+		
+		return list;
+	}
+
+
+	@Override
+	public List<Pay> getPayList(int lodge_no) {
+		return hostDao.getPayList(lodge_no);
 	}
 	
 	
