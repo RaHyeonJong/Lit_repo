@@ -194,7 +194,7 @@ $(document).ready(function(){
 			</tr>
 		</c:forEach>
 		
-		<tr><td></td></tr>
+		
 		</tbody>
 	</table>
 	<!-- 페이징 처리 -->

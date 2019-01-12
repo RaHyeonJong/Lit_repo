@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Life is trip 인생은 여행이다</title>
+    
 
 <style>
 #map {
@@ -81,7 +82,7 @@
 	vertical-align: middle !important;
 }
 
-#modal-people2 {
+#modal-people2, #modal-cate2 {
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 14px 36px 2px !important;
 	border-width: 1px !important;
 	border-style: solid !important;
@@ -153,9 +154,9 @@
 		<!-- header 끝 -->
 
 		<div id="search_filter" style="z-index: 91; top: 0;">
-			<button>날짜</button>
+			<button id="dateFilterBtn">날짜</button>
 			<button id="peopleFilterBtn">인원</button>
-			<button>숙소 종류</button>
+			<button id="cateFilterBtn">숙소 종류</button>
 			<button id="priceFilterBtn">가격</button>
 		</div>
 
@@ -183,6 +184,12 @@ var searchFilter = new Object(); // 검색 필터 오브젝트
 searchFilter.peopleCnt = 1;				// 인원 (파라미터)
 searchFilter.minPrice = 0;				// 최소 가격(파라미터)
 searchFilter.maxPrice = 99999999;		// 최대 가격(파라미터)
+
+searchFilter.startDate = "";
+searchFilter.endDate = "";
+
+searchFilter.cate = [];
+
 
 // 경계 값 (파라미터)
 searchFilter.neLat = 0;
@@ -216,6 +223,16 @@ $(document).ready(function() {
 	var priceDivX = priceDiv.offset().left;
 	var priceDivY = priceDiv.offset().top + priceDiv.height() + 32;
 	
+	// 달력 모달 위치
+	var dateDiv = $("#dateFilterBtn");
+	var dateDivX = dateDiv.offset().left;
+	var dateDivY = dateDiv.offset().top + dateDiv.height() + 32;
+	
+	// 숙소 종류 모달 위치
+	var cateDiv = $("#cateFilterBtn");
+	var cateDivX = cateDiv.offset().left;
+	var cateDivY = cateDiv.offset().top + cateDiv.height() + 32;
+	
 	$('#peopleFilterBtn').click(function() { // 인원 필터 버튼 누를 시
 		
 		$('.modal').css("display", "none");
@@ -235,6 +252,21 @@ $(document).ready(function() {
 		$('#modal-price').css("display", "block");
 	});
 	
+	$('#cateFilterBtn').click(function() { // 숙소 종류 필터 버튼 누를 시
+		$('.modal').css("display", "none");
+		$('#modal-cate2').css('left', cateDivX);
+		$('#modal-cate2').css('top', cateDivY);
+		$('#modal-cate').css("display", "block");
+	});
+	
+	$('#dateFilterBtn').click(function() { // 달력 필터 버튼 누를 시
+		$('.modal').css("display", "none");
+		$('#modal-date2').css('left', dateDivX);
+		$('#modal-date2').css('top', dateDivY);
+		$('#modal-date').css("display", "block");
+		$('#datepicker').focus();
+	});
+	
 	$('#peopleSend').click(function() { // 인원 적용 버튼 누를 시
 		alert('인원 필터');
 		searchFilterSend();
@@ -252,6 +284,21 @@ $(document).ready(function() {
 		searchFilterSend();
 		
 		$('#priceFilterBtn').html(searchFilter.minPrice + '원~' + searchFilter.maxPrice + '원');
+	});
+	
+	
+	
+	$('#cateSend').click(function() {
+		searchFilter.cate = [];
+		
+		$('input:checkbox[name="cate"]').each(function(){
+			if(this.checked == true){
+				
+				searchFilter.cate.push($(this).val());
+			}
+		});	
+		console.log(searchFilter.cate);
+		searchFilterSend();
 	});
 	
 	function searchFilterSend() {
@@ -279,11 +326,11 @@ $(document).ready(function() {
 						alert(list.length);
 						
 						
-						marker = new google.maps.Marker({
-							position : myLatlng,
-							map : map,
-							title : 'Click to zoom'
-						});
+// 						marker = new google.maps.Marker({
+// 							position : myLatlng,
+// 							map : map,
+// 							title : 'Click to zoom'
+// 						});
 						
 						
 					for( i in markerArray)
@@ -348,6 +395,19 @@ $(document).ready(function() {
 			$('.modal').css("display", "none");
 		} else if(e.target == $('#modal-price')[0]) {
 			$('.modal').css("display", "none");
+		} else if(e.target == $('#modal-date')[0]) {
+			$('.modal').css("display", "none");
+			
+			var con = $('#datepicker').val();
+			console.log(con);
+			searchFilter.startDate =  con.substring(0, 10);
+			searchFilter.endDate = con.substring(11, 21);
+			
+			$('#dateFilterBtn').html(con);
+			$('#dateFilterBtn').css("background", "#008489");
+			$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+			
+			searchFilterSend();
 		}
 	});
 	
@@ -364,7 +424,25 @@ $(document).ready(function() {
 			$('#peopleCnt').html(searchFilter.peopleCnt + '+');
 		}
 	});
+	$("#datepicker").datepicker();
 	
+	$('#datepicker').keypress(function(e){
+		if ( e.which == 13 ) { 
+			e.preventDefault(); 
+			
+			$('.modal').css("display", "none");
+			
+			var con = $('#datepicker').val();
+			console.log(con);
+			searchFilter.startDate =  con.substring(0, 10);
+			searchFilter.endDate = con.substring(11, 21);
+			
+			$('#dateFilterBtn').html(con);
+			$('#dateFilterBtn').css("background-color", "#008489");
+			
+			searchFilterSend();
+		}
+	});
 	
 
 }); // document ready end
@@ -483,8 +561,32 @@ $(document).ready(function() {
 			
 	
 	</script>
+
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
+
+<!-- 달력 필터 모달 -->
+<div id="modal-date" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-date2"
+		style="position: fixed; display:inline; background-color: #fefefe; text-align: center;">
+		<div id="modal-date3">
+			<!-- price min, max filter 추가 -->
+<!-- 			<label for="min">최소</label> <input type="text" id="priceMinFilter" -->
+<!-- 				name="priceMinFilter" /><br> <label for="max">최대</label> <input -->
+<!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
+<!-- 			<button id="priceFilter-send">적용</button> -->
+
+
+	
+			<input type="text" style="height: 0px; font-size:0px; border:none;" id="datepicker" data-range="true"
+    data-multiple-dates-separator="-"
+    data-language="en"></input>
+	
+		</div>
+	</div>
+</div>
+<!-- 달력 필터 모달 끝 -->
 
 <!-- 가격 필터 모달 -->
 <div id="modal-price" class="modal"
@@ -493,10 +595,12 @@ $(document).ready(function() {
 		style="position: fixed; width: 568px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
 		<div id="modal-price3">
 			<!-- price min, max filter 추가 -->
-			<label for="min">최소</label> <input type="text" id="priceMinFilter"
-				name="priceMinFilter" /><br> <label for="max">최대</label> <input
-				type="text" id="priceMaxFilter" name="priceMaxFilter" />
-			<button id="priceFilter-send">적용</button>
+<!-- 			<label for="min">최소</label> <input type="text" id="priceMinFilter" -->
+<!-- 				name="priceMinFilter" /><br> <label for="max">최대</label> <input -->
+<!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
+<!-- 			<button id="priceFilter-send">적용</button> -->
+
+			<div id="test-slider"></div>
 
 		</div>
 	</div>
@@ -533,4 +637,32 @@ $(document).ready(function() {
 	</div>
 </div>
 <!--   인원 모달 끝    -->
+
+<!-- 숙소종류 필터 모달 -->
+<div id="modal-cate" class="modal"
+	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	<div id="modal-cate2"
+		style="position: fixed; width: 344px;s padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		<div id="modal-cate3">
+			<table sytle="width:100%;">
+				<tr><td><input type="checkbox" id="catePension" name="cate" value="1"/></td><td style="text-align: left;padding-left: 10px;">펜션</td></tr>
+				<tr><td></td><td style="text-align: left;padding-left: 10px;font-size:15px;padding-bottom:15px;">집 전체를 단독으로 사용합니다</td></tr>
+				<tr><td><input type="checkbox" id="cateMotel" name="cate" value="2"/></td><td style="text-align: left;padding-left: 10px;">모텔</td></tr>
+				<tr><td></td><td style="text-align: left;padding-left: 10px;font-size:15px;padding-bottom:15px;">부티크 호텔, 호스텔 등의 개인실이나 다인실을 이용합니다</td></tr>
+				<tr><td><input type="checkbox" id="cateHouse" name="cate" value="3"/></td><td style="text-align: left;padding-left: 10px;">게스트하우스</td></tr>
+				<tr><td></td><td style="text-align: left;padding-left: 10px;font-size:15px;padding-bottom:15px;">사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께 이용합니다</td></tr>
+				<tr><td colspan="2" style="text-align:right;">
+				<div style="display: flex;">
+					<div id="cateCancel" style="text-align: left;flex-grow: 1 !important;cursor: pointer;">삭제</div>
+					<div id="cateSend" style="color: rgb(0, 132, 137);cursor: pointer;">적용</div>
+				</div>
+				</td></tr>
+			</table>
+
+		</div>
+	</div>
+</div>
+<!-- 숙소종류 필터 모달 끝 -->
+
+
 </html>

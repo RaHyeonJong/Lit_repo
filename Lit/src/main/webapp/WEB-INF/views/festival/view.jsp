@@ -7,7 +7,9 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <jsp:include page="../layout/header.jsp" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<head>
+	<title>Life Is Trip 인생은 여행이다.</title>
+</head>
 
 <style>
 

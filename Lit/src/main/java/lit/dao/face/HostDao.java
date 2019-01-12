@@ -5,6 +5,7 @@ import java.util.List;
 import lit.dto.Day_off;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Pay;
 
 public interface HostDao {
 	
@@ -25,7 +26,7 @@ public interface HostDao {
 	//---------------단계별 정보수정
 	
 	//본인이 등록한 숙소정보 select
-	public List selectByHostEdge();
+	public List<Lodge> selectByHostEdge(Lodge lodge);
 
 	//1단계 정보수정
 	public void updateElementOne(Lodge lodge);
@@ -53,5 +54,8 @@ public interface HostDao {
 
 	//위치정보 수정
 	public void updateLocation1(Lodge lodge);
+	public List<Lodge> getLodgeList(int mem_no);
+
+	public List<Pay> getPayList(int lodge_no);
 
 }

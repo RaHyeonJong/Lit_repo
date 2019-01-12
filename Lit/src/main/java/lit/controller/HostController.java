@@ -1,16 +1,11 @@
 package lit.controller;
 
-import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-
-import java.util.ArrayList;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,23 +17,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import lit.dto.Day_off;
 import lit.dto.Image;
 import lit.dto.Lodge;
 import lit.dto.Member;
+import lit.dto.Pay;
 import lit.service.face.HostService;
+import lit.util.Paging;
 
 @Controller
 public class HostController {
@@ -471,24 +462,31 @@ public class HostController {
 	
 	//1단계 숙소정보 수정
 	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.GET)
-	public void hostElementFirstFix() {
+	public void hostElementFirstFix(Lodge lodge,Model model) {
+
+		List<Lodge> hostLodgeElementList = hostService.viewHostElement(lodge);
 		
-		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
+		model.addAttribute("fristUpdate", hostLodgeElementList);
 		
 	}
 	
 	//1단계 숙소정보 수정
 	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.POST)
-	public void hostElementFirstFixProc(Lodge lodge) {
-			
+	public ModelAndView hostElementFirstFixProc(Lodge lodge,ModelAndView mav) {
+		
+		
+		
+		
 		hostService.hostElementFirstFix(lodge);
+		
+			return mav;
 		}
 	
 	//2단계 숙소정보 수정
 	@RequestMapping(value="/host/hostSecondFix", method=RequestMethod.GET)
-	public void hostElementSecondFix() {
+	public void hostElementSecondFix(Lodge lodge) {
 		
-		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
+		List<Lodge> hostLodgeElementList = hostService.viewHostElement(lodge);
 	}
 	
 	//2단계 숙소정보 수정
@@ -502,7 +500,7 @@ public class HostController {
 	@RequestMapping(value="/host/hostThirdFix", method=RequestMethod.GET)
 	public void hostElementThirdFix() {
 		
-		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
+//		List<Lodge> hostLodgeElementList = hostService.viewHostElement();
 		
 	}
 	
@@ -546,6 +544,25 @@ public class HostController {
 		
 		
 		
+	}
+	
+	@RequestMapping(value="/host/main")
+	public void hostMain(Model model, HttpSession session) {
+		List<Lodge> lodgeList = hostService.getLodgeList(session);
+		
+		model.addAttribute("lodgeList", lodgeList);
+		model.addAttribute("paging", new Paging(10,1,10,10));
+	}
+	
+	@RequestMapping(value="/host/viewPayList", method=RequestMethod.GET)
+	public void viewPayList(Model model, int lodge_no) {
+
+		List<Pay> payList = hostService.getPayList(lodge_no);
+		
+		System.out.println(payList);
+		
+		model.addAttribute("payList", payList);
+		model.addAttribute("paging", new Paging(10,1,10,10));
 	}
 	
 
