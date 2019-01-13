@@ -43,6 +43,9 @@ public interface AdminDao {
 	// 숙소 활성화 ( 승인 및 숙소 일시정지(거절) )
 	public void updateLodgeActivate(int lodge_no);
 	
+	// 숙소 체크박스 전체 승인
+	public void updateCheckLodgeActivation(String names);
+	
 		
 	// -------------------- 고객문의 관리 --------------------
 	

@@ -120,7 +120,14 @@ public class AdminServiceImpl implements AdminService{
 	  adminDao.updateLodgeActivate(lodge_no);
 	}
 
-
+	
+	// 선택된 체크박스 숙소 활성화 시키기 
+	@Override
+	public void checkLodgeActivation(String names) {
+		
+		adminDao.updateCheckLodgeActivation(names);
+		
+	}
 
 	// -------------------- 고객 센터 관리 --------------------
 	
@@ -420,6 +427,8 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminDao.viewRecommend();
 	}
+
+
 
 
 

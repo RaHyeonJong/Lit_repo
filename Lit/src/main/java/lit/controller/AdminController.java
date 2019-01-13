@@ -110,7 +110,14 @@ public class AdminController {
 		adminService.lodgeActivaiton(lodge_no);
 		return "redirect:/admin/lodge";
 	}
+	
+	// 체크박스로 선택된 숙소 활성화 시키기 
+	@RequestMapping(value="/admin/checkLodgeActivation", method=RequestMethod.POST)
+	public String cehckLodgeActivation(String names ) { 
 		
+        adminService.checkLodgeActivation(names);
+		return "redirect:/admin/lodge";
+	}
 	
 	// -------------------- 고객문의 관리 -------------------- 
 	
