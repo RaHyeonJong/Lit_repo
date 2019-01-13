@@ -120,6 +120,15 @@ UPDATE lodge SET lodge_addr =#{lodge_addr}, latitude=#{latitude}, longitude=#{lo
 </update>
 
 
+<update id="convenientUpdate" parameterType="lit.dto.Lodge">
+
+	UPDATE lodge
+	SET convenient_facility = #{convenient_facility} ,  convenient_area = #{convenient_area}
+	WHERE lodge_no = #{lodge_no}		
+
+
+</update>
+
 
 </mapper>
 

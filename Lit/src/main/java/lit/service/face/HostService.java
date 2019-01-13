@@ -1,6 +1,7 @@
 package lit.service.face;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -59,9 +60,14 @@ public interface HostService {
 
 	public void updateLocation(Lodge lodge);
 	
+	public void updateConvenient(Lodge lodge);
+	
 	// 호스트페이지 : 숙소리스트 가져오기
 	public List<Lodge> getLodgeList(HttpSession session);
 
+	//호스트페이지 : 편의시설 공간 가져오기
+	public Lodge getconveniences(Lodge lodge);
+	
 	// 호스트페이지 : 결제내역 가져오기
 	public List<Pay> getPayList(int lodge_no);
 
