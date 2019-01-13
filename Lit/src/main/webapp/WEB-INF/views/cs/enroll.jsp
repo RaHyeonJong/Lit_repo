@@ -85,9 +85,9 @@
         htParams : {
             bUseToolbar : true,            
             // 입력창 크기 조절바 사용 여부
-            bUseVerticalResizer : true,    
+            bUseVerticalResizer : false,    
             // 모드 탭(Editor | HTML | TEXT) 사용 여부
-            bUseModeChanger : true,
+            bUseModeChanger : false,
         }
     });
     

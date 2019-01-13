@@ -53,7 +53,7 @@
 									<tr>
 										<th>게시글 번호</th>
 										<th>제목</th>
-										<th>문의 고객 아이디</th>
+										<th>고객 이름</th>
 										<th>글쓴 시간</th>
 										<th>상세보기</th>
 										<th>답변 상태</th>
@@ -66,7 +66,7 @@
 										<tr>
 											<td>${cs.board_no }</td>
 											<td>${cs.title }</td>
-											<td>${cs.mem_no }</td>
+											<td>${cs.mem_name }</td>
 											<td>${cs.written_time }</td>
 											<td><a href="/cs/view?board_no=${cs.board_no }">상세보기</a></td>
 											<td><span style="color:red;">답변 대기</span></td>
@@ -159,7 +159,7 @@
 									<tr>
 										<th>게시글 번호</th>
 										<th>제목</th>
-										<th>문의 고객 아이디</th>
+										<th>고객 이름</th>
 										<th>글쓴 시간</th>
 										<th>상세보기</th>
 										<th>답변 상태</th>
@@ -172,9 +172,9 @@
 										<tr>
 											<td>${cs.board_no }</td>
 											<td>${cs.title }</td>
-											<td>${cs.mem_no }</td>
+											<td>${cs.mem_name }</td>
 											<td>${cs.written_time }</td>
-											<td><a href="">상세보기</a></td>
+											<td><a href="/cs/view?board_no=${cs.board_no }">상세보기</a></td>
 											<td><span style="color:blue;">답변 완료</span></td>
 									</c:forEach>
 								</tbody>

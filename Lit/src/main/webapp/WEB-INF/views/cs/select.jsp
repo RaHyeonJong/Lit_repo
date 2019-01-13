@@ -60,5 +60,5 @@
 	{
 		window.location.href="/cs/list?mem_no=${member.mem_no}";
 	}
-
+	
 </script>
