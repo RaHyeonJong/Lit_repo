@@ -49,6 +49,11 @@ public interface HostDao {
 	//숙소 이미지 넣기
 	public void insertLodgeView(Image image);
 
+	//노출기간 업데이트
+	public void updateAvailable(Lodge lodge);
+
+	//위치정보 수정
+	public void updateLocation1(Lodge lodge);
 	public List<Lodge> getLodgeList(int mem_no);
 
 	public List<Pay> getPayList(int lodge_no);

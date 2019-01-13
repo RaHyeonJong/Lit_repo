@@ -39,6 +39,13 @@ public class HostServiceImpl implements HostService{
 	
 	
 	//2단계숙소정보등록
+	
+	//노출기간업데이트
+	@Override
+	public void updateAvailabeTerm(Lodge lodge) {
+		hostDao.updateAvailable(lodge);
+		
+	}
 	@Override
 	public void insertSecond(Day_off day_off) {
 		hostDao.insertTwo(day_off);
@@ -55,11 +62,22 @@ public class HostServiceImpl implements HostService{
 	//-------------단계별 정보 수정
 	
 	//본인이 등록한 1,2,3단계 정보보기
+	
+	
+	//위치업데이트
+	@Override
+	public void updateLocation(Lodge lodge) {
+		
+		hostDao.updateLocation1(lodge);
+		
+	}
 	@Override
 	public List<Lodge> viewHostElement(Lodge lodge) {
 		
 		return hostDao.selectByHostEdge(lodge);
 	}
+	
+	
 	
 	
 	//1단계 정보수정

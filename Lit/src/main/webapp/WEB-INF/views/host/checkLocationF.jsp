@@ -107,7 +107,7 @@
 $(document).ready(function(){
 	$("#backButton").click(function(){
 		
-		location.href="/host/firstLocation";
+		location.href="/host/firstLocationF";
 		
 	});
 	
@@ -245,7 +245,7 @@ padding: 10px;
 			<div class="category">
 				<h4>입력될 숙소의 위치입니다</h4>
 			</div>
-			<form id = "addr" action="/host/checkLocation" method="post">
+			<form id = "addr" action="/host/checkLocationF" method="post">
 			<div>
 				<input type="hidden" id="markerX" name ="latitude" value="${lat}"/>
 				<input type="hidden" id="markerY" name="longitude" value="${lng}"/>

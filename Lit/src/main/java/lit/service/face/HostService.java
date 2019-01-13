@@ -55,6 +55,9 @@ public interface HostService {
 	//숙소 이미지 등록
 	public void hostaddViewList(MultipartHttpServletRequest msr,HttpServletRequest req,Image image);
 
+	public void updateAvailabeTerm(Lodge lodge);
+
+	public void updateLocation(Lodge lodge);
 	
 	// 호스트페이지 : 숙소리스트 가져오기
 	public List<Lodge> getLodgeList(HttpSession session);
