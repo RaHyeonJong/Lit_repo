@@ -372,6 +372,12 @@ public class MainController {
 			festivalList.get(i).setStored_name(imageName);
 		}
 		
+		
+		for(int i=0;i<lodgeList.size();i++) {
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
+		}
+		
 		logger.info(lodgeList.toString());
 		
 		model.addAttribute("lodgeList", lodgeList);
