@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>숙소 유형 및 내부사항</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
@@ -105,23 +105,24 @@ font-size:13px;
 .left { 
 width: 50%; 
 float: left; 
-border:1px solid red;
+
 
 }
 
 .innerleft{
 padding-left:30%;
+height:800px;
 
 
 
 
 }
 .right {
-
+bakcground-color:#E0E0E0;
 width: 49%; 
-
+height: 800px;
 float: right; 
-border:1px solid blue;
+
 }
 .continue{
 float:right;
@@ -183,6 +184,8 @@ color: white;
     -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     position: relative;
+        margin-bottom: 10px;
+    margin-top: 30px;
 
 
 }
@@ -223,7 +226,8 @@ color:#8c8c8c;
 width:55%;
 border:1px solid green;
 padding : 10px;
-margin:100px 10px 10px 10px;
+margin:250px 10px 10px 50px;
+border-radius:10%;
 
 }
 			
@@ -231,11 +235,12 @@ margin:100px 10px 10px 10px;
 </style>
 </head>
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 
 <div id="wrapper">
 	<div class="left" >
 	 <div class="innerleft">
-	  
+	 
 		<div class="category content2_1">
 			<h2>호스트의 숙소 정보를 입력해주세요</h2>
 		</div>

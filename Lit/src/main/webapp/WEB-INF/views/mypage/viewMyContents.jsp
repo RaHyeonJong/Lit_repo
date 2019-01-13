@@ -86,7 +86,7 @@ $(document).ready(function(){
     <!-- 페이징 번호 -->
     <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="page">
     	<c:if test="${paging.curPage eq page }">
-	   	<td style="background-color:#0275D8; color:white;">${page }</td>
+	   	<td style="background-color:#008489; color:white;">${page }</td>
 	   	</c:if>
 	
 	   	<c:if test="${paging.curPage ne page }">

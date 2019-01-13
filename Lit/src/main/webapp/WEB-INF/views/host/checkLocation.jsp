@@ -131,6 +131,7 @@ margin:0 auto;
 .left { 
 width: 50%; 
 float: left; 
+height:800px;
 }
 .innerleft{
 padding-left:30%;
@@ -138,7 +139,8 @@ padding-left:30%;
 }
 .right {
 width: 49%; 
-float: right; 
+float: right;
+height:800px;
 }
 
 
@@ -149,7 +151,7 @@ width: 400px;
 margin-left:10px;
       }
 #txtAddress{
-width:395px;
+width:395px;	
 height:40px;
 margin-left:10px;
 }
@@ -158,6 +160,7 @@ margin-left:10px;
 
 .move-button{
 padding:10px;
+padding-top:155px;
 
 }
 
@@ -210,7 +213,22 @@ color: white;
     -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     position: relative;
+    padding:10px;
 
+
+}
+
+.right1-1{
+border-radius:10%;
+width:55%;
+border:1px solid green;
+padding : 10px;
+margin:250px 10px 10px 50px;
+
+}
+
+.category {
+padding: 10px;
 
 }
     
@@ -219,10 +237,13 @@ color: white;
 <body>
 
 <div id="wrapper">
-	<div class="left" style="border:1px solid red;">
+	<div class="left">
 		<div class="innerleft">
+			<div class="category content1-1">
+				<h2>숙소의 위치를 확인하겠습니다</h2>
+			</div>
 			<div class="category">
-				<h3>주소를 확인해주세요</h3>
+				<h4>입력될 숙소의 위치입니다</h4>
 			</div>
 			<form id = "addr" action="/host/checkLocation" method="post">
 			<div>
@@ -234,29 +255,21 @@ color: white;
 			<br>
 			<div id="map"></div>
 			<br>
-			  <div class="cut"></div>
+
             <div class="move-button">
+              <div class="cut"></div>
                <button id="backButton">뒤로</button>
                <button id="nextButton">다음</button>
             </div>   
        </div><!-- inner end -->
    </div><!-- left end -->
-   <div class="right" style="border:1px solid blue;">
-      <div>
-         <h3>위치가 정확한지 확인하시고 <br>
-         숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
-      </div>
-      
-   </div><!-- right end -->
-
-	
-	<div class="right" style="border:1px solid blue;">
-		<div>
-			<h3>위치가 정확한지 확인하시고 <br>
-			숙소의 위치와 다르다면 마커를 움직여서 재설정해주세요</h3>
+   <div class="right">
+ 		<div class="right1-1">
+			<img src="/resources/images/hostPageIcon.svg" />
+			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>
+			<p>숙소이름은 편하게 적어주시고 가능인원이 확실하지 않으시면 평당 인원수로 선택해주세요</p>
 		</div>
-		
-	</div><!-- right end -->
+   </div><!-- right end -->
 
 
 </div><!-- wrapper end -->

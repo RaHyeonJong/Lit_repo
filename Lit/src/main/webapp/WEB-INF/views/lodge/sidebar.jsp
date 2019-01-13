@@ -67,6 +67,7 @@ $(document).ready(function(){
 	})
 	 $end.datepicker({
 		language : 'en',
+		minDate : new Date(),
 		maxDate : end_date,
 	onSelect : function(fd,date){
 		$start.data('datepicker')

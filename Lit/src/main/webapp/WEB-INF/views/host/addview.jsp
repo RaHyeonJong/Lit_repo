@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사진추가</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
@@ -93,7 +93,7 @@ h1 {
   position: absolute;
   font-size: 2.5rem;
   color: #e6e6e6;
-  top: calc(50% - 2.5rem);
+/*   top: calc(50% - 2.5rem); */
   left: calc(50% - 1.25rem);
   z-index: 0;
 }
@@ -177,7 +177,54 @@ i.material-icons {
   }
 }
 
+.content{
+    margin-left:100px;
+
+
+
+}
+
+.check-image {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 5px;
+ 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  float:left;
+}
+
+.check-image button{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+float:left;
+
+}
+
+.check-image button:hover{
+
+background-color: #d68e88;
+color: white;
+
+
+}
+
 </style>
+
+
+
 
 </head>
 
@@ -275,6 +322,7 @@ function initImageUpload(box) {
 				return;
 			}
 			("#sendPhoto").submit();
+			location.href="/host/hostFirst?lodge=${lodge_no}";
 			
 		});
 		
@@ -286,12 +334,15 @@ function initImageUpload(box) {
 			  initDropEffect(box);
 			  initImageUpload(box);
 				}	
+			
 		});
 </script>
 
 
 <body>
 <div id="wrapper">
+<div class="content">
+<div style="margin-left: 10px;"><h2>숙소 이미지 등록해주세요</h2></div>
  <form id="sendPhoto" name="fileForm" action="/host/addview" method="post" enctype="multipart/form-data">
  <input type ="hidden" name ="lodge_no" value="<c:out value="${lodge_no }"/>">
  <div>
@@ -356,16 +407,26 @@ function initImageUpload(box) {
 	
   </form>
 	
-	  <div class="box">
+	  <div class="check-image">
          <div>
-            <h4>사진을 다 등록하셨으면 확인 버튼을 눌러주세요. 사진이 충분하지 않을시 마지막 사진과 동일한 사진이 자동으로 추가됩니다.</h4>
+         	<h4>이미지등록 3단계</h4>
+            <p>1 - '+' 버튼을 눌러서 사진을<br> 선택해 등록해주세요</p>
+            <p>2 - 사진을 다 등록하셨으면<br> 확인 버튼을 눌러주세요</p>
+            <p>3 - 5장 등록을 권장하며 5장에 <br>미치지 않을시 마지막 사진과 <br>동일한 사진이 자동으로 추가됩니다</p>
             <button id="submit_button">확인</button>
          </div>
 
      </div>
+     
 
 
-</div>
+   
+
+
+
+</div><!-- content end -->
+
+</div><!-- wrapper end -->
 
 
 

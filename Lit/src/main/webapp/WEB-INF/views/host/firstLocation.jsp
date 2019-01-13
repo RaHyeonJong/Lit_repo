@@ -9,8 +9,7 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVZshgMFwiPl0L4xp4unmDwNRwlSBI6U8&libraries=places&callback=initAutocomplete"
-         async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVZshgMFwiPl0L4xp4unmDwNRwlSBI6U8&libraries=places&callback=initAutocomplete" async defer></script>
 <script type="text/javascript">
 function init() {
     var input = document.getElementById('locationTextField');
@@ -59,13 +58,18 @@ margin:0 auto;
 }
 
 .left { 
-width: 50%; 
+width: 50%;
+height:800px; 
 float: left; 
 }
 .innerleft{
 padding-left:30%;
 }
-.right {width: 49%; float: right;}
+.right {
+width: 49%; 
+float: right;
+height:800px;
+}
 
 .category select{
 width:190px;
@@ -109,6 +113,7 @@ float:left;
 
 .move-button{
 padding:10px;
+padding-top:250px;
 
 }
 
@@ -161,16 +166,26 @@ color: white;
     -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     box-shadow: 0 -1px 0 rgba(0,0,0,0.08);
     position: relative;
+    padding:10px;
 
+
+}	
+.right1-1{
+border-radius:10%;
+width:55%;
+border:1px solid green;
+padding : 10px;
+margin:250px 10px 10px 50px;
 
 }
 
 </style>
 </head>
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 
 <div id="wrapper">
-	<div class="left" style="border:1px solid red;">
+	<div class="left">
 	 <div class="innerleft">
 	  <form action="/host/firstLocation" method="post" id="sendLocation">
 		<div class="category content1-1">
@@ -201,15 +216,21 @@ color: white;
 		</div>
 
 		</form> <!-- form end -->
-		<div class="cut"></div>
 		<div class="move-button content1-5">
+			<div class="cut"></div>
+	
 			<button id="backButton" class="back">뒤로</button>
 			<button id="nextButton" class="continue">다음</button>
 		</div>
 	 
 	 </div><!-- inner end -->
 	</div><!-- left end -->
-	<div class="right" style="border:1px solid blue;">
+	<div class="right">
+		<div class="right1-1">
+			<img src="/resources/images/hostPageIcon.svg" />
+			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>
+			<p>숙소이름은 편하게 적어주시고 가능인원이 확실하지 않으시면 평당 인원수로 선택해주세요</p>
+		</div>
 	</div>
 
 
