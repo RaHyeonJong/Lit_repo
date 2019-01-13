@@ -18,24 +18,11 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!--Plugin CSS file with desired skin-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 <link rel="stylesheet" href="/resources/css/multirange.css">
 
 
-    
-
-
-
 <script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
-
-
-<!-- 가격 필터 -->
-
-<!--     Plugin JavaScript file -->
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
-	
-	
-   
    
 <style>
 #map {
@@ -623,9 +610,6 @@ $(document).ready(function() {
 			}
 	
 	</script>
-<!-- <script async defer -->
-<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script> -->
-
 
 <!-- 달력 필터 모달 -->
 <div id="modal-date" class="modal"

@@ -9,11 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 </head>
-
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
 
@@ -63,8 +64,8 @@ $("#approveRefund").click(function() {
 	
 	// 전송 폼
 	var $form = $("<form>")
-		.attr("action", "/admin/approveRefund")
-		.attr("method", "get")
+		.attr("action", "/admin/checkPayApprove")
+		.attr("method", "post")
 		.append(
 			$("<input>")
 				.attr("type", "hidden")
@@ -114,7 +115,9 @@ $("#approveRefund").click(function() {
 				<div class="w3-container payList">
 					<div class="card-body" style="padding-bottom: 70px;">
 						<div class="table-responsive" style="text-align: center;">
-
+                         <div style="text-align: right;">
+                         <button id="approveRefund" name="approveRefund" class="btn btn-outline-primary">전체 승인</button>
+                         </div>&nbsp;							
 							<table class="table table-bordered" id="dataTable"
 								    style="width: 100%; cellspacing: 0; top: 20%">
 								<thead>
@@ -136,7 +139,7 @@ $("#approveRefund").click(function() {
 									<c:forEach items="${payList }" var="pay">
 
 										<tr>
-										    <td><input type="checkbox" name="checkRow"></td>
+										    <td><input type="checkbox" name="checkRow" value="${pay.pay_no }"></td>
 											<td>${pay.pay_no }</td>
 											<td>${pay.payMember }</td>
 											<td>${pay.lodgeName }</td>
@@ -150,7 +153,7 @@ $("#approveRefund").click(function() {
 											<td>${pay.pay_sum }원</td>
 											<td><fmt:formatDate value="${pay.pay_time }" pattern="yyyy/MM/dd"/></td>
 										    <td><span style="color:red;">환불 대기</span></td>
-										    <td><button class="btn btn-primary" id="approveRefund" style="height: 33px; width:60px;"
+										    <td><button class="btn btn-primary" style="height: 33px; width:60px;"
 										        onclick="location.href='/admin/approveRefund?pay_no=${pay.pay_no }'">승인</button></td>
 										</tr>
 										
@@ -163,7 +166,7 @@ $("#approveRefund").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 50%;">
+		<ul class="pagination" style="padding-left: 350px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
@@ -279,7 +282,7 @@ $("#approveRefund").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 50%;">
+		<ul class="pagination" style="padding-left: 300px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
@@ -395,7 +398,7 @@ $("#approveRefund").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 50%;">
+		<ul class="pagination" style="padding-left: 300px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

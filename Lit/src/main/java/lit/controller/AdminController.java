@@ -110,7 +110,14 @@ public class AdminController {
 		adminService.lodgeActivaiton(lodge_no);
 		return "redirect:/admin/lodge";
 	}
+	
+	// 체크박스로 선택된 숙소 활성화 시키기 
+	@RequestMapping(value="/admin/checkLodgeActivation", method=RequestMethod.POST)
+	public String cehckLodgeActivation(String names ) { 
 		
+        adminService.checkLodgeActivation(names);
+		return "redirect:/admin/lodge";
+	}
 	
 	// -------------------- 고객문의 관리 -------------------- 
 	
@@ -257,6 +264,13 @@ public class AdminController {
 		return "redirect:/admin/payList?pay_state_no=2";
 	}
 	
+	// 체크박스로 선택된 환불 승인하기
+	@RequestMapping(value="/admin/checkPayApprove", method=RequestMethod.POST)
+	public String cehckPayApprove(String names ) { 
+		
+		adminService.checkPayApprove(names);
+		return "redirect:/admin/payList";
+	}	
 	
 	// -------------------- 신고 관리 --------------------  
 	
@@ -363,12 +377,13 @@ public class AdminController {
 	// 승인 대기중인 숙소 개수 가져오기
 	@RequestMapping(value="/admin/countForAdminHeader", method=RequestMethod.POST)
 	public ModelAndView countForAdminHeader(ModelAndView mav) { 
-		
+				
 		int lodge0Cnt = adminDao.lodgeActivation0CntAll();
 		int cs0Cnt = adminDao.answer0CntAll();
 		
 		mav.addObject("lodge0Cnt", lodge0Cnt);
 		mav.addObject("cs0Cnt", cs0Cnt);
+		
 		mav.setViewName("jsonView");
 		return mav;
 	}

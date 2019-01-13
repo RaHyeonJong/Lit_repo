@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 관리</title>
+<title>Life is trip 인생은 여행이다</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 </head>
 
 <body>
@@ -52,7 +53,7 @@
 									<tr>
 										<th>게시글 번호</th>
 										<th>제목</th>
-										<th>문의 고객 아이디</th>
+										<th>고객 이름</th>
 										<th>글쓴 시간</th>
 										<th>상세보기</th>
 										<th>답변 상태</th>
@@ -65,9 +66,9 @@
 										<tr>
 											<td>${cs.board_no }</td>
 											<td>${cs.title }</td>
-											<td>${cs.mem_no }</td>
+											<td>${cs.mem_name }</td>
 											<td>${cs.written_time }</td>
-											<td><a href="">상세보기</a></td>
+											<td><a href="/cs/view?board_no=${cs.board_no }">상세보기</a></td>
 											<td><span style="color:red;">답변 대기</span></td>
 									</c:forEach>
 								</tbody>
@@ -158,7 +159,7 @@
 									<tr>
 										<th>게시글 번호</th>
 										<th>제목</th>
-										<th>문의 고객 아이디</th>
+										<th>고객 이름</th>
 										<th>글쓴 시간</th>
 										<th>상세보기</th>
 										<th>답변 상태</th>
@@ -171,9 +172,9 @@
 										<tr>
 											<td>${cs.board_no }</td>
 											<td>${cs.title }</td>
-											<td>${cs.mem_no }</td>
+											<td>${cs.mem_name }</td>
 											<td>${cs.written_time }</td>
-											<td><a href="">상세보기</a></td>
+											<td><a href="/cs/view?board_no=${cs.board_no }">상세보기</a></td>
 											<td><span style="color:blue;">답변 완료</span></td>
 									</c:forEach>
 								</tbody>

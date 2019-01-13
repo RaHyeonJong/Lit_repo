@@ -2,6 +2,13 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <jsp:include page="../layout/header.jsp" />
+
+<head>
+
+	<title>Life Is Trip 인생은 여행이다.</title>
+
+</head>
+
 <style>
 	
 	/* 	자주하는질문, 1:1문의하기   가운데*/
@@ -112,6 +119,7 @@
 	
 	/* /cs/select 첫번째 버튼 */
 	.button1 {
+	 	box-shadow: 0 5px 0 darkred;
 		background-color:#ff0300;
 		color: white;
 		border:2px solid #cc2e2c;
@@ -128,6 +136,7 @@
 	/* /cs/select 두번째 버튼 */
 	.button2
 	{
+		 box-shadow: 0 5px 0 #f9bf52;
 		background-color:#f29d00;
 		color:white;
 		border:2px solid #996404;
@@ -136,7 +145,7 @@
 	
 	.button2:hover
 	{
-		background-color:#ffb638;
+		background-color:#efc67a;
 		color: white;
 	}
 
@@ -233,13 +242,54 @@
 	{
 		text-align:right;
 		padding-top:40px;
-		padding-right:170px;
-		
+		padding-right:170px;		
+	}
+	
+	/* a tag */
+	
+	#question,
+	#inquiry
+	{
+		 box-shadow: 0 5px 0 darkgray;
+		 color: white;
+		 padding: 0.5em 0.5em;
+		 position: relative;
+		 text-decoration: none;
+		 text-transform: uppercase;
+	}
+
+	#inquiry
+	{
+		 background-color: #000000;
+	}
+	
+	#question
+	{
+		background-color:#000000;
+	}
+	
+	#question:hover
+	{
+		background-color:#ffffff;
+		color:black;
+	}
+	
+	#inquiry:hover
+	{
+		background-color:#ffffff;
+		color:black;
+	}
+	
+	#inquiry:active,
+	#question:active
+	{
+		box-shadow: none;
+		top:5px;
 	}
 	
 </style>
 
 <div class="center">
-		<span style="font-size:20px; padding:20px;"><a href="/cs/cs">자주찾는 질문</a></span>
-		<span style="font-size:20px; padding:20px;"><a href="/cs/select">1:1 문의</a></span>
+		<span style="font-size:20px; padding:20px;"><a href="/cs/cs" id="question">자주찾는 질문</a></span>
+		<span style="font-size:20px; padding:20px;"><a href="/cs/select" id="inquiry">1:1 문의</a></span>
 </div>

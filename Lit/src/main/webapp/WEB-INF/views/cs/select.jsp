@@ -3,7 +3,6 @@
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <jsp:include page="/WEB-INF/views/cs/common.jsp" />
 
-
 <body>
 <div id="wrapper" style="min-width:978px; max-width:1200px; margin:0 auto;">
 
@@ -19,23 +18,15 @@
 		<br><br><br>	
 		
 			<c:if test="${not login }">
-			<button class="button button1" id="modal" style="margin-right:50px;">문 의 하 기</button>
-			<button class="button button2" id="modal1" style="margin-left:50px;">문 의 내 역</button>
-			
-			
+				<button class="button button1" id="modal" style="margin-right:50px;">문 의 하 기</button>
+				<button class="button button2" id="modal1" style="margin-left:50px;">문 의 내 역</button>
 			</c:if>
 		
 			<c:if test="${login }">
-			
-			<button class="button button1" onclick="button1_click();" style="margin-right:50px;">문 의 하 기</button>
-			<button class="button button2" onclick="button2_click();" style="margin-left:50px;">문 의 내 역</button>
-			
-			
+				<button class="button button1" onclick="button1_click();" style="margin-right:50px;">문 의 하 기</button	>
+				<button class="button button2" onclick="button2_click();" style="margin-left:50px;">문 의 내 역</button>	
 			</c:if>
-		
-			
-
-		</div>
+	</div>
 
 </div>
 </body>
@@ -59,11 +50,6 @@
 	{
 		modal.style.display="block";
 	}
-
-
-
-
-
 	//로그인 후 버튼 누르면 벌어지는 일
 	function button1_click()
 	{
@@ -74,5 +60,5 @@
 	{
 		window.location.href="/cs/list?mem_no=${member.mem_no}";
 	}
-
+	
 </script>

@@ -7,7 +7,9 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <jsp:include page="../layout/header.jsp" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<head>
+	<title>Life Is Trip 인생은 여행이다.</title>
+</head>
 
 <style>
 
@@ -73,13 +75,41 @@
 		
 	}
 	
-	#img_row
+ 	#img_row 
+	{ 
+ 		float:left; 
+ 		width:32%; 
+ 		height:300px; 
+ 		margin-right:10px; 
+ 	} 
+ 	
+	.column#caption
 	{
-		float:left;
-		width:32%;
-		height:300px;
-		margin-right:10px;
-		
+		position:relative;
+	}
+	
+	.column#caption .text {
+		position: absolute;		
+    	top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+     	opacity: 0; 
+	    transition: all 0.8s ease;
+	  	margin-top:-140px;
+	  	width:170px;
+	  	text-align:center;
+	    color: white;
+	    font-size: 28px;
+	}
+	
+	.column#caption:hover .text {
+		opacity: 1;
+	
+	}
+	
+	.column#caption:hover img {
+		/*  명도 30% 효과 줌 */
+		-webkit-filter: brightness(30%);
 	}
 
 </style>
@@ -122,10 +152,10 @@
 		
 		<c:forEach items="${recommendView }" var="recommend">
 		<div id="img_row">
-			<a href="/festival/view?festival_no=${recommend.festival_no }">
-			<img src="/resources/images/${recommend.stored_name }" style="width:100%; height:300px; border-radius:15%;"><br></a>
-				<h3 align="center">${recommend.festival_name }</h3>
-			
+			<a href="/festival/view?festival_no=${recommend.festival_no }" class="column" id="caption">
+			<img src="/resources/images/${recommend.stored_name }" style="width:100%; height:300px; border-radius:15%;"><br>
+				<span class="text">${recommend.festival_name }</span>
+			</a>
 		</div>			
 		</c:forEach>
 	</div>

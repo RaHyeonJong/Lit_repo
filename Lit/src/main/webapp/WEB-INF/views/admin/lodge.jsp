@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>숙소 관리</title>
+<title>Life Is Trip 인생은 여행이다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 </head>
@@ -65,8 +66,8 @@ $("#btnAccess").click(function() {
 	
 	// 전송 폼
 	var $form = $("<form>")
-		.attr("action", "/admin/lodgeActive")
-		.attr("method", "get")
+		.attr("action", "/admin/checkLodgeActivation")
+		.attr("method", "post")
 		.append(
 			$("<input>")
 				.attr("type", "hidden")
@@ -113,7 +114,6 @@ $("#btnAccess").click(function() {
             <div id="activation" class="w3-container lodge">
             <div class="card-body" style="padding-bottom:70px;">
               <div class="table-responsive" style="text-align:center;">
-                
                 <table class="table table-bordered" id="dataTable" style="width:100%; cellspacing:0; top:20%">  
                   <thead>
                     <tr>
@@ -170,7 +170,7 @@ $("#btnAccess").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 50%;">
+		<ul class="pagination" style="padding-left: 250px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->
@@ -243,6 +243,9 @@ $("#btnAccess").click(function() {
             <div id="nonActivation" class="w3-container lodge" >
             <div class="card-body" style="padding-bottom:70px;">
               <div class="table-responsive" style="text-align:center;">
+                <div style="text-align: right;">
+                  <button id="btnAccess" name="btnAccess" class="btn btn-outline-primary">전체승인</button>
+                 </div>&nbsp;
                 <table class="table table-bordered" id="dataTable" style="width:100%; cellspacing:0;">  
                   <thead>
                     <tr>
@@ -261,7 +264,7 @@ $("#btnAccess").click(function() {
                   <tbody>
                     <c:forEach items="${adminLodgeList }" var="lodge">            
                     <tr>
-                      <td><input type="checkbox" name="checkRow"></td>
+                      <td><input type="checkbox" name="checkRow" value="${lodge.lodge_no }"></td>
                       <td>${lodge.lodge_no }</td>
                       <td><c:choose>
                            <c:when test="${lodge.lodge_case_no == 1}">아파트</c:when>

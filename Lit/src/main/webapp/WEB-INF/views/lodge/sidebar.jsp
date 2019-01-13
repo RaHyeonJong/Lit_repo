@@ -67,6 +67,7 @@ $(document).ready(function(){
 	})
 	 $end.datepicker({
 		language : 'en',
+		minDate : new Date(),
 		maxDate : end_date,
 	onSelect : function(fd,date){
 		$start.data('datepicker')
@@ -98,13 +99,6 @@ $(document).ready(function(){
 		success: function(mav) {
 		
 			document.getElementById("total").innerHTML = mav;
-// 			$("#stay_cost").html(mav.add);
-// 			$("#cost").html(mav.st);
-// 			$("#service").html(mav.ser);
-// 			$("#sum").html(mav.total);
-// 			 $("#reserBtn").click(function(){
-// 					location.href = "/lodge/reservation";
-// 				});	
 			}
 			
 			 
@@ -185,7 +179,39 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/javascript"> //신고
+<script type="text/javascript"> //숙소 신고
+
+	function report(){ 
+	
+		var mem_no = "${member.mem_no}",
+			lodge_no = "${view.lodge_no}";
+	
+		if(mem_no ==""){
+			alert("로그인 후 이용해 주세요");
+			return;
+		}	
+			
+	$.ajax({
+		url : "report",
+		type : "get",
+		data : {"lodge_no" : lodge_no ,"reporter_no" : mem_no},
+		dataType : "text",
+		success : function(e){
+			if(e=="1"){
+				alert("신고되었습니다.");
+			}else if(e== "-1"){
+				alert("신고가 취소되었습니다.");
+			}
+		},
+		error : function(e){
+			alert("에러났어요");
+		}
+		
+	});
+
+
+	}
+
 
 
 </script>
@@ -208,7 +234,7 @@ $(document).ready(function(){
 
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */
-/* 	ul li { list-style: none; }  74오류나면 수정*/
+/* 	ul li { list-style: none; }  74오류나면 수정 */
 	.nav_side { position: absolute; top: 694px; left:1050px; min-width:500px; heigth:800px;}
 	.nav_side div { height: 30px; padding: 5px;  margin: 5px 0; list-style: none;}
 	a{text-decoration : none; color:#000;}

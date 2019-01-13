@@ -54,7 +54,7 @@
 		(select count(*) from report where lodge_no=l.lodge_no)
 		AS reportCnt
 		FROM lodge l WHERE lodge_activation=#{lodge_activation } ORDER BY
-		lodge_no
+		lodge_no desc
 		) R )B
 		WHERE B.rnum BETWEEN #{startNo } AND #{endNo }
 		ORDER BY
@@ -81,27 +81,43 @@
 		WHERE lodge_no = #{lodge_no }
 	</update>
 
+	<!-- 체크박스로 선택된 숙소 전체 활성화 하기 -->
+	<update id="updateCheckLodgeActivation" parameterType="String">
+	  UPDATE lodge SET lodge_activation = 1 WHERE lodge_no IN (${_parameter })
+	</update>
+
 
 	<!-- /////////// 고객센터 관리 /////////// -->
 
 	<!-- 고객센터 리스트 보이기 -->
 	<select id="csSelectAll" parameterType="lit.util.Paging" resultType="lit.dto.Board">
-		SELECT * FROM(
-		SELECT rownum rnum, R.* FROM
-		(SELECT * FROM board WHERE answer = #{answer } ORDER BY board_no )R )
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+<!-- 		SELECT * FROM( -->
+<!-- 		SELECT rownum rnum, R.* FROM -->
+<!-- 		(SELECT * FROM board WHERE answer = #{answer } ORDER BY board_no DESC)R ) -->
+<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+
+	SELECT * FROM(
+    	SELECT rownum rnum, R.* FROM
+		(SELECT * FROM board b
+    	INNER JOIN member m
+    	ON b.mem_no = m.mem_no
+    	WHERE answer = #{answer } ORDER BY board_no DESC)R )
+			WHERE rnum BETWEEN #{startNo } AND #{endNo }
+
 	</select>
 
 	<!-- 고객센터 답변 달린 게시글 수 구하기 -->
 	<select id="answer1CntAll" resultType="int">
 		SELECT COUNT(*) FROM board
 		WHERE answer = 1
+		ORDER BY board_no 
 	</select>
 
 	<!-- 고객센터 답변 안 달린 게시글 수 구하기 -->
 	<select id="answer0CntAll" resultType="int">
 		SELECT COUNT(*) FROM board
 		WHERE answer = 0
+		ORDER BY board_no
 	</select>
 
 
@@ -178,7 +194,7 @@
 		(SELECT mem_name FROM member m WHERE m.mem_no = p.mem_no )AS payMember,
         (SELECT l.lodge_name FROM lodge l WHERE l.lodge_no = p.lodge_no ) AS lodgeName,
         (SELECT m.mem_name FROM lodge l, member m WHERE l.lodge_no = p.lodge_no AND m.mem_no = l.mem_no ) AS hostName
-		FROM pay p WHERE pay_state_no= #{pay_state_no } ORDER BY pay_no DESC ) R )B
+		FROM pay p WHERE pay_state_no= #{pay_state_no } ORDER BY pay_no ) R )B
         WHERE B.rnum BETWEEN ${startNo } AND ${endNo } ORDER BY B.rnum
 	</select>
 	
@@ -204,7 +220,12 @@
 		WHERE pay_no = #{pay_no } 
 	</update>
     
-         
+    <!-- 체크박스로 선택된 환불 전체 승인 하기 -->
+	<update id="updateCheckPay" parameterType="String">
+	  UPDATE pay SET pay_state_no = 3 WHERE pay_no IN (${_parameter })
+	</update>     
+	
+	
 	<!-- /////////// 신고 관리 /////////// -->
 	
 	<!-- 멤버신고 관리 리스트 -->

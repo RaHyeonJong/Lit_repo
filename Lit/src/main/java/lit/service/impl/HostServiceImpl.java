@@ -2,10 +2,14 @@ package lit.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,8 @@ import lit.dao.face.HostDao;
 import lit.dto.Day_off;
 import lit.dto.Image;
 import lit.dto.Lodge;
+import lit.dto.Member;
+import lit.dto.Pay;
 import lit.service.face.HostService;
 
 @Service
@@ -36,6 +42,13 @@ public class HostServiceImpl implements HostService{
 	
 	
 	//2단계숙소정보등록
+	
+	//노출기간업데이트
+	@Override
+	public void updateAvailabeTerm(Lodge lodge) {
+		hostDao.updateAvailable(lodge);
+		
+	}
 	@Override
 	public void insertSecond(Day_off day_off) {
 		hostDao.insertTwo(day_off);
@@ -52,11 +65,22 @@ public class HostServiceImpl implements HostService{
 	//-------------단계별 정보 수정
 	
 	//본인이 등록한 1,2,3단계 정보보기
+	
+	
+	//위치업데이트
 	@Override
-	public List viewHostElement() {
+	public void updateLocation(Lodge lodge) {
 		
-		return hostDao.selectByHostEdge();
+		hostDao.updateLocation1(lodge);
+		
 	}
+	@Override
+	public List<Lodge> viewHostElement(Lodge lodge) {
+		
+		return hostDao.selectByHostEdge(lodge);
+	}
+	
+	
 	
 	
 	//1단계 정보수정
@@ -149,7 +173,45 @@ public class HostServiceImpl implements HostService{
 		}
 	
 	}
-	
-	
+
+
+	@Override
+	public List<Lodge> getLodgeList(HttpSession session) {
+		
+		int mem_no = ((Member)session.getAttribute("member")).getMem_no();
+		
+		List<Lodge> list = hostDao.getLodgeList(mem_no);
+		
+		return list;
+	}
+
+
+	@Override
+	public List<Pay> getPayList(int lodge_no) {
+		return hostDao.getPayList(lodge_no);
+	}
+
+
+	@Override
+	public Lodge getconveniences(Lodge lodge) {
+			
+		List<Lodge> item = hostDao.selectByHostEdge(lodge);
+		
+		for(Lodge list : item) {
+
+			lodge.setConvenient_facility(list.getConvenient_facility());
+			lodge.setConvenient_area(list.getConvenient_area());
+		}
+		
+		
+			return lodge;
+	}
+
+
+	@Override
+	public void updateConvenient(Lodge lodge) {
+		hostDao.convenientUpdate(lodge);
+		
+	}
 
 }
