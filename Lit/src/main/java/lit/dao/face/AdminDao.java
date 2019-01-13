@@ -102,6 +102,9 @@ public interface AdminDao {
 	// 환불 승인 (pay_state_no = 2 -> pay_state_no 3)
 	public void updateRefund(int pay_no);
 	
+	// 환불 체크박스 전체 결제 승인
+	public void updateCheckPay(String names);
+	
 	// -------------------- 신고 관리 --------------------	
 	
 	// 신고 멤버 리스트 보이기

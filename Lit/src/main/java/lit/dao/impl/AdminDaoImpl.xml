@@ -209,7 +209,12 @@
 		WHERE pay_no = #{pay_no } 
 	</update>
     
-         
+    <!-- 체크박스로 선택된 환불 전체 승인 하기 -->
+	<update id="updateCheckPay" parameterType="String">
+	  UPDATE pay SET pay_state_no = 3 WHERE pay_no IN (${_parameter })
+	</update>     
+	
+	
 	<!-- /////////// 신고 관리 /////////// -->
 	
 	<!-- 멤버신고 관리 리스트 -->

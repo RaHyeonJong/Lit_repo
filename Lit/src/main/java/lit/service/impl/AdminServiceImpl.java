@@ -310,6 +310,14 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.updateRefund(pay_no);
 	}
 	
+	// 체크박스 환불 승인하기
+	@Override
+	public void checkPayApprove(String names) {
+		
+		adminDao.updateCheckPay(names);
+	}
+	
+	
 	// -------------------- 신고 관리 --------------------
 	
 	// 신고당한 멤버 리스트
@@ -427,6 +435,8 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminDao.viewRecommend();
 	}
+
+
 
 
 

@@ -264,6 +264,13 @@ public class AdminController {
 		return "redirect:/admin/payList?pay_state_no=2";
 	}
 	
+	// 체크박스로 선택된 환불 승인하기
+	@RequestMapping(value="/admin/checkPayApprove", method=RequestMethod.POST)
+	public String cehckPayApprove(String names ) { 
+		
+		adminService.checkPayApprove(names);
+		return "redirect:/admin/payList";
+	}	
 	
 	// -------------------- 신고 관리 --------------------  
 	

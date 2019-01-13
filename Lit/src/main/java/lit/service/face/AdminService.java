@@ -120,6 +120,8 @@ public interface AdminService {
 	// 환불 승인하기
 	public void approveRefund(int pay_no);
 	
+	// 체크박스로 선택된 환불 승인하기
+	public void checkPayApprove(String names);
 	
 	// -------------------- 신고 관리 --------------------
 	
