@@ -5,11 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="/resources/dist/js/datepicker.min.js"></script>
+<!-- Include English language -->
+<script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+
+<script type="text/javascript">
+$("#datepicker").datepicker();
+</script>
+
 </head>
 <body>
 
 <h1>TEST</h1>
 <hr>
+<input type="text" class="datepicker-here" style="height: 50px; font-size: 20px; border: 1px solid black;"
+				id="datepicker" data-range="true" data-multiple-dates-separator="-"
+				data-language="en"></input>
 
 <div style="width:600px; height:600px;"><table style="width:100%;"><tr><td style="font-size:40px; font-weight: bold;"><img style="height: 38px;" 
 src="https://mblogthumb-phinf.pstatic.net/20120807_173/wldnjs980227_1344341038774YQ23Y_JPEG/%B9%D0%C2%A4%B8%F0%C0%DA_%C7%D8%C0%FB%B4%DC.jpg?type=w2"/>
@@ -20,6 +33,8 @@ LIFE IS TRIP</td></tr><tr><td style="padding-top:15px; font-size:18px;">나현�
 <div style="display:table-cell; vertical-align:middle; color:white; font-size: 18px; cursor:pointer;">비밀번호 재설정하기</div></div></a></td></tr>
 <tr><td style="padding-top:15px; font-size:18px;">감사합니다.</td></tr><tr><td style="padding-top:5px; font-size:18px;">라이프이즈트립 팀 드림</td></tr>
 </table></div>
+
+
 
 
 </body>

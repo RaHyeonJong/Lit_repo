@@ -5,11 +5,6 @@
 
 	<!-- jQuery -->
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-	<!-- 데이트 피커 -->
-<link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
-<script src="/resources/dist/js/datepicker.min.js"></script>
-	<!-- Include English language -->
-<script src="/resources/dist/js/i18n/datepicker.en.js"></script>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
@@ -505,8 +500,8 @@ body {
    min-width: 978px;
    transition: 0.6s;
    display: block;
-   position: -webkit-sticky;
-   position: sticky;
+	position: -webkit-sticky;
+	position: sticky;
    will-change: transform;
 }
 
