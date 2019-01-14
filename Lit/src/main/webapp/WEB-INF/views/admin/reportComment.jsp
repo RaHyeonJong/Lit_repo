@@ -115,7 +115,7 @@ $("#commentDelete").click(function() {
 					<div class="card-body" style="padding-bottom: 70px;">
 						<div class="table-responsive" style="text-align: center;">
                          <div style="text-align: right;">
-                         <button id="commentDelete" name="commentDelete" class="btn btn-outline-secondary">전체비활성화</button>
+                         <button id="commentDelete" name="commentDelete" class="btn btn-outline-danger" style="margin-right:15px;">전체비활성화</button>
                          </div>&nbsp;	
 							<table class="table table-bordered" id="dataTable"
 								    style="width: 100%; cellspacing: 0; top: 20%">
@@ -154,7 +154,7 @@ $("#commentDelete").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 23%;">
+		<ul class="pagination" style="padding-left: 300px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

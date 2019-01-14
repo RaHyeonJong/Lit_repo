@@ -83,11 +83,20 @@
       <div class="row">
         <c:forEach items="${festivalList }" var="festival">
         <div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:20px;">
-          <div class="card h-100">
+          <div class="card h-100">         
+          <a href="/festival/view?festival_no=${festival.festival_no }"></a>       
             <a href="/festival/view?festival_no=${festival.festival_no }" class="column col-xs-6" id="caption">
-            <img  src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; border-radius:15%" >
-        	    	<span class="text">${festival.festival_name }</span>
+            <img  src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; " >
+        	    	<span class="text" style="font-size:16px;">${festival.festival_name }</span>
  			</a>
+ 		    <div style="text-align:center; ">
+ 		      
+ 		      <br>${festival.start_date} ~ ${festival.end_date }
+              <button class="btn btn-outline-danger" style="width:200px; height:30px; font-size:13px;"
+               onclick="location='/festival/delete?festival_no=${festival.festival_no}'">축제 삭제하기</button>
+              <br>
+            </div>
+            <br>
           </div>
         </div>
        </c:forEach>
