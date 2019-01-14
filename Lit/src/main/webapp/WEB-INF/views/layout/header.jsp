@@ -513,8 +513,8 @@ body {
    min-width: 978px;
    transition: 0.6s;
    display: block;
-   position: -webkit-sticky;
-   position: sticky;
+	position: -webkit-sticky;
+	position: sticky;
    will-change: transform;
 }
 
