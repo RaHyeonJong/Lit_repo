@@ -21,8 +21,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 <link rel="stylesheet" href="/resources/css/multirange.css">
 
-
 <script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+
    
 <style>
 #map {
@@ -174,11 +174,7 @@
 		
     
     
-    	<!--Plugin JavaScript file-->
-   	 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
-		<!-- 숙소종류 필터 모달 끝 -->
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-		<script src="/resources/js/multirange.js"></script>
+    	
 		
 		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -328,14 +324,17 @@ $(document).ready(function() {
 	
 	$('#cateSend').click(function() {
 		searchFilter.cate = [];
-		
+		var cnt = 0;
 		$('input:checkbox[name="cate"]').each(function(){
 			if(this.checked == true){
-				
+				cnt++;
 				searchFilter.cate.push($(this).val());
 			}
 		});	
 		console.log(searchFilter.cate);
+		$('#cateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+		$('#cateFilterBtn').html("숙소종류·" + cnt);
+		
 		searchFilterSend();
 	});
 	
@@ -483,8 +482,8 @@ $(document).ready(function() {
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
 			
+			if(searchFilter.startDate != '')
 			$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
-// 			$('#dateFilterBtn').css("background-color", "#008489");
 			
 			searchFilterSend();
 		}
@@ -623,8 +622,6 @@ $(document).ready(function() {
 <!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
 <!-- 			<button id="priceFilter-send">적용</button> -->
 
-
-	
 			<input type="text" style="height: 0px; font-size:0px; border:none;" id="datepicker" data-range="true"
     data-multiple-dates-separator="-"
     data-language="en"></input>

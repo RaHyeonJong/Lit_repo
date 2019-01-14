@@ -134,8 +134,8 @@
 								<span>${list.festival_name }</span>
 							</div>
 							<div>
-								<span><fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${list.start_date }" /> ~
-								<fmt:formatDate type="date" pattern="yyyy-mm-dd" value="${list.end_date }" /> </span>
+								<span><fmt:formatDate type="date" value="${list.start_date }" /> ~
+								<fmt:formatDate type="date" value="${list.end_date }" /> </span>
 							</div> 
 						</div>
 					</a>
