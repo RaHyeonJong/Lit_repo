@@ -20,8 +20,10 @@
 	
 	#box1
 	{
-		width:450px;
-		height:580px;
+		width:100%;
+		height:100%;
+		max-width:450px;
+		max-height:580px;
 		float:left;
 		margin-right:100px;
 		text-align:center;
@@ -38,8 +40,10 @@
 	
 	#box2
 	{
-		width:450px;
-		height:580px;
+		width:100%;
+		height:100%;
+		max-width:450px;
+		max-height:580px;
 		float:left;
 		text-align:center;
 	}
@@ -47,20 +51,24 @@
 	#img_map,
 	#img_contents
 	{
-		width:450px;	
+		width:100%;
+		max-width:450px;	
 		display:inline-block;
 	}
 	
 	#img_map
 	{ 
-		height:400px;
+		height:100%;
+		max-height:400px;
 		margin-bottom:30px;	
 	}
 	
 	#img_contents
 	{
-		width:430px;
-		height:237px;
+		width:100%;
+		height:100%;
+		max-width:430px;
+		max-height:237px;
 		 
 		padding-left:20px;
 		text-align:left;

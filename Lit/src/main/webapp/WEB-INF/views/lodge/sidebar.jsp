@@ -229,8 +229,20 @@ $(document).ready(function(){
 	}
 		
 
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#ch_Btn").click(function(){
+			
+			location.href="/host/firstRoomF?lodge_no=${view.lodge_no}";
+			
+		});
+	});
+
 
 </script>
+
 
 <style>
 	.nav_side div { padding: 0; } /* 오류나면 수정 */

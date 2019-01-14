@@ -54,7 +54,7 @@
 		(select count(*) from report where lodge_no=l.lodge_no)
 		AS reportCnt
 		FROM lodge l WHERE lodge_activation=#{lodge_activation } ORDER BY
-		lodge_no
+		lodge_no desc
 		) R )B
 		WHERE B.rnum BETWEEN #{startNo } AND #{endNo }
 		ORDER BY
@@ -79,6 +79,11 @@
 		UPDATE lodge SET
 		lodge_activation = 1
 		WHERE lodge_no = #{lodge_no }
+	</update>
+
+	<!-- 체크박스로 선택된 숙소 전체 활성화 하기 -->
+	<update id="updateCheckLodgeActivation" parameterType="String">
+	  UPDATE lodge SET lodge_activation = 1 WHERE lodge_no IN (${_parameter })
 	</update>
 
 
@@ -189,7 +194,7 @@
 		(SELECT mem_name FROM member m WHERE m.mem_no = p.mem_no )AS payMember,
         (SELECT l.lodge_name FROM lodge l WHERE l.lodge_no = p.lodge_no ) AS lodgeName,
         (SELECT m.mem_name FROM lodge l, member m WHERE l.lodge_no = p.lodge_no AND m.mem_no = l.mem_no ) AS hostName
-		FROM pay p WHERE pay_state_no= #{pay_state_no } ORDER BY pay_no DESC ) R )B
+		FROM pay p WHERE pay_state_no= #{pay_state_no } ORDER BY pay_no ) R )B
         WHERE B.rnum BETWEEN ${startNo } AND ${endNo } ORDER BY B.rnum
 	</select>
 	
@@ -215,7 +220,12 @@
 		WHERE pay_no = #{pay_no } 
 	</update>
     
-         
+    <!-- 체크박스로 선택된 환불 전체 승인 하기 -->
+	<update id="updateCheckPay" parameterType="String">
+	  UPDATE pay SET pay_state_no = 3 WHERE pay_no IN (${_parameter })
+	</update>     
+	
+	
 	<!-- /////////// 신고 관리 /////////// -->
 	
 	<!-- 멤버신고 관리 리스트 -->
