@@ -225,6 +225,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 
 <div id="wrapper">
 	<div class="left">

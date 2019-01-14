@@ -256,7 +256,7 @@ public class HostController {
 			
 		//1단계 편의시설
 		@RequestMapping(value="/host/firstConveniencesF", method=RequestMethod.POST)
-		public void fcfproc(Lodge lodge,HttpSession session) {
+		public String fcfproc(Lodge lodge,HttpSession session) {
 			
 			lodge.setLodge_no((int)session.getAttribute("fix_lodge_no"));
 			
@@ -289,7 +289,7 @@ public class HostController {
 			
 			
 				logger.info(lodge.toString());
-//			return "redirect:/host/lodgeCharge";
+			return "redirect:/host/lodgeChargeF";
 			}
 	
 	
@@ -423,6 +423,47 @@ public class HostController {
 			lodge.setLongitude((double)session.getAttribute("longitude"));
 			lodge.setCheck_in_time(check_in_hour+"시"+check_in_min+"분");
 			
+//			int member_no = ((Member) session.getAttribute("member")).getMem_no();
+			
+			lodge.setMem_no(((Member)session.getAttribute("member")).getMem_no());
+
+			logger.info(lodge.toString());
+
+			hostService.insertFirst(lodge);
+			System.out.println(lodge.getLodge_no());
+			model.addAttribute("lodge_no", lodge.getLodge_no());
+			
+			return mav;
+			
+				}
+		
+		//1단계 요금설정
+		@RequestMapping(value="/host/lodgeChargeF", method=RequestMethod.GET)
+		public void icf() {
+					
+					
+				}
+				
+		//1단계 요금설정
+		@RequestMapping(value="/host/lodgeChargeF", method=RequestMethod.POST)
+		public ModelAndView icfProc(
+												Model model,
+												HttpSession session,
+												@RequestParam(defaultValue = "0")int check_in_hour, 
+												@RequestParam(defaultValue = "0")int check_in_min,
+												Lodge lodge,
+												Day_off day_off, ModelAndView mav
+												) {
+			
+			mav.setViewName("jsonView");
+				
+
+
+			session.setAttribute("check_in_time", check_in_hour+"시"+check_in_min+"분");
+			System.out.println(session.getAttribute("check_in_time"));
+			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
+
+		
 //			int member_no = ((Member) session.getAttribute("member")).getMem_no();
 			
 			lodge.setMem_no(((Member)session.getAttribute("member")).getMem_no());
