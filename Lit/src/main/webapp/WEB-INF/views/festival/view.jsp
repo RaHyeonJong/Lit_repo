@@ -10,174 +10,167 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 	<title>Life Is Trip 인생은 여행이다.</title>
+	<style>
+
+	#content_box,
+	#recommend_box
+	{
+		width:80%;
+		margin:0 auto;
+	}
+	
+	#fst_title
+	{
+		color:#ff792a;
+		font-size:40px;
+		text-align:center;
+		padding-bottom:30px;
+	}
+	
+	#fst_img
+	{
+		width:48%;
+		padding-right:30px;
+	}
+
+	#fst_map
+	{
+		width:52%;
+		height:60%;
+		padding-left:30px;
+	}
+
+	#fst_content
+	{
+		text-align:left;
+		padding-top:30px;
+	}
+	
+	#here
+	{
+		font-size:30px;
+		color:#ff792a;
+		font-weight:bold;
+		padding-top:40px;
+	}
+  	
+  	#stored
+  	{
+  		padding-top:20px;
+  		padding-bottom:30px;
+  		display:block;
+  		text-align:center;
+  		width:95%;
+  		height:300px;
+		border-radius:15%;
+  	}
+  	
+  	.column#caption
+   {
+      position:relative;
+   }
+   
+   .column#caption .text {
+      position: absolute;      
+      top: 50%;
+      left: 50%;
+      transform: translate(40%, -100%);
+      opacity:0;
+      transition: all 0.8s ease;
+      margin-top:-140px;
+      width:170px;
+      text-align:center;
+      color: white;
+      font-size: 28px;
+   }
+   
+   .column#caption:hover .text {
+      opacity: 1;
+   }
+   
+   .column#caption:hover img {
+      /*  명도 30% 효과 줌 */
+      -webkit-filter: brightness(30%);
+   }
+  	
+  	
+
+</style>
+	
 </head>
 
-<style>
 
-	#wrapper
-	{
-		margin: 60px 100px 60px 200px;
-	}
-	
-	#box1
-	{
-		width:30%;
-		height:100%;
-		max-width:1200px;
-		max-height:680px;
-		float:left;
-		margin-right:150px;
-		text-align:center;
-		margin-top: -20px;
-	}
-	
-	#img_box
-	{
-		
-		text-align:center;
-		display:inline-block;
-	}
-	
-	
-	#box2
-	{
-		width:30%;
-		height:100%;
-		max-width:1200px;
-		max-height:680px;
-		float:left;
-		text-align:center;
-	}
-	
-	#img_map,
-	#img_contents
-	{
-		width:100%;
-		max-width:550px;	
-		display:inline-block;
-	}
-	
-	#img_map
-	{ 
-		height:100%;
-		max-height:400px;
-		margin-bottom:30px;	
-	}
-	
-	#img_contents
-	{
-		width:100%;
-		height:100%;
-		max-width:430px;
-		max-height:237px;
-		 
-		padding-left:20px;
-		text-align:left;
-	}
-	
-	#img_recommend
-	{
-		width:100%;
-		max-width:1200px; 
-		margin-top:100px;
-		float:left;
-		
-	}
-	
- 	#img_row 
-	{ 
- 		float:left; 
- 		width:30%; 
- 		height:300px; 
- 		margin-right:20px;
- 		 
- 	} 
- 	
-	.column#caption
-	{
-		position:relative;
-	}
-	
-	.column#caption .text {
-		position: absolute;		
-    	top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-     	opacity: 0; 
-	    transition: all 0.8s ease;
-	  	margin-top:-140px;
-	  	width:170px;
-	  	text-align:center;
-	    color: white;
-	    font-size: 28px;
-	}
-	
-	.column#caption:hover .text {
-		opacity: 1;
-	
-	}
-	
-	.column#caption:hover img {
-		/*  명도 30% 효과 줌 */
-		-webkit-filter: brightness(30%);
-	}
-	
-</style>
 
 <input type="hidden" value="${festivalView.festival_no }" />
 
 <body>
 <div id="wrapper">
-	<div id="box1">
-	
-		<div id="img_box">
-			${festivalView.festival_contents }
-		</div>
-	</div>
 
+	<table id="content_box">
+	<thead>
+		<tr>
+			<td colspan="2" id="fst_title"><i class="fa fa-smile-o" aria-hidden="true"></i> ${festivalView.festival_name }</td>
+		</tr>
+	</thead>
 	
-	<div id="box2">
-	
-		<div id="img_map">
-			<p><p>
-		</div>
-	
-		<div id="img_contents">
-			<span style="font-weight:bold;"><i class="fa fa-smile-o" aria-hidden="true"></i> ${festivalView.festival_name } </span><p>
-			<span style="font-weight:bold;"><i class="fa fa-map-marker" aria-hidden="true"></i> ${festivalView.address } </span><p>
-			<span style="font-weight:bold;"><i class="fa fa-calendar" aria-hidden="true"></i> ${festivalView.start_date} ~ ${festivalView.end_date }</span><p>			
-			<span style="font-weight:bold;"><i class="fa fa-pencil" aria-hidden="true"></i> ${festivalView.written_time} </span><p>
-		</div>
-	</div>
-
-	<div id="img_recommend">
-	
-		<c:if test="${login }">
-		<h1 id="here">${member.mem_name }님 여기는 어떨까요!?</h1>
-		</c:if>
+	<tbody>
+		<tr>
+			<td rowspan="2" id="fst_img">
+					${festivalView.festival_contents }
+			</td>
+			
+			<td id="fst_map"></td>
+		</tr>
 		
-		<c:if test="${not login }">
-		<h1>Guest님 여기는 어떨까요!?</h1>
-		</c:if>
-		
-		<c:forEach items="${recommendView }" var="recommend">
-		<div id="img_row">
-			<a href="/festival/view?festival_no=${recommend.festival_no }" class="column" id="caption">
-			<img src="/resources/images/${recommend.stored_name }" style="width:100%; height:300px; border-radius:15%;"><br>
-				<span class="text">${recommend.festival_name }</span>
-			</a>
-		</div>			
-		</c:forEach>
-		
-	</div>
+		<tr>
+			<td id="fst_content"> 
+				<span style="font-weight:bold; color:gray;"><i class="fa fa-map-marker" aria-hidden="true"></i> ${festivalView.address } </span><p>
+				<span style="font-weight:bold; color:gray;"><i class="fa fa-calendar" aria-hidden="true"></i> ${festivalView.start_date} ~ ${festivalView.end_date }</span><p>			
+				<span style="font-weight:bold; color:gray;"><i class="fa fa-pencil" aria-hidden="true"></i> ${festivalView.written_time} </span>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+	
+	<table id="recommend_box">
+	
+		<thead>
+			<tr>
+				<td colspan="3" id="here">
+					<c:if test="${login }">
+						${member.mem_name } 님 여기는 어떨까요!?
+					</c:if>
+					
+					<c:if test="${not login }">
+						Guest 님 여기는 어떨까요!?
+					</c:if>
+				</td>
+			</tr>
+			
+		</thead>
+		<tbody>
+			<tr>
+			    <c:forEach items="${recommendView }" var="recommend">
+         		<td id="recommend_img">   
+            		<a href="/festival/view?festival_no=${recommend.festival_no }" class="column col-xs-6" id="caption">      
+                  		<img src="/resources/images/${recommend.stored_name }" id="stored"><br>
+                  		<span class="text">${recommend.festival_name }</span>
+            		</a>   
+         		</td>
+         </c:forEach>
+			</tr>
+		</tbody>	
+	</table>
+	
+	
 </div>
-
+<jsp:include page="../layout/footer.jsp" />
 </body>
 
 
 <script>
 		
-	var container = document.getElementById('img_map');
+	var container = document.getElementById('fst_map');
 	var options = {
 		center: new daum.maps.LatLng("${festivalView.latitude }", "${festivalView.longitude }"),
 		level: 3
