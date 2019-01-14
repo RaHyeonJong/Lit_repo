@@ -6,6 +6,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7a161e649deaccd6f18cc3348d4953ab&libraries=services,clusterer,drawing"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <jsp:include page="../layout/header.jsp" />
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 	<title>Life Is Trip 인생은 여행이다.</title>
@@ -20,10 +21,12 @@
 	
 	#box1
 	{
-		width:450px;
-		height:580px;
+		width:30%;
+		height:100%;
+		max-width:1200px;
+		max-height:680px;
 		float:left;
-		margin-right:100px;
+		margin-right:150px;
 		text-align:center;
 		margin-top: -20px;
 	}
@@ -38,8 +41,10 @@
 	
 	#box2
 	{
-		width:450px;
-		height:580px;
+		width:30%;
+		height:100%;
+		max-width:1200px;
+		max-height:680px;
 		float:left;
 		text-align:center;
 	}
@@ -47,20 +52,24 @@
 	#img_map,
 	#img_contents
 	{
-		width:450px;	
+		width:100%;
+		max-width:550px;	
 		display:inline-block;
 	}
 	
 	#img_map
 	{ 
-		height:400px;
+		height:100%;
+		max-height:400px;
 		margin-bottom:30px;	
 	}
 	
 	#img_contents
 	{
-		width:430px;
-		height:237px;
+		width:100%;
+		height:100%;
+		max-width:430px;
+		max-height:237px;
 		 
 		padding-left:20px;
 		text-align:left;
@@ -68,8 +77,8 @@
 	
 	#img_recommend
 	{
-		width:75%; 
-/* 		900px */
+		width:100%;
+		max-width:1200px; 
 		margin-top:100px;
 		float:left;
 		
@@ -78,9 +87,10 @@
  	#img_row 
 	{ 
  		float:left; 
- 		width:32%; 
+ 		width:30%; 
  		height:300px; 
- 		margin-right:10px; 
+ 		margin-right:20px;
+ 		 
  	} 
  	
 	.column#caption
@@ -111,7 +121,7 @@
 		/*  명도 30% 효과 줌 */
 		-webkit-filter: brightness(30%);
 	}
-
+	
 </style>
 
 <input type="hidden" value="${festivalView.festival_no }" />
@@ -143,7 +153,7 @@
 	<div id="img_recommend">
 	
 		<c:if test="${login }">
-		<h1>${member.mem_name }님 여기는 어떨까요!?</h1>
+		<h1 id="here">${member.mem_name }님 여기는 어떨까요!?</h1>
 		</c:if>
 		
 		<c:if test="${not login }">
@@ -158,21 +168,24 @@
 			</a>
 		</div>			
 		</c:forEach>
+		
 	</div>
-
 </div>
+
 </body>
+
+
 <script>
 		
 	var container = document.getElementById('img_map');
 	var options = {
-		center: new daum.maps.LatLng(${festivalView.latitude }, ${festivalView.longitude }),
+		center: new daum.maps.LatLng("${festivalView.latitude }", "${festivalView.longitude }"),
 		level: 3
 	};
 	
 	var map = new daum.maps.Map(container, options);
 	
-	var markerPosition  = new daum.maps.LatLng(${festivalView.latitude }, ${festivalView.longitude }); 
+	var markerPosition  = new daum.maps.LatLng("${festivalView.latitude }", "${festivalView.longitude }"); 
 
 	// 마커를 생성합니다
 	var marker = new daum.maps.Marker({
