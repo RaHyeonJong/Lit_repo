@@ -234,7 +234,7 @@ var marker;
 var cost;
 var infowindow;
 var markerArray = [];
-var peopleMax = 9; // 최대 인원
+var peopleMax = 20; // 최대 인원
 
 $(document).ready(function() {
 	$('#header').css('z-index', 91); // 모달 띄울 때
@@ -301,14 +301,12 @@ $(document).ready(function() {
 	});
 	
 	$('#peopleSend').click(function() { // 인원 적용 버튼 누를 시
-		alert('인원 필터');
 		$('#peopleFilterBtn').html('인원' + searchFilter.peopleCnt + '명');
 		$('#peopleFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
 		searchFilterSend();
 	});
 	
 	$('#peopleCancel').click(function() { // 인원 취소 버튼 누를 시
-		alert('인원 초기화');
 		searchFilter.peopleCnt = 1;
 		$('#peopleFilterBtn').html('인원');
 	});
@@ -360,8 +358,6 @@ $(document).ready(function() {
 		$('.modal').css("display", "none");
 		
 		
-		alert(JSON.stringify(searchFilter));
-		
          
             $.ajax({
 			    type: "post",
@@ -369,7 +365,7 @@ $(document).ready(function() {
 			    data: {"searchFilterJson" : JSON.stringify(searchFilter)},
 			    dataType: "json",
 			    success: function(list) {
-						alert(list.length);
+
 						
 						
 // 						marker = new google.maps.Marker({
@@ -445,14 +441,16 @@ $(document).ready(function() {
 			$('.modal').css("display", "none");
 			
 			var con = $('#datepicker').val();
-			console.log(con);
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
 			
-			$('#dateFilterBtn').html(con);
-			$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+			if(searchFilter.startDate != "") {
+				$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
+				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+				searchFilterSend();
+			}
 			
-			searchFilterSend();
+			
 		}
 	});
 	
@@ -481,11 +479,10 @@ $(document).ready(function() {
 			console.log(con);
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
-			
-			if(searchFilter.startDate != '')
-			$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
-			
-			searchFilterSend();
+				$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
+				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+				searchFilterSend();
+			}
 		}
 	});
 	
