@@ -101,7 +101,7 @@
  			
  			
 				<div class="h3">
- 					<h3>Life is trip의 인기 만점 숙소</h3>
+ 					<h3>ㄹ로 시작하는 숙소들</h3>
  				</div>
 				
 				<c:forEach var="list" end="5" items="${lodgeList }">
@@ -121,7 +121,7 @@
 				</c:forEach>
 				
 				<div class="h3">
- 					<h3>최고 평점의 행사</h3>
+ 					<h3>이 달의 행사</h3>
  				</div>
 				
 				<c:forEach var="list" items="${festivalList }">
@@ -142,7 +142,7 @@
 				</c:forEach>
 				
 				<div class="h3">
- 					<h3>가장 많이 찜한 숙소</h3>
+ 					<h3>믿고 보는 숙소 리스트 </h3>
  				</div>
 				
 				<c:forEach var="list" begin="6" items="${lodgeList }">
@@ -162,8 +162,6 @@
 				</c:forEach>
 				
 			
-			
- 			
  			<div id="enters"></div>
 		</div> <!-- content end -->
 		

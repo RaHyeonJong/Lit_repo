@@ -244,7 +244,7 @@ public class HostController {
 			
 			lodge = hostService.getconveniences(lodge);
 				
-			System.out.println(lodge);	
+//			System.out.println(lodge);	
 			
 				model.addAttribute("sub_list",lodge);
 			}
