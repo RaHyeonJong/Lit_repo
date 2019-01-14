@@ -102,7 +102,7 @@
     	INNER JOIN member m
     	ON b.mem_no = m.mem_no
     	WHERE answer = #{answer } ORDER BY board_no DESC)R )
-			WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	    WHERE rnum BETWEEN #{startNo } AND #{endNo }
 
 	</select>
 

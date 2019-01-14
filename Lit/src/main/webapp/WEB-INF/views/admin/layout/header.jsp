@@ -21,7 +21,7 @@
 <body>
 
 	  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-      <a class="navbar-brand mr-1" href="/admin/main">Life Is Trip Management</a>
+      <a class="navbar-brand mr-1" href="/admin/member">Life Is Trip Management</a>
       <!-- 목록 바 --> 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -46,6 +46,9 @@
             <i class="fas fa-bell fa-fw"></i>
             <span id="lodge0cnt" class="badge badge-danger">0</span>
           </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+             <a class="dropdown-item" href="/admin/lodge">대기숙소 승인하기</a>
+            </div>
         </li>
        
         <!-- 1:1문의내역 답변하기 -->
@@ -54,11 +57,15 @@
             <i class="fas fa-envelope fa-fw"></i>
             <span id="cs0cnt" class="badge badge-danger">0</span>
           </a>
+          
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+            <a class="dropdown-item" href="/admin/csList">1:1문의 답변하기</a>
+          </div>
         </li>
         
         <!-- 관리자 설정 정보 변경 -->
         <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="/admin/main" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
         </li>
@@ -98,7 +105,7 @@
 			}
 			
 		})
-	}, 1000);
+	}, 3000);
     
     
     </script>
