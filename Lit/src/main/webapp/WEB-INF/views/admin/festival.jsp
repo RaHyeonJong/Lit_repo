@@ -86,7 +86,7 @@
           <div class="card h-100">         
           <a href="/festival/view?festival_no=${festival.festival_no }"></a>       
             <a href="/festival/view?festival_no=${festival.festival_no }" class="column col-xs-6" id="caption">
-            <img  src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; " >
+            <img src="/resources/images/${festival.stored_name }" class="card-img-top" style="width:350px; height:350px; " >
         	    	<span class="text" style="font-size:16px;">${festival.festival_name }</span>
  			</a>
  		    <div style="text-align:center; ">
@@ -109,7 +109,7 @@
               
         <div class="pagination">
        <nav>
-      <ul class="pagination" style="padding-left: 58%;">
+      <ul class="pagination" style="padding-left: 280px;">
 
          <!-- 이전 페이지 -->
          <!-- 첫 페이지라면 금지 표시 -->

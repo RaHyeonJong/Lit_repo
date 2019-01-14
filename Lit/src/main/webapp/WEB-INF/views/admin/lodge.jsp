@@ -279,7 +279,7 @@ $("#btnAccess").click(function() {
                       <td>${lodge.lodge_name }</td>
                       <td>${lodge.lodge_capacity }</td> 
                       <td>${lodge.lodge_room }</td>
-                      <td><a href="?lodge_no=${lodge.lodge_no }">상세보기</a></td>
+                      <td><a href="/lodge/view?lodge_no=${lodge.lodge_no }">상세보기</a></td>
                       <td><button class="btn btn-primary" 
                                   onclick="location.href='/admin/lodgeActive?lodge_no=${lodge.lodge_no }'">승인</button></td>
                     </tr>
