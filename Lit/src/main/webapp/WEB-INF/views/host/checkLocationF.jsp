@@ -235,6 +235,7 @@ padding: 10px;
 </style>
 </head>
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 
 <div id="wrapper">
 	<div class="left">

@@ -340,6 +340,7 @@ function initImageUpload(box) {
 
 
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 <div id="wrapper">
 <div class="content">
 <div style="margin-left: 10px;"><h2>숙소 이미지 등록해주세요</h2></div>

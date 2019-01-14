@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 	
 	$("#fix_lodge").click(function(){
-		location.href="/host/hostFirstFix?lodge_no="+${lodge_no};
+		location.href="/host/firstRoomF?lodge_no="+${lodge_no};
 		
 		
 	});

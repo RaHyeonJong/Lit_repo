@@ -166,7 +166,6 @@ font-size:13px;
 .left { 
 width: 50%; 
 float: left; 
-border:1px solid red;
 
 }
 
@@ -182,7 +181,7 @@ padding-left:30%;
 width: 49%; 
 
 float: right; 
-border:1px solid blue;
+
 }
 .continue{
 float:right;
@@ -292,7 +291,7 @@ margin:100px 10px 10px 10px;
 </style>
 </head>
 <body>
-
+<jsp:include page="hostHeader.jsp"></jsp:include>
 <div id="wrapper">
 	<div class="left" >
 	 <div class="innerleft">
