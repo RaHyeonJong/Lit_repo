@@ -3,13 +3,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Life is trip 인생은 여행이다</title>
-    
 
+<%-- /resources/images/lodge_image/${list.stored_name[0] } --%>
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!--Plugin CSS file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+<link rel="stylesheet" href="/resources/css/multirange.css">
+
+<script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+
+   
 <style>
 #map {
 	position: fixed;
@@ -62,27 +76,31 @@
 
 #lodgeList2 {
 	display: table;
-	border: 1px solid gray;
+	border: 1px solid rgb(235, 235, 235);
 	margin: 20px 0;
 	width: 48%;
+}
+
+#lodgeList2:hover {
+	box-shadow: rgba(0,0,0, 0.2) 0px 0px 4px !important;
 }
 
 #lodgeImage {
 	display: table-cell;
 	width: 300px;
 	height: 200px;
-	border: 1px solid gray;
+	border: 0px solid rgb(235, 235, 235);
 }
 
 #lodgeInfo {
 	display: table-cell;
-	border: 1px solid gray;
+	border: 0px solid rgb(235, 235, 235);
 	width: 100%;
 	height: 200px !important;
 	vertical-align: middle !important;
 }
 
-#modal-people2, #modal-cate2 {
+#modal-people2, #modal-cate2, #modal-price2 {
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 14px 36px 2px !important;
 	border-width: 1px !important;
 	border-style: solid !important;
@@ -139,6 +157,9 @@
 	line-height: 1;
 	color: rgb(0, 132, 137);
 }
+.Search-box {
+	margin-bottom: 13px;
+}
 </style>
 
 </head>
@@ -150,7 +171,14 @@
 			<!-- header 시작 -->
 			<c:import url="../layout/header.jsp" />
 		</div>
-
+		
+    
+    
+    	
+		
+		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
 		<!-- header 끝 -->
 
 		<div id="search_filter" style="z-index: 91; top: 0;">
@@ -206,7 +234,7 @@ var marker;
 var cost;
 var infowindow;
 var markerArray = [];
-var peopleMax = 9; // 최대 인원
+var peopleMax = 20; // 최대 인원
 
 $(document).ready(function() {
 	$('#header').css('z-index', 91); // 모달 띄울 때
@@ -244,6 +272,11 @@ $(document).ready(function() {
 		console.log($('#modal-people2').attr('left'));
 		
 	});
+	
+	$('#lodgeInfo').click(function() {
+		var lodge_no = $('#lodgeInfo').attr('data-lodgeNo');
+		window.location.href = "/lodge/view?lodge_no="+lodge_no;
+	});
 
 	$('#priceFilterBtn').click(function() { // 가격 필터 버튼 누를 시
 		$('.modal').css("display", "none");
@@ -268,13 +301,12 @@ $(document).ready(function() {
 	});
 	
 	$('#peopleSend').click(function() { // 인원 적용 버튼 누를 시
-		alert('인원 필터');
+		$('#peopleFilterBtn').html('인원' + searchFilter.peopleCnt + '명');
+		$('#peopleFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
 		searchFilterSend();
-		$('#peopleFilterBtn').html(searchFilter.peopleCnt + '명');
 	});
 	
 	$('#peopleCancel').click(function() { // 인원 취소 버튼 누를 시
-		alert('인원 초기화');
 		searchFilter.peopleCnt = 1;
 		$('#peopleFilterBtn').html('인원');
 	});
@@ -290,14 +322,27 @@ $(document).ready(function() {
 	
 	$('#cateSend').click(function() {
 		searchFilter.cate = [];
-		
+		var cnt = 0;
 		$('input:checkbox[name="cate"]').each(function(){
 			if(this.checked == true){
-				
+				cnt++;
 				searchFilter.cate.push($(this).val());
 			}
 		});	
 		console.log(searchFilter.cate);
+		$('#cateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+		$('#cateFilterBtn').html("숙소종류·" + cnt);
+		
+		searchFilterSend();
+	});
+	
+	$('#priceSend').click(function() {
+		searchFilter.minPrice = $('#ds1').val();
+		searchFilter.maxPrice = $('#ds2').val();
+		
+		$('#priceFilterBtn').html(searchFilter.minPrice + '원~' + searchFilter.maxPrice + '원');
+		$('#priceFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+		
 		searchFilterSend();
 	});
 	
@@ -311,10 +356,7 @@ $(document).ready(function() {
 		
 		
 		$('.modal').css("display", "none");
-		searchFilter.minPrice = $('#priceMinFilter').val();
-		searchFilter.maxPrice = $('#priceMaxFilter').val();
 		
-		alert(JSON.stringify(searchFilter));
 		
          
             $.ajax({
@@ -323,7 +365,7 @@ $(document).ready(function() {
 			    data: {"searchFilterJson" : JSON.stringify(searchFilter)},
 			    dataType: "json",
 			    success: function(list) {
-						alert(list.length);
+
 						
 						
 // 						marker = new google.maps.Marker({
@@ -399,15 +441,16 @@ $(document).ready(function() {
 			$('.modal').css("display", "none");
 			
 			var con = $('#datepicker').val();
-			console.log(con);
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
 			
-			$('#dateFilterBtn').html(con);
-			$('#dateFilterBtn').css("background", "#008489");
-			$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+			if(searchFilter.startDate != "") {
+				$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
+				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+				searchFilterSend();
+			}
 			
-			searchFilterSend();
+			
 		}
 	});
 	
@@ -436,11 +479,10 @@ $(document).ready(function() {
 			console.log(con);
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
-			
-			$('#dateFilterBtn').html(con);
-			$('#dateFilterBtn').css("background-color", "#008489");
-			
-			searchFilterSend();
+				$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
+				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+				searchFilterSend();
+			}
 		}
 	});
 	
@@ -461,10 +503,14 @@ $(document).ready(function() {
 				});
 				
 				map.addListener('dragend', function() { // dragend 시작
-					alert('dragend');
 				
 					map2();
 				}); // dragend 끝
+				
+				map.addListener('zoom_changed', function() { // zoom_changed
+				
+					map2();
+				}); // zoom_changed 끝
 				
 				/* marker = new google.maps.Marker({
 					position : myLatlng,
@@ -558,12 +604,8 @@ $(document).ready(function() {
 					} // function map() end
 					
 			}
-			
 	
 	</script>
-
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&callback=initMap"></script>
 
 <!-- 달력 필터 모달 -->
 <div id="modal-date" class="modal"
@@ -577,8 +619,6 @@ $(document).ready(function() {
 <!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
 <!-- 			<button id="priceFilter-send">적용</button> -->
 
-
-	
 			<input type="text" style="height: 0px; font-size:0px; border:none;" id="datepicker" data-range="true"
     data-multiple-dates-separator="-"
     data-language="en"></input>
@@ -590,18 +630,30 @@ $(document).ready(function() {
 
 <!-- 가격 필터 모달 -->
 <div id="modal-price" class="modal"
-	style="display: none; position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
+	style="display: none; font: 15px Open Sans;position: fixed; z-index: 90; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(255, 255, 255, 0.85) !important;">
 	<div id="modal-price2"
-		style="position: fixed; width: 568px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
+		style="position: fixed; width: 400px; padding-bottom: 20px; background-color: #fefefe; text-align: center;">
 		<div id="modal-price3">
-			<!-- price min, max filter 추가 -->
-<!-- 			<label for="min">최소</label> <input type="text" id="priceMinFilter" -->
-<!-- 				name="priceMinFilter" /><br> <label for="max">최대</label> <input -->
-<!-- 				type="text" id="priceMaxFilter" name="priceMaxFilter" /> -->
-<!-- 			<button id="priceFilter-send">적용</button> -->
-
-			<div id="test-slider"></div>
-
+		
+<!-- 	</div> -->
+		<fieldset>
+<!--   <legend>Cost range one</legend> -->
+  <div class="range-slider">
+      <input type="text" class="js-range-slider1" value="" tabindex="-1"/>
+<!--       <div> -->
+<!--         <label for="ds1" class="lbl js-from">From</label> -->
+<!--         <label for="ds2" class="lbl js-to">To</label> -->
+<!--       </div>   -->
+      <div class="extra-controls minimised">
+        <input id="ds1" type="text" maxlength="10" value="20000" class="inp js-from" />
+        <input id="ds2" type="text" maxlength="10" value="190000" class="inp js-to" />
+      </div>
+  </div>
+</fieldset>
+		<div style="display: flex;">
+				<div id="priceCancel" style="text-align: left;flex-grow: 1 !important;cursor: pointer;">삭제</div>
+				<div id="priceSend" style="color: rgb(0, 132, 137);cursor: pointer;">적용</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -662,7 +714,9 @@ $(document).ready(function() {
 		</div>
 	</div>
 </div>
-<!-- 숙소종류 필터 모달 끝 -->
+
+<!--     jQuery -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 
 </html>

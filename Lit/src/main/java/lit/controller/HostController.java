@@ -1,11 +1,16 @@
 package lit.controller;
 
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -234,17 +239,30 @@ public class HostController {
 	//수정 편의시설
 		@RequestMapping(value="/host/firstConveniencesF", method=RequestMethod.GET)
 
-		public void fcf(Lodge lodge) {}
+		public void fcf(Lodge lodge,Model model) {
+			
+			
+			lodge = hostService.getconveniences(lodge);
+				
+//			System.out.println(lodge);	
+			
+				model.addAttribute("sub_list",lodge);
+			}
+			
+			
+		
 
 
 			
 		//1단계 편의시설
 		@RequestMapping(value="/host/firstConveniencesF", method=RequestMethod.POST)
-		public String fcfproc(Lodge lodge,HttpSession session) {
+		public void fcfproc(Lodge lodge,HttpSession session) {
+			
+			lodge.setLodge_no((int)session.getAttribute("fix_lodge_no"));
 			
 			String[] word = lodge.getConvenient_facility().split(",");
 			String[] otherCon = lodge.getConvenient_area().split(",");
-			System.out.println(lodge.getConvenient_facility());
+//			System.out.println(lodge.getConvenient_facility());
 			
 			
 			for(String word2 : word) {
@@ -267,11 +285,11 @@ public class HostController {
 				lodge.setConvenient_area(t);
 			}
 			
+			hostService.updateConvenient(lodge);
 			
-				session.setAttribute("convenient_facility", lodge.getConvenient_facility());
-				session.setAttribute("convenient_area", lodge.getConvenient_area());
+			
 				logger.info(lodge.toString());
-			return "redirect:/host/lodgeCharge";
+//			return "redirect:/host/lodgeCharge";
 			}
 	
 	
@@ -461,23 +479,23 @@ public class HostController {
 	
 	
 	//1단계 숙소정보 수정
-	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.GET)
+	@RequestMapping(value="/host/firstRoomF", method=RequestMethod.GET)
 	public void hostElementFirstFix(Lodge lodge,Model model) {
 
 		List<Lodge> hostLodgeElementList = hostService.viewHostElement(lodge);
+		
+		model.addAttribute("lodge_no",lodge.getLodge_no());
 		
 		model.addAttribute("fristUpdate", hostLodgeElementList);
 		
 	}
 	
 	//1단계 숙소정보 수정
-	@RequestMapping(value="/host/hostFirstFix", method=RequestMethod.POST)
+	@RequestMapping(value="/host/firstRoomF", method=RequestMethod.POST)
 	public ModelAndView hostElementFirstFixProc(Lodge lodge,ModelAndView mav) {
 		
-		
-		
-		
-		hostService.hostElementFirstFix(lodge);
+		 hostService.hostElementFirstFix(lodge);
+		 mav.setViewName("jsonView");
 		
 			return mav;
 		}

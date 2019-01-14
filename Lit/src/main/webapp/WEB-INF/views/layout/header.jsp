@@ -3,12 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+	<!-- jQuery -->
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+<!-- 숙소종류 필터 모달 끝 -->
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/resources/js/multirange.js"></script>
+
 	<!-- 데이트 피커 -->
 <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="/resources/dist/js/datepicker.min.js"></script>
 	<!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
@@ -860,9 +869,9 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 			  <form action="/main/searchMain" class="Search" method="POST" name="formname" onsubmit="return check()">
 			  		<input type="hidden" id="cityLng" name="cityLng"/>
 			  		<input type="hidden" id="cityLat" name="cityLat"/>
-   				 <input class="Search-box" type="search" id="location-input" autocomplete="off" onkeypress="JavaScript:press(this.form)">
+   				 <input class="Search-box" type="search" id="location-input" autocomplete="off" style="padding-left: 15px;" onkeypress="JavaScript:press(this.form)">
    					
-   				 <label class="Search-label" for="Search-box"><i class="fa fa-search"></i></label>
+   				 <label class="Search-label" for="Search-box"><i class="fa fa-search" style="display: none;"></i></label>
    				 
    				 <input type="submit" style="display:none;" />
   			</form>
@@ -1110,7 +1119,7 @@ function initialize(){
 }
 
 ////////// 자동완성기능 /////////
-function initAutocomplete() {
+function initAutoComplete() {
 	var input = document.getElementById('location-input');
 	var searchBox = new google.maps.places.Autocomplete(input);
 	
@@ -1142,6 +1151,14 @@ function check() {
 </script>
 
 
+
 <!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initAutocomplete&v=3.exp&sensor=false&libraries=places"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&callback=initialize&v=3.exp&sensor=false&libraries=places"
          async defer></script>
+         
+<script>
+function initialize() {
+	   initAutoComplete();
+	   initMap();
+}
+</script>

@@ -20,8 +20,10 @@
 	
 	#box1
 	{
-		width:450px;
-		height:580px;
+		width:100%;
+		height:100%;
+		max-width:450px;
+		max-height:580px;
 		float:left;
 		margin-right:100px;
 		text-align:center;
@@ -38,8 +40,10 @@
 	
 	#box2
 	{
-		width:450px;
-		height:580px;
+		width:100%;
+		height:100%;
+		max-width:450px;
+		max-height:580px;
 		float:left;
 		text-align:center;
 	}
@@ -47,20 +51,24 @@
 	#img_map,
 	#img_contents
 	{
-		width:450px;	
+		width:100%;
+		max-width:450px;	
 		display:inline-block;
 	}
 	
 	#img_map
 	{ 
-		height:400px;
+		height:100%;
+		max-height:400px;
 		margin-bottom:30px;	
 	}
 	
 	#img_contents
 	{
-		width:430px;
-		height:237px;
+		width:100%;
+		height:100%;
+		max-width:430px;
+		max-height:237px;
 		 
 		padding-left:20px;
 		text-align:left;
@@ -75,13 +83,41 @@
 		
 	}
 	
-	#img_row
+ 	#img_row 
+	{ 
+ 		float:left; 
+ 		width:32%; 
+ 		height:300px; 
+ 		margin-right:10px; 
+ 	} 
+ 	
+	.column#caption
 	{
-		float:left;
-		width:32%;
-		height:300px;
-		margin-right:10px;
-		
+		position:relative;
+	}
+	
+	.column#caption .text {
+		position: absolute;		
+    	top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+     	opacity: 0; 
+	    transition: all 0.8s ease;
+	  	margin-top:-140px;
+	  	width:170px;
+	  	text-align:center;
+	    color: white;
+	    font-size: 28px;
+	}
+	
+	.column#caption:hover .text {
+		opacity: 1;
+	
+	}
+	
+	.column#caption:hover img {
+		/*  명도 30% 효과 줌 */
+		-webkit-filter: brightness(30%);
 	}
 
 </style>
@@ -124,10 +160,10 @@
 		
 		<c:forEach items="${recommendView }" var="recommend">
 		<div id="img_row">
-			<a href="/festival/view?festival_no=${recommend.festival_no }">
-			<img src="/resources/images/${recommend.stored_name }" style="width:100%; height:300px; border-radius:15%;"><br></a>
-				<h3 align="center">${recommend.festival_name }</h3>
-			
+			<a href="/festival/view?festival_no=${recommend.festival_no }" class="column" id="caption">
+			<img src="/resources/images/${recommend.stored_name }" style="width:100%; height:300px; border-radius:15%;"><br>
+				<span class="text">${recommend.festival_name }</span>
+			</a>
 		</div>			
 		</c:forEach>
 	</div>

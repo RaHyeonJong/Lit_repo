@@ -96,7 +96,7 @@
                
         <!-- 일반 유저 페이징 처리 -->
                
-        <div class="w3-bar">
+       <div class="w3-bar"> 
 	    <nav>
 		<ul class="pagination" style="padding-left: 23%;">
 

@@ -51,6 +51,9 @@ public interface HostDao {
 
 	//노출기간 업데이트
 	public void updateAvailable(Lodge lodge);
+	
+	//편의시설 공간 업데이트
+	public void convenientUpdate(Lodge lodge);
 
 	//위치정보 수정
 	public void updateLocation1(Lodge lodge);

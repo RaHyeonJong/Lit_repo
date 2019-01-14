@@ -100,6 +100,11 @@ public class MainController {
 			SearchFilter searchFilter
 			
 			) {
+		System.out.println("test location : " + searchFilter.getLocation());
+		
+		if((searchFilter.getCityLat() == 1) && (searchFilter.getCityLat() == 1)) {
+			return "redirect:/main";
+		}
 		
 		logger.info("메인 페이지 띄우기");
 		int people_num = 0;
@@ -370,6 +375,12 @@ public class MainController {
 		for(int i=0;i<festivalList.size();i++) {
 			String imageName = mainService.getFestivalImageName(festivalList.get(i).getFestival_no());
 			festivalList.get(i).setStored_name(imageName);
+		}
+		
+		
+		for(int i=0;i<lodgeList.size();i++) {
+			String[] imageArray = mainService.getLodgeImageName(lodgeList.get(i).getLodge_no());
+			lodgeList.get(i).setStored_name(imageArray);
 		}
 		
 		logger.info(lodgeList.toString());
