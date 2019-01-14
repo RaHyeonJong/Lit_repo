@@ -258,7 +258,7 @@ public class HostController {
 		@RequestMapping(value="/host/firstConveniencesF", method=RequestMethod.POST)
 		public void fcfproc(Lodge lodge,HttpSession session) {
 			
-			lodge.setLodge_no((int)session.getAttribute("fix_lodge_no"));
+
 			
 			String[] word = lodge.getConvenient_facility().split(",");
 			String[] otherCon = lodge.getConvenient_area().split(",");
