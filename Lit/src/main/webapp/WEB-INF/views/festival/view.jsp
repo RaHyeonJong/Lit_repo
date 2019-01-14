@@ -6,6 +6,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7a161e649deaccd6f18cc3348d4953ab&libraries=services,clusterer,drawing"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <jsp:include page="../layout/header.jsp" />
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 	<title>Life Is Trip 인생은 여행이다.</title>
@@ -76,8 +77,8 @@
 	
 	#img_recommend
 	{
-		width:75%; 
-/* 		900px */
+		width:75%;
+		max-width:900px; 
 		margin-top:100px;
 		float:left;
 		
@@ -119,6 +120,9 @@
 		/*  명도 30% 효과 줌 */
 		-webkit-filter: brightness(30%);
 	}
+	
+	
+	
 
 </style>
 
@@ -151,7 +155,7 @@
 	<div id="img_recommend">
 	
 		<c:if test="${login }">
-		<h1>${member.mem_name }님 여기는 어떨까요!?</h1>
+		<h1 id="here">${member.mem_name }님 여기는 어떨까요!?</h1>
 		</c:if>
 		
 		<c:if test="${not login }">
@@ -166,21 +170,24 @@
 			</a>
 		</div>			
 		</c:forEach>
+		
 	</div>
-
 </div>
+
 </body>
+
+
 <script>
 		
 	var container = document.getElementById('img_map');
 	var options = {
-		center: new daum.maps.LatLng(${festivalView.latitude }, ${festivalView.longitude }),
+		center: new daum.maps.LatLng("${festivalView.latitude }", "${festivalView.longitude }"),
 		level: 3
 	};
 	
 	var map = new daum.maps.Map(container, options);
 	
-	var markerPosition  = new daum.maps.LatLng(${festivalView.latitude }, ${festivalView.longitude }); 
+	var markerPosition  = new daum.maps.LatLng("${festivalView.latitude }", "${festivalView.longitude }"); 
 
 	// 마커를 생성합니다
 	var marker = new daum.maps.Marker({
