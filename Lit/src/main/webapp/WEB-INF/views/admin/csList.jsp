@@ -80,7 +80,7 @@
                
         <div class="w3-bar">
 	    <nav>
-		<ul class="pagination" style="padding-left: 30%;">
+		<ul class="pagination" style="padding-left: 300px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

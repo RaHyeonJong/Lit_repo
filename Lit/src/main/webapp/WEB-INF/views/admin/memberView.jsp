@@ -10,7 +10,7 @@
 <title>Life Is Trip 인생은 여행이다.</title>
 <link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
 <link href="https://fonts.googleapis.com/css?family=Charm:700" rel="stylesheet">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 
 <style type="text/css">
@@ -43,22 +43,27 @@ dd {
 <body>
 
 
-	<div class="detail" style="background-color: #E0F2F7;">
-	
+	<div class="detail" >
+	<br>
 	     <!-- close 버튼  -->
-	     <div id="close" style=" position:relative;  left:92%;">
-	        <input type="button" id="close" 
-			       style="  border-radius: 10px; padding: 15px; font-size: 22px; width:50px; height:50px;
-			         margin: 20px; color: #fff; position: relative; display: inline-block; 
-			         background-color: #FA5882;" onclick="history.go(-1);" value="X">
+	     <div id="close" style=" position:relative;  left:85%;">
+	        <button id="close" class="btn btn-light" style="width:150px;"
+			          onclick="history.go(-1);" >close</button>
          </div> 
         
         		
 		<!-- 프로필 사진 공간 -->
         <div id="profilePhoto" style="text-align:center;">
-          <p style="font-family:Charm; font-size:30px; color:#585858;">Member Profile</p>
-          <img src="/resources/images/adminImages/${memberView.stored_name }"
-               style="width:250px; height:250px; border-radius:50px;">
+         <p style="font-family:Charm; font-size:30px; color:#585858;">Member Profile</p>
+         <br>
+          <c:if test="${memberView.stored_name ne null }">
+          <img src="/resources/images/${memberView.stored_name }"
+               style="width:350px; height:350px; border-radius:300px;">
+          </c:if>
+          <c:if test="${memberView.stored_name eq null }">
+            <img src="/resources/images/empty_profile_photo.jpg"
+                 style="width:350px; height:350px; border-radius:15px;">
+          </c:if>     
         </div><br><br>
         
         <!-- 회원 상세 정보 -->

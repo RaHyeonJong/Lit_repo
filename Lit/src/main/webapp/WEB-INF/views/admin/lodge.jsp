@@ -114,7 +114,7 @@ $("#btnAccess").click(function() {
             <div id="activation" class="w3-container lodge">
             <div class="card-body" style="padding-bottom:70px;">
               <div class="table-responsive" style="text-align:center;">
-                <table class="table table-bordered" id="dataTable" style="width:100%; cellspacing:0; top:20%">  
+                <table class="table table-bordered" id="dataTable" style="width:100%; cellspacing:0; top:20%; margin-left:0%;" >  
                   <thead>
                     <tr>
                       <th>숙소 번호</th>
@@ -122,7 +122,6 @@ $("#btnAccess").click(function() {
                       <th>숙소 유형</th>
                       <th>숙소 이름</th>
                       <th>수용 인원</th>
-                      <th>방 개수</th>
                       <th>숙소 주소</th>
                       <th>숙소 신고 수</th>
                       <th>상세보기</th>                          
@@ -146,8 +145,7 @@ $("#btnAccess").click(function() {
                           </c:choose></td>
                       <td>${lodge.lodge_name }</td>
                       <td>${lodge.lodge_capacity }</td> 
-                      <td>${lodge.lodge_room }</td>
-                      <td>${lodge.lodge_addr }</td> 
+                      <td style="width:500px;">${lodge.lodge_addr }</td> 
                       <!-- 신고 받은 숙소 -->
                       <td><c:choose>
                             <c:when test="${lodge.reportCnt == 0 }">
@@ -157,7 +155,7 @@ $("#btnAccess").click(function() {
                              <span style="color:red;">${lodge.reportCnt }</span>
                             </c:when>
                           </c:choose></td>
-                      <td><a href="?lodge_no=${lodge.lodge_no }">상세보기</a></td>                    
+                      <td><a href="/lodge/view?lodge_no=${lodge.lodge_no }">상세보기</a></td>                    
                     </tr>
                 
                     </c:forEach>
@@ -170,7 +168,7 @@ $("#btnAccess").click(function() {
                
         <div class="pagination">
 	    <nav>
-		<ul class="pagination" style="padding-left: 250px;">
+		<ul class="pagination" style="padding-left: 300px;">
 
 			<!-- 이전 페이지 -->
 			<!-- 첫 페이지라면 금지 표시 -->

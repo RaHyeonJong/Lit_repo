@@ -21,7 +21,7 @@
 <body>
 
 	  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-      <a class="navbar-brand mr-1" href="/admin/main">Life Is Trip Management</a>
+      <a class="navbar-brand mr-1" href="/admin/member">Life Is Trip Management</a>
       <!-- 목록 바 --> 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -105,7 +105,7 @@
 			}
 			
 		})
-	}, 1000);
+	}, 3000);
     
     
     </script>
