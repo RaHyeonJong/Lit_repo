@@ -199,7 +199,7 @@ $(document).ready(function(){
 		location.href="/host/firstLocation";
 		
 	});
-	
+
 	
 	$("#nextButton").click(function(){
 		
@@ -215,11 +215,15 @@ $(document).ready(function(){
 			return;
 		}
 		
-		$('form').submit();
+		console.log(check);
+		console.log(etc_check);
+		
+		$('#conveniences').submit();
 
 	});
 	
-
+	
+	$("input:checkbox").each(function(idx, e){ e.checked = ('${sub_list }'.indexOf(e.value) > -1); });
 	
 });
 </script>
@@ -230,13 +234,14 @@ $(document).ready(function(){
 	<div class="left">
 		<div class="innerleft">
 			<div class="category"><h2>숙소의 편의시설을 선택해주세요</h2></div>
-				<form id ="conveniences" action="/host/firstConveniences" method="post">
+				<form id ="conveniences" action="/host/firstConveniencesF" method="post">
+				<input type="hidden" id="splitCode" name="splitCode" value="${sub_list }" />
 					<div class="category checkbox-container">
 						<p><input name="convenient_facility" value="#무선인터넷" type="checkbox" id="a1"/><label for="a1">무선인터넷</label><br></p>
 						<p><input name="convenient_facility" value="#샴푸" type="checkbox" id="a2"/><label for="a2">샴푸</label></p>
 						<p><input name="convenient_facility" value="#옷장/서랍장" type="checkbox" id="a3"/><label for="a3">옷장/서랍장</label><br></p>
 						<p><input name="convenient_facility" value="#TV" type="checkbox" id="a4"/><label for="a4">TV</label></p>
-						<p><input name="convenient_facility" value="#난방" type="checkbox" id="a5"/><label for="a5">난방</label></p>
+						<p><input name="convenient_facility" value="#난방"  type="checkbox" id="a5"/><label for="a5">난방</label></p>
 						<p><input name="convenient_facility" value="#에어컨" type="checkbox" id="a6"/><label for="a6">에어컨</label></p>
 						<p><input name="convenient_facility" value="#업무가능공간" type="checkbox" id="a7"/><label for="a7">업무가능공간</label></p>
 						<p><input name="convenient_facility" value="#벽난로" type="checkbox" id="a8"/><label for="a8">벽난로</label></p>
@@ -258,7 +263,6 @@ $(document).ready(function(){
 						<p><input name="convenient_area" value="#엘리베이터" type="checkbox" id="a16"/><label for="a16">엘리베이터</label></p>
 						<p><input name="convenient_area" value="#욕조" type="checkbox" id="a17"/><label for="a17">욕조</label></p>
 						<p><input name="convenient_area" value="#헬스장" type="checkbox" id="a18"/><label for="a18">헬스장</label></p>
-					
 					</div>
 				</form>
 			<br>

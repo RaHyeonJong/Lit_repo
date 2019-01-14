@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-<title>풀캘린더</title>
+<title>예약가능날짜설정</title>
 <style type="text/css">
 #wrapper { 
          margin :40px 10px; 
@@ -21,7 +21,15 @@
 
 .selectShow{
 	margin: 0 auto;
+	width: 350px;
+    margin-left: 120px;
 	
+
+
+}
+
+.explain{
+ margin-left: 120px;
 
 
 }
@@ -30,6 +38,101 @@
 width:50%;
 margin:0 auto;
 
+}
+
+.move-button{
+padding:10px;
+width:125px;
+float:right;
+margin-right:112px;
+}
+
+
+
+#nextButton{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #c7e700;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+
+  
+
+}
+#nextButton:hover{
+
+background-color: #d68e88;
+color: white;
+
+
+}
+
+#backButton{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #c7e700;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+
+}
+
+#backButton:hover{
+background-color: #d68e88; /* Green */
+color: white;
+}
+
+#calendar{
+width:700px;
+
+}
+
+.selectShow select {
+	border-radius:5px;
+	 outline:none;
+    width: 95px;
+    height: 36px;
+    border: 0;
+    background: #fff url('https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/arrow-down-48.png') no-repeat;
+    background-size: 20px;
+    background-position:right 10px center;
+    font-family: 'Arial';
+    padding-left: 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border:1px solid #777;
+    font-size:15px;
+    padding-left:10px;
+}
+
+.selectShow button{
+height:35px;
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #c7e700;
+font-size:15px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+border-radius:5%;
+
+}
+.selectShow button:hover{
+background-color: #d68e88; /* Green */
+color: white;
 }
 </style>
 <link href="/resources/fullcalendar/fullcalendar.css" rel="stylesheet"/>
@@ -126,7 +229,7 @@ margin:0 auto;
     	
     	$("#nextButton").click(function(){
     		$('#sendMonth').click();
-    		location.href="/host/lodgeCharge";
+    		location.href="/host/addview?lodge_no="+${lodge_no};
     		
     	});
         
@@ -137,7 +240,7 @@ margin:0 auto;
 		$("#sendMonth").click(function(){
 			var lodge_no = ${lodge_no};
 			selected_month = $('#selectShowMonth').val();
-			
+
 
 			$.ajax({
 				type: 'POST',
@@ -165,6 +268,8 @@ margin:0 auto;
             	 	console.log("실패");
 				}
 			});
+			
+		
 		});
 	});
 </script>
@@ -172,7 +277,7 @@ margin:0 auto;
 	<div id="wrapper">
 	 <div class="content">
 		<div class="selectShow" >
-			<h4>몇개월동안 숙소를 활성화 시키시겠습니까?</h4>
+			<h4>몇개월동안 숙소를 활성화 시키시겠습니까? ${testDate}</h4>
 			<select  id="selectShowMonth" name="selectShowMonth">
 				<option value="3">3개월</option>
 				<option value="6">6개월</option>
@@ -184,14 +289,18 @@ margin:0 auto;
 			<button id="sendMonth">확인</button>
 		</div>
 		<br>
+		<div class="explain">
+			<h4>비활성 날짜를 클릭하여 설정해주세요</h4>
+		
+		</div>
+		<br>
 
     	<!-- 캘린더부분 -->
     	<div id="calendar"></div>
     	<div class="move-button">
     		<button id="backButton" class="back">뒤로</button>
 			<button id="nextButton" class="continue">다음</button>
-    	
-    	</div>
+       	</div>
      </div>
     </div>
 </body>

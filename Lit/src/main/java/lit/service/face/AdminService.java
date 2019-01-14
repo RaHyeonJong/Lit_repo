@@ -52,6 +52,8 @@ public interface AdminService {
 	// 숙소 비활성화 시키기
 	public void lodgeActivaiton(int lodge_no);
 	
+	// 체크박스로 선택된 숙소 승인 시키기
+	public void checkLodgeActivation(String names);
 	
 	// -------------------- 고객문의 관리 --------------------
 	
@@ -118,6 +120,8 @@ public interface AdminService {
 	// 환불 승인하기
 	public void approveRefund(int pay_no);
 	
+	// 체크박스로 선택된 환불 승인하기
+	public void checkPayApprove(String names);
 	
 	// -------------------- 신고 관리 --------------------
 	

@@ -30,11 +30,9 @@
       <!-- 네비 바 검색 -->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" placeholder="Life Is Trip 바로가기" aria-label="Search" aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
+            <button class="btn btn-light" type="button" onclick="location.href='/main'">Go</button>
           </div>
         </div>
        </form>
@@ -44,24 +42,18 @@
       
         <!-- 알림 바 -->
         <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="/admin/lodge?lodge_activation=0" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">+9</span>
+            <span id="lodge0cnt" class="badge badge-danger">0</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="/admin/lodge?lodge_activation=0">숙소 승인 대기</a>
-          </div>
         </li>
        
-        <!-- 메세지 바 -->
+        <!-- 1:1문의내역 답변하기 -->
         <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="/admin/csList" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
+            <span id="cs0cnt" class="badge badge-danger">0</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">메세지</a>
-          </div>
         </li>
         
         <!-- 관리자 설정 정보 변경 -->
@@ -69,9 +61,6 @@
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">1:1문의 내역 답변하기</a>
-          </div>
         </li>
       </ul>
 
@@ -86,6 +75,37 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin.min.js"></script>
+
+    <!-- 숙소, 고객지원 실시간 개수  -->
+    <script type="text/javascript">
+    
+    setInterval(function(){
+    
+    	$.ajax({
+			type:"post",
+			url:"/admin/countForAdminHeader",
+			data:{},
+			dataType:"json",
+			success:function(res)
+			{
+				$('#lodge0cnt').html(res.lodge0Cnt);
+				$('#cs0cnt').html(res.cs0Cnt);
+				return;
+			},
+			error:function()
+			{
+				alert("오류");
+			}
+			
+		})
+	}, 1000);
+    
+    
+    </script>
+    
+    
+    
+    
 
 </body>
 </html>

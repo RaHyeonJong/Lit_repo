@@ -671,6 +671,7 @@ $(function() {
  	
  	 $end.datepicker({
  		language : 'en',
+ 		minDate : new Date(),
  		maxDate : end_date,
 	 	onSelect : function(fd,date){
  		$start.data('datepicker')
@@ -773,7 +774,6 @@ $(function() {
 		
 			<!-- content시작 -->
     <div id="gallery">
-    	
       <div class="photo " id="photo1" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[0].stored_name }"/></div>
       <div class="photo " id="photo2" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[1].stored_name }"/></div>
       <div class="photo " id="photo3" style =" overflow: hidden;"><img src="/resources/images/lodge_image/${lodgeimg[2].stored_name }"/>
