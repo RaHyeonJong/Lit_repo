@@ -490,7 +490,6 @@ $(document).ready(function() {
 				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
 				searchFilterSend();
 			}
-		}
 	});
 	
 
