@@ -21,12 +21,12 @@
 	
 	#box1
 	{
-		width:100%;
+		width:30%;
 		height:100%;
-		max-width:450px;
-		max-height:580px;
+		max-width:1200px;
+		max-height:680px;
 		float:left;
-		margin-right:100px;
+		margin-right:150px;
 		text-align:center;
 		margin-top: -20px;
 	}
@@ -41,10 +41,10 @@
 	
 	#box2
 	{
-		width:100%;
+		width:30%;
 		height:100%;
-		max-width:450px;
-		max-height:580px;
+		max-width:1200px;
+		max-height:680px;
 		float:left;
 		text-align:center;
 	}
@@ -53,7 +53,7 @@
 	#img_contents
 	{
 		width:100%;
-		max-width:450px;	
+		max-width:550px;	
 		display:inline-block;
 	}
 	
@@ -77,8 +77,8 @@
 	
 	#img_recommend
 	{
-		width:75%;
-		max-width:900px; 
+		width:100%;
+		max-width:1200px; 
 		margin-top:100px;
 		float:left;
 		
@@ -87,9 +87,10 @@
  	#img_row 
 	{ 
  		float:left; 
- 		width:32%; 
+ 		width:30%; 
  		height:300px; 
- 		margin-right:10px; 
+ 		margin-right:20px;
+ 		 
  	} 
  	
 	.column#caption
@@ -121,9 +122,6 @@
 		-webkit-filter: brightness(30%);
 	}
 	
-	
-	
-
 </style>
 
 <input type="hidden" value="${festivalView.festival_no }" />
