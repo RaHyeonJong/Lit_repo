@@ -16,6 +16,11 @@ $(document).ready(function(){
 	
 	});
 	
+	$("#fix_lodge").click(function(){
+		location.href="/host/hostFirstFix?lodge_no="+${lodge_no};
+		
+		
+	});
 
 	
 });
@@ -38,9 +43,87 @@ float:right;
 }
 
 .innerleft{
-margin-top:20%;
+margin-top:12%;
 
 
+}
+
+.lodge-element{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+
+  
+
+
+}
+
+.lodge-element:hover{
+
+background-color: #d68e88;
+color: white;
+
+
+}
+
+.lodge-calendar{
+text-align:center;
+text-decoration:none;
+display:inline-block;
+border:none;
+background-color : #fd5e00;
+font-size:16px;
+color:white;
+transition-duration: 0.4s;
+width:60px;
+height:40px;
+border-radius:5%;
+
+  
+
+
+}
+.lodge-calendar:hover{
+
+background-color: #d68e88;
+color: white;
+
+
+}
+
+label{
+font-size:17px;
+
+
+}
+
+.one{
+padding-top:65px;
+padding-left:10px;
+ font-style: italic
+
+}
+
+.two{
+padding-left:10px;
+ font-style: italic
+
+}
+
+.title{
+padding-left:10px;
+
+}
+.div-button{
+padding:10px;
 }
 
 
@@ -52,34 +135,49 @@ margin-top:20%;
 <div id="wrapper">
 	
 	
-	<div class="left" style="border: 1px solid red;">
-	 <div class="innerleft" style="border: 1px solid green; ">
-	 	<label>나와랏 : ${lodge_no}</label>
-		<div>
+	<div class="left" >
+	 <div class="innerleft" >
+
+		<div class="title">
 			<h2>호스트로 가는길</h2>
+		</div>
+		<div style="padding-left:10px;">
+			<label>등록한 숙소정보를 변경하거나 예약설정과 숙소사진을 등록해주세요</label>
+		
 		</div>
 
 
 			
-			<div>
-				<h3>1단계</h3>
-				<button>숙소상세정보등록</button>
+			<div class="one">
+				<label>숙소정보, 편의시설</label><br>
+						
 			</div>
-			<div>
-			  	<h3>2단계</h3>
-			  	<button id="move-calendar">예약가능날짜설정 및 사진등록</button>
+			<div class="div-button">
+				<button id="fix_lodge" class="lodge-element">변경</button>
+				<hr>
+			</div>
+			<br>
+			<br>
+			<div class="two">
+			  	<label>예약설정, 사진등록</label><br>
+			
+			</div>
+			<div class="div-button">
+				<button id="move-calendar" class="lodge-calendar">설정</button>
+			  	<hr>
 			</div>
 
 		
 		</div><!-- inner end -->
 	</div><!-- left end -->
-	<div class="right" style="border: 1px solid blue;">
-	<img src="/resources/images/host/hostFirstImage.png" style="width:550px; height:400px; margin-top:25%;"  />
+	<div class="right" >
+	<img src="/resources/images/host/hostFirstImage.png" style="width:550px; height:400px; margin-top:8%;"  />
 
 		
 	
 	</div>
 </div>
+<jsp:include page="../layout/footer.jsp"></jsp:include>
 
 
 

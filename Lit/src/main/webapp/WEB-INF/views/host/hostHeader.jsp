@@ -19,7 +19,7 @@ margin:0px;
 
 width:100%;
 height:80px;
-border:1px solid #430000;
+border:1px solid #E0E0E0;
 position:relative;
 z-index:9999;
 top:0;
@@ -29,14 +29,14 @@ left:0;
 
 .logo-right{
 float:left;
-border:1px solid green;
+
 padding:17px;
 
 }
 
 .link-hostFirst{
 float:right;
-border:1px solid blue;
+
 
 
 
