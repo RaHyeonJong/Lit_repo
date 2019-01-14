@@ -100,6 +100,11 @@ public class MainController {
 			SearchFilter searchFilter
 			
 			) {
+		System.out.println("test location : " + searchFilter.getLocation());
+		
+		if((searchFilter.getCityLat() == 1) && (searchFilter.getCityLat() == 1)) {
+			return "redirect:/main";
+		}
 		
 		logger.info("메인 페이지 띄우기");
 		int people_num = 0;

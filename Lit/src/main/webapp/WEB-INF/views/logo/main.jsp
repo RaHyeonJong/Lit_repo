@@ -32,10 +32,10 @@
 	<p style="margin:0; text-align:right;">라이프이즈트립에는 다 있습니다.</p>
 	</div>
 
-	<form action="/main/searchMain" method="POST" onsubmit="return check()">
+	<form action="/main/searchMain" method="POST">
 
-		<input type="hidden" id="cityLat" name="cityLat"/>
-		<input type="hidden" id="cityLng" name="cityLng"/>
+		<input type="hidden" id="cityLat" name="cityLat" value="1"/>
+		<input type="hidden" id="cityLng" name="cityLng" value="1"/>
 
 		<table style="width:100%;">
 		<tr><td colspan="2" style="padding:20px 30px 5px 30px;"><h4 style="margin:0; text-align:left;">목적지</h4></td></tr>
@@ -93,21 +93,6 @@ function initAutocomplete() {
 // google.maps.event.addDomListener(window, 'load', initAutocomplete);
 ///////////////////////////////
 
-function check() {
-	if(document.getElementById('cityLat').value == "") {
-		alert(document.getElementById('cityLat').value + "장소를 입력하세요!");
-		return false;
-	}
-	if(document.getElementById('checkin').value == "") {
-		alert("체크인 날짜를 입력하세요!");
-		return false;
-	}
-	if(document.getElementById('checkout').value == "") {
-		alert("체크아웃 날짜를 입력하세요!");
-		return false;
-	}
-	return true;
-}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTG_c6ER7OJVOjxEwH0H723PhlQcWS2F8&libraries=places&v=3.exp&sensor=false&libraries=places&callback=initAutocomplete"
          async defer></script>

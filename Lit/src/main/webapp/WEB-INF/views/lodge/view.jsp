@@ -688,7 +688,7 @@ $(function() {
 	$(document).ready(function(){
 
 		$('#lodge_like').click(function(){
-			if("${!login}"){
+			if(${! login}){
 				alert("로그인 후 이용해 주세요");
 				return;
 			}

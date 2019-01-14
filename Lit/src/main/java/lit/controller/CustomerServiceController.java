@@ -103,6 +103,6 @@ public class CustomerServiceController {
 		}
 		
 		logger.info("후 : " + comment.toString());
-		return "redirect:/cs/cs";
+		return "redirect:/admin/csList";
 	}
 }

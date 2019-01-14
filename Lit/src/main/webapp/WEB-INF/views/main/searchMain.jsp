@@ -32,9 +32,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css" />
 <link rel="stylesheet" href="/resources/css/multirange.css">
 
-
-<script
-	src="//static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+<script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
 
 <style>
 #map {
@@ -184,17 +182,6 @@
 			<!-- header 시작 -->
 			<c:import url="../layout/header.jsp" />
 		</div>
-
-
-
-		<!--Plugin JavaScript file-->
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
-		<!-- 숙소종류 필터 모달 끝 -->
-		<script
-			src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-		<script src="/resources/js/multirange.js"></script>
-
 		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 		<script
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -254,7 +241,7 @@ var marker;
 var cost;
 var infowindow;
 var markerArray = [];
-var peopleMax = 9; // 최대 인원
+var peopleMax = 20; // 최대 인원
 
 $(document).ready(function() {
 	$('#header').css('z-index', 91); // 모달 띄울 때
@@ -321,14 +308,12 @@ $(document).ready(function() {
 	});
 	
 	$('#peopleSend').click(function() { // 인원 적용 버튼 누를 시
-		alert('인원 필터');
 		$('#peopleFilterBtn').html('인원' + searchFilter.peopleCnt + '명');
 		$('#peopleFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
 		searchFilterSend();
 	});
 	
 	$('#peopleCancel').click(function() { // 인원 취소 버튼 누를 시
-		alert('인원 초기화');
 		searchFilter.peopleCnt = 1;
 		$('#peopleFilterBtn').html('인원');
 	});
@@ -344,14 +329,17 @@ $(document).ready(function() {
 	
 	$('#cateSend').click(function() {
 		searchFilter.cate = [];
-		
+		var cnt = 0;
 		$('input:checkbox[name="cate"]').each(function(){
 			if(this.checked == true){
-				
+				cnt++;
 				searchFilter.cate.push($(this).val());
 			}
 		});	
 		console.log(searchFilter.cate);
+		$('#cateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+		$('#cateFilterBtn').html("숙소종류·" + cnt);
+		
 		searchFilterSend();
 	});
 	
@@ -377,8 +365,6 @@ $(document).ready(function() {
 		$('.modal').css("display", "none");
 		
 		
-		alert(JSON.stringify(searchFilter));
-		
          
             $.ajax({
 			    type: "post",
@@ -386,7 +372,7 @@ $(document).ready(function() {
 			    data: {"searchFilterJson" : JSON.stringify(searchFilter)},
 			    dataType: "json",
 			    success: function(list) {
-						alert(list.length);
+
 						
 						
 // 						marker = new google.maps.Marker({
@@ -462,14 +448,16 @@ $(document).ready(function() {
 			$('.modal').css("display", "none");
 			
 			var con = $('#datepicker').val();
-			console.log(con);
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
 			
-			$('#dateFilterBtn').html(con);
-			$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+			if(searchFilter.startDate != "") {
+				$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
+				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+				searchFilterSend();
+			}
 			
-			searchFilterSend();
+			
 		}
 	});
 	
@@ -498,11 +486,10 @@ $(document).ready(function() {
 			console.log(con);
 			searchFilter.startDate =  con.substring(0, 10);
 			searchFilter.endDate = con.substring(11, 21);
-			
-			$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
-// 			$('#dateFilterBtn').css("background-color", "#008489");
-			
-			searchFilterSend();
+				$('#dateFilterBtn').html(searchFilter.startDate + '~' + searchFilter.endDate);
+				$('#dateFilterBtn').attr("style" , "color:white !important;background-color:#008489 !important");
+				searchFilterSend();
+			}
 		}
 	});
 	
@@ -641,11 +628,10 @@ $(document).ready(function() {
 			<!-- 			<button id="priceFilter-send">적용</button> -->
 
 
-
-			<input type="text" style="height: 0px; font-size: 0px; border: none;" class="datepicker-here"
-				id="datepicker" data-range="true" data-multiple-dates-separator="-"
-				data-language="en"></input>
-
+			<input type="text" style="height: 0px; font-size:0px; border:none;" id="datepicker" data-range="true"
+    data-multiple-dates-separator="-"
+    data-language="en"></input>
+	
 		</div>
 	</div>
 </div>
