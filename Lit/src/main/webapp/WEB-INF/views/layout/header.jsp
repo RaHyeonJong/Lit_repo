@@ -5,11 +5,19 @@
 
 	<!-- jQuery -->
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+<!-- 숙소종류 필터 모달 끝 -->
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/resources/js/multirange.js"></script>
+
 	<!-- 데이트 피커 -->
 <link href="/resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="/resources/dist/js/datepicker.min.js"></script>
 	<!-- Include English language -->
 <script src="/resources/dist/js/i18n/datepicker.en.js"></script>
+
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link rel="shortcut icon" type="image/x-ion" href="/resources/images/url.ico" />
@@ -1141,6 +1149,7 @@ function check() {
 	return true;
 }
 </script>
+
 
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?"></script> -->
