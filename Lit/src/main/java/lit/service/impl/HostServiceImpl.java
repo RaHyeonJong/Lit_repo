@@ -141,27 +141,12 @@ public class HostServiceImpl implements HostService{
 		for(MultipartFile mf : fileList) {
 			String origin_name = mf.getOriginalFilename(); //파일 원본
 			UUID uid = UUID.randomUUID();
+			
 			String stored_name = uid.toString()+"_"+origin_name;
-//			long fileSize = mf.getSize(); //파일 사이즈
 			
-			File file = new File(path);
-			if(origin_name != null && !origin_name.equals("")) {
-					//파일명 앞에 업로드 시간 초단위로 붙여 파일명 중복 방지
-					image.setOrigin_name(origin_name);
-					image.setStored_name(stored_name);
-					
-			}
-			System.out.println("orgin_name :"+ image.getOrigin_name());
-			System.out.println("stored_name :"+ image.getStored_name());
-			System.out.println("lodge_no :"+ image.getLodge_no());
-			
-			String safeFile = path+System.currentTimeMillis()+origin_name;
-			
-			
-			hostDao.insertLodgeView(image);
-			
+			File file = new File(path,stored_name);
 			try {
-				mf.transferTo(new File(safeFile));
+				mf.transferTo(file);
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -169,6 +154,18 @@ public class HostServiceImpl implements HostService{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			if(origin_name != null && !origin_name.equals("")) {
+					//파일명 앞에 업로드 시간 초단위로 붙여 파일명 중복 방지
+					image.setOrigin_name(mf.getOriginalFilename());
+					image.setStored_name(file.getName());
+					
+			}
+			
+			
+			hostDao.insertLodgeView(image);
+			
+		
 			
 		}
 	
@@ -211,6 +208,13 @@ public class HostServiceImpl implements HostService{
 	@Override
 	public void updateConvenient(Lodge lodge) {
 		hostDao.convenientUpdate(lodge);
+		
+	}
+	
+	//가격업데이트
+	@Override
+	public void updateCharge(Lodge lodge) {
+		hostDao.updateLodgeCharge(lodge);
 		
 	}
 

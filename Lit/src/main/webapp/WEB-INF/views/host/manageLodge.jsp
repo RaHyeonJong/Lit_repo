@@ -9,7 +9,7 @@
 <title>예약가능날짜설정</title>
 <style type="text/css">
 #wrapper { 
-         margin :40px 10px; 
+         margin :0px 10px; 
          padding : 0; 
          font-family : "Lucida Grande", Helvetica, Arial, Verdana,sans-serif; */
          font-size : 14px; 

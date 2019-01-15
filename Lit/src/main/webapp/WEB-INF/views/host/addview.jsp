@@ -321,8 +321,8 @@ function initImageUpload(box) {
 				alert("최소 첫번째 사진을 삽입해 주세요");
 				return;
 			}
-			("#sendPhoto").submit();
-			location.href="/host/hostFirst?lodge=${lodge_no}";
+			$("#sendPhoto").submit();
+			
 			
 		});
 		
@@ -344,7 +344,7 @@ function initImageUpload(box) {
 <div id="wrapper">
 <div class="content">
 <div style="margin-left: 10px;"><h2>숙소 이미지 등록해주세요</h2></div>
- <form id="sendPhoto" name="fileForm" action="/host/addview" method="post" enctype="multipart/form-data">
+ <form id="sendPhoto" action="/host/addview" method="post" enctype="multipart/form-data">
  <input type ="hidden" name ="lodge_no" value="<c:out value="${lodge_no }"/>">
  <div>
  

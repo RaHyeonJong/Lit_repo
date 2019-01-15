@@ -71,4 +71,7 @@ public interface HostService {
 	// 호스트페이지 : 결제내역 가져오기
 	public List<Pay> getPayList(int lodge_no);
 
+	//가격업데이트
+	public void updateCharge(Lodge lodge);
+
 }

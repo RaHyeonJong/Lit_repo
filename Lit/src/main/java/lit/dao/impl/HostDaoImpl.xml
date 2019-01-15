@@ -129,6 +129,13 @@ UPDATE lodge SET lodge_addr =#{lodge_addr}, latitude=#{latitude}, longitude=#{lo
 
 </update>
 
+<update id="updateLodgeCharge" parameterType="lit.dto.Lodge">
+	UPDATE lodge
+	SET stay_cost=#{stay_cost}, check_in_time=#{check_in_time}
+	WHERE lodge_no = #{lodge_no}
+
+</update>
+
 
 </mapper>
 

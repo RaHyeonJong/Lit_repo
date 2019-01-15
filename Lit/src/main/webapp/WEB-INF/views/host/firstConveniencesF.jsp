@@ -280,8 +280,8 @@ $(document).ready(function(){
 	<div class="right">
 	 	<div class="right1-1">
 			<img src="/resources/images/hostPageIcon.svg" />
-			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>
-			<p>숙소이름은 편하게 적어주시고 가능인원이 확실하지 않으시면 평당 인원수로 선택해주세요</p>
+			<p>숙소의 편의시설과 기타시설을 체크해주세요</p>
+			<p>하나이상의 시설은 무조건 체크해주셔야합니다</p>
 		</div>
 	</div>
 

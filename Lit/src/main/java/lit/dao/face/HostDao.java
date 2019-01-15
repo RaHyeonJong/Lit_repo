@@ -61,4 +61,7 @@ public interface HostDao {
 
 	public List<Pay> getPayList(int lodge_no);
 
+	//가격업데이트
+	public void updateLodgeCharge(Lodge lodge);
+
 }

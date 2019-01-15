@@ -893,7 +893,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<c:if test="${member.mem_case eq 'user' }">
 				
 					<li><a href="/mypage/main?go=message" class="message_count">쪽지 ${counter }개</a>
-					<li><a href="/host/firstRoom">호스트가 되어보세요</a></li>
+					<li><a href="/host/hostMain">호스트가 되어보세요</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>
 					<li><a href="/logout">로그아웃</a></li>
@@ -908,7 +908,7 @@ ul.hovermenu>li>.sub li:hover ul.subCate.sub5 {
 				<!-- 호스트 로그인 -->
 				<c:if test="${member.mem_case eq 'host' }">
 					<li><a href="/mypage/main?go=message" class="message_count">쪽지 <b>${counter }</b>개</a>
-					<li><a href="/host/firstRoom">숙소추가하기</a></li>
+					<li><a href="/host/hostMain">숙소추가하기</a></li>
 					<li><a href="/host/main">호스트 페이지</a></li>
 					<li><a href="/cs/cs">고객센터</a></li>
 					<li><a href="/mypage/main">마이페이지</a></li>

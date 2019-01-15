@@ -44,6 +44,8 @@ public class HostController {
 	@Autowired HostService hostService;
 	
 	
+
+	
 	//호스트등록 첫 메인페이지
 	@RequestMapping(value="/host/hostMain", method=RequestMethod.GET)
 	public void hostMain() {
@@ -61,6 +63,7 @@ public class HostController {
 		
 		model.addAttribute("lodge_no", lodge_no);
 		session.setAttribute("fix_lodge_no", lodge_no);
+	
 		
 		
 		
@@ -423,7 +426,7 @@ public class HostController {
 			lodge.setLongitude((double)session.getAttribute("longitude"));
 			lodge.setCheck_in_time(check_in_hour+"시"+check_in_min+"분");
 			
-//			int member_no = ((Member) session.getAttribute("member")).getMem_no();
+
 			
 			lodge.setMem_no(((Member)session.getAttribute("member")).getMem_no());
 
@@ -459,19 +462,15 @@ public class HostController {
 				
 
 
-			session.setAttribute("check_in_time", check_in_hour+"시"+check_in_min+"분");
-			System.out.println(session.getAttribute("check_in_time"));
-			System.out.println("세션에 저장된 요금 : " + session.getAttribute("stay_cost"));
 
-		
-//			int member_no = ((Member) session.getAttribute("member")).getMem_no();
+			lodge.setCheck_in_time(check_in_hour+"시"+check_in_min+"분");
+
 			
-			lodge.setMem_no(((Member)session.getAttribute("member")).getMem_no());
 
 			logger.info(lodge.toString());
 
-			hostService.insertFirst(lodge);
-			System.out.println(lodge.getLodge_no());
+			hostService.updateCharge(lodge);
+
 			model.addAttribute("lodge_no", lodge.getLodge_no());
 			
 			return mav;
@@ -591,16 +590,14 @@ public class HostController {
 	
 	
 	@RequestMapping(value="/host/addview", method=RequestMethod.POST)
-	public void hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no,Model model) {
+	public String hostAddView(MultipartHttpServletRequest msr,HttpServletRequest req, Image image,int lodge_no,Model model) {
 		
 		image.setLodge_no(lodge_no);
 		
 		
-		
-		
-//		hostService.hostaddViewList(msr,req,image);
+		hostService.hostaddViewList(msr,req,image);
 	
-		
+		return "redirect:/main";
 		
 		
 	}

@@ -267,8 +267,8 @@ padding: 10px;
    <div class="right">
  		<div class="right1-1">
 			<img src="/resources/images/hostPageIcon.svg" />
-			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>
-			<p>숙소이름은 편하게 적어주시고 가능인원이 확실하지 않으시면 평당 인원수로 선택해주세요</p>
+			<p>입력한 숙소의 위치가 마커로 표시됩니다</p>
+			<p>마커의 위치가 숙소의 위치와 다르다면 마커를 움직여주세요</p>
 		</div>
    </div><!-- right end -->
 

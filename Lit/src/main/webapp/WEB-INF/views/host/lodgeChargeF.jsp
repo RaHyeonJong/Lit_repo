@@ -44,7 +44,7 @@ $("#inputCharge").focusout(function(){
 		
 			$.ajax({
 			 type: 'POST',
-            url: '/host/lodgeCharge',
+            url: '/host/lodgeChargeF',
             dataType: "json",
             data: {
                 "check_in_hour" : option1, 
@@ -205,7 +205,21 @@ font-weight:bold;
 
 select{
 
-
+	border-radius:5px;
+	 outline:none;
+    width: 95px;
+    height: 36px;
+    border: 0;
+    background: #fff url('https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/arrow-down-48.png') no-repeat;
+    background-size: 20px;
+    background-position:right 10px center;
+    font-family: 'Arial';
+    padding-left: 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border:1px solid #777;
+    font-size:15px;
+    padding-left:10px;
 }
     
 
@@ -310,8 +324,8 @@ select{
 	<div class="right">
 		<div class="right1-1">
 			<img src="/resources/images/hostPageIcon.svg" />
-			<p>건물유형과 숙소유형에 따라서 예약표시가 달라질 수 있으니 꼭 유형을 선택해주세요</p>
-			<p>숙소이름은 편하게 적어주시고 가능인원이 확실하지 않으시면 평당 인원수로 선택해주세요</p>
+			<p>숙소가격은 1만원 이상으로 입력해주세요</p>
+			<p>1만원 이하로 입력시 넘어가지 않습니다</p>
 		</div>
 	</div>
 
