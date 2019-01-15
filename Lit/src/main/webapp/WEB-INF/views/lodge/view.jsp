@@ -485,11 +485,10 @@ function fn_replyDelete(comment_no){ //후기 삭제
            
                 $("#reviewitem"+comment_no).remove();
                 alert("삭제되었습니다.");
-            
+                $("#replyReply").show();
         }
     })
-
-    
+   
      }
     
     
@@ -544,6 +543,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
     	hideDiv("#replyDiv");
     	$("#replyup").show();
     	$("#replydel").show();
+    	$("#replyReply").show();
     	$("#reply"+updateComm).html(updateContents);
     	updateComm = updateContents = null;
     	
@@ -556,7 +556,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
 	
     function fn_replyReply(comment_no){
 		$("#replyDialog").show();
-			
+		$("#replyReply").hide();	
 		if(updateComm){
 			fn_replyUpdateCancel();
 		}
@@ -572,6 +572,7 @@ function fn_replyDelete(comment_no){ //후기 삭제
     	hideDiv("#replyDialog");
     	$("#replyup2").show();
     	$("#replydel2").show();
+    	$("#replyReply").show();
     }
     
     function fn_replyReplySave(){
@@ -687,8 +688,10 @@ $(function() {
 <script type="text/javascript"> //저장(좋아요)
 	$(document).ready(function(){
 
+		
+		
 		$('#lodge_like').click(function(){
-			if(${! login}){
+			if(${!login}){
 				alert("로그인 후 이용해 주세요");
 				return;
 			}
@@ -941,7 +944,7 @@ $(function() {
        				 <button id= "replydel" onclick="fn_replyDelete('<c:out value="${review.comment_no}"/>')">삭제</button>
 					</c:if>
 					<c:if test ="${login && member.mem_no eq view.mem_no }">
- 					 <button  onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
+ 					 <button id="replyReply" onclick="fn_replyReply('<c:out value ="${review.comment_no}"/>')">댓글</button>
    					</c:if>
    					
    				 </div>
