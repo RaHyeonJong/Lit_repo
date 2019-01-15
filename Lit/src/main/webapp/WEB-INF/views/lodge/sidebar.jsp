@@ -235,7 +235,7 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		$("#ch_Btn").click(function(){
 			
-			location.href="/host/firstRoomF?lodge_no=${view.lodge_no}";
+			location.href="/host/hostFirst?lodge_no=${view.lodge_no}";
 			
 		});
 	});
