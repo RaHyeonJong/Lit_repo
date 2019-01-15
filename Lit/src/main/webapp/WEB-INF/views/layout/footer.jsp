@@ -15,7 +15,7 @@
   position: relative;
   height: auto;
   display: block;
-    margin-left: 362px;
+  margin-left: 362px;
   
   
 }
@@ -61,13 +61,14 @@
     text-align: -webkit-left;
   }
 
- h1 {
+.col h1 {
   color: #999999;
   font-size: 14px;
   font-family: inherit;
   font-weight: bold;
   padding: 5px 0px 5px 0px;
 }
+
 .social ul li {
   display: inline-block;
   padding-right: 5px !important;

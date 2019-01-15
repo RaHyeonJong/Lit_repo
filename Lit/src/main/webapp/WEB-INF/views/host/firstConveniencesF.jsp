@@ -229,13 +229,13 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<jsp:include page="hostHeader.jsp"></jsp:include>
 
 <div id="wrapper">
 	<div class="left">
 		<div class="innerleft">
 			<div class="category"><h2>숙소의 편의시설을 선택해주세요</h2></div>
 				<form id ="conveniences" action="/host/firstConveniencesF" method="post">
-				<input type="hidden" id="splitCode" name="splitCode" value="${sub_list }" />
 					<div class="category checkbox-container">
 						<p><input name="convenient_facility" value="#무선인터넷" type="checkbox" id="a1"/><label for="a1">무선인터넷</label><br></p>
 						<p><input name="convenient_facility" value="#샴푸" type="checkbox" id="a2"/><label for="a2">샴푸</label></p>

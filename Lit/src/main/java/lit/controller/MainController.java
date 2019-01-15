@@ -100,6 +100,11 @@ public class MainController {
 			SearchFilter searchFilter
 			
 			) {
+		System.out.println("test location : " + searchFilter.getLocation());
+		
+		if((searchFilter.getCityLat() == 1) && (searchFilter.getCityLat() == 1)) {
+			return "redirect:/main";
+		}
 		
 		logger.info("메인 페이지 띄우기");
 		int people_num = 0;
@@ -358,9 +363,9 @@ public class MainController {
 		
 		
 		
-		String[] lodgeComment = {"1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11", "12", "13","14", "15", "16", "17", "18", "19", "20"};
+		String[] lodgeComment = {"믿고 보는 숙소 리스트", "LIT 에디터의 초이스", "TV에 나온 숙소","평점이 높은 인기 숙소", "가성비 숙소", "베스트 숙소", "이주의 GOOD딜 숙소", "LIT 픽 숙소", "이 달의 숙소", "특색이 있는 숙소", "기억에 남을 톡특한 숙소", "여행 목적에 딱 맞는 숙소", "슈퍼호스트의 숙소","서울의 숙소", "편안한 숙소", "분위기 좋은 숙소", "사랑이 싹트는 숙소", "이색 숙소", "저렴한 숙소", "고급 숙소"};
 		
-		String[] festivalComment = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
+		String[] festivalComment = {"가성비 행사", "베스트 행사", "이주의 GOOD딜 행사", "LIT 픽 행사", "믿고 보는 행사 리스트", "LIT 에디터의 초이스", "TV에 나온 행사", "평점이 높은 인기 행사", "사람들이 많이 찾은 행사", "이 달의 행사"};
 		
 		List<Lodge> lodgeList = mainService.getLodgeList(page); // 9개씩
 		

@@ -34,10 +34,10 @@ public class AdminController {
 	@Autowired ServletContext context;
 	@Autowired AdminDao adminDao;
 	
-	@RequestMapping(value="/admin/layout/header", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/main", method=RequestMethod.GET)
 	public void adminMain( ) {
 		
-		// 관리자 메인페이지보이기		
+		
 		
 	}
 	

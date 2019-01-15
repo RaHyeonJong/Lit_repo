@@ -89,7 +89,7 @@
      </div>
      <c:if test="${image.stored_name ne null }">
       <p style="text-align:center; padding:5px;">
-        <img id="thumbNailPreview" width="500px" height="300px" src="/resources/images/festival/${image.stored_name }">   
+        <img id="thumbNailPreview" width="500px" height="300px" src="/resources/images/${image.stored_name }">   
       </p>
      </c:if>
      <c:if test="${image.stored_name eq null }">

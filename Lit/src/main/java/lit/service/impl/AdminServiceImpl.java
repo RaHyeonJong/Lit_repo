@@ -209,7 +209,7 @@ public class AdminServiceImpl implements AdminService{
 		if(!"".equals(multipartFile.getOriginalFilename())) {
 			
 			String uId = UUID.randomUUID().toString();
-			String stored = context.getRealPath("resources/images/festival");
+			String stored = context.getRealPath("resources/images");
 			String name = multipartFile.getOriginalFilename() + "_" + uId;
 			
 			File dest = new File(stored, name);

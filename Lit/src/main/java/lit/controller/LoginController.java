@@ -93,7 +93,7 @@ public class LoginController {
 	public String logout(HttpSession session) { 
 		session.invalidate();
 		
-		return "redirect:/tempmain";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value="/login/changePw", method=RequestMethod.GET)
@@ -105,7 +105,7 @@ public class LoginController {
 			PrintWriter out = null;
 			try {
 				out = resp.getWriter();
-				out.println("<script>alert('잘못된 접근입니다.'); location.href='/tempmain';</script>");
+				out.println("<script>alert('잘못된 접근입니다.'); location.href='/main';</script>");
 				out.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -125,7 +125,7 @@ public class LoginController {
 		PrintWriter out = null;
 		try {
 			out = resp.getWriter();
-			out.println("<script>alert('비밀번호가 성공적으로 변경되었습니다.'); location.href='/tempmain';</script>");
+			out.println("<script>alert('비밀번호가 성공적으로 변경되었습니다.'); location.href='/main';</script>");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -133,7 +133,7 @@ public class LoginController {
 			if(out != null) out.close();
 		}
 		
-		return "redirect:/tempmain";
+		return "redirect:/main";
 	}
 }
 
